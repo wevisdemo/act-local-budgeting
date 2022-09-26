@@ -5,16 +5,20 @@ The script to fetch Google Sheets in CSV format and aggregate to useful JSON dat
   - [Build](#build)
   - [Run](#run)
   - [Keywords](#keywords)
+  - [Data File Structure](#data-file-structure)
   - [Data File Formats](#data-file-formats)
-    - [Nation-wide Budget](#nation-wide-budget)
-      - [File Name Format](#file-name-format)
+    - [Metadata](#metadata)
+      - [File Name Path](#file-name-path)
       - [Data Type](#data-type)
-    - [PAO Budget Per Year](#pao-budget-per-year)
-      - [File Name Format](#file-name-format-1)
+    - [Nation-wide Budget](#nation-wide-budget)
+      - [File Name Path](#file-name-path-1)
       - [Data Type](#data-type-1)
-    - [Keywords](#keywords-1)
-      - [File Name Format](#file-name-format-2)
+    - [PAO Budget Per Year](#pao-budget-per-year)
+      - [File Name Path](#file-name-path-2)
       - [Data Type](#data-type-2)
+    - [Keywords](#keywords-1)
+      - [File Name Path](#file-name-path-3)
+      - [Data Type](#data-type-3)
 
 ## Build
 TBD
@@ -32,15 +36,54 @@ TBD
 | หมวด             | Category                                     |
 | อบจ.             | PAO (Provincial Administrative Organization) |
 
+## Data File Structure
+Output files from this script will be automatically created/updated to `/static/data`. Within this path, files are put in a year-named directory indicated the data for a corresponding year.
+
+Example:
+```
+/static
+  /data
+    metadata.json
+    keywords.json
+    /2564
+      nation-wide.json
+      pao-เชียงใหม่.json
+```
+
 ## Data File Formats
+
+### Metadata
+A root file indicates years and provinces provided in the data set.
+
+#### File Name Path
+```
+/static/data/metadata.json
+```
+
+#### Data Type
+```ts
+// This type is the root type for this file
+type Metadata = {
+  years: number[]
+  provinces: string[]
+}
+```
+
+Example
+```json
+{
+  "years": [2563, 2564],
+  "provinces": ["เชียงใหม่", "เชียงราย"]
+}
+```
 
 ### Nation-wide Budget
 
-#### File Name Format
+#### File Name Path
 ```
-nation-wide-${year}.json
+/static/data/${year}/nation-wide.json
 ```
-Example: `nation-wide-2564.json`
+Example: `/static/data/2564/nation-wide.json`
 #### Data Type
 ```ts
 // This type is the root type for this file
@@ -48,6 +91,7 @@ type NationWideBudget = {
   total: number
   groupedByArea: BudgetByArea[]
   groupedByType: BudgetByType[]
+  budgetPerCapita: ProviceBudgetPerCapita[]
 }
 
 type Area = string
@@ -69,6 +113,11 @@ type BudgetByType = {
   type: Type
   total: number
 }
+
+type ProviceBudgetPerCapita = {
+  name: string
+  amount: number
+}
 ```
 
 Example
@@ -88,17 +137,20 @@ Example
   }],
   "groupedByType": [
     { "type": "งบบุคลากร", "total": 35000000000 }
+  ],
+  "budgetPerCapita": [
+    { "name": "เชียงใหม่", "amount": 898 }
   ]
 }
 ```
 
 ### PAO Budget Per Year
 
-#### File Name Format
+#### File Name Path
 ```
-pao-${name}-${year}.json
+/static/data/${year}/pao-${name}.json
 ```
-Example: `pao-เชียงใหม่-2564.json`
+Example: `/static/data/2564/pao-เชียงใหม่.json`
 #### Data Type
 ```ts
 // This type is the root type for this file
@@ -244,8 +296,10 @@ Example
 
 ### Keywords
 
-#### File Name Format
-`keywords.json`
+#### File Name Path
+```
+/static/data/keywords.json
+```
 #### Data Type
 ```ts
 // This type is the root type for this file
