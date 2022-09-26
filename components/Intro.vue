@@ -158,7 +158,7 @@
                 ตรวจสอบ<br />งบประมาณ<br />ในจังหวัดของคุณ
               </h4>
             </div>
-            <a href="/story">
+            <a href="/act-local-budgeting/story">
               <div class="box-2 pointer mx-3 mt-3 mt-md-0">
                 <h4 class="header-4 white-a ml-4 mb-3 font-weight-bold">
                   งบ อบจ.<br />
