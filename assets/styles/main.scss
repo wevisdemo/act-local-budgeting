@@ -1,0 +1,324 @@
+@import "./font";
+
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "IBMPlexSansThai", serif;
+  min-height: 100%;
+  height: 100%;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+// ---- header , text --------
+
+.header-1 {
+  font-size: 99px;
+  line-height: 125%;
+  @media #{$mq-mini-mobile} {
+    font-size: 69px;
+  }
+}
+.header-2 {
+  font-size: 55px;
+  line-height: 125%;
+  @media #{$mq-mini-mobile} {
+    font-size: 44px;
+  }
+}
+.header-3 {
+  font-size: 40px;
+  line-height: 125%;
+  @media #{$mq-mini-mobile} {
+    font-size: 32px;
+  }
+}
+.header-4 {
+  font-size: 32px;
+  line-height: 125%;
+  @media #{$mq-mini-mobile} {
+    font-size: 25px;
+  }
+}
+.header-5 {
+  font-size: 26px;
+  line-height: 125%;
+  @media #{$mq-mini-mobile} {
+    font-size: 20px;
+  }
+}
+
+.text-1 {
+  line-height: 120%;
+  font-size: 24px;
+  @media #{$mq-mini-mobile} {
+    font-size: 18px;
+  }
+}
+.text-2 {
+  line-height: 120%;
+  font-size: 20px;
+  @media #{$mq-mini-mobile} {
+    font-size: 14px;
+  }
+}
+.text-3 {
+  line-height: 120%;
+  font-size: 16px;
+  @media #{$mq-mini-mobile} {
+    font-size: 12px;
+  }
+}
+.text-4 {
+  line-height: 120%;
+  font-size: 13px;
+  @media #{$mq-mini-mobile} {
+    font-size: 10px;
+  }
+}
+
+// ------------ color ----------------
+.white-a {
+  color: $white-a;
+}
+
+.white-b {
+  color: $white-b;
+}
+
+.white-c {
+  color: $white-b;
+}
+
+.orange-a {
+  color: $orange-a;
+}
+
+.orange-b {
+  color: $orange-b;
+}
+
+.purple-a {
+  color: $purple-a;
+}
+
+.purple-b {
+  color: $purple-b;
+}
+
+.blue-a {
+  color: $blue-a;
+}
+
+.blue-b {
+  color: $blue-b;
+}
+
+.light-blue {
+  color: $light-blue;
+}
+
+.green {
+  color: $green;
+}
+
+.lime {
+  color: $lime;
+}
+
+.lime-b {
+  color: $lime-b;
+}
+
+.light-grey {
+  color: $light-grey;
+}
+
+.grey {
+  color: $grey;
+}
+
+.yellow {
+  color: $yellow;
+}
+
+.black {
+  color: $black;
+}
+
+// ----------------------------
+
+.bg-white-a {
+  background-color: $white-a;
+}
+
+.bg-white-b {
+  background-color: $white-b;
+}
+
+.bg-white-c {
+  background-color: $white-b;
+}
+
+.bg-orange-a {
+  background-color: $orange-a;
+}
+
+.bg-orange-b {
+  background-color: $orange-b;
+}
+
+.bg-purple-a {
+  background-color: $purple-a;
+}
+
+.bg-purple-b {
+  background-color: $purple-b;
+}
+
+.bg-blue-a {
+  background-color: $blue-a;
+}
+
+.bg-blue-b {
+  background-color: $blue-b;
+}
+
+.bg-light-blue {
+  background-color: $light-blue;
+}
+
+.bg-green {
+  background-color: $green;
+}
+
+.bg-lime {
+  background-color: $lime;
+}
+
+.bg-light-grey {
+  background-color: $light-grey;
+}
+
+.bg-grey {
+  background-color: $grey;
+}
+
+.bg-yellow {
+  background-color: $yellow;
+}
+
+.bg-black {
+  background-color: $black;
+}
+
+// ----------------------------
+
+::-webkit-input-placeholder {
+  /* Edge */
+  color: #ffb9af;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #ffb9af;
+}
+
+::placeholder {
+  color: #ffb9af;
+}
+
+.scrollama__debug-offset {
+  display: none;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s !important;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0 !important;
+}
+
+.modal-content {
+  background: none;
+  border: 0;
+}
+
+.modal-open {
+  padding-right: 0 !important;
+}
+
+.w-sm-50 {
+  width: 50%;
+  @media #{$mq-mobile} {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+.opacity-0-5 {
+  opacity: 0.5;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.fade-in {
+  animation: fadeIn ease 10s;
+  -webkit-animation: fadeIn ease 10s;
+  -moz-animation: fadeIn ease 10s;
+  -o-animation: fadeIn ease 10s;
+  -ms-animation: fadeIn ease 10s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOut ease 8s;
+  -webkit-animation: fadeOut ease 8s;
+  -moz-animation: fadeOut ease 8s;
+  -o-animation: fadeOut ease 8s;
+  -ms-animation: fadeOut ease 8s;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+.popover {
+  z-index: 10;
+}
+
+.content-box {
+  max-width: 700px;
+  margin: auto;
+}
