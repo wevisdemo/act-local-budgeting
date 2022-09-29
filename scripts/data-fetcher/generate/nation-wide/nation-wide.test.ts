@@ -36,8 +36,8 @@ describe('generate > nation-wide', () => {
       ...getExpenseRow(),
       expenseArea: 'ด้านบริการชุมชนและสังคม',
       expensePlan: 'การศึกษา',
-      expenseTask: 'งบบุคลากร',
-      expenseType: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
+      expenseType: 'งบบุคลากร',
+      expenseTask: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
       amount: 10,
     }
 
@@ -102,8 +102,8 @@ function getExpenseRow(): BudgetRow {
     type: 'expense',
     expenseArea: 'ด้านบริการชุมชนและสังคม',
     expensePlan: 'การศึกษา',
-    expenseTask: 'งบบุคลากร',
-    expenseType: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
+    expenseType: 'งบบุคลากร',
+    expenseTask: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
     amount: 10,
   }
 }

@@ -8,8 +8,8 @@ describe('generate > group-budget', () => {
       ...getExpenseRow(),
       expenseArea: 'ด้านบริการชุมชนและสังคม',
       expensePlan: 'การศึกษา',
-      expenseTask: 'งบบุคลากร',
-      expenseType: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
+      expenseType: 'งบบุคลากร',
+      expenseTask: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
       amount: 10,
     }
 
@@ -17,8 +17,8 @@ describe('generate > group-budget', () => {
       ...getExpenseRow(),
       expenseArea: 'ด้านบริการชุมชนและสังคม',
       expensePlan: 'สาธารณสุข',
-      expenseTask: 'งบบุคลากร',
-      expenseType: 'บริการสาธารณสุขและงานสาธารณสุขอื่น',
+      expenseType: 'งบบุคลากร',
+      expenseTask: 'บริการสาธารณสุขและงานสาธารณสุขอื่น',
       amount: 20,
     }
 
@@ -26,8 +26,8 @@ describe('generate > group-budget', () => {
       ...getExpenseRow(),
       expenseArea: 'ด้านการเศรษฐกิจ',
       expensePlan: 'การเกษตร',
-      expenseTask: 'งบบุคลากร',
-      expenseType: 'สิ่งแวดล้อมและทรัพยากรธรรมชาติ',
+      expenseType: 'งบบุคลากร',
+      expenseTask: 'สิ่งแวดล้อมและทรัพยากรธรรมชาติ',
       amount: 50,
     }
 
@@ -93,8 +93,8 @@ function getExpenseRow(): BudgetRow {
     type: 'expense',
     expenseArea: 'ด้านบริการชุมชนและสังคม',
     expensePlan: 'การศึกษา',
-    expenseTask: 'งบบุคลากร',
-    expenseType: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
+    expenseType: 'งบบุคลากร',
+    expenseTask: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
     amount: 10,
   }
 }
