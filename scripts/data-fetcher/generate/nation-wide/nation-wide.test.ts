@@ -27,8 +27,8 @@ describe('generate > nation-wide', () => {
 
     const nationWideBudgets = generateNationWide([expense2564Row, income2564Row, expense2565Row])
 
-    expect(nationWideBudgets['2564'].total).toBe(10)
-    expect(nationWideBudgets['2563'].total).toBe(1)
+    expect(nationWideBudgets.find(b => b.year === 2564)?.budget.total).toBe(10)
+    expect(nationWideBudgets.find(b => b.year === 2563)?.budget.total).toBe(1)
   })
 
   test('Group by area; not use income row', () => {
@@ -52,8 +52,8 @@ describe('generate > nation-wide', () => {
 
     const nationWideBudgets = generateNationWide([communityEducation, income2564Row])
 
-    expect(nationWideBudgets['2564'].groupedByArea.length).toBe(1)
-    expect(nationWideBudgets['2564'].groupedByArea).toContainEqual({
+    expect(nationWideBudgets.find(b => b.year === 2564)?.budget.groupedByArea.length).toBe(1)
+    expect(nationWideBudgets.find(b => b.year === 2564)?.budget.groupedByArea).toContainEqual({
       area: "ด้านบริการชุมชนและสังคม",
       total: 10,
       plans: [{
@@ -88,8 +88,8 @@ describe('generate > nation-wide', () => {
 
     const nationWideBudgets = generateNationWide([personnel, operation, incomeRow])
 
-    expect(nationWideBudgets['2564'].groupedByType.length).toBe(1)
-    expect(nationWideBudgets['2564'].groupedByType).toContainEqual(
+    expect(nationWideBudgets.find(b => b.year === 2564)?.budget.groupedByType.length).toBe(1)
+    expect(nationWideBudgets.find(b => b.year === 2564)?.budget.groupedByType).toContainEqual(
       { type: 'งบบุคลากร', total: 30 },
     )
   })

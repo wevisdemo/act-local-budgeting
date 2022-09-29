@@ -3,15 +3,14 @@ import { NationWideBudget } from "./nation-wide.types"
 import { getUnique } from "../utils"
 import { getGroupedByArea, getGroupedByType } from "../group-budget"
 
-export function generateNationWide(budgets: BudgetRow[]): { [year: string]: NationWideBudget } {
+export function generateNationWide(budgets: BudgetRow[]): { year: number, budget: NationWideBudget }[] {
   const expenseRows = budgets.filter(row => row.type === 'expense')
   const years = getUnique(expenseRows.map(row => row.year))
 
-  return years.reduce((result, year) => {
+  return years.map(year => {
     const filteredBudgets = expenseRows.filter(row => row.year === Number(year))
-    result[year] = getNationWide(filteredBudgets)
-    return result
-  }, {} as { [year: string]: NationWideBudget })
+    return { year, budget: getNationWide(filteredBudgets) }
+  })
 }
 
 function getNationWide(filteredBudgets: BudgetRow[]): NationWideBudget {
