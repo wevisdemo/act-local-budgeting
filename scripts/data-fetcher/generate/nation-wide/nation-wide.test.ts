@@ -31,7 +31,7 @@ describe('generate > nation-wide', () => {
     expect(nationWideBudgets['2563'].total).toBe(1)
   })
 
-  test('Group by area', () => {
+  test('Group by area; not use income row', () => {
     const communityEducation: BudgetRow = {
       ...getExpenseRow(),
       expenseArea: 'ด้านบริการชุมชนและสังคม',
@@ -41,49 +41,29 @@ describe('generate > nation-wide', () => {
       amount: 10,
     }
 
-    const communityHealth: BudgetRow = {
-      ...getExpenseRow(),
-      expenseArea: 'ด้านบริการชุมชนและสังคม',
-      expensePlan: 'สาธารณสุข',
-      expenseTask: 'งบบุคลากร',
-      expenseType: 'บริการสาธารณสุขและงานสาธารณสุขอื่น',
+    const income2564Row: BudgetRow = {
+      year: 2564,
+      province: 'เชียงใหม่',
+      type: 'income',
+      incomeCategory: 'รายได้จัดเก็บเอง',
+      incomeType: 'หมวดภาษีอากร',
       amount: 20,
     }
 
-    const economicArgiculture: BudgetRow = {
-      ...getExpenseRow(),
-      expenseArea: 'ด้านการเศรษฐกิจ',
-      expensePlan: 'การเกษตร',
-      expenseTask: 'งบบุคลากร',
-      expenseType: 'สิ่งแวดล้อมและทรัพยากรธรรมชาติ',
-      amount: 50,
-    }
+    const nationWideBudgets = generateNationWide([communityEducation, income2564Row])
 
-    const nationWideBudgets = generateNationWide([communityEducation, communityHealth, economicArgiculture])
-
+    expect(nationWideBudgets['2564'].groupedByArea.length).toBe(1)
     expect(nationWideBudgets['2564'].groupedByArea).toContainEqual({
       area: "ด้านบริการชุมชนและสังคม",
-      total: 30,
+      total: 10,
       plans: [{
         plan: "การศึกษา",
         total: 10,
-      }, {
-        plan: "สาธารณสุข",
-        total: 20,
-      }]
-    } as BudgetByArea)
-
-    expect(nationWideBudgets['2564'].groupedByArea).toContainEqual({
-      area: "ด้านการเศรษฐกิจ",
-      total: 50,
-      plans: [{
-        plan: "การเกษตร",
-        total: 50,
       }]
     } as BudgetByArea)
   })
 
-  test('Group by type', () => {
+  test('Group by type; not use income row', () => {
     const personnel: BudgetRow = {
       ...getExpenseRow(),
       expenseType: 'งบบุคลากร',
@@ -97,19 +77,20 @@ describe('generate > nation-wide', () => {
       amount: 20,
     }
 
-    const capital: BudgetRow = {
-      ...getExpenseRow(),
-      expenseType: 'งบดำเนินการ',
-      amount: 25,
+    const incomeRow: BudgetRow = {
+      year: 2564,
+      province: 'เชียงใหม่',
+      type: 'income',
+      incomeCategory: 'รายได้จัดเก็บเอง',
+      incomeType: 'หมวดภาษีอากร',
+      amount: 20,
     }
 
-    const nationWideBudgets = generateNationWide([personnel, operation, capital])
+    const nationWideBudgets = generateNationWide([personnel, operation, incomeRow])
 
+    expect(nationWideBudgets['2564'].groupedByType.length).toBe(1)
     expect(nationWideBudgets['2564'].groupedByType).toContainEqual(
       { type: 'งบบุคลากร', total: 30 },
-    )
-    expect(nationWideBudgets['2564'].groupedByType).toContainEqual(
-      { type: 'งบดำเนินการ', total: 25 },
     )
   })
 })
