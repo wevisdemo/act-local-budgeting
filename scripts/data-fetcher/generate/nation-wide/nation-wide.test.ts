@@ -1,6 +1,6 @@
-import { BudgetRow } from "../read/types";
+import { BudgetRow } from "../../read/types";
 import { generateNationWide } from "./nation-wide";
-import { BudgetByArea } from "./nation-wide.types";
+import { BudgetByArea } from "../types";
 
 describe('generate > nation-wide', () => {
   test('Sum total based on year with only expenses', () => {

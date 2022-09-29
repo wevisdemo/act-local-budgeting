@@ -1,4 +1,4 @@
-import { generateNationWide } from './generate/nation-wide'
+import { generateNationWide } from './generate/nation-wide/nation-wide'
 import { getBudgetRows } from './read/google-sheets'
 import { CsvUrls } from './read/types'
 
@@ -16,5 +16,3 @@ async function main() {
 }
 
 main()
-
-

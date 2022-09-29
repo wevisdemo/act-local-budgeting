@@ -1,6 +1,7 @@
-import { BudgetRow } from "../read/types"
-import { BudgetByArea, BudgetByType, NationWideBudget } from "./nation-wide.types"
-import { Area, Plan } from "./types"
+import { BudgetRow } from "../../read/types"
+import { NationWideBudget } from "./nation-wide.types"
+import { BudgetByArea, BudgetByType } from "../types"
+import { Area, Plan } from "../types"
 
 type AreaStructure = { area: Area, plans: Plan[] }
 
