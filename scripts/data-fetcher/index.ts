@@ -52,6 +52,8 @@ keyword=${keywordRows.length}`)
 
     console.log('writing...')
     await writeJsonFiles({ nationWides, paos, keywords, metadata }, DATA_PATH)
+    console.log('succeeded, see infos and warnings below')
+    console.log('---------------------------------------')
   } catch (e) {
     console.error(e)
   } finally {

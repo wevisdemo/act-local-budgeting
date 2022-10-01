@@ -1,23 +1,27 @@
-import * as Papa from 'papaparse'
+import { parse } from 'csv-parse'
 import request from 'request'
 
 export function parseRemote(url: string): Promise<string[][]> {
   return new Promise((resolve, reject) => {
     const dataStream = request.get(url)
-    const options = { encoding: 'utf8' }
-    const parseStream = Papa.parse(Papa.NODE_STREAM_INPUT, options as Papa.ParseConfig)
+    const parseStream = parse()
     let completed = false
 
     dataStream.pipe(parseStream)
+    const data: string[][] = []
 
-    let data: string[][] = []
-    parseStream.on('data', (chunk: unknown) => {
-        data.push(chunk as string[])
+    parseStream.on('readable', (chunk: unknown) => {
+      let record;
+      while ((record = parseStream.read()) !== null) {
+        data.push(record);
+      }
     })
 
-    parseStream.on('finish', () => {
+    parseStream.on('end', () => {
       resolve(data)
     })
+
+    parseStream.on('error', reject)
 
     dataStream.on('error', (err) => {
       parseStream.end()
