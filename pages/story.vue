@@ -3,12 +3,21 @@
     <Header />
     <div class="min-h-screen">
       <div class="main">
-        <div class="main__graphic wrapper">{{ currStep }}</div>
+        <div class="main__graphic wrapper" id="wrapper">
+          <div class="img-wrapper">
+            <img width="100%" id="img-1" :src="land_1" alt="" />
+            <img width="100%" id="img-2" :src="back" alt="" />
+            <img width="100%" id="img-3" :src="front" alt="" />
+            <img width="100%" id="img-4" :src="land_2" alt="" />
+            <img width="100%" id="img-5" :src="front_dark" alt="" />
+            <img width="100%" id="img-6" :src="back_dark" alt="" />
+          </div>
+        </div>
         <Scrollama
-          class="test"
+          class="scrollama-content"
           :debug="true"
           :offset="0.5"
-          @step-enter="({ element }) => (currStep = element.dataset.stepNo)"
+          @step-enter="handler"
         >
           <div class="step" data-step-no="1">
             <h2 class="header-2 font-weight-bold text-center">
@@ -31,7 +40,7 @@
                 อบจ. มีอำนาจหน้าที่ครอบคลุม หลากหลายด้าน ไม่ว่าจะเป็น...
               </p>
 
-              <div class="random header-3">วิศวกรรมจราจร</div>
+              <div class="random header-3" id="random">วิศวกรรมจราจร</div>
             </div>
           </div>
           <div class="step" data-step-no="4">
@@ -52,6 +61,15 @@
                 >ของประชาชนอย่างเราที่จะต้องเข้าไปมีส่วนร่วมแสดงความคิดเห็นในขั้นตอนการจัดสรรงบในแต่ละปี
               </h5>
             </div>
+            <!-- <lottie
+              class="arrow-img"
+              :options="{
+                animationData: arrow,
+                animationSpeed: 1,
+                loop: true,
+                autoplay: true,
+              }"
+            /> -->
           </div>
         </Scrollama>
       </div>
@@ -402,11 +420,15 @@
               </div>
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-center">
-              <div class="box-1 pointer mx-3">
-                <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
-                  ตรวจสอบ<br />งบประมาณ<br />ในจังหวัดของคุณ
-                </h4>
-              </div>
+              <a href="/act-local-budgeting/dashboard">
+                <div class="box-1 pointer mx-3">
+                  <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
+                    งบ อบจ.<br />
+                    สำคัญกับชีวิตเรา<br />
+                    อย่างไร?
+                  </h4>
+                </div>
+              </a>
               <a href="/act-local-budgeting/conclusion">
                 <div class="box-2 pointer mx-3 mt-3 mt-md-0">
                   <h4 class="header-4 white-a ml-4 mb-3 font-weight-bold">
@@ -426,13 +448,17 @@
 <script>
 import "intersection-observer";
 import Scrollama from "vue-scrollama";
+import * as arrow from "~/assets/lottie/story_postit.json";
+import Lottie from "vue-lottie/src/lottie.vue";
 
 export default {
   components: {
     Scrollama,
+    Lottie,
   },
   data() {
     return {
+      arrow: arrow.default,
       logo: require("~/assets/images/logo.svg"),
       arrow: require("~/assets/images/arrow.svg"),
       papertear: require("~/assets/images/papertear.svg"),
@@ -445,8 +471,104 @@ export default {
       thailand: require("~/assets/images/thailand.svg"),
       link_white: require("~/assets/images/link_white.svg"),
       link_black: require("~/assets/images/link_black.svg"),
+      land_1: require("~/assets/images/land_1.png"),
+      land_2: require("~/assets/images/land_2.png"),
+      back: require("~/assets/images/back.png"),
+      back_dark: require("~/assets/images/back_dark.png"),
+      front: require("~/assets/images/front.png"),
+      front_dark: require("~/assets/images/front_dark.png"),
       currStep: null,
+      word_random: [
+        { title: "ป้องกันและระงับโรคติดต่อ ", bg: "#253472", color: "#FFFEF5" },
+        {
+          title: "การจัดการ และดูแลสถานีขนส่งทางบกและทางน้ำ ",
+          bg: "#FFB930",
+          color: "#181F1C",
+        },
+        {
+          title: "กำจัดขยะมูลฝอย สิ่งปฏิกูล และน้ำเสีย ",
+          bg: "#89E26A",
+          color: "#181F1C",
+        },
+        { title: "วิศวกรรมจราจร  ", bg: "#FFFFFF", color: "#181F1C" },
+        {
+          title: "ป้องกันและบรรเทาสาธารณภัย ",
+          bg: "#F2A8EE",
+          color: "#181F1C",
+        },
+        {
+          title: "ส่งเสริมประชาธิปไตย ความเสมอภาคและสิทธิเสรีภาพของประชาชน",
+          bg: "#E0FD6A",
+          color: "#181F1C",
+        },
+        { title: "ส่งเสริมการท่องเที่ยว ", bg: "#A80C7C", color: "#FFFEF5" },
+        {
+          title: "ดูแลทรัพยากรธรรมชาติและสิ่งแวดล้อม ",
+          bg: "#EC6440",
+          color: "#FFFEF5",
+        },
+        {
+          title: "การพัฒนาคุณภาพชีวิต เด็กสตรี คนชรา และผู้ด้อยโอกาส ",
+          bg: "#F2A8EE",
+          color: "#181F1C",
+        },
+        { title: "ส่งเสริมการกีฬา ", bg: "#E0FD6A", color: "#181F1C" },
+      ],
     };
+  },
+  mounted() {
+    document.getElementsByTagName("body")[0].style.overflow = "hidden";
+    document.getElementById("img-1").style.bottom = 0;
+    setTimeout(() => {
+      document.getElementById("img-2").style.bottom = "7%";
+    }, 1000);
+    setTimeout(() => {
+      document.getElementById("img-3").style.bottom = "6%";
+      document.getElementsByTagName("body")[0].style.overflow = "unset";
+    }, 2000);
+
+    var i = 1;
+
+    setInterval(() => {
+      document.getElementById("random").textContent = this.word_random[i].title;
+      document.getElementById("random").style.background =
+        this.word_random[i].bg;
+      document.getElementById("random").style.color = this.word_random[i].color;
+      i = ++i % this.word_random.length;
+    }, 2000);
+  },
+  methods: {
+    handler({ element, index, direction }) {
+      if (index == 0) {
+        document.getElementById("img-2").style.transform = "none";
+        document.getElementById("img-3").style.transform = "none";
+        document.getElementById("img-2").style.bottom = "7%";
+        document.getElementById("img-3").style.bottom = "6%";
+      } else if (index == 1) {
+        document.getElementById("img-2").style.transform = "scale(2.5)";
+        document.getElementById("img-3").style.transform = "scale(3)";
+        document.getElementById("img-2").style.bottom = "22%";
+        document.getElementById("img-3").style.bottom = "12%";
+      }
+
+      if (index == 4) {
+        document.getElementById("img-1").style.opacity = 0;
+        document.getElementById("img-2").style.opacity = 0;
+        document.getElementById("img-3").style.opacity = 0;
+        document.getElementById("img-4").style.opacity = 1;
+        document.getElementById("img-5").style.opacity = 1;
+        document.getElementById("img-6").style.opacity = 1;
+        document.getElementById("wrapper").classList.add("wrapper-grid");
+      } else {
+        document.getElementById("img-4").style.opacity = 0;
+        document.getElementById("img-5").style.opacity = 0;
+        document.getElementById("img-6").style.opacity = 0;
+        document.getElementById("img-1").style.opacity = 1;
+        document.getElementById("img-2").style.opacity = 1;
+        document.getElementById("img-3").style.opacity = 1;
+        document.getElementById("wrapper").classList.remove("wrapper-grid");
+      }
+    },
   },
 };
 </script>
@@ -455,6 +577,11 @@ export default {
 .wrapper {
   background-image: url("~/assets/images/sky.png");
   background-size: cover;
+}
+
+.wrapper-grid {
+  background-image: url("~/assets/images/bg_grid_blue.svg");
+  background-size: contain;
 }
 
 .bg-grid-blue {
@@ -494,9 +621,58 @@ export default {
   height: 100vh;
   color: rgba($color: #000000, $alpha: 0.1);
   font-size: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  // display: flex;
+  // align-items: flex-end;
+  // justify-content: center;
+
+  img {
+    position: absolute;
+    bottom: -100%;
+    transition: 0.7s;
+    left: 0;
+    right: 0;
+  }
+}
+
+#img-2 {
+  max-width: 964px;
+  margin: auto;
+}
+
+#img-3 {
+  max-width: 647px;
+  margin: auto;
+}
+
+#img-4 {
+  max-width: 964px;
+  margin: auto;
+  transform: scale(2.5);
+  bottom: 0;
+  z-index: 5;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+#img-5 {
+  max-width: 647px;
+  margin: auto;
+  transform: scale(3);
+  bottom: 12%;
+  z-index: 5;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+#img-6 {
+  max-width: 946px;
+  margin: auto;
+  transform: scale(2.5);
+  bottom: 22%;
+  z-index: 5;
+  transition: 0.5s;
+  opacity: 0;
 }
 .step {
   padding: 15vh 0;
@@ -508,7 +684,7 @@ export default {
   justify-content: center;
 }
 
-.test {
+.scrollama-content {
   position: relative;
   z-index: 1;
   margin-top: -100vh;
@@ -530,6 +706,8 @@ export default {
   padding: 20px 64px;
   text-align: center;
   font-weight: lighter;
+  width: fit-content;
+  margin: auto;
 }
 .story-intro {
   padding: 30px 10px 66px;
