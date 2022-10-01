@@ -1,5 +1,5 @@
 export function parseToNumber(input: string): number {
-  return Number(input.split(',').join(''))
+  return Number(input.replaceAll('฿', '').split(',').join(''))
 }
 
 export function parseEmptyStringToUndefined(input: string): string | undefined {

@@ -194,7 +194,7 @@ function mapChiefExecutive(row: AssetRow): ChiefExecutive {
       expense: row.ownExpense,
       taxed: row.ownTaxed,
     },
-    spouseAccount: row.spouseAsset === undefined ? {
+    spouseAccount: row.spouseAsset !== undefined ? {
       asset: row.spouseAsset ?? 0,
       debt: row.spouseDebt ?? 0,
       income: row.spouseIncome ?? 0,

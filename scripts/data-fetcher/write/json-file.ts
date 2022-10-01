@@ -39,7 +39,7 @@ export async function writeJsonFiles(input: WriteJsonFilesInput, rootPath: strin
     await Promise.all(files.map(async (file) => {
       const filePath = join(rootPath, file.path)
       await mkdir(dirname(filePath), { recursive: true })
-      return writeFile(filePath, JSON.stringify(file.content))
+      return writeFile(filePath, JSON.stringify(file.content, null, 2))
     }))
   } catch (e) {
     throw new Error(`Write JSONs: cannot write files ${e}`)
