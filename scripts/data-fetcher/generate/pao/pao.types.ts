@@ -23,7 +23,6 @@ export type PAO = {
   name: string
   incomes: IncomeByType[]
   population: number
-  perCapitaIncome: number
   budgetingDocUrl: string
   ActAiUrl: string
   chiefExecutives: ChiefExecutive[]

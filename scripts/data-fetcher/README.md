@@ -196,7 +196,6 @@ type PAO = {
   name: string
   incomes: IncomeByType[]
   population: number
-  perCapitaIncome: number
   budgetingDocUrl: string
   ActAiUrl: string
   chiefExecutives: ChiefExecutive[]
@@ -267,7 +266,6 @@ Example
         ]
       }],
       "population": 1495741,
-      "perCapitaIncome": 2100,
       "budgetingDocUrl": "https://drive.google.com",
       "ActAiUrl": "https://tinyurl.com",
       "chiefExecutives": [{
