@@ -1,8 +1,16 @@
 import { generateKeywords } from './generate/keywords/keywords'
+import { generateMetadata } from './generate/metadata/metadata'
 import { generateNationWide } from './generate/nation-wide/nation-wide'
 import { generatePaoBudgets } from './generate/pao/pao'
 import { getActAiLinkRows, getAssetRows, getBudgetRows, getByYearLinkRows, getKeywordRows } from './read/google-sheets'
 import { CsvUrls } from './read/types'
+import { writeJsonFiles } from './write/json-file'
+
+// !! WARN: This script will DELETE the given path without any warnings !!
+// Path to data directory to generate JSON files into
+// Relative and absolute path are acceptable
+// No trailing backslash
+const DATA_PATH = './static/data'
 
 async function main() {
   const csvUrls: CsvUrls = {
@@ -30,6 +38,9 @@ async function main() {
   const nationWides = generateNationWide(budgetRows)
   const paos = generatePaoBudgets(budgetRows, assetRows, actAiLinkRows, byYearkLinkRows)
   const keywords = generateKeywords(keywordRows)
+  const metadata = generateMetadata(paos)
+
+  writeJsonFiles({ nationWides, paos, keywords, metadata }, DATA_PATH)
 }
 
 main()
