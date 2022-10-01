@@ -1,7 +1,9 @@
+// These type aliases are in case we want to change them to a more concreted types
 export type Area = string
 export type Plan = string
 export type Type = string
 
+// Shared types by PAOs and Nation-wide
 export type BudgetByArea = {
   area: Area
   total: number

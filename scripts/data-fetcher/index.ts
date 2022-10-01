@@ -9,8 +9,8 @@ import { writeJsonFiles } from './write/json-file'
 
 // !! WARN: This script will DELETE the given path without any warnings !!
 // Path to data directory to generate JSON files into
-// Relative and absolute path are acceptable
-// No trailing backslash
+// - Relative and absolute path are acceptable
+// - No trailing backslash
 const DATA_PATH = './static/data'
 
 const csvUrls: CsvUrls = {
