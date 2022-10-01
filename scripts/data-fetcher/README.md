@@ -2,8 +2,12 @@
 The script to fetch Google Sheets in CSV format and aggregate to useful JSON data files.
 
 - [ACT Local Budgeting / Data Fetcher](#act-local-budgeting--data-fetcher)
+- [Development Guide](#development-guide)
   - [Build](#build)
   - [Run](#run)
+  - [Test](#test)
+  - [Seperations](#seperations)
+- [Data Interfaces](#data-interfaces)
   - [Keywords](#keywords)
   - [Data File Structure](#data-file-structure)
   - [Data File Formats](#data-file-formats)
@@ -20,12 +24,43 @@ The script to fetch Google Sheets in CSV format and aggregate to useful JSON dat
       - [File Name Path](#file-name-path-3)
       - [Data Type](#data-type-3)
 
+# Development Guide
 ## Build
-TBD
+All dependencies are added with parent's `package.json`. Simply run:
+```
+npm i
+```
 
 ## Run
-TBD
+This sub-project uses `typescript` with `ts-node`. You can run the fetcher with:
 
+```
+npm run fetch
+```
+
+Which will kick-start the command in `index.ts`
+
+## Test
+We do unit testing in some crucial parts. All of them are now in the `generate` path since most of conditions and calculations are done there.
+
+To run test:
+```
+npm run test-fetch
+```
+
+## Seperations
+This sub-project are split into three layers:
+
+1. Read: data from data sources
+   - Result -> rows as data sources but with data type transformations
+2. Generate: meaningful data for interfacing
+   - Result -> transformed data into use cases
+3. Write: to destination (in this case, json files)
+   - Result -> deliver generated data to desired destination
+
+
+
+# Data Interfaces
 ## Keywords
 | In Sheets        | In Data File                                 |
 |------------------|----------------------------------------------|
@@ -196,7 +231,6 @@ type PAO = {
   name: string
   incomes: IncomeByType[]
   population: number
-  perCapitaIncome: number
   budgetingDocUrl: string
   ActAiUrl: string
   chiefExecutives: ChiefExecutive[]
@@ -218,7 +252,7 @@ type ChiefExecutive = {
   inOffice: string
   photoUrl: string
   ownAccount: Account
-  spouseAccount: Account
+  spouseAccount?: Account
   fillingUrl: string
 }
 
@@ -267,7 +301,6 @@ Example
         ]
       }],
       "population": 1495741,
-      "perCapitaIncome": 2100,
       "budgetingDocUrl": "https://drive.google.com",
       "ActAiUrl": "https://tinyurl.com",
       "chiefExecutives": [{
