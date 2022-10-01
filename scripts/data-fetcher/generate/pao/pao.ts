@@ -1,4 +1,4 @@
-import { AssetRow, BudgetRow } from "../../read/types";
+import { ActAiLinkRow, AssetRow, BudgetRow, ByYearLinkRow } from "../../read/types";
 import { getGroupedByArea, getGroupedByType } from "../group-budget";
 import { getUnique, sum } from "../utils";
 import { BudgetByTask, ChiefExecutive, IncomeByType, PaoBudget } from "./pao.types";
@@ -8,6 +8,8 @@ type PaoBudgetFileData = {year: number, province: string, budget: PaoBudget}
 export function generatePaoBudgets(
   budgetRows: BudgetRow[],
   assetRows: AssetRow[],
+  actAiLinkRows: ActAiLinkRow[],
+  byYearkLinkRows: ByYearLinkRow[],
 ): PaoBudgetFileData[] {
   const allYears = getUnique(budgetRows.map(row => row.year))
   const allProvinces = getUnique(budgetRows.map(row => row.province))
@@ -23,6 +25,18 @@ export function generatePaoBudgets(
       const incomeRows = targetedBudgetRows
         .filter(row => row.type === 'income')
 
+      const actAiLinkRow = actAiLinkRows
+        .find(row => row.province === province)
+      if (actAiLinkRow === undefined) {
+        throw new Error(`Generate PAO: cannot find ACT AI link for ${province}`)
+      }
+
+      const byYearkLinkRow = byYearkLinkRows
+        .find(row => row.year === year && row.province === province)
+      if (byYearkLinkRow === undefined) {
+        throw new Error(`Generate PAO: cannot find ByYear link for ${province}, ${year}`)
+      }
+
       result.push(getPaoBudgetFileData({
         year,
         province,
@@ -31,6 +45,9 @@ export function generatePaoBudgets(
         chiefExecutives: chiefExecutiveDirectory.get(
           chiefExecutiveDirectoryKey(province, year)
         ) ?? [],
+        actAiUrl: actAiLinkRow.url,
+        budgetingDocUrl: byYearkLinkRow.url,
+        population: byYearkLinkRow.population,
       }))
     }
   }
@@ -45,11 +62,14 @@ function getPaoBudgetFileData({
   incomeRows,
   chiefExecutives,
 }: {
-  year: number,
-  province: string,
+  year: number
+  province: string
   expenseRows: BudgetRow[]
   incomeRows: BudgetRow[]
   chiefExecutives: ChiefExecutive[]
+  actAiUrl: string
+  budgetingDocUrl: string
+  population: number
 }): PaoBudgetFileData {
   return {
     year,
@@ -60,6 +80,7 @@ function getPaoBudgetFileData({
     groupedByType: getGroupedByType(expenseRows),
     tasks: expenseRows.map(mapTask),
     pao: {
+      name: province,
       incomes: getIncomeByType(incomeRows),
       chiefExecutives,
     }

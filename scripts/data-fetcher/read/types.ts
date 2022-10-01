@@ -19,13 +19,13 @@ export type BudgetRow = {
   amount: number // จำนวนเงิน
 }
 
-export type ActaiLinkRow = {
+export type ActAiLinkRow = {
   province: string
   url: string // link ACT AI
 }
 
 export type ByYearLinkRow = {
-  year: string // fiscal
+  year: number // fiscal
   province: string // province
   url: string // doc
   population: number // population
@@ -40,7 +40,7 @@ export type AssetRow = {
   inOffice: string // ระยะเวลาดำรงตำแหน่ง
   photoUrl: string // Photo
   fillingReason: string // กรณีที่ยื่น
-  fillingDate: string // เมื่อวันที่ 
+  fillingDate: string // เมื่อวันที่
   ownAsset: number // รวมทรัพย์สินผู้ยื่น
   spouseAsset?: number // รวมทรัพย์สินคู่สมรส
   ownDebt: number // รวมหนี้สินผู้ยื่น

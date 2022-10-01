@@ -1,4 +1,4 @@
-import { AssetRow, BudgetRow } from "../../read/types"
+import { ActAiLinkRow, AssetRow, BudgetRow, ByYearLinkRow } from "../../read/types"
 import { BudgetByArea } from "../types"
 import { generatePaoBudgets } from "./pao"
 import { BudgetByTask, ChiefExecutive } from "./pao.types"
@@ -9,11 +9,23 @@ describe('generate > pao > budget', () => {
     const chiangMai2563 = { ...getExpenseRow(), year: 2563 }
     const saraburi2564 = { ...getExpenseRow(), province: 'สระบุรี' }
 
-    const paos = generatePaoBudgets([
-      chiangMai2564,
-      chiangMai2563,
-      saraburi2564,
-    ], [])
+    const paos = generatePaoBudgets(
+      [
+        chiangMai2564,
+        chiangMai2563,
+        saraburi2564,
+      ],
+      [],
+      [
+        getActAiLinkRow(),
+        { ...getActAiLinkRow(), province: 'สระบุรี' }],
+      [
+        getByYearLinkRow(2563),
+        getByYearLinkRow(2564),
+        { ...getByYearLinkRow(2563), province: 'สระบุรี' },
+        { ...getByYearLinkRow(2564), province: 'สระบุรี' },
+      ]
+    )
 
     expect(paos).toContainEqual(
       { year: 2564, province: 'เชียงใหม่', budget: expect.anything() },
@@ -44,7 +56,7 @@ describe('generate > pao > budget', () => {
       chiangMai2564_1,
       chiangMai2564_2,
       chiangMai2563,
-    ], [])
+    ], [], [getActAiLinkRow()], [getByYearLinkRow(2563), getByYearLinkRow(2564)])
 
     expect(paos.find(e => e.year === 2564)?.budget.total).toBe(30)
     expect(paos.find(e => e.year === 2563)?.budget.total).toBe(15)
@@ -66,7 +78,7 @@ describe('generate > pao > budget', () => {
       chiangMai2564_1,
       chiangMai2564_2,
       chiangMai2563,
-    ], [])
+    ], [], [getActAiLinkRow()], [getByYearLinkRow(2563), getByYearLinkRow(2564)])
 
     expect(
       paos.find(e => e.year === 2564)?.budget.groupedByArea[0]
@@ -107,7 +119,7 @@ describe('generate > pao > budget', () => {
       chiangMai2564_1,
       chiangMai2564_2,
       chiangMai2563,
-    ], [])
+    ], [], [getActAiLinkRow()], [getByYearLinkRow(2563), getByYearLinkRow(2564)])
 
     expect(
       paos.find(e => e.year === 2564)?.budget.groupedByType[0]
@@ -132,7 +144,7 @@ describe('generate > pao > budget', () => {
     const paos = generatePaoBudgets([
       educationGeneralAdministration,
       preSchoolAndPrimarySchool,
-    ], [])
+    ], [], [getActAiLinkRow()], [getByYearLinkRow(2564)])
 
     const targetedPao = paos.find(e => e.year === 2564)?.budget
 
@@ -171,7 +183,7 @@ describe('generate > pao > incomes', () => {
 
     const paos = generatePaoBudgets(
       [collectTaxIncome, collectCapitalIncome, subsidyIncome],
-      [],
+      [], [getActAiLinkRow()], [getByYearLinkRow(2564)],
     )
 
     expect(paos[0].budget.pao.incomes.length).toBe(2)
@@ -237,6 +249,8 @@ describe('generate > pao > chiefExecutive', () => {
     const paos = generatePaoBudgets(
       [expense2563, expense2564],
       [mrUdorn, mrBurapa],
+      [getActAiLinkRow()],
+      [getByYearLinkRow(2563), getByYearLinkRow(2564)],
     )
 
     const pao2563 = paos.find(p => p.year === 2563)
@@ -258,7 +272,12 @@ describe('generate > pao > chiefExecutive', () => {
     }
     const expense2564 = getExpenseRow()
 
-    const paos = generatePaoBudgets([expense2563, expense2564], [mrUdorn])
+    const paos = generatePaoBudgets(
+      [expense2563, expense2564],
+      [mrUdorn],
+      [getActAiLinkRow()],
+      [getByYearLinkRow(2563), getByYearLinkRow(2564)],
+      )
 
     expect(paos.length).toBe(2)
     expect(paos[0].budget.pao.chiefExecutives[0].name).toEqual('พันตำรวจโท อุดร แปลกโบสถ์')
@@ -314,5 +333,21 @@ function getAssetRow(): AssetRow {
     ownTaxed: 9,
     spouseTaxed: 10,
     fillingUrl: 'https://drive.google.com',
+  }
+}
+
+function getActAiLinkRow(): ActAiLinkRow {
+  return {
+    province: 'เชียงใหม่',
+    url: '',
+  }
+}
+
+function getByYearLinkRow(year: number): ByYearLinkRow {
+  return {
+    year,
+    province: 'เชียงใหม่',
+    url: '',
+    population: 0,
   }
 }
