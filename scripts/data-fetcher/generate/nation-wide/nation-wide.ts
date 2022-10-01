@@ -3,7 +3,9 @@ import { NationWideBudget } from "./nation-wide.types"
 import { getUnique } from "../utils"
 import { getGroupedByArea, getGroupedByType } from "../group-budget"
 
-export function generateNationWide(budgets: BudgetRow[]): { year: number, budget: NationWideBudget }[] {
+export type NationWideFileData = { year: number, budget: NationWideBudget }
+
+export function generateNationWide(budgets: BudgetRow[]): NationWideFileData[] {
   const expenseRows = budgets.filter(row => row.type === 'expense')
   const years = getUnique(expenseRows.map(row => row.year))
 

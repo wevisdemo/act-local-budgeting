@@ -57,8 +57,8 @@ export type AssetRow = {
 }
 
 export type KeywordRow = {
-  plan: string
-  task: string
-  type: string
-  keywords: string[]
+  plan: string // แผนงานรายจ่าย
+  task: string // งานรายจ่าย
+  type: string // ประเภทรายจ่าย
+  keywords: string[] // keyword
 }

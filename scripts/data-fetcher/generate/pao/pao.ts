@@ -3,7 +3,7 @@ import { getGroupedByArea, getGroupedByType } from "../group-budget";
 import { getUnique, sum } from "../utils";
 import { BudgetByTask, ChiefExecutive, IncomeByType, PaoBudget } from "./pao.types";
 
-type PaoBudgetFileData = {year: number, province: string, budget: PaoBudget}
+export type PaoBudgetFileData = { year: number, province: string, budget: PaoBudget }
 
 export function generatePaoBudgets(
   budgetRows: BudgetRow[],
