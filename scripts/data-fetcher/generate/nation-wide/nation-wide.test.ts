@@ -1,6 +1,13 @@
 import { BudgetRow } from "../../read/types";
 import { generateNationWide } from "./nation-wide";
 import { BudgetByArea } from "../types";
+jest.mock('../../log-collector/log-collector', () => {
+  return {
+    logc: {
+      warn: () => {},
+    }
+  }
+})
 
 describe('generate > nation-wide', () => {
   test('Sum total based on year with only expenses', () => {

@@ -4,7 +4,9 @@ import request from 'request'
 export function parseRemote(url: string): Promise<string[][]> {
   return new Promise((resolve, reject) => {
     const dataStream = request.get(url)
-    const parseStream = Papa.parse(Papa.NODE_STREAM_INPUT)
+    const options = { encoding: 'utf8' }
+    const parseStream = Papa.parse(Papa.NODE_STREAM_INPUT, options as Papa.ParseConfig)
+    let completed = false
 
     dataStream.pipe(parseStream)
 
@@ -14,9 +16,18 @@ export function parseRemote(url: string): Promise<string[][]> {
     })
 
     parseStream.on('finish', () => {
-        resolve(data)
+      resolve(data)
     })
 
-    parseStream.on('error', reject)
+    dataStream.on('error', (err) => {
+      parseStream.end()
+      if (!completed) {
+        reject(err)
+      }
+    })
+
+    dataStream.on('complete', () => {
+      completed = true
+    })
   })
 }

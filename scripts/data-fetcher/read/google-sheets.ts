@@ -10,8 +10,8 @@ export async function getBudgetRows(csvUrl: string): Promise<BudgetRow[]> {
     throw new Error('BudgetRow: no content to process')
   }
 
-  if (parsed[0].length >= 10) {
-    throw new Error('BudgetRow: invalid amount of columns')
+  if (parsed[0].length < 10) {
+    throw new Error(`BudgetRow: invalid amount of columns; headers are ${parsed[0]}`)
   }
 
   // Remove header row
@@ -41,8 +41,8 @@ export async function getAssetRows(csvUrl: string): Promise<AssetRow[]> {
     throw new Error('AssetRow: no content to process')
   }
 
-  if (parsed[0].length >= 20) {
-    throw new Error('AssetRow: invalid amount of columns')
+  if (parsed[0].length < 20) {
+    throw new Error(`AssetRow: invalid amount of columns; headers are ${parsed[0]}`)
   }
 
   // Remove header rows
@@ -84,8 +84,8 @@ export async function getActAiLinkRows(csvUrl: string): Promise<ActAiLinkRow[]> 
     throw new Error('ActAiLinkRow: no content to process')
   }
 
-  if (parsed[0].length >= 2) {
-    throw new Error('ActAiLinkRow: invalid amount of columns')
+  if (parsed[0].length < 2) {
+    throw new Error(`ActAiLinkRow: invalid amount of columns; headers are ${parsed[0]}`)
   }
 
   // Remove header row
@@ -107,8 +107,8 @@ export async function getByYearLinkRows(csvUrl: string): Promise<ByYearLinkRow[]
     throw new Error('ByYearLinkRow: no content to process')
   }
 
-  if (parsed[0].length >= 4) {
-    throw new Error('ByYearLinkRow: invalid amount of columns')
+  if (parsed[0].length < 4) {
+    throw new Error(`ByYearLinkRow: invalid amount of columns; headers are ${parsed[0]}`)
   }
 
   // Remove header row
@@ -132,8 +132,8 @@ export async function getKeywordRows(csvUrl: string): Promise<KeywordRow[]> {
     throw new Error('KeywordRow: no content to process')
   }
 
-  if (parsed[0].length >= 3) {
-    throw new Error('KeywordRow: invalid amount of columns')
+  if (parsed[0].length < 4) {
+    throw new Error(`KeywordRow: invalid amount of columns; headers are ${parsed[0]}`)
   }
 
   // Remove header row

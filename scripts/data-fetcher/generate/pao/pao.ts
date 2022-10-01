@@ -1,3 +1,4 @@
+import { logc } from "../../log-collector/log-collector";
 import { ActAiLinkRow, AssetRow, BudgetRow, ByYearLinkRow } from "../../read/types";
 import { getGroupedByArea, getGroupedByType } from "../group-budget";
 import { getUnique, sum } from "../utils";
@@ -28,13 +29,17 @@ export function generatePaoBudgets(
       const actAiLinkRow = actAiLinkRows
         .find(row => row.province === province)
       if (actAiLinkRow === undefined) {
-        throw new Error(`Generate PAO: cannot find ACT AI link for ${province}`)
+        logc.warn(`Generate PAO: cannot find ACT AI link for ${province}`, {
+          source: `ActAiLink`,
+        })
       }
 
       const byYearkLinkRow = byYearkLinkRows
         .find(row => row.year === year && row.province === province)
       if (byYearkLinkRow === undefined) {
-        throw new Error(`Generate PAO: cannot find ByYear link for ${province}, ${year}`)
+        logc.warn(`Generate PAO: cannot find ByYear link for ${province}, ${year}`, {
+          source: `ByYearLink`,
+        })
       }
 
       result.push(getPaoBudgetFileData({
@@ -45,9 +50,9 @@ export function generatePaoBudgets(
         chiefExecutives: chiefExecutiveDirectory.get(
           chiefExecutiveDirectoryKey(province, year)
         ) ?? [],
-        actAiUrl: actAiLinkRow.url,
-        budgetingDocUrl: byYearkLinkRow.url,
-        population: byYearkLinkRow.population,
+        actAiUrl: actAiLinkRow?.url ?? '',
+        budgetingDocUrl: byYearkLinkRow?.url ?? '',
+        population: byYearkLinkRow?.population ?? NaN,
       }))
     }
   }
@@ -126,8 +131,9 @@ function chiefExecutiveDirectoryKey(province: string, year: number) {
 function generateChiefExecutiveDirectory(assetRows: AssetRow[]): Map<string, ChiefExecutive[]>{
   const result = new Map<string, ChiefExecutive[]>()
 
-  for (const row of assetRows) {
-    const years = getInOfficeYears(row)
+  for (const i in assetRows) {
+    const row = assetRows[i]
+    const years = getInOfficeYears(row, i)
     const chiefExecutive = mapChiefExecutive(row)
 
     for (const year of years) {
@@ -145,7 +151,7 @@ function generateChiefExecutiveDirectory(assetRows: AssetRow[]): Map<string, Chi
   return result
 }
 
-function getInOfficeYears(assetRow: AssetRow): number[] {
+function getInOfficeYears(assetRow: AssetRow, line: string): number[] {
   const { inOffice } = assetRow
   const [ startDate, endDate ] = inOffice.split('-').map(splited => splited.trim())
 
@@ -153,7 +159,14 @@ function getInOfficeYears(assetRow: AssetRow): number[] {
   let endYear = (endDate ?? '').split('/').at(2)
 
   if (startYear === undefined) {
-    throw new Error(`Generate PAO: start year not found for entry: ${JSON.stringify(assetRow)}`)
+    logc.warn(
+      `Generate PAO: start year not found for entry: ${JSON.stringify(assetRow)}`,
+      {
+        source: 'Asset',
+        line,
+      }
+    )
+    return []
   }
 
   if (endYear === undefined) {

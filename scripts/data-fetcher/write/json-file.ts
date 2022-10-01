@@ -1,8 +1,10 @@
-import { writeFile, rmdir, mkdir } from 'fs/promises'
+import { writeFile, rm, mkdir } from 'fs/promises'
+import { dirname, join } from 'path'
 import { KeywordMap } from "../generate/keywords/types";
 import { Metadata } from "../generate/metadata/types";
 import { NationWideFileData } from "../generate/nation-wide/nation-wide";
 import { PaoBudgetFileData } from "../generate/pao/pao";
+import { logc } from '../log-collector/log-collector';
 
 type WriteJsonFilesInput = {
   metadata: Metadata
@@ -20,24 +22,30 @@ export async function writeJsonFiles(input: WriteJsonFilesInput, rootPath: strin
   const files = createFilePathWithData(input)
 
   try {
-    await rmdir(rootPath, { recursive: true })
+    logc.info(`Write JSON Files: remove root path directory`)
+    await rm(rootPath, { recursive: true })
   } catch (e) {
     throw new Error(`Write JSONs: cannot remove root path directory ${e}`)
   }
 
   try {
+    logc.info(`Write JSON Files: recreate root path directory`)
     await mkdir(rootPath)
   } catch (e) {
     throw new Error(`Write JSONs: cannot recreate root path directory ${e}`)
   }
 
   try {
-    await Promise.all(files.map((file) =>
-      writeFile(`${rootPath}${file.path}`, JSON.stringify(file.content))
-    ))
+    await Promise.all(files.map(async (file) => {
+      const filePath = join(rootPath, file.path)
+      await mkdir(dirname(filePath), { recursive: true })
+      return writeFile(filePath, JSON.stringify(file.content))
+    }))
   } catch (e) {
     throw new Error(`Write JSONs: cannot write files ${e}`)
   }
+
+  logc.info(`Successfully wrote ${files.length} files to ${rootPath}`)
 }
 
 function createFilePathWithData(input: WriteJsonFilesInput): FilePathWithData[] {

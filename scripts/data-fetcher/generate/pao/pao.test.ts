@@ -1,7 +1,14 @@
 import { ActAiLinkRow, AssetRow, BudgetRow, ByYearLinkRow } from "../../read/types"
 import { BudgetByArea } from "../types"
 import { generatePaoBudgets } from "./pao"
-import { BudgetByTask, ChiefExecutive } from "./pao.types"
+import { BudgetByTask } from "./pao.types"
+jest.mock('../../log-collector/log-collector', () => {
+  return {
+    logc: {
+      warn: () => {},
+    }
+  }
+})
 
 describe('generate > pao > budget', () => {
   test('Get all PAO budgets for years by provinces', () => {
