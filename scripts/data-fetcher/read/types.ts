@@ -1,3 +1,5 @@
+import { Plan } from "../generate/types"
+
 export type CsvUrls = {
   budget: string
   actAiLink: string
@@ -52,4 +54,11 @@ export type AssetRow = {
   ownTaxed: number // เงินได้พึงประเมินผู้ยื่น
   spouseTaxed?: number // เงินได้พึงประเมินคู่สมรส
   fillingUrl: string // PDF Link
+}
+
+export type KeywordRow = {
+  plan: string
+  task: string
+  type: string
+  keywords: string[]
 }

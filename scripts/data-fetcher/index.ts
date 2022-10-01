@@ -1,6 +1,7 @@
+import { generateKeywords } from './generate/keywords/keywords'
 import { generateNationWide } from './generate/nation-wide/nation-wide'
 import { generatePaoBudgets } from './generate/pao/pao'
-import { getActAiLinkRows, getAssetRows, getBudgetRows, getByYearLinkRows } from './read/google-sheets'
+import { getActAiLinkRows, getAssetRows, getBudgetRows, getByYearLinkRows, getKeywordRows } from './read/google-sheets'
 import { CsvUrls } from './read/types'
 
 async function main() {
@@ -17,15 +18,18 @@ async function main() {
     assetRows,
     actAiLinkRows,
     byYearkLinkRows,
+    keywordRows,
   ] = await Promise.all([
     getBudgetRows(csvUrls.budget),
     getAssetRows(csvUrls.asset),
     getActAiLinkRows(csvUrls.actAiLink),
     getByYearLinkRows(csvUrls.byYearLink),
+    getKeywordRows(csvUrls.keyword),
   ])
 
   const nationWides = generateNationWide(budgetRows)
   const paos = generatePaoBudgets(budgetRows, assetRows, actAiLinkRows, byYearkLinkRows)
+  const keywords = generateKeywords(keywordRows)
 }
 
 main()

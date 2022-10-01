@@ -1,4 +1,4 @@
-import { Area, BudgetByArea, BudgetByType, Plan, Type } from "../types"
+import { BudgetByArea, BudgetByType } from "../types"
 
 export type NationWideBudget = {
   total: number

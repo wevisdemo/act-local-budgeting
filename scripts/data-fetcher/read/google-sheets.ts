@@ -1,7 +1,7 @@
 
 import { parseRemote } from './csv'
 import { parseEmptyStringToUndefined, parseToNumber } from './parsers'
-import { BudgetRow, AssetRow, ActAiLinkRow, ByYearLinkRow } from './types'
+import { BudgetRow, AssetRow, ActAiLinkRow, ByYearLinkRow, KeywordRow } from './types'
 
 export async function getBudgetRows(csvUrl: string): Promise<BudgetRow[]> {
   let parsed = await parseRemote(csvUrl)
@@ -10,7 +10,7 @@ export async function getBudgetRows(csvUrl: string): Promise<BudgetRow[]> {
     throw new Error('BudgetRow: no content to process')
   }
 
-  if (parsed[0].length !== 11) {
+  if (parsed[0].length >= 10) {
     throw new Error('BudgetRow: invalid amount of columns')
   }
 
@@ -41,7 +41,7 @@ export async function getAssetRows(csvUrl: string): Promise<AssetRow[]> {
     throw new Error('AssetRow: no content to process')
   }
 
-  if (parsed[0].length !== 21) {
+  if (parsed[0].length >= 20) {
     throw new Error('AssetRow: invalid amount of columns')
   }
 
@@ -84,7 +84,7 @@ export async function getActAiLinkRows(csvUrl: string): Promise<ActAiLinkRow[]> 
     throw new Error('ActAiLinkRow: no content to process')
   }
 
-  if (parsed[0].length !== 2) {
+  if (parsed[0].length >= 2) {
     throw new Error('ActAiLinkRow: invalid amount of columns')
   }
 
@@ -107,7 +107,7 @@ export async function getByYearLinkRows(csvUrl: string): Promise<ByYearLinkRow[]
     throw new Error('ByYearLinkRow: no content to process')
   }
 
-  if (parsed[0].length !== 6) {
+  if (parsed[0].length >= 4) {
     throw new Error('ByYearLinkRow: invalid amount of columns')
   }
 
@@ -122,5 +122,30 @@ export async function getByYearLinkRows(csvUrl: string): Promise<ByYearLinkRow[]
     province: row[1],
     url: row[2],
     population: parseToNumber(row[3]),
+  }))
+}
+
+export async function getKeywordRows(csvUrl: string): Promise<KeywordRow[]> {
+  let parsed = await parseRemote(csvUrl)
+
+  if (parsed.length < 2) {
+    throw new Error('KeywordRow: no content to process')
+  }
+
+  if (parsed[0].length >= 3) {
+    throw new Error('KeywordRow: invalid amount of columns')
+  }
+
+  // Remove header row
+  parsed.splice(0, 1)
+
+  // Remove possible empty rows
+  parsed = parsed.filter(row => parseEmptyStringToUndefined(row[0]))
+
+  return parsed.map(row => ({
+    plan: row[0],
+    task: row[1],
+    type: row[2],
+    keywords: row[3].split(',').map(e => e.trim()),
   }))
 }
