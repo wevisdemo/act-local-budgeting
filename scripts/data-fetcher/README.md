@@ -218,7 +218,7 @@ type ChiefExecutive = {
   inOffice: string
   photoUrl: string
   ownAccount: Account
-  spouseAccount: Account
+  spouseAccount?: Account
   fillingUrl: string
 }
 

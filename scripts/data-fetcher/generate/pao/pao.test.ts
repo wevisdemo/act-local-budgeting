@@ -1,14 +1,14 @@
-import { BudgetRow } from "../../read/types"
+import { AssetRow, BudgetRow } from "../../read/types"
 import { BudgetByArea } from "../types"
 import { generatePaoBudgets } from "./pao"
-import { BudgetByTask } from "./pao.types"
+import { BudgetByTask, ChiefExecutive } from "./pao.types"
 
-describe('generate > pao', () => {
+describe('generate > pao > budget', () => {
   test('Get all PAO budgets for years by provinces', () => {
     const chiangMai2564 = getExpenseRow()
     const chiangMai2563 = { ...getExpenseRow(), year: 2563 }
     const saraburi2564 = { ...getExpenseRow(), province: 'สระบุรี' }
-    
+
     const paos = generatePaoBudgets([
       chiangMai2564,
       chiangMai2563,
@@ -39,7 +39,7 @@ describe('generate > pao', () => {
       year: 2563,
       amount: 15,
     }
-    
+
     const paos = generatePaoBudgets([
       chiangMai2564_1,
       chiangMai2564_2,
@@ -67,7 +67,7 @@ describe('generate > pao', () => {
       chiangMai2564_2,
       chiangMai2563,
     ], [])
-    
+
     expect(
       paos.find(e => e.year === 2564)?.budget.groupedByArea[0]
     ).toEqual({
@@ -108,7 +108,7 @@ describe('generate > pao', () => {
       chiangMai2564_2,
       chiangMai2563,
     ], [])
-    
+
     expect(
       paos.find(e => e.year === 2564)?.budget.groupedByType[0]
     ).toEqual({ type: 'งบบุคลากร', total: 30 } as BudgetByTask)
@@ -135,7 +135,7 @@ describe('generate > pao', () => {
     ], [])
 
     const targetedPao = paos.find(e => e.year === 2564)?.budget
-    
+
     expect(targetedPao).not.toBeUndefined()
     expect(targetedPao?.tasks).toContainEqual({
       task: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
@@ -154,6 +154,81 @@ describe('generate > pao', () => {
   })
 })
 
+describe('generate > pao > chiefExecutive', () => {
+  test('Get executives for the right year', () => {
+    const mrUdorn = getAssetRow()
+    const mrBurapa = {
+      ...getAssetRow(),
+      firstName: 'บูรพา',
+      inOffice: '01/01/2564 - 01/01/2565',
+    }
+
+    const expectedUdorn = {
+      name: 'พันตำรวจโท อุดร แปลกโบสถ์',
+      inOffice: '01/01/2563 - 01/01/2564',
+      photoUrl: 'https://ele.dla.go.th',
+      ownAccount: {
+        asset: 1,
+        debt: 3,
+        income: 5,
+        expense: 7,
+        taxed: 9,
+      },
+      spouseAccount: {
+        asset: 2,
+        debt: 4,
+        income: 6,
+        expense: 8,
+        taxed: 10,
+      },
+      fillingUrl: 'https://drive.google.com',
+    }
+    const expectedBurapa = {
+      ...expectedUdorn,
+      name: 'พันตำรวจโท บูรพา แปลกโบสถ์',
+      inOffice: '01/01/2564 - 01/01/2565',
+    }
+
+    const expense2563 = {
+      ...getExpenseRow(),
+      year: 2563,
+    }
+    const expense2564 = getExpenseRow()
+
+    const paos = generatePaoBudgets(
+      [expense2563, expense2564],
+      [mrUdorn, mrBurapa],
+    )
+
+    const pao2563 = paos.find(p => p.year === 2563)
+    const pao2564 = paos.find(p => p.year === 2564)
+    expect(pao2563?.budget.pao.chiefExecutives.length).toEqual(1)
+    expect(pao2564?.budget.pao.chiefExecutives.length).toEqual(2)
+    expect(pao2564?.budget.pao.chiefExecutives).toContainEqual(expectedUdorn)
+    expect(pao2564?.budget.pao.chiefExecutives).toContainEqual(expectedBurapa)
+  })
+
+  test('Use present day for executive who is still in office', () => {
+    const mrUdorn = {
+      ...getAssetRow(),
+      inOffice: '01/01/2563',
+    }
+    const expense2563 = {
+      ...getExpenseRow(),
+      year: 2563,
+    }
+    const expense2564 = getExpenseRow()
+
+    const paos = generatePaoBudgets([expense2563, expense2564], [mrUdorn])
+
+    expect(paos.length).toBe(2)
+    expect(paos[0].budget.pao.chiefExecutives[0].name).toEqual('พันตำรวจโท อุดร แปลกโบสถ์')
+    expect(paos[1].budget.pao.chiefExecutives[0].name).toEqual('พันตำรวจโท อุดร แปลกโบสถ์')
+  })
+})
+
+
+
 function getExpenseRow(): BudgetRow {
   return {
     year: 2564,
@@ -164,5 +239,30 @@ function getExpenseRow(): BudgetRow {
     expenseType: 'งบบุคลากร',
     expenseTask: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
     amount: 10,
+  }
+}
+
+function getAssetRow(): AssetRow {
+  return {
+    firstName: 'อุดร',
+    lastName: 'แปลกโบสถ์',
+    title: 'พันตำรวจโท',
+    province: 'เชียงใหม่',
+    position: '',
+    inOffice: '01/01/2563 - 01/01/2564',
+    photoUrl: 'https://ele.dla.go.th',
+    fillingReason: '',
+    fillingDate: '',
+    ownAsset: 1,
+    spouseAsset: 2,
+    ownDebt: 3,
+    spouseDebt: 4,
+    ownIncome: 5,
+    spouseIncome: 6,
+    ownExpense: 7,
+    spouseExpense: 8,
+    ownTaxed: 9,
+    spouseTaxed: 10,
+    fillingUrl: 'https://drive.google.com',
   }
 }
