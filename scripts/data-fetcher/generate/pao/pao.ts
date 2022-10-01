@@ -1,7 +1,7 @@
 import { AssetRow, BudgetRow } from "../../read/types";
 import { getGroupedByArea, getGroupedByType } from "../group-budget";
 import { getUnique, sum } from "../utils";
-import { BudgetByTask, ChiefExecutive, PaoBudget } from "./pao.types";
+import { BudgetByTask, ChiefExecutive, IncomeByType, PaoBudget } from "./pao.types";
 
 type PaoBudgetFileData = {year: number, province: string, budget: PaoBudget}
 
@@ -42,6 +42,7 @@ function getPaoBudgetFileData({
   year,
   province,
   expenseRows,
+  incomeRows,
   chiefExecutives,
 }: {
   year: number,
@@ -59,6 +60,7 @@ function getPaoBudgetFileData({
     groupedByType: getGroupedByType(expenseRows),
     tasks: expenseRows.map(mapTask),
     pao: {
+      incomes: getIncomeByType(incomeRows),
       chiefExecutives,
     }
   } as PaoBudget }
@@ -72,6 +74,28 @@ function mapTask(row: BudgetRow): BudgetByTask {
     type: row.expenseType!,
     total: row.amount,
   }
+}
+
+function getIncomeByType(incomeRows: BudgetRow[]): IncomeByType[] {
+  const result: IncomeByType[] = []
+  const types = getUnique(incomeRows.map(row => row.incomeType!))
+  for (const type of types) {
+    const rowsOfType = incomeRows.filter(row => row.incomeType === type)
+    const categories = getUnique(rowsOfType.map(row => row.incomeCategory!))
+
+    result.push({
+      type,
+      total: rowsOfType.map(row => row.amount).reduce(sum, 0),
+      categories: categories.map(cat => {
+        return {
+          category: cat,
+          total: rowsOfType.find(row => row.incomeType === type && row.incomeCategory === cat)?.amount ?? 0
+        }
+      })
+    })
+  }
+
+  return result
 }
 
 function chiefExecutiveDirectoryKey(province: string, year: number) {

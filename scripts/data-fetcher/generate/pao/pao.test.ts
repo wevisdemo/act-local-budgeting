@@ -154,6 +154,45 @@ describe('generate > pao > budget', () => {
   })
 })
 
+describe('generate > pao > incomes', () => {
+  test('Group income by types', () => {
+    const collectTaxIncome = getIncomeRow()
+    const collectCapitalIncome = {
+      ...getIncomeRow(),
+      incomeCategory: 'หมวดรายได้จากทุน',
+      amount: 25,
+    }
+    const subsidyIncome = {
+      ...getIncomeRow(),
+      incomeType: 'รายได้ที่รัฐบาลอุดหนุนให้แก่องค์กรปกครองส่วนท้องถิ่น',
+      incomeCategory: 'หมวดเงินอุดหนุนทั่วไป',
+      amount: 30,
+    }
+
+    const paos = generatePaoBudgets(
+      [collectTaxIncome, collectCapitalIncome, subsidyIncome],
+      [],
+    )
+
+    expect(paos[0].budget.pao.incomes.length).toBe(2)
+    expect(paos[0].budget.pao.incomes).toContainEqual({
+      type: 'รายได้จัดเก็บเอง',
+      total: 40,
+      categories: [
+        { category: 'หมวดภาษีอากร', total: 15 },
+        { category: 'หมวดรายได้จากทุน', total: 25 },
+      ]
+    })
+    expect(paos[0].budget.pao.incomes).toContainEqual({
+      type: 'รายได้ที่รัฐบาลอุดหนุนให้แก่องค์กรปกครองส่วนท้องถิ่น',
+      total: 30,
+      categories: [
+        { category: 'หมวดเงินอุดหนุนทั่วไป', total: 30 },
+      ]
+    })
+  })
+})
+
 describe('generate > pao > chiefExecutive', () => {
   test('Get executives for the right year', () => {
     const mrUdorn = getAssetRow()
@@ -239,6 +278,17 @@ function getExpenseRow(): BudgetRow {
     expenseType: 'งบบุคลากร',
     expenseTask: 'บริหารทั่วไปเกี่ยวกับการศึกษา',
     amount: 10,
+  }
+}
+
+function getIncomeRow(): BudgetRow {
+  return {
+    year: 2564,
+    province: 'เชียงใหม่',
+    type: 'income',
+    incomeType: 'รายได้จัดเก็บเอง',
+    incomeCategory: 'หมวดภาษีอากร',
+    amount: 15,
   }
 }
 
