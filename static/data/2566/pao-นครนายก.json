@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "นครนายก",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย จักรพันธ์ จินตนาพากานนท์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210720/9ECCFA70-06F5-2EB7-63AE-36A84635406B_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 1853066.95,
+          "debt": 1739,
+          "income": 721029.68,
+          "expense": 540000,
+          "taxed": 121029.68
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1BQXGPdrTpJENV8e-rGcMuxmRFkm6xh4q?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yd66vd9g"
+  }
+}

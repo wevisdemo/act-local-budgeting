@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "พิษณุโลก",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย มนต์ชัย วิวัฒน์ธนาฒย์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210210/04202210-0355-CE11-E8A5-0403529A2D4B_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 33435950.82,
+          "debt": 537700,
+          "income": 1050360,
+          "expense": 677388,
+          "taxed": 1050360
+        },
+        "spouseAccount": {
+          "asset": 115608068.9,
+          "debt": 0,
+          "income": 3137526.32,
+          "expense": 600000,
+          "taxed": 1637526.32
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1Zkwu3XZTXqPrN7EGdYytS1GUTmTVRs5d?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ya2yxhp7"
+  }
+}

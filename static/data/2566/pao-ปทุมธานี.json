@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ปทุมธานี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "พลตำรวจโท คำรณวิทย์ ธูปกระจ่าง",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210701/BA096ED0-B336-4DD4-1DC8-83A20DDD1D9D_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 63127770.36,
+          "debt": 3617929.8,
+          "income": 2692596.8,
+          "expense": 1959800,
+          "taxed": 720292.8
+        },
+        "spouseAccount": {
+          "asset": 4384489.64,
+          "debt": 0,
+          "income": 827557.2,
+          "expense": 401000,
+          "taxed": 827557.2
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1ro8c5JvUVXfGkg2B4oMx9q_fM2uDDI6c?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y9u57m3z"
+  }
+}

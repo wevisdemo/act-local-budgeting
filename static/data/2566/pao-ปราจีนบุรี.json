@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ปราจีนบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย สุนทร วิลาวัลย์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20201107/3FFB85CF-90BA-1A8C-780F-5508016451C0_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 635284177.79,
+          "debt": 4000000,
+          "income": 2163160,
+          "expense": 450000,
+          "taxed": 1256800
+        },
+        "spouseAccount": {
+          "asset": 10250000,
+          "debt": 0,
+          "income": 0,
+          "expense": 0,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1iJcJYgaoCsT_Gll0oTaOMje3rl9nFBSr?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ya6qwd7w"
+  }
+}

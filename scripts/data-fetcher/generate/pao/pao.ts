@@ -66,6 +66,9 @@ function getPaoBudgetFileData({
   expenseRows,
   incomeRows,
   chiefExecutives,
+  actAiUrl,
+  budgetingDocUrl,
+  population,
 }: {
   year: number
   province: string
@@ -87,9 +90,12 @@ function getPaoBudgetFileData({
     pao: {
       name: province,
       incomes: getIncomeByType(incomeRows),
+      population,
       chiefExecutives,
+      budgetingDocUrl,
+      actAiUrl,
     }
-  } as PaoBudget }
+  }}
 }
 
 function mapTask(row: BudgetRow): BudgetByTask {

@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "จันทบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ธนภณ กิจกาญจน์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/applicant/22/888/3229800022085.jpg",
+        "ownAccount": {
+          "asset": 46664366.74,
+          "debt": 0,
+          "income": 906480,
+          "expense": 229304,
+          "taxed": 680681.25
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1NBrSDdMN-yaN-Mn-bkcVCw0EjhWDypXU?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y7dj9spp"
+  }
+}

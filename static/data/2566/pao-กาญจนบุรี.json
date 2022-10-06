@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "กาญจนบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย สุรพงษ์ ปิยะโชติ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210717/9C174844-0A69-2B6C-1516-9DE09E9022BD_UPLOADFILE_DlaELE63.jpeg",
+        "ownAccount": {
+          "asset": 84552908.76,
+          "debt": 366772.6,
+          "income": 1146360,
+          "expense": 350000,
+          "taxed": 240000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1SO1FGJtYTAAGvajKaxmhjsivIHXDU0wN?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ya9bw39k"
+  }
+}

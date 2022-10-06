@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ภูเก็ต",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย เรวัต อารีรอบ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210303/72BD5A60-9925-66B7-118D-CC3C374C740C_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 274910078.78,
+          "debt": 99347883.21,
+          "income": 29042706.7,
+          "expense": 6180500,
+          "taxed": 10585714.32
+        },
+        "spouseAccount": {
+          "asset": 102421628.24,
+          "debt": 22104405.85,
+          "income": 1640456.28,
+          "expense": 1569800,
+          "taxed": 1120900
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1aBzjE8X1yABfKlRbZzNAJHLvmIkkPym9?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y9b56pv7"
+  }
+}

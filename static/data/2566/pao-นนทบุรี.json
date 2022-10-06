@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "นนทบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "พันตำรวจเอก ธงชัย เย็นประเสริฐ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210312/D442059F-3736-72EB-623E-22960459D502_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 188517710.04,
+          "debt": 0,
+          "income": 6541130.37,
+          "expense": 3400000,
+          "taxed": 6541130.37
+        },
+        "spouseAccount": {
+          "asset": 8334223.46,
+          "debt": 7004567.76,
+          "income": 240000,
+          "expense": 873600,
+          "taxed": 240000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1ZDq8ugNK1xN5-F5USLNS3Awcg8J8D0Jj?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yam5grvf"
+  }
+}

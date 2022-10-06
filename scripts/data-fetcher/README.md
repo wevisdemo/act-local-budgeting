@@ -232,7 +232,7 @@ type PAO = {
   incomes: IncomeByType[]
   population: number
   budgetingDocUrl: string
-  ActAiUrl: string
+  actAiUrl: string
   chiefExecutives: ChiefExecutive[]
 }
 
@@ -302,7 +302,7 @@ Example
       }],
       "population": 1495741,
       "budgetingDocUrl": "https://drive.google.com",
-      "ActAiUrl": "https://tinyurl.com",
+      "actAiUrl": "https://tinyurl.com",
       "chiefExecutives": [{
         "name": "พันตำรวจโท อุดร แปลกโบสถ์",
         "inOffice": "20/12/2563 - 19/12/2567",

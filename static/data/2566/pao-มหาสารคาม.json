@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "มหาสารคาม",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย คมคาย อุดรพิมพ์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20201210/D3FD16CD-DCFE-4173-E4DE-27A047268C41_UPLOADFILE_DlaELE63.JPG",
+        "ownAccount": {
+          "asset": 93474696.81,
+          "debt": 0,
+          "income": 740680,
+          "expense": 480000,
+          "taxed": 740682
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/11Ig_0bnp5T_h_-E-ya_-22-5ehgwc14K?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yae8lcbz"
+  }
+}

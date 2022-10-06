@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "พะเยา",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย อัครา พรหมเผ่า",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20201216/BA21750A-6653-2196-0698-705BB2695B28_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 28025619.93,
+          "debt": 2953824,
+          "income": 2400000,
+          "expense": 1093456,
+          "taxed": 300000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1URNAgK6UoVsnKXzdSW9JQwfJjwurAAJy?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yb8n93tb"
+  }
+}
