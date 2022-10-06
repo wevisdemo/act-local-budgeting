@@ -57,7 +57,7 @@ keyword=${keywordRows.length}`)
   } catch (e) {
     console.error(e)
   } finally {
-    console.log(logc.getAll())
+    console.log(JSON.stringify(logc.getAll(), null, 2))
   }
 }
 

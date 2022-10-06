@@ -17,8 +17,8 @@ export async function getBudgetRows(csvUrl: string): Promise<BudgetRow[]> {
   // Remove header row
   parsed.splice(0, 1)
 
-  // Remove possible empty rows
-  parsed = parsed.filter(row => parseEmptyStringToUndefined(row[0]))
+  // Remove possible empty rows; validating year and province columns
+  parsed = parsed.filter(row => parseEmptyStringToUndefined(row[0]) && parseEmptyStringToUndefined(row[1]))
 
   return parsed.map(row => ({
     year: parseToNumber(row[0]),
@@ -114,8 +114,8 @@ export async function getByYearLinkRows(csvUrl: string): Promise<ByYearLinkRow[]
   // Remove header row
   parsed.splice(0, 1)
 
-  // Remove possible empty rows
-  parsed = parsed.filter(row => parseEmptyStringToUndefined(row[0]))
+  // Remove possible empty rows; validating year and province columns
+  parsed = parsed.filter(row => parseEmptyStringToUndefined(row[0]) && parseEmptyStringToUndefined(row[1]))
 
   return parsed.map(row => ({
     year: parseToNumber(row[0]),
