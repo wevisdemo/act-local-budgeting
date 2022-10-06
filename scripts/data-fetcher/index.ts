@@ -45,7 +45,7 @@ byYearLink=${byYearkLinkRows.length}
 keyword=${keywordRows.length}`)
 
     console.log('generating...')
-    const nationWides = generateNationWide(budgetRows)
+    const nationWides = generateNationWide(budgetRows, byYearkLinkRows)
     const paos = generatePaoBudgets(budgetRows, assetRows, actAiLinkRows, byYearkLinkRows)
     const keywords = generateKeywords(keywordRows)
     const metadata = generateMetadata(paos)
