@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "นครราชสีมา",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาง ยลดา หวังศุภกิจโกศล",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210312/4C7AFFA0-BEE3-6BF2-F140-6DFF58EA87E4_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 212744957.11,
+          "debt": 35500000,
+          "income": 62372684.93,
+          "expense": 3095136.99,
+          "taxed": 3001084.93
+        },
+        "spouseAccount": {
+          "asset": 248534489.41,
+          "debt": 0,
+          "income": 165419851.51,
+          "expense": 960000,
+          "taxed": 3119651.51
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/14NLL4n09g0etYmFkzuav3D64SuewUVI8?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y7kutdcf"
+  }
+}

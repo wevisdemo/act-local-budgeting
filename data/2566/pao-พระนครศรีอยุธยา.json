@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "พระนครศรีอยุธยา",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาง สมทรง พันธ์เจริญวรกุล",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210225/7964196D-CFF9-80F1-7D46-3C9085447C5A_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 192412578.63,
+          "debt": 0,
+          "income": 966368,
+          "expense": 900000,
+          "taxed": 3141100044.59
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1kJlUs5ORWdFTTiCJf7zxOUlXIu5x9gHQ?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yb59wg5g"
+  }
+}

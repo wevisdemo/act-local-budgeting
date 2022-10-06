@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "บุรีรัมย์",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ภูษิต เล็กอุดากร",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20220408/BD2216B4-623B-58BC-49FA-7ABC609D5192_UPLOADFILE_DlaELE63.jpeg",
+        "ownAccount": {
+          "asset": 3071002,
+          "debt": 8000000,
+          "income": 906360,
+          "expense": 1085600,
+          "taxed": 190638
+        },
+        "spouseAccount": {
+          "asset": 29426463,
+          "debt": 4866837.1,
+          "income": 180000,
+          "expense": 84000,
+          "taxed": 234000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1RTRXFOIGEH8Ff4TNorASSfJmfnIzXqd6?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yauq3zsb"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "พังงา",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ธราธิป ทองเจิม",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210217/52E4EF93-6660-D159-0ECE-B6C022805F06_UPLOADFILE_DlaELE63.jpeg",
+        "ownAccount": {
+          "asset": 3027111.5,
+          "debt": 1765527.42,
+          "income": 75530,
+          "expense": 8000,
+          "taxed": 52000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/14yxIGbhQSb1gDVDWlG2IhYhKX6OMttvE?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y8tpkd8n"
+  }
+}

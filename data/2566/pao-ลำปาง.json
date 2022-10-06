@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ลำปาง",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นางสาว ตวงรัตน์ โล่ห์สุนทร",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210315/2E4D5E34-57D7-38E9-6A3A-91C9DFE8D39A_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 78504186.13,
+          "debt": 0,
+          "income": 1362000,
+          "expense": 540000,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1HckCC7erCIboI72DJP0012ckYsKxq5Mq?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yco8yhvy"
+  }
+}

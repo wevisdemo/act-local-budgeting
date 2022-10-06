@@ -428,6 +428,7 @@
         ]
       }
     ],
+    "population": 190842,
     "chiefExecutives": [
       {
         "name": "นางสาว สุกานดา ปานะสุทธะ",
@@ -440,15 +441,10 @@
           "expense": 87000,
           "taxed": 500000
         },
-        "spouseAccount": {
-          "asset": 0,
-          "debt": 0,
-          "income": 0,
-          "expense": 0,
-          "taxed": 0
-        },
         "fillingUrl": "https://drive.google.com/drive/folders/1sN0iEt8-wYJz3jTeUQmx9HZVHcb-DvIh?usp=sharing"
       }
-    ]
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1a0USPFmHUkSiR6nVrp4-zBktDNmv0HG5/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/yc2nzyu8"
   }
 }

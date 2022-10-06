@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ประจวบคีรีขันธ์",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย สราวุธ ลิ้มอรุณรักษ์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210312/0358E257-DDF7-21B8-7B99-780F7E9B5199_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 199130853.22,
+          "debt": 0,
+          "income": 5180000,
+          "expense": 2690000,
+          "taxed": 180000
+        },
+        "spouseAccount": {
+          "asset": 241234735.51,
+          "debt": 0,
+          "income": 3180000,
+          "expense": 450000,
+          "taxed": 180000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1IFlK9umguVIZ1DAKwOGMQbx9gAtCsA5l?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y9sfheml"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "นครสวรรค์",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "พลตำรวจเอก สมศักดิ์ จันทะพิงค์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210322/84492DB8-275D-0112-7A24-6129E3D9218B_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 7435744.94,
+          "debt": 1267990.54,
+          "income": 1022160,
+          "expense": 360000,
+          "taxed": 1022160
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/181VaGHD4F75iihml2CE6g4Bszh7BI28k?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y6uy2c92"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "สิงห์บุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ศุภวัฒน์ เทียนถาวร",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210312/2B06DEC6-D26A-DDC5-F4E5-24D19D300D78_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 265285887.07,
+          "debt": 0,
+          "income": 3061000,
+          "expense": 1880000,
+          "taxed": 2879750
+        },
+        "spouseAccount": {
+          "asset": 132375166.82,
+          "debt": 0,
+          "income": 2947400,
+          "expense": 1160000,
+          "taxed": 3629595
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1GSfD5ABBwZl8GQ7jZPWei0pxFb-s52zs?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ybh4bwro"
+  }
+}

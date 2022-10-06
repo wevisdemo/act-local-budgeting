@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "บึงกาฬ",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาง แว่นฟ้า ทองศรี",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210315/E3557001-EB21-1AF9-8FA0-C7ACB52E5B5A_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 30838936.13,
+          "debt": 20058.01,
+          "income": 906360,
+          "expense": 537500,
+          "taxed": 240000
+        },
+        "spouseAccount": {
+          "asset": 22187704.19,
+          "debt": 60550.55,
+          "income": 1576320,
+          "expense": 659486,
+          "taxed": 1670487
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1LNsXN47ztWeItyLwkLKdwn7JC9lZ-lHo?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yck7g6wy"
+  }
+}

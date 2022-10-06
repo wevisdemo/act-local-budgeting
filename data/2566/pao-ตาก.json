@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ตาก",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ณัฐวุฒิ ทวีเกื้อกูลกิจ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/applicant/63/5474/3639900044052.jpg",
+        "ownAccount": {
+          "asset": 379671952.09,
+          "debt": 0,
+          "income": 2407538,
+          "expense": 1527140,
+          "taxed": 2354537
+        },
+        "spouseAccount": {
+          "asset": 67241885.67,
+          "debt": 0,
+          "income": 2513350.09,
+          "expense": 1766640,
+          "taxed": 2513350.09
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/11M2Wzn2MA1mcetwek_EkgBEepetYe31k?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yaaqkpx3"
+  }
+}

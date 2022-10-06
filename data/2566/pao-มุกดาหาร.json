@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "มุกดาหาร",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "พันตำรวจโท จิตต์ ศรีโยหะ มุกดาธนพงศ์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210312/46D69ADF-F055-6F3C-D3A8-130BC4DFA97E_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 6846326.64,
+          "debt": 4808706,
+          "income": 651484.88,
+          "expense": 192366.16,
+          "taxed": 0
+        },
+        "spouseAccount": {
+          "asset": 5930563.93,
+          "debt": 0,
+          "income": 597090,
+          "expense": 145856.5,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1vi1yc5WlgC_uwpj9pXz4bY6tUOM72iX7?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y729bcky"
+  }
+}

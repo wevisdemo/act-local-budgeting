@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "เลย",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ธนาวุฒิ ทิมสุวรรณ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210315/D7329E73-D52B-555C-321C-281AFC0F412F_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 146426116.74,
+          "debt": 13982009.77,
+          "income": 740681.27,
+          "expense": 360000,
+          "taxed": 794681.27
+        },
+        "spouseAccount": {
+          "asset": 65806844.22,
+          "debt": 12183384.1,
+          "income": 1107000,
+          "expense": 240000,
+          "taxed": 987000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1-bXRcuWXpp8D8l-UMVWBT00a3ngg0TvL?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ybyb29q2"
+  }
+}

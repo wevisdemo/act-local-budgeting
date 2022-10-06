@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "สงขลา",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ไพเจน มากสุวรรณ์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210312/F9083738-CB28-5CC9-11F3-29BFB0FDFFDF_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 28155114.43,
+          "debt": 88578.68,
+          "income": 1552082.36,
+          "expense": 930266.5,
+          "taxed": 615722.36
+        },
+        "spouseAccount": {
+          "asset": 36737173.58,
+          "debt": 5620.83,
+          "income": 726000,
+          "expense": 564784,
+          "taxed": 60000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1i2noPLtZgX-shM5v8nWWMPwNsFJgbfmc?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ybdkqpgf"
+  }
+}

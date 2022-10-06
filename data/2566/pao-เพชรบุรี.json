@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "เพชรบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ชัยยะ อังกินันทน์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210525/67F8837C-9FD2-6F5A-409F-22985B9B0FAF_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 16807220.81,
+          "debt": 0,
+          "income": 906360,
+          "expense": 180000,
+          "taxed": 46454
+        },
+        "spouseAccount": {
+          "asset": 26504420.12,
+          "debt": 0,
+          "income": 687000,
+          "expense": 0,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1tUwXGTD7F2LPD3UqNwABUvoxdpY7UtGO?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yd5qy9w8"
+  }
+}

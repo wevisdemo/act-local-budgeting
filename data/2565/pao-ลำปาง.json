@@ -499,6 +499,7 @@
         ]
       }
     ],
+    "population": 724678,
     "chiefExecutives": [
       {
         "name": "นางสาว ตวงรัตน์ โล่ห์สุนทร",
@@ -511,15 +512,10 @@
           "expense": 540000,
           "taxed": 0
         },
-        "spouseAccount": {
-          "asset": 0,
-          "debt": 0,
-          "income": 0,
-          "expense": 0,
-          "taxed": 0
-        },
         "fillingUrl": "https://drive.google.com/drive/folders/1HckCC7erCIboI72DJP0012ckYsKxq5Mq?usp=sharing"
       }
-    ]
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1xvEXurdKGghamsWv5-SRhwGVYe3-LFku/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/yco8yhvy"
   }
 }

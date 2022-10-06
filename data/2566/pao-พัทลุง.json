@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "พัทลุง",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย วิสุทธิ์ ธรรมเพชร",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210315/B5D9531D-7DE6-15DE-AE86-7F1BEB38B4A5_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 38893330.74,
+          "debt": 0,
+          "income": 1738100,
+          "expense": 1200000,
+          "taxed": 49529
+        },
+        "spouseAccount": {
+          "asset": 9221995.32,
+          "debt": 0,
+          "income": 1450000,
+          "expense": 100000,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1TVWD5JsjFCF8urPiMEyvWlOGMbbHh2Kl?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yau95kmu"
+  }
+}

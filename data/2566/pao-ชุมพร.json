@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ชุมพร",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย นพพร อุสิทธิ์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/applicant/86/7168/3860200178111.jpg",
+        "ownAccount": {
+          "asset": 15036997.75,
+          "debt": 4142164.35,
+          "income": 1101360,
+          "expense": 889100.65,
+          "taxed": 385637.42
+        },
+        "spouseAccount": {
+          "asset": 27821780.24,
+          "debt": 11636283.49,
+          "income": 1220894.13,
+          "expense": 763431.7,
+          "taxed": 360394.13
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1Zix8TtL5DCCZgK7qnvN6lQ9AiW6EEVGv?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yavlxyn8"
+  }
+}

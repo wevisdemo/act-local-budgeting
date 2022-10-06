@@ -378,6 +378,7 @@
         ]
       }
     ],
+    "population": 717040,
     "chiefExecutives": [
       {
         "name": "นางสาว ศุภพานี โพธิ์สุ",
@@ -390,15 +391,10 @@
           "expense": 2120467,
           "taxed": 1880000
         },
-        "spouseAccount": {
-          "asset": 0,
-          "debt": 0,
-          "income": 0,
-          "expense": 0,
-          "taxed": 0
-        },
         "fillingUrl": "https://drive.google.com/drive/folders/1CHA643dOLuXP1_HqaOQTfBylD2z5M53s?usp=sharing"
       }
-    ]
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/112DYNWsywxNpezAnYeMonEs8F3ymQHoy/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/ycsaopde"
   }
 }

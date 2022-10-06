@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ชลบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย วิทยา คุณปลื้ม",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210312/7B379F00-EB7F-CFAE-AA4A-B7EFA32D6E49_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 36230253.56,
+          "debt": 17282722.35,
+          "income": 956281.3,
+          "expense": 840000,
+          "taxed": 1130000
+        },
+        "spouseAccount": {
+          "asset": 119869872.73,
+          "debt": 24127499.24,
+          "income": 1230000,
+          "expense": 600000,
+          "taxed": 1138525
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1FOd3syOOebKiAjMCAW6YegMKe4YcFfXX?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ybqezn3v"
+  }
+}
