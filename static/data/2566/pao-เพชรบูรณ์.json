@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "เพชรบูรณ์",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย อัครเดช ทองใจสด",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210729/0019F651-7D49-346D-BC9F-ADB5E9EB4720_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 90485458.05,
+          "debt": 91684,
+          "income": 1100681.3,
+          "expense": 0,
+          "taxed": 1100681.3
+        },
+        "spouseAccount": {
+          "asset": 46265712.01,
+          "debt": 1574488.71,
+          "income": 570270.99,
+          "expense": 0,
+          "taxed": 570270.99
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1QQlU9TcIEEfmT5g2cRPaTNQwHb9oELD5?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y893dkct"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "นครพนม",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นางสาว ศุภพานี โพธิ์สุ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20211006/596026E4-4381-AF62-51AD-C5CE8AA6D6C1_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 63430233677,
+          "debt": 4418698.19,
+          "income": 2894360,
+          "expense": 2120467,
+          "taxed": 1880000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1CHA643dOLuXP1_HqaOQTfBylD2z5M53s?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ycsaopde"
+  }
+}

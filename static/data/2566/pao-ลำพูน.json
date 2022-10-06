@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ลำพูน",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย อนุสรณ์ วงศ์วรรณ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210315/E1929269-7504-2D39-EB95-DE9B79C09DFB_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 149330100.29,
+          "debt": 119148.21,
+          "income": 1344000,
+          "expense": 810000,
+          "taxed": 1950377.96
+        },
+        "spouseAccount": {
+          "asset": 119777944.73,
+          "debt": 255040.07,
+          "income": 2250000,
+          "expense": 940000,
+          "taxed": 2637062.09
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1_1n31uPPyAiBqlLABrdYbwtcL2l3xYpU?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yar24djj"
+  }
+}

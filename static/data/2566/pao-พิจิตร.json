@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "พิจิตร",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "พันตำรวจเอก กฤษฎา ภัทรประสิทธิ์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210323/73B0281F-F94E-44A8-14AC-6136CF84119E_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 27136874.95,
+          "debt": 393217.88,
+          "income": 679298.4,
+          "expense": 400000,
+          "taxed": 679298.4
+        },
+        "spouseAccount": {
+          "asset": 95690087.37,
+          "debt": 15912809.18,
+          "income": 323580,
+          "expense": 300000,
+          "taxed": 323580
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1pI1e6BlT1oqND6KMbJObvl3JdJTSvxv1?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y7rn75oy"
+  }
+}

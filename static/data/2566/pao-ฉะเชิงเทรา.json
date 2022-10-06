@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ฉะเชิงเทรา",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย กิตติ เป้าเปี่ยมทรัพย์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210315/61B0CA1F-5025-586F-1578-A171AD835070_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 1907447.69,
+          "debt": 200000,
+          "income": 930681.3,
+          "expense": 567000,
+          "taxed": 930681.3
+        },
+        "spouseAccount": {
+          "asset": 36108794.21,
+          "debt": 12124796.93,
+          "income": 336000,
+          "expense": 591500,
+          "taxed": 336000
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1Kvx3hb-OMGr4lqxLybDIjoLB1gCcH_tL?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y8vwgz4h"
+  }
+}

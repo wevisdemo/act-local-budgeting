@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ตราด",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย วิเชียร ทรัพย์เจริญ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210216/FBF15CEA-3D73-7FAF-6DB4-0DA46E480F68_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 150631659.51,
+          "debt": 6125366.52,
+          "income": 29351573,
+          "expense": 27850870,
+          "taxed": 0
+        },
+        "spouseAccount": {
+          "asset": 135764374.06,
+          "debt": 720090,
+          "income": 398400,
+          "expense": 95536,
+          "taxed": 10188
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1tMzCNZOhVaNElB_Iku_Buu_Ho8XCc1Dl?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ybt22jt2"
+  }
+}

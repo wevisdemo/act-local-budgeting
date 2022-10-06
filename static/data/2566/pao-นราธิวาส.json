@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "นราธิวาส",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย กูเซ็ง ยาวอหะซัน",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210315/FD8DB7EC-5FE3-9B80-04FD-1FD790053B0D_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 0,
+          "debt": 0,
+          "income": 1288215.56,
+          "expense": 720000,
+          "taxed": 1032728.3
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1xpIAhOCkEnrgDfuI2kNW-cb6BIsDzhgH?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y83xtzaq"
+  }
+}

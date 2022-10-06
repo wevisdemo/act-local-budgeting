@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ปัตตานี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย เศรษฐ์ อัลยุฟรี",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210708/CC0E1F0B-48EA-75F1-15BB-65A3C275CEFB_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 30933005.75,
+          "debt": 4700557.36,
+          "income": 4626360,
+          "expense": 4617396,
+          "taxed": 2526360
+        },
+        "spouseAccount": {
+          "asset": 23911751.61,
+          "debt": 0,
+          "income": 768000,
+          "expense": 360000,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/13utPLwroHS6BCLEVT_JCNMqBWryTyJ3u?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y93nwd95"
+  }
+}

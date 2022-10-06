@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ระยอง",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ปิยะ ปิตุเตชะ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/applicant/21/830/3210500199780.jpg",
+        "ownAccount": {
+          "asset": 124473256.96,
+          "debt": 39837986.7,
+          "income": 3016281,
+          "expense": 0,
+          "taxed": 916281.3
+        },
+        "spouseAccount": {
+          "asset": 129680893.46,
+          "debt": 0,
+          "income": 1890259.84,
+          "expense": 0,
+          "taxed": 1890259.84
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1ElR1_ecZHKJ6Oz6LDo3w6-hJQbQ8fHWP?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/ybxbvp79"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ลพบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาง อรพิน จิระพันธุ์วาณิช",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210318/57E2216B-9896-4DC8-53AF-1B67FF22D2F2_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 40376490.59,
+          "debt": 2200000,
+          "income": 883681.28,
+          "expense": 0,
+          "taxed": 0
+        },
+        "spouseAccount": {
+          "asset": 3104375,
+          "debt": 0,
+          "income": 0,
+          "expense": 0,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1kr10HHrX54itjCoojA0cqrgKthhDGEbb?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/y7cmmw3s"
+  }
+}

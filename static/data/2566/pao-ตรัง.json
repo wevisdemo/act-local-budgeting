@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ตรัง",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย บุ่นเล้ง โล่สถาพรพิพิธ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210312/89CA3842-2002-7FDD-CA1E-4DEC1B847757_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 0,
+          "debt": 0,
+          "income": 0,
+          "expense": 0,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1vqpoOKZkxS-MZ-1x6hLV4TxaDHipzmpv?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yd62sevw"
+  }
+}

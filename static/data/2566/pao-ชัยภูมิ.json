@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ชัยภูมิ",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย อร่าม โล่ห์วีระ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210317/2C1CD359-DF76-6BE8-FA20-CB2700007A61_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 1566414480.1,
+          "debt": 325883140.23,
+          "income": 1230360,
+          "expense": 204000,
+          "taxed": 0
+        },
+        "spouseAccount": {
+          "asset": 119049367.73,
+          "debt": 134166.52,
+          "income": 1009818.26,
+          "expense": 302945.48,
+          "taxed": 706872.78
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1dotfcPfSJ4OmY-R49dH8PP_FHptqozOt?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "",
+    "actAiUrl": "https://tinyurl.com/yau8tvrn"
+  }
+}

@@ -446,6 +446,7 @@
         ]
       }
     ],
+    "population": 1549344,
     "chiefExecutives": [
       {
         "name": "นาง กนกพร เดชเดโช",
@@ -458,15 +459,10 @@
           "expense": 914037,
           "taxed": 148800
         },
-        "spouseAccount": {
-          "asset": 0,
-          "debt": 0,
-          "income": 0,
-          "expense": 0,
-          "taxed": 0
-        },
         "fillingUrl": "https://drive.google.com/drive/folders/1BbHQ2TKkNZU6a82AsVAbrutRoImA7ujo?usp=sharing"
       }
-    ]
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1FeJKZAue84616EwzXwU-Ki9c2R72TZPe/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/yb9343o8"
   }
 }
