@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <!-- <Header /> -->
     <div class="bg-blue-a white-a">
       <div class="p-4">
         <p class="text-1 m-0">
@@ -20,7 +20,14 @@
             <h5 class="header-5 font-weight-bold">
               จัดสรรงบประมาณผ่านข้อบัญญัติงบประมาณฯ ทั้งหมด
             </h5>
-            <h1 class="header-1">56,005 ล้านบาท</h1>
+            <h1 class="header-1">
+              {{
+                parseInt(
+                  total_nationwide.toString().substring(0, 5)
+                ).toLocaleString()
+              }}
+              ล้านบาท
+            </h1>
           </div>
         </div>
       </div>
@@ -41,34 +48,88 @@
                     class="work-type-square mr-2"
                     :style="{ backgroundColor: item.color }"
                   ></div>
-                  <p class="text-3 mr-1">{{ item.percent }}%</p>
+                  <p class="text-3 mr-1">
+                    {{ ((item.total / total_nationwide) * 100).toFixed(1) }}%
+                  </p>
                   <p class="text-3 font-weight-bold">{{ item.name }}</p>
                 </div>
               </div>
 
-              <p class="text-3 text-center">รายละเอียด 11 แผน</p>
+              <div class="d-flex w-100">
+                <template class="d-flex mx-1" v-for="(item2, i) in work_type">
+                  <div
+                    v-for="(item3, j) in item2.plans"
+                    :style="{
+                      maxWidth:
+                        ((item3.total / total_nationwide) * 100).toFixed(1) +
+                        '%',
+                    }"
+                    class="w-100"
+                    :key="'type-' + i + j"
+                  >
+                    <div
+                      class="work-type-square big w-100 mr-2"
+                      :style="{
+                        backgroundColor: item2.color,
+                      }"
+                      :key="j"
+                    >
+                      <h5 class="header-5 mr-1" v-if="j == 0">
+                        {{
+                          ((item3.total / total_nationwide) * 100).toFixed(1)
+                        }}%
+                      </h5>
+                    </div>
+                  </div>
+                </template>
+              </div>
+
+              <p class="text-3 text-center mt-5">
+                รายละเอียด
+                {{ total_work_type }}
+                แผน
+              </p>
 
               <div>
                 <VueSlickCarousel
                   v-bind="slickOptions"
                   class="work-card-wrapper"
+                  v-if="groupedByAreaSlide.length > 0"
                 >
-                  <div class="work-card" v-for="item in 5">
+                  <div
+                    class="work-card"
+                    v-for="(item, i) in groupedByAreaSlide"
+                    :key="'slide-' + i"
+                    :style="{
+                      backgroundColor: item.color,
+                    }"
+                  >
                     <b-row>
                       <b-col cols="8">
                         <p class="text-1 font-weight-bold">
-                          แผนงานบริหารงานทั่วไป
+                          {{ item.plan }}
                         </p>
-                        <h4 class="header-4">9,832 ล้านบาท (17.6%)</h4>
+                        <h4 class="header-4">
+                          {{
+                            parseInt(
+                              item.total.toString().substring(0, 4)
+                            ).toLocaleString()
+                          }}
+                          ล้านบาท ({{
+                            ((item.total / total_nationwide) * 100).toFixed(1)
+                          }}%)
+                        </h4>
                         <p class="text-3 m-0">
-                          งบประมาณที่เกี่ยวข้องกับการบริหารจัดการทั่วไป
-                          ภายในองค์กรของ อบจ. เช่น เงินเดือนพนักงาน
-                          เงินสำหรับใช้จ่ายสิ่งวัสดุอุปกรณ์ต่าง ๆ ขององค์กร
-                          เงินจัดกิจกรรมเพื่อพัฒนาศักยภาพภายในองค์กร เป็นต้น
+                          {{ work_type_desc[i].desc }}
                         </p>
                       </b-col>
                       <b-col cols="4"
-                        ><img width="100%" :src="work_type_1" alt=""
+                        ><img
+                          width="100%"
+                          :src="
+                            require(`@/assets/images/work_type_${i + 1}.svg`)
+                          "
+                          alt=""
                       /></b-col>
                     </b-row>
                   </div>
@@ -81,41 +142,85 @@
               <div class="d-flex justify-content-center">
                 <div
                   class="d-flex mx-1"
-                  v-for="(item, i) in work_type"
+                  v-for="(item, i) in groupedByType"
                   :key="i"
                 >
                   <div
                     class="work-type-square mr-2"
                     :style="{ backgroundColor: item.color }"
                   ></div>
-                  <p class="text-3 mr-1">{{ item.percent }}%</p>
-                  <p class="text-3 font-weight-bold">{{ item.name }}</p>
+                  <p class="text-3 mr-1">
+                    {{ ((item.total / total_nationwide) * 100).toFixed(1) }}%
+                  </p>
+                  <p class="text-3 font-weight-bold">{{ item.type }}</p>
                 </div>
               </div>
 
-              <p class="text-3 text-center">รายละเอียด 21 แผน</p>
+              <div class="d-flex w-100">
+                <div
+                  v-for="(item3, j) in groupedByType"
+                  :style="{
+                    maxWidth:
+                      ((item3.total / total_nationwide) * 100).toFixed(1) + '%',
+                  }"
+                  class="w-100"
+                  :key="'type-' + j"
+                >
+                  <div
+                    class="work-type-square big w-100 mr-2"
+                    :style="{
+                      backgroundColor: item3.color,
+                    }"
+                    :key="j"
+                  >
+                    <h5 class="header-5 mr-1">
+                      {{ ((item3.total / total_nationwide) * 100).toFixed(1) }}%
+                    </h5>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-3 text-center mt-5">
+                รายละเอียด
+                {{ groupedByType.length }}
+                แผน
+              </p>
 
               <div>
                 <VueSlickCarousel
                   v-bind="slickOptions"
                   class="work-card-wrapper"
+                  v-if="groupedByType.length > 0"
                 >
-                  <div class="work-card" v-for="item in 5">
+                  <div
+                    class="work-card"
+                    v-for="(item, i) in groupedByType"
+                    :key="'slide-' + i"
+                    :style="{
+                      backgroundColor: item.color,
+                    }"
+                  >
                     <b-row>
                       <b-col cols="8">
-                        <p class="text-1 font-weight-bold">
-                          แผนงานบริหารงานทั่วไป
+                        <p class="text-1 font-weight-bold m-0">
+                          {{ item.type }}
                         </p>
-                        <h4 class="header-4">9,832 ล้านบาท (17.6%)</h4>
-                        <p class="text-3 m-0">
-                          งบประมาณที่เกี่ยวข้องกับการบริหารจัดการทั่วไป
-                          ภายในองค์กรของ อบจ. เช่น เงินเดือนพนักงาน
-                          เงินสำหรับใช้จ่ายสิ่งวัสดุอุปกรณ์ต่าง ๆ ขององค์กร
-                          เงินจัดกิจกรรมเพื่อพัฒนาศักยภาพภายในองค์กร เป็นต้น
-                        </p>
+                        <h4 class="header-4">
+                          {{
+                            parseInt(
+                              item.total.toString().substring(0, 4)
+                            ).toLocaleString()
+                          }}
+                          ล้านบาท ({{
+                            ((item.total / total_nationwide) * 100).toFixed(1)
+                          }}%)
+                        </h4>
                       </b-col>
                       <b-col cols="4"
-                        ><img width="100%" :src="work_type_1" alt=""
+                        ><img
+                          width="100%"
+                          :src="require(`@/assets/images/klang_${item.id}.svg`)"
+                          alt=""
                       /></b-col>
                     </b-row>
                   </div>
@@ -140,8 +245,8 @@
           ></b-form-select>
           อบจ.
           <b-form-select
-            v-model="selected"
-            :options="options"
+            v-model="selected_province"
+            :options="provinces"
             class="year-select text-2 white-a font-weight-bold"
           ></b-form-select
           >ใช้งบประมาณไปกับอะไรบ้าง?
@@ -155,107 +260,9 @@
             active
             title-item-class="tab-header"
           >
-            <div class="text-1 bg-black py-4 white-a">
-              <div class="text-center my-5">
-                <h4 class="header-4 font-weight-bold">
-                  จัดสรรงบประมาณทั้งหมดในภาพรวม
-                </h4>
-                <h1 class="header-1">6,005 ล้านบาท</h1>
-              </div>
-
-              <div class="text-center pb-4">
-                <p class="text-2 mb-1">จำแนกค่าใช้จ่ายตาม</p>
-                <b-form-group v-slot="{ ariaDescribedby }">
-                  <b-form-radio-group
-                    id="btn-radios-1"
-                    v-model="selected_type"
-                    :options="type"
-                    :aria-describedby="ariaDescribedby"
-                    name="radios-btn-default"
-                    buttons
-                    class="black expense-type"
-                  ></b-form-radio-group>
-                </b-form-group>
-              </div>
-
-              <div class="d-flex justify-content-center">
-                <div
-                  class="d-flex mx-1"
-                  v-for="(item, i) in work_type"
-                  :key="i"
-                >
-                  <div
-                    class="work-type-square mr-2"
-                    :style="{ backgroundColor: item.color }"
-                  ></div>
-                  <p class="text-3 mr-1">{{ item.percent }}%</p>
-                  <p class="text-3 font-weight-bold">{{ item.name }}</p>
-                </div>
-              </div>
-
-              <p class="text-3 text-center mt-5">รายละเอียด 11 แผน</p>
-
-              <div>
-                <VueSlickCarousel
-                  v-bind="slickOptions"
-                  class="work-card-wrapper-2"
-                >
-                  <div v-for="item in 5">
-                    <div class="work-card black">
-                      <b-row class="align-items-center">
-                        <b-col cols="8">
-                          <p class="text-1 font-weight-bold m-0">
-                            แผนงานบริหารงานทั่วไป
-                          </p>
-                          <h4 class="header-4">9,832 ล้านบาท (17.6%)</h4>
-                        </b-col>
-                        <b-col cols="4"
-                          ><img width="100%" :src="work_type_1" alt=""
-                        /></b-col>
-                      </b-row>
-                    </div>
-                    <div class="bg-white p-4">
-                      <p class="text-2 blue-a font-weight-bold m-0">
-                        มี XX รายการงบภายใต้แผนงาน
-                      </p>
-                      <p class="text-2 blue-a m-0">
-                        (สัดส่วน % เทียบเฉพาะรายการในแผนงานเดียวกัน)
-                      </p>
-                      <hr />
-
-                      <div v-for="item in 5">
-                        <p class="text-2 black font-weight-bold m-0">
-                          ควบคุมภายในและการตรวจสอบภายใน
-                        </p>
-                        <p class="text-3 black m-0">xx,xxxx ล้านบาท (xx%)</p>
-                        <div class="bg-black w-50 test mb-4"></div>
-                      </div>
-                    </div>
-                  </div>
-                </VueSlickCarousel>
-              </div>
-
-              <div class="mt-5 text-center">
-                <a
-                  href="#"
-                  target="_blank"
-                  class="link-btn text-3"
-                  rel="noopener noreferrer"
-                  >สำรวจเอกสารงบประมาณฉบับจริง</a
-                >
-              </div>
-              <div class="mt-5 text-center">
-                <a
-                  href="#"
-                  target="_blank"
-                  class="link-btn text-3"
-                  rel="noopener noreferrer"
-                  >Download ข้อบัญญัติรายจ่าย อบจ.</a
-                >
-              </div>
-            </div>
+            <ProvinceData />
           </b-tab>
-          <b-tab title="สำรวจผ่านคำสำคัญ" title-item-class="tab-header" active>
+          <b-tab title="สำรวจผ่านคำสำคัญ" title-item-class="tab-header">
             <div class="text-2 bg-white py-4 black">
               <div style="width: 600px" class="mx-auto text-center">
                 <p>
@@ -303,9 +310,15 @@
                   >
                   <b-collapse :id="'collapse-' + (i + 1)">
                     <b-card>
-                    <b-row>
-                      <b-col cols="4" v-for="item in 6"><div class="test3 text-3 white-b p-2 text-center mb-3">ระบบประปา</div></b-col>
-                    </b-row>
+                      <!-- <b-row>
+                        <b-col cols="4" v-for="item in 6"
+                          ><div
+                            class="test3 text-3 white-b p-2 text-center mb-3"
+                          >
+                            ระบบประปา
+                          </div></b-col
+                        >
+                      </b-row> -->
                     </b-card>
                   </b-collapse></b-col
                 >
@@ -471,22 +484,22 @@ export default {
   data() {
     return {
       selected: 2565,
-      selected_type: "แผนงาน",
-      options: [
-        { value: 2565, text: 2565 },
-        { value: 2564, text: 2564 },
-      ],
-      type: [
-        { text: "แผนงาน", value: "แผนงาน" },
-        { text: "ประเภทงบ", value: "ประเภทงบ" },
-      ],
-      work_type: [
-        { name: "ด้านบริหารทั่วไป", color: "#F2A8EE", percent: 18.6 },
-        { name: "ด้านบริการชุมชน", color: "#89E26A", percent: 18.6 },
-        { name: "ด้านเศรษฐกิจ", color: "#FF8540", percent: 18.6 },
-        { name: "ด้านการดำเนินงานอื่น", color: "#4A4E5E", percent: 18.6 },
-      ],
 
+      selected_province: "เชียงใหม่",
+      total_nationwide: 0,
+      total_work_type: 0,
+      options: [],
+      provinces: [],
+      groupedByArea: [],
+      groupedByType: [],
+      groupedByAreaSlide: [],
+
+      work_type: [
+        { name: "ด้านบริหารทั่วไป", color: "#F2A8EE", total: 0, plans: [] },
+        { name: "ด้านบริการชุมชน", color: "#89E26A", total: 0, plans: [] },
+        { name: "ด้านเศรษฐกิจ", color: "#FF8540", total: 0, plans: [] },
+        { name: "ด้านการดำเนินงานอื่น", color: "#4A4E5E", total: 0, plans: [] },
+      ],
       keyword: [
         {
           text: "โครงสร้างพื้นฐาน/สิ่งอำนวยความสะดวก",
@@ -521,7 +534,127 @@ export default {
           },
         ],
       },
+      work_type_desc: [
+        {
+          title: "แผนงานบริหารงานทั่วไป",
+          desc: "งบประมาณที่เกี่ยวข้องกับการบริหารจัดการทั่วไป ภายในองค์กรของ อบจ. เช่น เงินเดือนพนักงาน เงินสำหรับใช้จ่ายสิ่งวัสดุอุปกรณ์ต่าง ๆ ขององค์กร เงินจัดกิจกรรมเพื่อพัฒนาศักยภาพภายในองค์กร เป็นต้น",
+        },
+        {
+          title: "แผนงานการรักษาความสงบภายใน",
+          desc: "งบประมาณที่เกี่ยวข้องกับการป้องกันสาธารณภัย",
+        },
+        {
+          title: "แผนงานการศึกษา",
+          desc: "งบประมาณที่เกี่ยวข้องกับการศึกษา ทั้งส่วนที่เกี่ยวข้องกับครู นักเรียน บุคลากรในสถานศึกษา โรงเรียนตั้งแต่ชั้นอนุบาลถึงมัธยม ไปจนถึงกิจกรรมพัฒนาทักษะและศักยภาพต่าง ๆ ของทั้งครูและนักเรียน",
+        },
+        {
+          title: "แผนงานสาธารณสุข",
+          desc: "งบประมาณที่เกี่ยวข้องกับด้านสาธารณสุขทั้งหมด ส่วนใหญ่เป็นภารกิจของโรงพยาบาล และศูนย์ส่งเสริมสุขภาพ ไม่ว่าจะเป็นเรื่อง ป้องกันโรคระบาด หรือ บำบัดปัญหายาเสพติด",
+        },
+        {
+          title: "แผนงานสังคมสงเคราะห์",
+          desc: "งบประมาณที่เกี่ยวข้องกับภารกิจให้ความช่วยเหลือ เด็กนักเรียนด้อยโอกาส คนพิการ หรือ กลุ่มผู้สูงอายุ",
+        },
+        {
+          title: "แผนงานเคหะและชุมชน",
+          desc: "งบประมาณที่เกี่ยวข้องกับงานด้านวิศวกรรม โครงสร้างพื้นฐาน เสาไฟฟ้า รวมไปถึงการบริหารจัดการสวนสาธารณะ และการจัดเก็บขยะ",
+        },
+        {
+          title: "แผนงานสร้างความเข้มแข็งของชุมชน",
+          desc: "งบประมาณที่เกี่ยวข้องกับเรื่องทั่วไปซึ่งเกี่ยวข้อง กับคุณภาพชีวิตโดยภาพรวมของคนในจังหวัด เช่น การส่งเสริมด้านอาชีพ การให้ความรู้เกี่ยวกับอาชีพ ไปจนถึงการพัฒนาคุณภาพชีวิตของผู้ด้อยโอกาส คนพิการ ผู้สูงอายุ ฯลฯ",
+        },
+        {
+          title: "แผนงานการศาสนา วัฒนธรรมและนันทนาการ",
+          desc: "งบประมาณที่สนับสนุนให้ กีฬา นันทนาการ พิธีการต่าง ๆ พระราชพิธี วันสำคัญทางศาสนา รวมไปถึงการท่องเที่ยว ฯลฯ",
+        },
+        {
+          title: "แผนงานอุตสาหกรรมและการโยธา",
+          desc: "งบประมาณที่ใช้จ่ายหลัก ๆ ไปกับงานด้านผังเมือง การสร้าง บูรณะ ถนนและพื้นผิวจราจร",
+        },
+        {
+          title: "แผนงานการเกษตร",
+          desc: "งบประมาณที่เกี่ยวข้องกับกิจกรรม ซึ่งเกี่ยวกับ การเกษตร เกษตรกร รวมถึงการอนุรักษ์และฟื้นฟูทรัพยากร ทางธรรมชาติ",
+        },
+        {
+          title: "แผนงานการพาณิชย์",
+          desc: "งบประมาณที่เกี่ยวข้องกับโรงรับจำนำ การประปา ตลาดสด โรงฆ่าสัตว์ รวมถึงทรัพยากรทางทะเล ซึ่งเป็นแผนงานที่ไม่ได้ปรากฏ อยู่ในบทบัญญัติรายจ่ายของทุกจังหวัด",
+        },
+        {
+          title: "แผนงานงบกลาง",
+          desc: "งบประมาณที่เกี่ยวข้องกับรายการอื่น ๆ นอกเหนือจากภาระหน้าที่หลัก เช่น ชำระหนี้ สมทบประกันสังคม เข้ากองทุน เงินบำเหน็จบำนาญ เงินสำรองจ่าย หรือ เงินช่วยเหลือพิเศษ ฯลฯ",
+        },
+        {
+          title: "แผนงานงบกลาง",
+          desc: "งบประมาณที่เกี่ยวข้องกับรายการอื่น ๆ นอกเหนือจากภาระหน้าที่หลัก เช่น ชำระหนี้ สมทบประกันสังคม เข้ากองทุน เงินบำเหน็จบำนาญ เงินสำรองจ่าย หรือ เงินช่วยเหลือพิเศษ ฯลฯ",
+        },
+      ],
     };
+  },
+  created() {
+    this.setYearAndProvince();
+    this.getNationWideData();
+  },
+  methods: {
+    setYearAndProvince() {
+      fetch("/data/metadata.json")
+        .then((response) => response.json())
+        .then((data) => {
+          data.years.forEach((element) => {
+            this.options.push({ value: element, text: element });
+          });
+
+          data.provinces.forEach((element) => {
+            this.provinces.push({ value: element, text: element });
+          });
+        });
+    },
+    getNationWideData() {
+      fetch("/data/2565/nation-wide.json")
+        .then((response) => response.json())
+        .then((data) => {
+          this.total_nationwide = data.total;
+          this.groupedByArea = data.groupedByArea;
+          this.groupedByType = data.groupedByType;
+
+          let result = this.groupedByArea.map((a) => a.plans);
+
+          this.work_type.forEach((element, i) => {
+            this.work_type[i].plans = result[i];
+            this.work_type[i].total = this.groupedByArea[i].total;
+          });
+
+          this.work_type.map((x, i, ref) => {
+            x.plans.map((y) => {
+              y.color = x.color;
+            });
+          });
+
+          result.forEach((element) => {
+            this.total_work_type += element.length;
+
+            element.forEach((element2) => {
+              this.groupedByAreaSlide.push(element2);
+            });
+          });
+
+          let bg = "";
+
+          this.groupedByType.map((x, i, ref) => {
+            if (x.type == "งบบุคลากร") bg = "#208FDF";
+            else if (x.type == "งบดำเนินงาน") bg = "#EC6440";
+            else if (x.type == "งบลงทุน") bg = "#F1E6D7";
+            else if (x.type == "งบเงินอุดหนุน") bg = "#253472";
+            else if (x.type == "งบกลาง") bg = "#FFB930";
+            else bg = "#A80C7C";
+            x.id = i + 1;
+            x.color = bg;
+          });
+
+          this.groupedByType.sort(function (a, b) {
+            return b.total - a.total;
+          });
+        });
+    },
   },
 };
 </script>
@@ -601,6 +734,7 @@ export default {
 .work-type-square {
   width: 15px;
   height: 15px;
+  overflow: hidden;
 }
 
 .work-card-wrapper {
@@ -608,19 +742,9 @@ export default {
   margin: auto;
 }
 
-.work-card-wrapper-2 {
-  max-width: 780px;
-  margin: auto;
-}
-
 .work-card {
-  background: #f2a8ee;
   box-shadow: 1px 1px 12px 2px rgba(24, 31, 28, 0.15);
   padding: 25px;
-}
-
-.test {
-  height: 20px;
 }
 
 .link-btn {
@@ -723,5 +847,16 @@ export default {
 
 .test3 {
   border: 1px solid #fffef5;
+}
+
+.big {
+  height: 200px;
+  border: 4px solid #ffffff;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.big:hover {
+  border: 4px solid #000000;
 }
 </style>

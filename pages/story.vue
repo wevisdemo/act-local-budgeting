@@ -61,7 +61,7 @@
                 >ของประชาชนอย่างเราที่จะต้องเข้าไปมีส่วนร่วมแสดงความคิดเห็นในขั้นตอนการจัดสรรงบในแต่ละปี
               </h5>
             </div>
-            <!-- <lottie
+            <lottie
               class="arrow-img"
               :options="{
                 animationData: arrow,
@@ -69,7 +69,7 @@
                 loop: true,
                 autoplay: true,
               }"
-            /> -->
+            />
           </div>
         </Scrollama>
       </div>
@@ -458,7 +458,7 @@ export default {
   },
   data() {
     return {
-      arrow: arrow.default,
+      arrow: arrow ,
       logo: require("~/assets/images/logo.svg"),
       arrow: require("~/assets/images/arrow.svg"),
       papertear: require("~/assets/images/papertear.svg"),
@@ -514,6 +514,7 @@ export default {
         },
         { title: "ส่งเสริมการกีฬา ", bg: "#E0FD6A", color: "#181F1C" },
       ],
+      isFirstTime: true,
     };
   },
   mounted() {
@@ -525,7 +526,10 @@ export default {
     setTimeout(() => {
       document.getElementById("img-3").style.bottom = "6%";
       document.getElementsByTagName("body")[0].style.overflow = "unset";
-    }, 2000);
+      this.isFirstTime = false;
+    }, 3000);
+
+
 
     var i = 1;
 
@@ -540,10 +544,12 @@ export default {
   methods: {
     handler({ element, index, direction }) {
       if (index == 0) {
-        document.getElementById("img-2").style.transform = "none";
-        document.getElementById("img-3").style.transform = "none";
-        document.getElementById("img-2").style.bottom = "7%";
-        document.getElementById("img-3").style.bottom = "6%";
+        if (!this.isFirstTime) {
+          document.getElementById("img-2").style.transform = "none";
+          document.getElementById("img-3").style.transform = "none";
+          document.getElementById("img-2").style.bottom = "7%";
+          document.getElementById("img-3").style.bottom = "6%";
+        }
       } else if (index == 1) {
         document.getElementById("img-2").style.transform = "scale(2.5)";
         document.getElementById("img-3").style.transform = "scale(3)";

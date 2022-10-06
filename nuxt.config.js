@@ -38,6 +38,18 @@ export default {
         content: 'website'
       },
       {
+        hid: "og-image",
+        property: "og:image",
+        content:
+          BASE_URL + 'og_image.png'
+      },
+      {
+        hid: "twitter:image",
+        name: "twitter:image:src",
+        content:
+          BASE_URL + 'og_image.png'
+      },
+      {
         hid: 'twitter:title',
         name: 'twitter:title',
         content: 'ผ่างบเมือง ให้งบประมาณเมือง…เป็นเรื่องตรวจสอบได้ '

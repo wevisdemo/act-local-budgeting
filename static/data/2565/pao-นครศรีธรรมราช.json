@@ -458,13 +458,6 @@
           "expense": 914037,
           "taxed": 148800
         },
-        "spouseAccount": {
-          "asset": 0,
-          "debt": 0,
-          "income": 0,
-          "expense": 0,
-          "taxed": 0
-        },
         "fillingUrl": "https://drive.google.com/drive/folders/1BbHQ2TKkNZU6a82AsVAbrutRoImA7ujo?usp=sharing"
       }
     ]
