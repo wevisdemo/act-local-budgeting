@@ -9,7 +9,7 @@
         </h1>
       </div>
 
-      <div class="text-center pb-4">
+      <div class="text-center pb-4" v-if="total != 0">
         <p class="text-2 mb-1">จำแนกค่าใช้จ่ายตาม</p>
         <b-form-group v-slot="{ ariaDescribedby }">
           <b-form-radio-group
@@ -25,7 +25,7 @@
       </div>
 
       <template v-if="selected_type == 'แผนงาน'">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center" v-if="total != 0">
           <div class="d-flex mx-1" v-for="(item, i) in work_type" :key="i">
             <div
               class="work-type-square mr-2"
@@ -38,7 +38,7 @@
           </div>
         </div>
 
-        <div class="d-flex w-100">
+        <div class="d-flex w-100" v-if="total != 0">
           <template class="d-flex mx-1" v-for="(item2, i) in work_type">
             <div
               v-for="(item3, j) in item2.plans"
@@ -49,6 +49,7 @@
               :key="'type-' + i + j"
             >
               <div
+                @click="selectWorkPlan(item3.plan)"
                 class="work-type-square big black w-100 mr-2"
                 :style="{
                   backgroundColor: item2.color,
@@ -63,12 +64,15 @@
           </template>
         </div>
 
-        <p class="my-5 text-2 text-center">รายละเอียดแผนงาน</p>
+        <p class="my-5 text-2 text-center" v-if="total != 0">
+          รายละเอียดแผนงาน
+        </p>
 
-        <div>
+        <div v-if="total != 0">
           <VueSlickCarousel
             v-bind="slickOptions"
             class="work-card-wrapper-2"
+            ref="workplanprovince"
             v-if="groupedByAreaSlide.length > 0"
           >
             <div
@@ -118,31 +122,34 @@
                 </p>
                 <hr />
 
-                <div
-                  v-for="(item2, j) in tasks
-                    .filter((x) => x.area == item.name && x.plan == item.plan)
-                    .sort(function (a, b) {
-                      return b.total - a.total;
-                    })"
-                  :key="'province-task-' + j"
-                >
-                  <p class="text-2 black font-weight-bold m-0">
-                    {{ item2.task }}
-                  </p>
-                  <p class="text-3 black m-0">
-                    {{
-                      parseInt(
-                        item2.total.toString().substring(0, 4)
-                      ).toLocaleString()
-                    }}
-                    ล้านบาท ({{ ((item2.total / total) * 100).toFixed(1) }}%)
-                  </p>
+                <div class="test">
                   <div
-                    class="bg-black task-chart mb-4"
-                    :style="{
-                      maxWidth: ((item2.total / total) * 100).toFixed(1) + '%',
-                    }"
-                  ></div>
+                    v-for="(item2, j) in tasks
+                      .filter((x) => x.area == item.name && x.plan == item.plan)
+                      .sort(function (a, b) {
+                        return b.total - a.total;
+                      })"
+                    :key="'province-task-' + j"
+                  >
+                    <p class="text-2 black font-weight-bold m-0">
+                      {{ item2.task }}
+                    </p>
+                    <p class="text-3 black m-0">
+                      {{
+                        parseInt(
+                          item2.total.toString().substring(0, 4)
+                        ).toLocaleString()
+                      }}
+                      ล้านบาท ({{ ((item2.total / total) * 100).toFixed(1) }}%)
+                    </p>
+                    <div
+                      class="bg-black task-chart mb-4"
+                      :style="{
+                        maxWidth:
+                          ((item2.total / total) * 100).toFixed(1) + '%',
+                      }"
+                    ></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -167,13 +174,13 @@
           <div
             v-for="(item3, j) in groupedByType"
             :style="{
-              maxWidth:
-                ((item3.total / total) * 100).toFixed(1) + '%',
+              maxWidth: ((item3.total / total) * 100).toFixed(1) + '%',
             }"
             class="w-100"
             :key="'type-' + j"
           >
             <div
+            @click="selectWorkType(item3.type)"
               class="work-type-square big w-100 mr-2"
               :style="{
                 backgroundColor: item3.color,
@@ -193,6 +200,7 @@
           <VueSlickCarousel
             v-bind="slickOptions"
             class="work-card-wrapper-2"
+            ref="worktypeprovince"
             v-if="groupedByType.length > 0"
           >
             <div
@@ -221,20 +229,16 @@
                   </b-col>
                   <b-col cols="4"
                     ><img
-                          width="100%"
-                          :src="require(`@/assets/images/klang_${item.id}.svg`)"
-                          alt=""
-                      /></b-col>
+                      width="100%"
+                      :src="require(`@/assets/images/klang_${item.id}.svg`)"
+                      alt=""
+                  /></b-col>
                 </b-row>
               </div>
               <div class="bg-white p-4">
                 <p class="text-2 blue-a font-weight-bold m-0">
                   มี
-                  {{
-                    tasks.filter(
-                      (x) => x.type == item.type
-                    ).length
-                  }}
+                  {{ tasks.filter((x) => x.type == item.type).length }}
                   รายการงบภายใต้แผนงาน
                 </p>
                 <p class="text-2 blue-a m-0">
@@ -242,40 +246,43 @@
                 </p>
                 <hr />
 
-                <div
-                  v-for="(item2, j) in tasks
-                    .filter((x) => x.type == item.type)
-                    .sort(function (a, b) {
-                      return b.total - a.total;
-                    })"
-                  :key="'province-task-' + j"
-                >
-                  <p class="text-2 black font-weight-bold m-0">
-                    {{ item2.task }}
-                  </p>
-                  <p class="text-3 black m-0">
-                    {{
-                      parseInt(
-                        item2.total.toString().substring(0, 4)
-                      ).toLocaleString()
-                    }}
-                    ล้านบาท ({{ ((item2.total / total) * 100).toFixed(1) }}%)
-                  </p>
+                <div class="test">
                   <div
-                    class="bg-black task-chart mb-4"
-                    :style="{
-                      maxWidth: ((item2.total / total) * 100).toFixed(1) + '%',
-                    }"
-                  ></div>
+                    v-for="(item2, j) in tasks
+                      .filter((x) => x.type == item.type)
+                      .sort(function (a, b) {
+                        return b.total - a.total;
+                      })"
+                    :key="'province-task-' + j"
+                  >
+                    <p class="text-2 black font-weight-bold m-0">
+                      {{ item2.task }}
+                    </p>
+                    <p class="text-3 black m-0">
+                      {{
+                        parseInt(
+                          item2.total.toString().substring(0, 4)
+                        ).toLocaleString()
+                      }}
+                      ล้านบาท ({{ ((item2.total / total) * 100).toFixed(1) }}%)
+                    </p>
+                    <div
+                      class="bg-black task-chart mb-4"
+                      :style="{
+                        maxWidth:
+                          ((item2.total / total) * 100).toFixed(1) + '%',
+                      }"
+                    ></div>
+                  </div>
                 </div>
               </div>
             </div>
           </VueSlickCarousel></div
       ></template>
 
-      <div class="mt-5 text-center">
+      <div class="mt-5 text-center"  v-if="total != 0">
         <a
-          href="#"
+          :href="pao.budgetingDocUrl"
           target="_blank"
           class="link-btn text-3"
           rel="noopener noreferrer"
@@ -284,7 +291,7 @@
       </div>
       <div class="mt-5 text-center">
         <a
-          href="#"
+          href="https://docs.google.com/spreadsheets/d/1hyNpUsSRriL0XhP89HtEO9S0uU2IOQz33cvxT5GwIeU/edit#gid=0"
           target="_blank"
           class="link-btn text-3"
           rel="noopener noreferrer"
@@ -297,6 +304,10 @@
 
 <script>
 export default {
+  props: {
+    year: Number,
+    province: String,
+  },
   data() {
     return {
       total: 0,
@@ -304,6 +315,7 @@ export default {
       groupedByArea: [],
       groupedByType: [],
       groupedByAreaSlide: [],
+      pao: [],
       tasks: [],
       work_type: [
         { name: "ด้านบริหารทั่วไป", color: "#F2A8EE", total: 0, plans: [] },
@@ -332,18 +344,34 @@ export default {
       },
     };
   },
-  created() {
-    this.getNationWideData();
+  watch: {
+    year: {
+      handler(newValue, oldValue) {
+        this.getData(this.year, this.province);
+      },
+    },
+    province: {
+      handler(newValue, oldValue) {
+        this.getData(this.year, this.province);
+      },
+    },
+  },
+  mounted() {
+    this.getData(this.year, this.province);
   },
   methods: {
-    getNationWideData() {
-      fetch("/data/2565/pao-กระบี่.json")
+    getData(y, p) {
+      this.groupedByAreaSlide = [];
+      this.total_work_type = 0;
+
+      fetch("/data/" + y + "/pao-" + p + ".json")
         .then((response) => response.json())
         .then((data) => {
           this.total = data.total;
           this.groupedByArea = data.groupedByArea;
           this.groupedByType = data.groupedByType;
           this.tasks = data.tasks;
+          this.pao = data.pao;
 
           let result = this.groupedByArea.map((a) => a.plans);
 
@@ -385,6 +413,14 @@ export default {
           });
         });
     },
+    selectWorkPlan(index) {
+      const i = this.groupedByAreaSlide.map((e) => e.plan).indexOf(index);
+      this.$refs.workplanprovince.goTo(i);
+    },
+    selectWorkType(index) {
+      const i = this.groupedByType.map((e) => e.type).indexOf(index);
+      this.$refs.worktypeprovince.goTo(i);
+    },
   },
 };
 </script>
@@ -418,5 +454,18 @@ export default {
 
 .task-chart {
   height: 20px;
+}
+
+.test {
+  max-height: 420px;
+  overflow: hidden;
+}
+
+.link-btn {
+  background: #181f1c;
+  color: #fffef5;
+  border: 1px solid #fffef5;
+  border-radius: 5px;
+  padding: 10px 25px;
 }
 </style>

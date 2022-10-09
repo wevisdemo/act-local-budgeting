@@ -61,15 +61,14 @@
                 >ของประชาชนอย่างเราที่จะต้องเข้าไปมีส่วนร่วมแสดงความคิดเห็นในขั้นตอนการจัดสรรงบในแต่ละปี
               </h5>
             </div>
-            <lottie
-              class="arrow-img"
-              :options="{
-                animationData: arrow,
-                animationSpeed: 1,
-                loop: true,
-                autoplay: true,
-              }"
+            <div class="lottiebox">
+            <lottie-animation
+              ref="anim"
+              :animationData="require('@/assets/lottie/story_postit.json')"
+              :loop="true"
+              :autoPlay="true"
             />
+          </div>
           </div>
         </Scrollama>
       </div>
@@ -450,15 +449,17 @@ import "intersection-observer";
 import Scrollama from "vue-scrollama";
 import * as arrow from "~/assets/lottie/story_postit.json";
 import Lottie from "vue-lottie/src/lottie.vue";
+import LottieAnimation from 'lottie-web-vue'
 
 export default {
   components: {
     Scrollama,
     Lottie,
+    LottieAnimation
   },
   data() {
     return {
-      arrow: arrow ,
+      arrow: arrow,
       logo: require("~/assets/images/logo.svg"),
       arrow: require("~/assets/images/arrow.svg"),
       papertear: require("~/assets/images/papertear.svg"),
@@ -528,8 +529,6 @@ export default {
       document.getElementsByTagName("body")[0].style.overflow = "unset";
       this.isFirstTime = false;
     }, 3000);
-
-
 
     var i = 1;
 
@@ -963,5 +962,10 @@ export default {
     width: 280px;
     height: 201.86px;
   }
+}
+
+.lottiebox {
+  position: absolute;
+  bottom: 0;
 }
 </style>

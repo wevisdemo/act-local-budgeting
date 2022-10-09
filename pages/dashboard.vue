@@ -9,6 +9,7 @@
             v-model="selected"
             :options="options"
             class="year-select text-2 white-a font-weight-bold"
+            @change="getNationWideData"
           ></b-form-select>
         </p>
         <h4 class="header-4 mt-2">
@@ -68,6 +69,7 @@
                     :key="'type-' + i + j"
                   >
                     <div
+                      @click="selectWorkPlan(item3.plan)"
                       class="work-type-square big w-100 mr-2"
                       :style="{
                         backgroundColor: item2.color,
@@ -90,11 +92,11 @@
                 แผน
               </p>
 
-              <div>
+              <div v-if="groupedByAreaSlide.length > 0">
                 <VueSlickCarousel
                   v-bind="slickOptions"
                   class="work-card-wrapper"
-                  v-if="groupedByAreaSlide.length > 0"
+                  ref="workplan"
                 >
                   <div
                     class="work-card"
@@ -167,6 +169,7 @@
                   :key="'type-' + j"
                 >
                   <div
+                    @click="selectWorkType(item3.type)"
                     class="work-type-square big w-100 mr-2"
                     :style="{
                       backgroundColor: item3.color,
@@ -190,6 +193,7 @@
                 <VueSlickCarousel
                   v-bind="slickOptions"
                   class="work-card-wrapper"
+                  ref="worktype"
                   v-if="groupedByType.length > 0"
                 >
                   <div
@@ -232,14 +236,14 @@
       </div>
     </div>
     <div class="bg-blue-a white-a">
-      <div class="p-4">
+      <div class="px-4 py-5">
         <h4 class="header-4 font-weight-bold">
           ลองมาส่องงบจังหวัดที่คุณสนใจกันดีกว่า
         </h4>
         <p class="text-1 mt-2">
           ปี
           <b-form-select
-            v-model="selected"
+            v-model="selected_year_province"
             :options="options"
             class="year-select text-2 white-a font-weight-bold"
           ></b-form-select>
@@ -257,12 +261,21 @@
         <b-tabs align="right" lazy nav-class="main-tab pr-5" no-fade>
           <b-tab
             title="สำรวจผ่านโครงสร้าง"
-            active
             title-item-class="tab-header"
+            active
           >
-            <ProvinceData />
+            <template v-if="selected_province != ''">
+              <ProvinceData
+                :year="selected_year_province"
+                :province="selected_province"
+              />
+            </template>
           </b-tab>
-          <b-tab title="สำรวจผ่านคำสำคัญ" title-item-class="tab-header">
+          <b-tab
+            title="สำรวจผ่านคำสำคัญ"
+            title-item-class="tab-header"
+            :disabled="selected_province == ''"
+          >
             <div class="text-2 bg-white py-4 black">
               <div style="width: 600px" class="mx-auto text-center">
                 <p>
@@ -280,48 +293,162 @@
                 </p>
               </div>
               <b-row class="m-0">
-                <b-col
-                  sm="4"
-                  v-for="(item, i) in keyword"
-                  :key="i"
-                  class="mb-3"
-                >
-                  <div
-                    class="bg-blue-a test2 px-3 pt-3 lime-b"
-                    :style="{
-                      backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
-                        (i + 1) +
-                        '.svg')})`,
-                    }"
-                  >
-                    <p class="m-0 font-weight-bold">{{ item.text }}</p>
-                  </div>
-                  <b-button
-                    v-b-toggle="'collapse-' + (i + 1)"
-                    variant="primary"
-                    class="
-                      keyword-collapse
-                      w-100
-                      bg-blue-a
-                      text-right text-1
-                      lime-b
-                    "
-                    >+</b-button
-                  >
-                  <b-collapse :id="'collapse-' + (i + 1)">
-                    <b-card>
-                      <!-- <b-row>
-                        <b-col cols="4" v-for="item in 6"
-                          ><div
-                            class="test3 text-3 white-b p-2 text-center mb-3"
-                          >
-                            ระบบประปา
-                          </div></b-col
-                        >
-                      </b-row> -->
-                    </b-card>
-                  </b-collapse></b-col
-                >
+                <b-col sm="4" class="mb-3">
+                  <template v-for="(item, i) in keyword.slice(0, 3)">
+                    <div class="mb-3" :key="i">
+                      <div
+                        class="bg-blue-a test2 px-3 pt-3 lime-b"
+                        :style="{
+                          backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
+                            (i + 1) +
+                            '.svg')})`,
+                        }"
+                      >
+                        <p class="m-0 font-weight-bold">{{ item.text }}</p>
+                      </div>
+                      <b-button
+                        v-b-toggle="'collapse-set-1-' + (i + 1)"
+                        variant="primary"
+                        class="
+                          keyword-collapse
+                          w-100
+                          bg-blue-a
+                          text-right text-1
+                          lime-b
+                        "
+                        >+</b-button
+                      >
+                      <b-collapse :id="'collapse-set-1-' + (i + 1)">
+                        <b-card>
+                          <b-row>
+                            <b-col
+                              cols="4"
+                              v-for="(item2, j) in item.list"
+                              :key="'kw-' + j"
+                              ><div
+                                class="
+                                  test3
+                                  text-3
+                                  white-b
+                                  p-2
+                                  text-center
+                                  mb-3
+                                "
+                                @click="showKeywordResult(item2)"
+                              >
+                                {{ item2 }}
+                              </div></b-col
+                            >
+                          </b-row>
+                        </b-card>
+                      </b-collapse>
+                    </div>
+                  </template>
+                </b-col>
+                <b-col sm="4" class="mb-3">
+                  <template v-for="(item, i) in keyword.slice(3, 5)">
+                    <div class="mb-3" :key="i">
+                      <div
+                        class="bg-blue-a test2 px-3 pt-3 lime-b"
+                        :style="{
+                          backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
+                            (i + 1) +
+                            '.svg')})`,
+                        }"
+                      >
+                        <p class="m-0 font-weight-bold">{{ item.text }}</p>
+                      </div>
+                      <b-button
+                        v-b-toggle="'collapse-set-2-' + (i + 1)"
+                        variant="primary"
+                        class="
+                          keyword-collapse
+                          w-100
+                          bg-blue-a
+                          text-right text-1
+                          lime-b
+                        "
+                        >+</b-button
+                      >
+                      <b-collapse :id="'collapse-set-2-' + (i + 1)">
+                        <b-card>
+                          <b-row>
+                            <b-col
+                              cols="4"
+                              v-for="(item2, j) in item.list"
+                              :key="'kw-' + j"
+                              ><div
+                                class="
+                                  test3
+                                  text-3
+                                  white-b
+                                  p-2
+                                  text-center
+                                  mb-3
+                                "
+                                @click="showKeywordResult(item2)"
+                              >
+                                {{ item2 }}
+                              </div></b-col
+                            >
+                          </b-row>
+                        </b-card>
+                      </b-collapse>
+                    </div>
+                  </template>
+                </b-col>
+                <b-col sm="4" class="mb-3">
+                  <template v-for="(item, i) in keyword.slice(5, 7)">
+                    <div class="mb-3" :key="i">
+                      <div
+                        class="bg-blue-a test2 px-3 pt-3 lime-b"
+                        :style="{
+                          backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
+                            (i + 1) +
+                            '.svg')})`,
+                        }"
+                      >
+                        <p class="m-0 font-weight-bold">{{ item.text }}</p>
+                      </div>
+                      <b-button
+                        v-b-toggle="'collapse-set-3-' + (i + 1)"
+                        variant="primary"
+                        class="
+                          keyword-collapse
+                          w-100
+                          bg-blue-a
+                          text-right text-1
+                          lime-b
+                        "
+                        >+</b-button
+                      >
+                      <b-collapse :id="'collapse-set-3-' + (i + 1)">
+                        <b-card>
+                          <b-row>
+                            <b-col
+                              cols="4"
+                              v-for="(item2, j) in item.list"
+                              :key="'kw-' + j"
+                              ><div
+                                class="
+                                  test3
+                                  text-3
+                                  white-b
+                                  p-2
+                                  text-center
+                                  mb-3
+                                "
+                                @click="showKeywordResult(item2)"
+                              >
+                                {{ item2 }}
+                              </div></b-col
+                            >
+                          </b-row>
+                        </b-card>
+                      </b-collapse>
+                    </div>
+                  </template>
+                </b-col>
               </b-row>
 
               <div class="mt-5 text-center">
@@ -335,7 +462,7 @@
               </div>
               <div class="mt-5 text-center">
                 <a
-                  href="#"
+                href="https://docs.google.com/spreadsheets/d/1hyNpUsSRriL0XhP89HtEO9S0uU2IOQz33cvxT5GwIeU/edit#gid=0"
                   target="_blank"
                   class="link-btn text-3"
                   rel="noopener noreferrer"
@@ -347,135 +474,127 @@
         </b-tabs>
       </div>
     </div>
-    <div class="bg-blue-a p-4">
-      <div class="pao-header-box mb-5">
-        <div class="content bg-lime-b">
-          <p class="text-1 font-weight-bold m-0 blue-a">
-            รายการงบที่น่าจับตาของ อบจ. เชียงใหม่
+    <template v-if="selected_province != ''">
+      <div class="bg-blue-a p-4">
+        <PaoSection
+          :year="selected_year_province"
+          :province="selected_province"
+        />
+      </div>
+      <div
+        class="
+          grid-wrapper
+          h-100vh
+          d-flex
+          justify-content-center
+          align-items-center
+        "
+      >
+        <div class="content text-2 white-b text-center">
+          <p class="text-1 font-weight-bold">
+            หลังตรวจสอบแล้ว…เราทำอะไรได้บ้าง?
+          </p>
+
+          <p>
+            องค์กรต่อต้านคอร์รัปชัน (ประเทศไทย) หรือ ACT ได้พัฒนาเครื่องมือ
+            <b> Corruption Watch</b> ในรูปแบบ Line Official Account
+            เพื่อสนับสนุนการร่วมจับตาและส่งข้อมูลเหตุสงสัยทุจริตคอรร์รัปชัน<br /><br />
+            <span class="orange-b">หากพบประเด็นน่าสงสัย</span
+            >เกี่ยวกับแผนงบประมาณในจังหวัดของคุณ สามารถช่วยกัน
+            <span class="lime-b font-weight-bold"
+              >ส่งเบาะแสเหตุสงสัยการทุจริตคอร์รัปชัน</span
+            >
+            มาได้ที่ LINE Official Account จับตาไม่ให้ใครโกง
+          </p>
+
+          <img :src="corruption_watch" class="my-4" width="186" alt="" />
+
+          <p class="m-0 font-weight-bold">@corruptionwatch</p>
+          <p>
+            และติดตามสรุปการรายงานเหตุสงสัยการทุจริต ได้ที่ Corruption Watch
           </p>
         </div>
       </div>
-      <p class="text-1 white-b font-weight-bold">
-        5 อันดับรายการที่ใช้จ่ายเงิน<u>เยอะ</u>ที่สุด
-      </p>
-      <div class="overflow-auto drag-wrapper" v-dragscroll>
-        <div class="d-flex flex-nowrap">
-          <img
-            :src="project_card_sample"
-            v-for="item in 5"
-            alt=""
-            class="mr-3"
-          />
-        </div>
-      </div>
-      <p class="text-1 white-b font-weight-bold mt-5">
-        5 อันดับรายการที่ใช้จ่ายเงิน<u>น้อย</u>ที่สุด
-      </p>
-      <div class="overflow-auto drag-wrapper" v-dragscroll>
-        <div class="d-flex flex-nowrap">
-          <img
-            :src="project_card_sample"
-            v-for="item in 5"
-            alt=""
-            class="mr-3"
-          />
-        </div>
-      </div>
-      <b-row class="mx-0 mt-5">
-        <b-col
-          sm="10"
-          class="
-            text-2
-            bg-black
-            text-right
-            p-3
-            white-b
-            d-flex
-            align-items-center
-          "
-        >
+      <div
+        class="
+          h-100vh
+          choose-wrapper
+          d-flex
+          flex-column
+          justify-content-between
+        "
+      >
+        <div class="p-3 d-flex justify-content-center align-items-center h-100">
           <div>
-            <p>
-              แผนงบประมาณของ<span class="lime-b">อบจ. เชียงใหม่</span>
-              ประกอบด้วยโครงการอีกมากมายที่เกี่ยวข้องกับความเป็นอยู่ของพวกเรา
-            </p>
-            <p class="m-0">
-              ทุกคนสามารถเข้าใช้เครื่องมือ ACT Ai
-              เพื่อสืบค้นข้อมูลโครงการจัดซื้ดจัดจ้างภาครัฐ และตรวจสอบความโปร่งใส
-              ของรายละเอียดโครงการ งบประมาณ และบริษัทชนะการประมูล
-            </p>
-          </div>
-        </b-col>
-        <b-col sm="2" class="bg-white-a p-3 red text-center">
-          <img :src="logo" alt="" />
-          <p class="text-2 mb-0 font-weight-bold mt-2">เข้าสู่เครื่องมือ</p>
-        </b-col>
-      </b-row>
-    </div>
-    <div
-      class="
-        grid-wrapper
-        h-100vh
-        d-flex
-        justify-content-center
-        align-items-center
-      "
-    >
-      <div class="content text-2 white-b text-center">
-        <p class="text-1 font-weight-bold">หลังตรวจสอบแล้ว…เราทำอะไรได้บ้าง?</p>
-
-        <p>
-          องค์กรต่อต้านคอร์รัปชัน (ประเทศไทย) หรือ ACT ได้พัฒนาเครื่องมือ
-          <b> Corruption Watch</b> ในรูปแบบ Line Official Account
-          เพื่อสนับสนุนการร่วมจับตาและส่งข้อมูลเหตุสงสัยทุจริตคอรร์รัปชัน<br /><br />
-          <span class="orange-b">หากพบประเด็นน่าสงสัย</span
-          >เกี่ยวกับแผนงบประมาณในจังหวัดของคุณ สามารถช่วยกัน
-          <span class="lime-b font-weight-bold"
-            >ส่งเบาะแสเหตุสงสัยการทุจริตคอร์รัปชัน</span
-          >
-          มาได้ที่ LINE Official Account จับตาไม่ให้ใครโกง
-        </p>
-
-        <img :src="corruption_watch" class="my-4" width="186" alt="" />
-
-        <p class="m-0 font-weight-bold">@corruptionwatch</p>
-        <p>และติดตามสรุปการรายงานเหตุสงสัยการทุจริต ได้ที่ Corruption Watch</p>
-      </div>
-    </div>
-    <div
-      class="h-100vh choose-wrapper d-flex flex-column justify-content-between"
-    >
-      <div class="p-3 d-flex justify-content-center align-items-center h-100">
-        <div>
-          <div class="header-box mb-5">
-            <div class="content bg-blue-a">
-              <p class="text-1 font-weight-bold m-0 white-a">
-                คลิกเลือก เพื่อไปต่อ
-              </p>
+            <div class="header-box mb-5">
+              <div class="content bg-blue-a">
+                <p class="text-1 font-weight-bold m-0 white-a">
+                  คลิกเลือก เพื่อไปต่อ
+                </p>
+              </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-center">
+              <a href="/act-local-budgeting/story">
+                <div class="box-1 pointer mx-3">
+                  <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
+                    งบ อบจ.<br />
+                    สำคัญกับชีวิตเรา<br />
+                    อย่างไร?
+                  </h4>
+                </div>
+              </a>
+              <a href="/act-local-budgeting/conclusion">
+                <div class="box-2 pointer mx-3 mt-3 mt-md-0">
+                  <h4 class="header-4 white-a ml-4 mb-3 font-weight-bold">
+                    สรุปภาพรวมงบ อบจ.
+                  </h4>
+                </div>
+              </a>
             </div>
           </div>
-          <div class="d-flex flex-column flex-md-row justify-content-center">
-            <a href="/act-local-budgeting/story">
-              <div class="box-1 pointer mx-3">
-                <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
-                  งบ อบจ.<br />
-                  สำคัญกับชีวิตเรา<br />
-                  อย่างไร?
-                </h4>
-              </div>
-            </a>
-            <a href="/act-local-budgeting/conclusion">
-              <div class="box-2 pointer mx-3 mt-3 mt-md-0">
-                <h4 class="header-4 white-a ml-4 mb-3 font-weight-bold">
-                  สรุปภาพรวมงบ อบจ.
-                </h4>
-              </div>
-            </a>
-          </div>
         </div>
+        <div class="gradient"></div>
       </div>
-      <div class="gradient"></div>
-    </div>
+    </template>
+    <b-modal
+      id="kw-modal"
+      ref="kw-modal"
+      title="BootstrapVue"
+      hide-header
+      hide-footer
+      size="xl"
+      centered
+    >
+      <div class="bg-black p-4">
+        <template v-if="keywordSlide.length > 0">
+          <div class="text-center white-b text-2 mb-5">
+            จากงบประมาณ <span class="lime">อบจ.{{ selected_province }}</span>
+            ทั้งหมด
+            {{
+              parseInt(
+                total_province.toString().substring(0, 4)
+              ).toLocaleString()
+            }}
+            ล้านบาท พบคำว่า
+            <div class="selected_keyword">{{ selected_keyword }}</div>
+            ปรากฏใน {{ keywordSlide.length }} รายการงบ
+          </div>
+          <KeywordSlide :data="keywordSlide" :total="total_province" />
+        </template>
+        <template v-else>
+          <div class="text-center">
+            <div class="d-flex justify-content-center align-items-center mb-3">
+              <p class="text-2 white-b m-0">ไม่ปรากฏคำว่า</p>
+              <div class="selected_keyword ml-3">{{ selected_keyword }}</div>
+            </div>
+            <p class="text-2 white-b">
+              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัดเชียงใหม่ ในปี
+              2565
+            </p>
+          </div>
+        </template>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -484,16 +603,19 @@ export default {
   data() {
     return {
       selected: 2565,
-
-      selected_province: "เชียงใหม่",
+      selected_year_province: 2565,
+      selected_province: "",
+      selected_keyword: "",
       total_nationwide: 0,
       total_work_type: 0,
+      total_province: 0,
       options: [],
       provinces: [],
       groupedByArea: [],
       groupedByType: [],
       groupedByAreaSlide: [],
-
+      keywordSlide: [],
+      tasks: [],
       work_type: [
         { name: "ด้านบริหารทั่วไป", color: "#F2A8EE", total: 0, plans: [] },
         { name: "ด้านบริการชุมชน", color: "#89E26A", total: 0, plans: [] },
@@ -504,21 +626,126 @@ export default {
         {
           text: "โครงสร้างพื้นฐาน/สิ่งอำนวยความสะดวก",
           bg: "~/assets/images/keywordgroup_1.svg",
+          list: [
+            "การจราจร",
+            "สนาม",
+            "สะพาน",
+            "ถนน",
+            "เสาไฟฟ้า",
+            "ระบบประปา",
+            "ท่อระบายน้ำ",
+            "ฝายน้ำ",
+            "ลำห้วย",
+          ],
         },
-        { text: "วัสดุ/อุปกรณ์", bg: "./assets/images/keywordgroup_2.svg" },
-        { text: "กิจกรรม", bg: "./assets/images/keywordgroup_3.svg" },
-        { text: "บุคลากร/กลุ่มคน", bg: "./assets/images/keywordgroup_4.svg" },
-        { text: "สถานที่", bg: "./assets/images/keywordgroup_5.svg" },
+        {
+          text: "บุคลากร/กลุ่มคน",
+          bg: "./assets/images/keywordgroup_4.svg",
+          list: [
+            "เทศกิจ",
+            "นักเรียน",
+            "ครู",
+            "อาสาสมัครสาธารณสุขประจําหมู่บ้าน",
+            "ปศุสัตว์",
+            "พยาบาลชุมชน",
+            "คนพิการ",
+            "ผู้สูงอายุ",
+            "ประมง",
+            "เกษตรกร",
+            "นักกีฬา",
+            "ผู้ด้อยโอกาส",
+          ],
+        },
+        {
+          text: "ค่าใช้จ่ายอื่น ๆ",
+          bg: "./assets/images/keywordgroup_7.svg",
+          list: [
+            "เงินเดือน",
+            "เงินเพิ่มพิเศษ",
+            "ค่าตอบแทนพนักงานจ้าง",
+            "OT",
+            "ชำระหนี้",
+            "ทุนสำรอง",
+            "สมทบประกันสังคม",
+            "บำรุุงสมาคม",
+            "กองทุนบำเหน็จบำนาญ",
+            "กองทุนสำรองเลี้ยงชีพ",
+            "สงเคราะห์ผู้ป่วยยากไร้",
+            "เงินช่วยพิเศษ",
+          ],
+        },
+        {
+          text: "วัสดุ/อุปกรณ์",
+          bg: "./assets/images/keywordgroup_2.svg",
+          list: [
+            "บำรุงสำนักงาน",
+            "อุปกรณ์สำนักงาน",
+            "เครื่องดับเพลิง",
+            "ครุภัณฑ์การแพทย์",
+            "เครื่องออกกำลังกาย",
+            "อุปกรณ์การเรียน",
+            "อุปกรณ์กีฬา",
+            "เครื่องมือการช่าง",
+          ],
+        },
+        {
+          text: "สถานที่",
+          bg: "./assets/images/keywordgroup_5.svg",
+          list: [
+            "โรงเรียน",
+            "โรงพยาบาล",
+            "ศูนย์บริการสาธารณสุข",
+            "สวนสาธารณะ",
+            "สนามเด็กเล่น",
+            "ป่า",
+            "โรงรับจำนำ",
+            "ตลาด",
+            "โรงฆ่าสัตว์",
+            "สถานีขนส่ง",
+            "ท่าเรือ",
+          ],
+        },
+        {
+          text: "กิจกรรม",
+          bg: "./assets/images/keywordgroup_3.svg",
+          list: [
+            "กิจกรรมโครงการภายใน อบจ.",
+            "พิธีการวันสำคัญ",
+            "โครงการฝีกอบรมต่าง ๆ",
+            "ทุนการศึกษา",
+            "กิจกรรมส่งเสริมการศึกษา",
+            "โฆษณาประชาสัมพันธ์",
+            "แข่งขันกีฬา",
+            "นันทนาการ",
+            "พิธีการทางศาสนา",
+            "ส่งเสริมการท่องเที่ยว",
+            "เทศกาล",
+            "ศิลปะ",
+            "พระราชพิธี",
+            "ประเพณี",
+            "อนุรักษ์ธรรมชาติ",
+          ],
+        },
         {
           text: "สวัสดิการ/คุณภาพชีวิต",
           bg: "./assets/images/keywordgroup_6.svg",
+          list: [
+            "ป้องกันสาธารณภัย",
+            "ป้องกันและควบคุมโรค",
+            "กิจกรรมพัฒนาคุณภาพชีวิต",
+            "กำจัดขยะ",
+            "บำบัดน้ำเสีย",
+            "กิจกรรมส่งเสริมอาชีพ",
+            "ป้องกันยาเสพติด",
+            "ปรับปรุงภูมิทัศน์",
+            "ป้องกันมลพิษ",
+          ],
         },
-        { text: "ค่าใช้จ่ายอื่น ๆ", bg: "./assets/images/keywordgroup_7.svg" },
       ],
       work_type_1: require("~/assets/images/work_type_1.svg"),
       corruption_watch: require("~/assets/images/corruption_watch.png"),
       project_card_sample: require("~/assets/images/project_card_sample.svg"),
-      logo: require("~/assets/images/logo.svg"),
+      trophy_desktop: require("~/assets/images/trophy_desktop.svg"),
       slickOptions: {
         focusOnSelect: true,
         infinite: true,
@@ -534,6 +761,7 @@ export default {
           },
         ],
       },
+
       work_type_desc: [
         {
           title: "แผนงานบริหารงานทั่วไป",
@@ -592,7 +820,8 @@ export default {
   },
   created() {
     this.setYearAndProvince();
-    this.getNationWideData();
+    this.getNationWideData(2565);
+    this.getProvinceData();
   },
   methods: {
     setYearAndProvince() {
@@ -603,13 +832,18 @@ export default {
             this.options.push({ value: element, text: element });
           });
 
+          this.provinces.push({ value: "", text: "เลือกจังหวัด" });
+
           data.provinces.forEach((element) => {
             this.provinces.push({ value: element, text: element });
           });
         });
     },
-    getNationWideData() {
-      fetch("/data/2565/nation-wide.json")
+    getNationWideData(year) {
+      this.groupedByAreaSlide = [];
+      this.total_work_type = 0;
+
+      fetch("/data/" + year + "/nation-wide.json")
         .then((response) => response.json())
         .then((data) => {
           this.total_nationwide = data.total;
@@ -654,6 +888,50 @@ export default {
             return b.total - a.total;
           });
         });
+    },
+    getProvinceData() {
+      fetch("/data/2565/pao-กระบี่.json")
+        .then((response) => response.json())
+        .then((data) => {
+          this.tasks = data.tasks;
+          this.total_province = data.total;
+        });
+    },
+    showKeywordResult(text) {
+      this.keywordSlide = [];
+      this.selected_keyword = text;
+
+      fetch("/data/keywords.json")
+        .then((response) => response.json())
+        .then((data) => {
+          let a = Object.entries(data);
+          let b = a.filter((x) => x[0] == text);
+          b[0][1].forEach((element) => {
+            let c = this.tasks.filter(
+              (x) =>
+                x.plan == element.plan &&
+                x.task == element.task &&
+                x.type == element.type
+            );
+
+            if (c.length > 0) {
+              c.forEach((element, i) => {
+                this.keywordSlide.push(element);
+              });
+            }
+          });
+        });
+
+      console.log(this.keywordSlide);
+      this.$refs["kw-modal"].show();
+    },
+    selectWorkPlan(index) {
+      const i = this.groupedByAreaSlide.map((e) => e.plan).indexOf(index);
+      this.$refs.workplan.goTo(i);
+    },
+    selectWorkType(index) {
+      const i = this.groupedByType.map((e) => e.type).indexOf(index);
+      this.$refs.worktype.goTo(i);
     },
   },
 };
@@ -706,6 +984,28 @@ export default {
   border: none;
   padding: 10px;
 }
+
+select::-ms-expand {
+  display: none;
+}
+
+.year-select {
+  -webkit-appearance: none;
+  /*webkit browsers */
+  -moz-appearance: none;
+  /*Firefox */
+  appearance: none;
+  background: transparent;
+  width: 150px;
+  border: 1px solid #e5fbff;
+  border-radius: 0;
+  margin: 0 10px;
+}
+
+.year-select option {
+  background: #e0fd6a;
+  color: #181f1c !important;
+}
 </style>
 
 <style lang="scss" scoped>
@@ -716,13 +1016,6 @@ export default {
   .content {
     max-width: 600px;
   }
-}
-
-.year-select {
-  width: 96px;
-  border: 1px solid #e5fbff;
-  background: transparent;
-  border-radius: 0;
 }
 
 .tab-desc {
@@ -819,24 +1112,9 @@ export default {
   }
 }
 
-.pao-header-box {
-  border: 1px solid #e0fd6a;
-  padding: 10px;
-  width: fit-content;
-  margin: auto;
-
-  .content {
-    padding: 10px;
-  }
-}
-
-.drag-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
 .test2 {
   height: 175px;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -858,5 +1136,13 @@ export default {
 
 .big:hover {
   border: 4px solid #000000;
+}
+
+.selected_keyword {
+  background: #fffef5;
+  padding: 10px 15px;
+  color: #0056a6;
+  width: fit-content;
+  display: inline-block;
 }
 </style>
