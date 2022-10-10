@@ -55,6 +55,46 @@ describe('generate > group-budget', () => {
     } as BudgetByArea)
   })
 
+  test('Group by area; should not include same plan in other areas', () => {
+    const otherCentral: BudgetRow = {
+      ...getExpenseRow(),
+      expenseArea: 'ด้านการดำเนินงานอื่น ๆ ',
+      expensePlan: 'งบกลาง',
+      expenseType: 'งบกลาง',
+      expenseTask: 'งบกลาง',
+      amount: 10,
+    }
+
+    const financialCentral: BudgetRow = {
+      ...getExpenseRow(),
+      expenseArea: 'ด้านการเศรษฐกิจ',
+      expensePlan: 'งบกลาง',
+      expenseType: 'งบกลาง',
+      expenseTask: 'งบกลาง',
+      amount: 20,
+    }
+
+    const groupedByAreas = getGroupedByArea([otherCentral, financialCentral])
+
+    expect(groupedByAreas).toContainEqual({
+      area: "ด้านการดำเนินงานอื่น ๆ ",
+      total: 10,
+      plans: [{
+        plan: "งบกลาง",
+        total: 10,
+      }]
+    } as BudgetByArea)
+
+    expect(groupedByAreas).toContainEqual({
+      area: "ด้านการเศรษฐกิจ",
+      total: 20,
+      plans: [{
+        plan: "งบกลาง",
+        total: 20,
+      }]
+    } as BudgetByArea)
+  })
+
   test('Group by type', () => {
     const personnel: BudgetRow = {
       ...getExpenseRow(),

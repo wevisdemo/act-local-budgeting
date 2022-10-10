@@ -27,7 +27,7 @@ export function getBudgetByAreaFromStructure(structure: AreaStructure, expenseRo
   const plans = structure.plans.map(plan => ({
     plan,
     total: expenseRows
-      .filter(row => row.expensePlan === plan)
+      .filter(row => row.expensePlan === plan && row.expenseArea === structure.area)
       .map(row => row.amount)
       .reduce(sum, 0)
   }))
