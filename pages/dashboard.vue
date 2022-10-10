@@ -818,7 +818,7 @@ export default {
       ],
     };
   },
-  created() {
+  mounted() {
     this.setYearAndProvince();
     this.getNationWideData(2565);
     this.getProvinceData();
