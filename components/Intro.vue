@@ -153,12 +153,14 @@
             </div>
           </div>
           <div class="d-flex flex-column flex-md-row justify-content-center">
-            <div class="box-1 pointer mx-3">
-              <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
-                ตรวจสอบ<br />งบประมาณ<br />ในจังหวัดของคุณ
-              </h4>
-            </div>
-            <a href="/act-local-budgeting/story">
+            <NuxtLink to="/dashboard">
+              <div class="box-1 pointer mx-3">
+                <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
+                  ตรวจสอบ<br />งบประมาณ<br />ในจังหวัดของคุณ
+                </h4>
+              </div>
+            </NuxtLink>
+            <NuxtLink to="/story">
               <div class="box-2 pointer mx-3 mt-3 mt-md-0">
                 <h4 class="header-4 white-a ml-4 mb-3 font-weight-bold">
                   งบ อบจ.<br />
@@ -166,7 +168,7 @@
                   อย่างไร?
                 </h4>
               </div>
-            </a>
+            </NuxtLink>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@
       <div class="text-center my-5">
         <h4 class="header-4 font-weight-bold">จัดสรรงบประมาณทั้งหมดในภาพรวม</h4>
         <h1 class="header-1">
-          {{ parseInt(total.toString().substring(0, 5)).toLocaleString() }}
+          {{ parseInt(total.toString().substring(0,total.toString().length - 5)).toLocaleString() }}
           ล้านบาท
         </h1>
       </div>
@@ -93,7 +93,7 @@
                     <h4 class="header-4">
                       {{
                         parseInt(
-                          item.total.toString().substring(0, 4)
+                          item.total.toString().substring(0,item.total.toString().length - 5)
                         ).toLocaleString()
                       }}
                       ล้านบาท ({{ ((item.total / total) * 100).toFixed(1) }}%)
@@ -137,7 +137,7 @@
                     <p class="text-3 black m-0">
                       {{
                         parseInt(
-                          item2.total.toString().substring(0, 4)
+                          item2.total.toString().substring(0,item.total.toString().length - 5)
                         ).toLocaleString()
                       }}
                       ล้านบาท ({{ ((item2.total / total) * 100).toFixed(1) }}%)
@@ -221,7 +221,7 @@
                     <h4 class="header-4">
                       {{
                         parseInt(
-                          item.total.toString().substring(0, 4)
+                          item.total.toString().substring(0,item.total.toString().length - 5)
                         ).toLocaleString()
                       }}
                       ล้านบาท ({{ ((item.total / total) * 100).toFixed(1) }}%)
@@ -261,7 +261,7 @@
                     <p class="text-3 black m-0">
                       {{
                         parseInt(
-                          item2.total.toString().substring(0, 4)
+                          item2.total.toString().substring(0,item2.total.toString().length - 5)
                         ).toLocaleString()
                       }}
                       ล้านบาท ({{ ((item2.total / total) * 100).toFixed(1) }}%)
@@ -364,7 +364,7 @@ export default {
       this.groupedByAreaSlide = [];
       this.total_work_type = 0;
 
-      fetch("/data/" + y + "/pao-" + p + ".json")
+      fetch("data/" + y + "/pao-" + p + ".json")
         .then((response) => response.json())
         .then((data) => {
           this.total = data.total;

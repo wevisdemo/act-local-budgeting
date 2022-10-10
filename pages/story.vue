@@ -62,13 +62,13 @@
               </h5>
             </div>
             <div class="lottiebox">
-            <lottie-animation
-              ref="anim"
-              :animationData="require('@/assets/lottie/story_postit.json')"
-              :loop="true"
-              :autoPlay="true"
-            />
-          </div>
+              <lottie-animation
+                ref="anim"
+                :animationData="require('@/assets/lottie/story_postit.json')"
+                :loop="true"
+                :autoPlay="true"
+              />
+            </div>
           </div>
         </Scrollama>
       </div>
@@ -419,7 +419,7 @@
               </div>
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-center">
-              <a href="/act-local-budgeting/dashboard">
+              <NuxtLink to="/dashboard">
                 <div class="box-1 pointer mx-3">
                   <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
                     งบ อบจ.<br />
@@ -427,14 +427,14 @@
                     อย่างไร?
                   </h4>
                 </div>
-              </a>
-              <a href="/act-local-budgeting/conclusion">
+              </NuxtLink>
+              <NuxtLink to="/conclusion">
                 <div class="box-2 pointer mx-3 mt-3 mt-md-0">
                   <h4 class="header-4 white-a ml-4 mb-3 font-weight-bold">
                     สรุปภาพรวมงบ อบจ.
                   </h4>
                 </div>
-              </a>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -449,13 +449,13 @@ import "intersection-observer";
 import Scrollama from "vue-scrollama";
 import * as arrow from "~/assets/lottie/story_postit.json";
 import Lottie from "vue-lottie/src/lottie.vue";
-import LottieAnimation from 'lottie-web-vue'
+import LottieAnimation from "lottie-web-vue";
 
 export default {
   components: {
     Scrollama,
     Lottie,
-    LottieAnimation
+    LottieAnimation,
   },
   data() {
     return {

@@ -24,7 +24,7 @@
             <h1 class="header-1">
               {{
                 parseInt(
-                  total_nationwide.toString().substring(0, 5)
+                  total_nationwide.toString().substring(0,total_nationwide.toString().length - 5)
                 ).toLocaleString()
               }}
               ล้านบาท
@@ -114,7 +114,7 @@
                         <h4 class="header-4">
                           {{
                             parseInt(
-                              item.total.toString().substring(0, 4)
+                              item.total.toString().substring(0,item.total.toString().length - 5)
                             ).toLocaleString()
                           }}
                           ล้านบาท ({{
@@ -158,7 +158,7 @@
                 </div>
               </div>
 
-              <div class="d-flex w-100">
+              <div class="d-flex w-100" v-dragscroll>
                 <div
                   v-for="(item3, j) in groupedByType"
                   :style="{
@@ -212,7 +212,7 @@
                         <h4 class="header-4">
                           {{
                             parseInt(
-                              item.total.toString().substring(0, 4)
+                              item.total.toString().substring(0,item.total.toString().length - 5)
                             ).toLocaleString()
                           }}
                           ล้านบาท ({{
@@ -462,7 +462,7 @@
               </div>
               <div class="mt-5 text-center">
                 <a
-                href="https://docs.google.com/spreadsheets/d/1hyNpUsSRriL0XhP89HtEO9S0uU2IOQz33cvxT5GwIeU/edit#gid=0"
+                  href="https://docs.google.com/spreadsheets/d/1hyNpUsSRriL0XhP89HtEO9S0uU2IOQz33cvxT5GwIeU/edit#gid=0"
                   target="_blank"
                   class="link-btn text-3"
                   rel="noopener noreferrer"
@@ -534,7 +534,7 @@
               </div>
             </div>
             <div class="d-flex flex-column flex-md-row justify-content-center">
-              <a href="/act-local-budgeting/story">
+              <NuxtLink to="/story">
                 <div class="box-1 pointer mx-3">
                   <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
                     งบ อบจ.<br />
@@ -542,14 +542,14 @@
                     อย่างไร?
                   </h4>
                 </div>
-              </a>
-              <a href="/act-local-budgeting/conclusion">
+              </NuxtLink>
+              <NuxtLink to="/conclusion">
                 <div class="box-2 pointer mx-3 mt-3 mt-md-0">
                   <h4 class="header-4 white-a ml-4 mb-3 font-weight-bold">
                     สรุปภาพรวมงบ อบจ.
                   </h4>
                 </div>
-              </a>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -572,7 +572,7 @@
             ทั้งหมด
             {{
               parseInt(
-                total_province.toString().substring(0, 4)
+                total_province.toString().substring(0,total_province.toString().length - 5)
               ).toLocaleString()
             }}
             ล้านบาท พบคำว่า
@@ -825,7 +825,7 @@ export default {
   },
   methods: {
     setYearAndProvince() {
-      fetch("/data/metadata.json")
+      fetch("data/metadata.json")
         .then((response) => response.json())
         .then((data) => {
           data.years.forEach((element) => {
@@ -843,7 +843,7 @@ export default {
       this.groupedByAreaSlide = [];
       this.total_work_type = 0;
 
-      fetch("/data/" + year + "/nation-wide.json")
+      fetch("data/" + year + "/nation-wide.json")
         .then((response) => response.json())
         .then((data) => {
           this.total_nationwide = data.total;
@@ -890,7 +890,7 @@ export default {
         });
     },
     getProvinceData() {
-      fetch("/data/2565/pao-กระบี่.json")
+      fetch("data/2565/pao-กระบี่.json")
         .then((response) => response.json())
         .then((data) => {
           this.tasks = data.tasks;

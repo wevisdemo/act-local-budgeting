@@ -19,7 +19,7 @@
           >
         </b-row>
         <p class="text-1 my-1">
-          {{ parseInt(item.total.toString().substring(0, 4)).toLocaleString() }}
+          {{ parseInt(item.total.toString().substring(0,item.total.toString().length - 5)).toLocaleString() }}
           ล้านบาท
         </p>
         <p class="text-4 mb-1">

@@ -5,10 +5,10 @@
         <img :src="logo" alt="" width="70" />
       </div>
       <div>
-        <a href="/act-local-budgeting" class="box text-3">หน้าหลัก</a>
-        <a href="/act-local-budgeting/dashboard" class="box text-3">สำรวจข้อมูล</a>
-        <a href="/act-local-budgeting/story" class="box text-3">งบ อบจ. สำคัญอย่างไร</a>
-        <a href="/act-local-budgeting/conclusion" class="box text-3">สรุปภาพรวม</a>
+        <NuxtLink class="box text-3" to="/">หน้าหลัก</NuxtLink>
+        <NuxtLink class="box text-3" to="/dashboard">สำรวจข้อมูล</NuxtLink>
+        <NuxtLink class="box text-3" to="/story">งบ อบจ. สำคัญอย่างไร</NuxtLink>
+        <NuxtLink class="box text-3" to="/conclusion">สรุปภาพรวม</NuxtLink>
       </div>
     </div>
   </div>

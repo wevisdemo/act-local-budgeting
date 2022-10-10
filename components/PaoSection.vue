@@ -36,7 +36,7 @@
             </b-row>
             <p class="text-1 my-1">
               {{
-                parseInt(item.total.toString().substring(0, 4)).toLocaleString()
+                parseInt(item.total.toString().substring(0,item.total.toString().length - 5)).toLocaleString()
               }}
               ล้านบาท
             </p>
@@ -195,7 +195,7 @@
             </b-row>
             <p class="text-1 my-1">
               {{
-                parseInt(item.total.toString().substring(0, 4)).toLocaleString()
+                parseInt(item.total.toString().substring(0,item.total.toString().length - 5)).toLocaleString()
               }}
               ล้านบาท
             </p>
@@ -342,7 +342,7 @@
             >
               {{
                 parseInt(
-                  pao.population.toString().substring(0, 4)
+                  pao.population.toString().substring(0,pao.population.toString().length - 5)
                 ).toLocaleString()
               }}
               ล้านบาท
@@ -392,7 +392,7 @@
                   <p class="my-1 white-b">
                     {{
                       parseInt(
-                        item.total.toString().substring(0, 4)
+                        item.total.toString().substring(0,item.total.toString().length - 5)
                       ).toLocaleString()
                     }}
                     ล้านบาท
@@ -579,7 +579,7 @@ export default {
   },
   methods: {
     getData(y, p) {
-      fetch("/data/" + y + "/pao-" + p + ".json")
+      fetch("data/" + y + "/pao-" + p + ".json")
         .then((response) => response.json())
         .then((data) => {
           this.tasks = data.tasks;
@@ -594,7 +594,7 @@ export default {
 
       this.testKey++;
 
-      fetch("/data/2565/nation-wide.json")
+      fetch("data/2565/nation-wide.json")
         .then((response) => response.json())
         .then((data) => {
           let result = data.budgetPerCapita;

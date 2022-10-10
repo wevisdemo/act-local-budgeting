@@ -78,8 +78,9 @@ export default {
   },
 
   // generate: {
-  //   dir: 'dist/booksonshelf',
+  //   dir: 'dist/act-local-budgeting',
   // },
+
   router: {
     base: '/act-local-budgeting/',
   },
@@ -124,8 +125,4 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-
-  generate: {
-    routes: array
-  }
 }
