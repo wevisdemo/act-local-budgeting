@@ -12,14 +12,14 @@
       >
       <div class="task-box">
         <b-row no-gutters>
-          <b-col cols="12" class="pl-1">
+          <b-col cols="12" class="">
             <p class="text-3 mb-0 font-weight-bold">
               {{ item.task }}
             </p></b-col
           >
         </b-row>
         <p class="text-1 my-1">
-          {{ parseInt(item.total.toString().substring(0,item.total.toString().length - 5)).toLocaleString() }}
+          {{ parseInt(item.total.toString().substring(0,item.total.toString().length - 3)).toLocaleString() }}
           ล้านบาท
         </p>
         <p class="text-4 mb-1">

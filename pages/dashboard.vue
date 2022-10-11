@@ -1,9 +1,9 @@
 <template>
   <div>
-    <!-- <Header /> -->
+    <Header />
     <div class="bg-blue-a white-a">
       <div class="p-4">
-        <p class="text-1 m-0">
+        <p class="text-1 mb-0 mt-5">
           ในปี
           <b-form-select
             v-model="selected"
@@ -24,7 +24,9 @@
             <h1 class="header-1">
               {{
                 parseInt(
-                  total_nationwide.toString().substring(0,total_nationwide.toString().length - 5)
+                  total_nationwide
+                    .toString()
+                    .substring(0, total_nationwide.toString().length - 3)
                 ).toLocaleString()
               }}
               ล้านบาท
@@ -33,12 +35,45 @@
         </div>
       </div>
       <div class="position-relative">
-        <p class="text-2 white-a m-0 tab-desc">
-          โดยสามารถจำแนกค่าใช้จ่ายออกตาม:
-        </p>
-        <b-tabs align="right" lazy nav-class="main-tab pr-5" no-fade>
-          <b-tab title="แผนงาน" active title-item-class="tab-header">
-            <div class="text-1 bg-white py-4 black">
+        <b-tabs
+          align="right"
+          lazy
+          nav-class="main-tab pr-5 align-items-center"
+          no-fade
+        >
+          <template #tabs-start>
+            <p class="text-2 white-a m-0 px-3">
+              โดยสามารถจำแนกค่าใช้จ่ายออกตาม:
+            </p>
+          </template>
+          <b-tab
+            title="แผนงาน"
+            active
+            title-item-class="tab-header"
+            @click="activetab = 'แผนงาน'"
+          >
+            <template #title>
+              <img
+                :src="info"
+                v-if="activetab == 'แผนงาน'"
+                class="info"
+                alt=""
+                id="popover-plan"
+              />
+              <strong>แผนงาน</strong>
+              <b-popover
+                v-if="activetab == 'แผนงาน'"
+                target="popover-plan"
+                triggers="hover"
+                placement="topleft"
+              >
+                <p class="text-3 m-0">
+                  <b>แผนงาน</b> หมายถึงภารกิจแต่ละด้าน
+                  ที่องค์กรปกครองส่วนท้องถิ่น มีหน้าที่ตามกฎหมาย
+                </p>
+              </b-popover>
+            </template>
+            <div class="text-1 bg-white py-5 black">
               <div class="d-flex justify-content-center">
                 <div
                   class="d-flex mx-1"
@@ -105,6 +140,7 @@
                     :style="{
                       backgroundColor: item.color,
                     }"
+                    :class="{ 'white-b': item.color == '#4A4E5E' }"
                   >
                     <b-row>
                       <b-col cols="8">
@@ -114,7 +150,9 @@
                         <h4 class="header-4">
                           {{
                             parseInt(
-                              item.total.toString().substring(0,item.total.toString().length - 5)
+                              item.total
+                                .toString()
+                                .substring(0, item.total.toString().length - 3)
                             ).toLocaleString()
                           }}
                           ล้านบาท ({{
@@ -125,22 +163,41 @@
                           {{ work_type_desc[i].desc }}
                         </p>
                       </b-col>
-                      <b-col cols="4"
-                        ><img
-                          width="100%"
-                          :src="
-                            require(`@/assets/images/work_type_${i + 1}.svg`)
-                          "
-                          alt=""
-                      /></b-col>
+                      <b-col cols="4"><ImageSector :title="item.plan" /></b-col>
                     </b-row>
                   </div>
                 </VueSlickCarousel>
               </div>
             </div>
           </b-tab>
-          <b-tab title="ประเภทงบ" title-item-class="tab-header">
-            <div class="text-1 bg-white py-4 black">
+          <b-tab
+            title="ประเภทงบ"
+            title-item-class="tab-header"
+            @click="activetab = 'ประเภทงบ'"
+          >
+            <template #title>
+              <img
+                :src="info"
+                v-if="activetab == 'ประเภทงบ'"
+                class="info"
+                alt=""
+                id="popover-type"
+              />
+              <strong>ประเภทงบ</strong>
+              <b-popover
+                v-if="activetab == 'ประเภทงบ'"
+                target="popover-type"
+                triggers="hover"
+                placement="topleft"
+              >
+                <p class="text-3 m-0">
+                  <b>ประเภทงบ</b>
+                  หมายถึงประเภทรายจ่าย ของ อบจ. ที่กำหนดไว้ใน
+                  พรบ.องค์การบริหารส่วนจังหวัด
+                </p>
+              </b-popover>
+            </template>
+            <div class="text-1 bg-white py-5 black">
               <div class="d-flex justify-content-center">
                 <div
                   class="d-flex mx-1"
@@ -152,13 +209,13 @@
                     :style="{ backgroundColor: item.color }"
                   ></div>
                   <p class="text-3 mr-1">
-                    {{ ((item.total / total_nationwide) * 100).toFixed(1) }}%
+                    {{ ((item.total / total_nationwide) * 100).toFixed(2) }}%
                   </p>
                   <p class="text-3 font-weight-bold">{{ item.type }}</p>
                 </div>
               </div>
 
-              <div class="d-flex w-100" v-dragscroll>
+              <div class="d-flex w-100 drag-wrapper overflow-auto" v-dragscroll>
                 <div
                   v-for="(item3, j) in groupedByType"
                   :style="{
@@ -203,6 +260,10 @@
                     :style="{
                       backgroundColor: item.color,
                     }"
+                    :class="{
+                      'white-b':
+                        item.color == '#253472' || item.color == '#A80C7C',
+                    }"
                   >
                     <b-row>
                       <b-col cols="8">
@@ -212,7 +273,9 @@
                         <h4 class="header-4">
                           {{
                             parseInt(
-                              item.total.toString().substring(0,item.total.toString().length - 5)
+                              item.total
+                                .toString()
+                                .substring(0, item.total.toString().length - 3)
                             ).toLocaleString()
                           }}
                           ล้านบาท ({{
@@ -223,7 +286,9 @@
                       <b-col cols="4"
                         ><img
                           width="100%"
-                          :src="require(`@/assets/images/klang_${item.id}.svg`)"
+                          :src="
+                            require(`@/assets/images/sector/sector_klang.svg`)
+                          "
                           alt=""
                       /></b-col>
                     </b-row>
@@ -257,13 +322,65 @@
         </p>
       </div>
       <div class="position-relative">
-        <p class="text-2 white-a m-0 tab-desc">เลือกวิธีสำรวจ:</p>
-        <b-tabs align="right" lazy nav-class="main-tab pr-5" no-fade>
+        <b-tabs
+          align="right"
+          lazy
+          nav-class="main-tab-province pr-5 align-items-center"
+          no-fade
+        >
+          <template #tabs-start>
+            <p class="text-2 white-a m-0 px-3">เลือกวิธีสำรวจ:</p>
+          </template>
           <b-tab
             title="สำรวจผ่านโครงสร้าง"
             title-item-class="tab-header"
             active
+            @click="activetab_province = 'สำรวจผ่านโครงสร้าง'"
           >
+            <template #title>
+              <img
+                :src="info"
+                v-if="
+                  activetab_province == 'สำรวจผ่านโครงสร้าง' &&
+                  selected_province != ''
+                "
+                class="info"
+                alt=""
+                id="popover-province-1"
+              />
+              <strong>สำรวจผ่านโครงสร้าง</strong>
+              <b-popover
+                v-if="activetab_province == 'สำรวจผ่านโครงสร้าง'"
+                target="popover-province-1"
+                triggers="hover"
+                placement="topleft"
+              >
+                <p class="text-3 m-0">
+                  <b>โครงสร้างงบ อบจ.</b><br />
+                  สามารถแบ่งออกเป็นประเภท
+                  ตามลำดับขั้นตั้งแต่ใหญ่ไปจนถึงเล็กได้ดังนี้
+                  <br /><br />
+
+                  <b>ด้านรายจ่าย</b
+                  ><img
+                    :src="arrow_left_black"
+                    class="mx-1"
+                    width="10"
+                    alt=""
+                  />
+                  <b>แผนงานรายจ่าย</b
+                  ><img
+                    :src="arrow_left_black"
+                    class="mx-1"
+                    width="10"
+                    alt=""
+                  />
+                  <b>งานรายจ่าย</b><br />
+                  สามารถแบ่งออกเป็นประเภท
+                  ตามลำดับขั้นตั้งแต่ใหญ่ไปจนถึงเล็กได้ดังนี้
+                </p>
+              </b-popover>
+            </template>
             <template v-if="selected_province != ''">
               <ProvinceData
                 :year="selected_year_province"
@@ -274,9 +391,9 @@
           <b-tab
             title="สำรวจผ่านคำสำคัญ"
             title-item-class="tab-header"
-            :disabled="selected_province == ''"
+            @click="activetab_province = 'สำรวจผ่านคำสำคัญ'"
           >
-            <div class="text-2 bg-white py-4 black">
+            <div class="text-2 bg-white py-5 black">
               <div style="width: 600px" class="mx-auto text-center">
                 <p>
                   เห็นโครงสร้างงบ อบจ. กันไปแล้ว หลายคนอาจจะยังจินตนาการไม่ออก
@@ -325,14 +442,14 @@
                               cols="4"
                               v-for="(item2, j) in item.list"
                               :key="'kw-' + j"
+                              class="mb-3"
                               ><div
                                 class="
-                                  test3
+                                  keyword-btn
                                   text-3
                                   white-b
                                   p-2
                                   text-center
-                                  mb-3
                                 "
                                 @click="showKeywordResult(item2)"
                               >
@@ -379,7 +496,7 @@
                               :key="'kw-' + j"
                               ><div
                                 class="
-                                  test3
+                                  keyword-btn
                                   text-3
                                   white-b
                                   p-2
@@ -431,7 +548,7 @@
                               :key="'kw-' + j"
                               ><div
                                 class="
-                                  test3
+                                  keyword-btn
                                   text-3
                                   white-b
                                   p-2
@@ -451,22 +568,24 @@
                 </b-col>
               </b-row>
 
-              <div class="mt-5 text-center">
+              <div class="mt-5 text-center" v-if="total_province > 0">
                 <a
-                  href="#"
+                  :href="budgetingDocUrl"
                   target="_blank"
-                  class="link-btn text-3"
+                  class="link-btn-w text-3"
                   rel="noopener noreferrer"
-                  >สำรวจเอกสารงบประมาณฉบับจริง</a
+                  ><img :src="link_w" class="mr-1" alt="" />
+                  สำรวจเอกสารงบประมาณฉบับจริง</a
                 >
               </div>
-              <div class="mt-5 text-center">
+              <div class="mt-4 text-center">
                 <a
                   href="https://docs.google.com/spreadsheets/d/1hyNpUsSRriL0XhP89HtEO9S0uU2IOQz33cvxT5GwIeU/edit#gid=0"
                   target="_blank"
-                  class="link-btn text-3"
+                  class="link-btn-w text-3"
                   rel="noopener noreferrer"
-                  >Download ข้อบัญญัติรายจ่าย อบจ.</a
+                  ><img :src="download_w" class="mr-1" alt="" />Download
+                  ข้อบัญญัติรายจ่าย อบจ.</a
                 >
               </div>
             </div>
@@ -565,21 +684,43 @@
       size="xl"
       centered
     >
+      <div class="text-right">
+        <img
+          :src="close"
+          alt=""
+          class="pointer"
+          @click="$bvModal.hide('kw-modal')"
+        />
+      </div>
       <div class="bg-black p-4">
         <template v-if="keywordSlide.length > 0">
-          <div class="text-center white-b text-2 mb-5">
+          <div class="text-center white-b text-2">
             จากงบประมาณ <span class="lime">อบจ.{{ selected_province }}</span>
             ทั้งหมด
             {{
               parseInt(
-                total_province.toString().substring(0,total_province.toString().length - 5)
+                total_province
+                  .toString()
+                  .substring(0, total_province.toString().length - 3)
               ).toLocaleString()
             }}
             ล้านบาท พบคำว่า
             <div class="selected_keyword">{{ selected_keyword }}</div>
             ปรากฏใน {{ keywordSlide.length }} รายการงบ
           </div>
-          <KeywordSlide :data="keywordSlide" :total="total_province" />
+          <div class="text-right">
+            <img
+              :src="drag"
+              alt=""
+              class="m-3"
+              v-if="keywordSlide.length > 4"
+            />
+          </div>
+          <KeywordSlide
+            :data="keywordSlide"
+            :total="total_province"
+            class="mt-3"
+          />
         </template>
         <template v-else>
           <div class="text-center">
@@ -606,6 +747,9 @@ export default {
       selected_year_province: 2565,
       selected_province: "",
       selected_keyword: "",
+      budgetingDocUrl: "",
+      activetab: "แผนงาน",
+      activetab_province: "สำรวจผ่านโครงสร้าง",
       total_nationwide: 0,
       total_work_type: 0,
       total_province: 0,
@@ -742,7 +886,12 @@ export default {
           ],
         },
       ],
-      work_type_1: require("~/assets/images/work_type_1.svg"),
+      info: require("~/assets/images/info.svg"),
+      drag: require("~/assets/images/drag.svg"),
+      close: require("~/assets/images/close.svg"),
+      link_w: require("~/assets/images/link_w.svg"),
+      download_w: require("~/assets/images/download_w.svg"),
+      arrow_left_black: require("~/assets/images/arrow_right_black.svg"),
       corruption_watch: require("~/assets/images/corruption_watch.png"),
       project_card_sample: require("~/assets/images/project_card_sample.svg"),
       trophy_desktop: require("~/assets/images/trophy_desktop.svg"),
@@ -818,10 +967,18 @@ export default {
       ],
     };
   },
+  watch: {
+    // whenever question changes, this function will run
+    selected_year_province(newQuestion, oldQuestion) {
+      this.getProvinceData(this.selected_year_province, this.selected_province);
+    },
+    selected_province(newQuestion, oldQuestion) {
+      this.getProvinceData(this.selected_year_province, this.selected_province);
+    },
+  },
   mounted() {
     this.setYearAndProvince();
     this.getNationWideData(2565);
-    this.getProvinceData();
   },
   methods: {
     setYearAndProvince() {
@@ -889,12 +1046,13 @@ export default {
           });
         });
     },
-    getProvinceData() {
-      fetch("data/2565/pao-กระบี่.json")
+    getProvinceData(y, p) {
+      fetch("data/" + y + "/pao-" + p + ".json")
         .then((response) => response.json())
         .then((data) => {
           this.tasks = data.tasks;
           this.total_province = data.total;
+          this.budgetingDocUrl = data.pao.budgetingDocUrl;
         });
     },
     showKeywordResult(text) {
@@ -950,7 +1108,7 @@ export default {
 .tab-header {
   width: 250px;
   text-align: center;
-
+  position: relative;
   font-size: 24px;
   font-weight: bold;
 }
@@ -995,7 +1153,9 @@ select::-ms-expand {
   -moz-appearance: none;
   /*Firefox */
   appearance: none;
-  background: transparent;
+  background-color: transparent;
+  background-image: url("~/assets/images/arrow_dd.svg");
+  background-repeat: no-repeat;
   width: 150px;
   border: 1px solid #e5fbff;
   border-radius: 0;
@@ -1005,6 +1165,16 @@ select::-ms-expand {
 .year-select option {
   background: #e0fd6a;
   color: #181f1c !important;
+}
+
+.main-tab-province {
+  border-color: #181f1c !important;
+}
+
+.main-tab-province li a.active {
+  background: #181f1c !important;
+  color: #fffef5 !important;
+  border-color: #181f1c !important;
 }
 </style>
 
@@ -1036,7 +1206,8 @@ select::-ms-expand {
 }
 
 .work-card {
-  box-shadow: 1px 1px 12px 2px rgba(24, 31, 28, 0.15);
+  //box-shadow: 1px 1px 12px 2px rgba(24, 31, 28, 0.15);
+  border: 4px solid #000;
   padding: 25px;
 }
 
@@ -1123,8 +1294,9 @@ select::-ms-expand {
   border-radius: 0;
 }
 
-.test3 {
+.keyword-btn {
   border: 1px solid #fffef5;
+  cursor: pointer;
 }
 
 .big {
@@ -1144,5 +1316,20 @@ select::-ms-expand {
   color: #0056a6;
   width: fit-content;
   display: inline-block;
+}
+
+.info {
+  position: absolute;
+  right: -24px;
+  top: 0;
+  z-index: 1;
+}
+
+.link-btn-w {
+  background: white !important;
+  color: $black !important;
+  border: 1px solid $black !important;
+  border-radius: 5px;
+    padding: 5px 25px;
 }
 </style>

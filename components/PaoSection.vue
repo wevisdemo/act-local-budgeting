@@ -3,15 +3,20 @@
     <div class="pao-header-box mb-5">
       <div class="content bg-lime-b">
         <p class="text-1 font-weight-bold m-0 blue-a">
-          รายการงบที่น่าจับตาของ อบจ. {{province}}
+          รายการงบที่น่าจับตาของ อบจ. {{ province }}
         </p>
       </div>
     </div>
-    <template v-if="total != 0">
-      <p class="text-1 white-b font-weight-bold">
-        5 อันดับรายการที่ใช้จ่ายเงิน<u>เยอะ</u>ที่สุด
-      </p>
-      <div class="overflow-auto drag-wrapper" v-dragscroll v-if="tasks.length > 0">
+    <template>
+      <div class="text-1 white-b font-weight-bold d-flex justify-content-between mb-3">
+        <span> 5 อันดับรายการที่ใช้จ่ายเงิน<u>เยอะ</u>ที่สุด</span>
+        <img :src="drag" alt="" />
+      </div>
+      <div
+        class="overflow-auto drag-wrapper"
+        v-dragscroll
+        v-if="tasks.length > 0"
+      >
         <div class="d-flex flex-nowrap task-wrapper">
           <div
             class="task-box mr-3"
@@ -36,7 +41,11 @@
             </b-row>
             <p class="text-1 my-1">
               {{
-                parseInt(item.total.toString().substring(0,item.total.toString().length - 5)).toLocaleString()
+                parseInt(
+                  item.total
+                    .toString()
+                    .substring(0, item.total.toString().length - 3)
+                ).toLocaleString()
               }}
               ล้านบาท
             </p>
@@ -167,10 +176,16 @@
           </div>
         </div>
       </div>
-      <p class="text-1 white-b font-weight-bold mt-5">
-        5 อันดับรายการที่ใช้จ่ายเงิน<u>น้อย</u>ที่สุด
-      </p>
-      <div class="overflow-auto drag-wrapper" v-dragscroll v-if="tasks.length > 0">
+      <div class="text-center py-5 text-2 white-b" v-else>ไม่พบข้อมูล</div>
+      <div class="text-1 white-b font-weight-bold d-flex justify-content-between mb-3 mt-5">
+        <span> 5 อันดับรายการที่ใช้จ่ายเงิน<u>น้อย</u>ที่สุด</span>
+        <img :src="drag" alt="" />
+      </div>
+      <div
+        class="overflow-auto drag-wrapper"
+        v-dragscroll
+        v-if="tasks.length > 0"
+      >
         <div class="d-flex flex-nowrap task-wrapper">
           <div
             class="task-box mr-3"
@@ -195,7 +210,11 @@
             </b-row>
             <p class="text-1 my-1">
               {{
-                parseInt(item.total.toString().substring(0,item.total.toString().length - 5)).toLocaleString()
+                parseInt(
+                  item.total
+                    .toString()
+                    .substring(0, item.total.toString().length - 3)
+                ).toLocaleString()
               }}
               ล้านบาท
             </p>
@@ -325,10 +344,11 @@
           </div>
         </div>
       </div>
+      <div class="text-center py-5 text-2 white-b" v-else>ไม่พบข้อมูล</div>
     </template>
     <div>
       <p class="text-1 white-b my-5 font-weight-bold">
-        ข้อมูลอื่นๆของจังของอบจ. {{province}}
+        ข้อมูลอื่นๆของจังของอบจ. {{ province }}
       </p>
       <b-row v-if="pao.chiefExecutives != null">
         <b-col sm="7">
@@ -342,7 +362,9 @@
             >
               {{
                 parseInt(
-                  pao.population.toString().substring(0,pao.population.toString().length - 5)
+                  pao.population
+                    .toString()
+                    .substring(0, pao.population.toString().length - 3)
                 ).toLocaleString()
               }}
               ล้านบาท
@@ -385,14 +407,16 @@
                       'bg-blue-a': i == 1,
                       'bg-pink': i == 2,
                     }"
-                    class="font-weight-bold"
+                    class="font-weight-bold text-center"
                   >
                     {{ item.type }}
                   </div>
                   <p class="my-1 white-b">
                     {{
                       parseInt(
-                        item.total.toString().substring(0,item.total.toString().length - 5)
+                        item.total
+                          .toString()
+                          .substring(0, item.total.toString().length - 3)
                       ).toLocaleString()
                     }}
                     ล้านบาท
@@ -514,6 +538,7 @@ export default {
       klang_mini_4: require("~/assets/images/mini_icon/klang_mini_4.svg"),
       klang_mini_5: require("~/assets/images/mini_icon/klang_mini_5.svg"),
       klang_mini_6: require("~/assets/images/mini_icon/klang_mini_6.svg"),
+      drag: require("~/assets/images/drag.svg"),
       logo: require("~/assets/images/logo.svg"),
       series: [
         {
@@ -620,10 +645,6 @@ export default {
   .content {
     padding: 10px;
   }
-}
-
-.drag-wrapper::-webkit-scrollbar {
-  display: none;
 }
 
 .task-box {

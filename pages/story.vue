@@ -12,6 +12,14 @@
             <img width="100%" id="img-5" :src="front_dark" alt="" />
             <img width="100%" id="img-6" :src="back_dark" alt="" />
           </div>
+          <div class="lottiebox" v-if="index == 4">
+            <lottie-animation
+              ref="anim"
+              :animationData="require('@/assets/lottie/story_postit.json')"
+              :loop="true"
+              :autoPlay="true"
+            />
+          </div>
         </div>
         <Scrollama
           class="scrollama-content"
@@ -61,15 +69,8 @@
                 >ของประชาชนอย่างเราที่จะต้องเข้าไปมีส่วนร่วมแสดงความคิดเห็นในขั้นตอนการจัดสรรงบในแต่ละปี
               </h5>
             </div>
-            <div class="lottiebox">
-              <lottie-animation
-                ref="anim"
-                :animationData="require('@/assets/lottie/story_postit.json')"
-                :loop="true"
-                :autoPlay="true"
-              />
-            </div>
           </div>
+          <div data-step-no="6"></div>
         </Scrollama>
       </div>
       <div class="">
@@ -460,6 +461,7 @@ export default {
   data() {
     return {
       arrow: arrow,
+      index: 0,
       logo: require("~/assets/images/logo.svg"),
       arrow: require("~/assets/images/arrow.svg"),
       papertear: require("~/assets/images/papertear.svg"),
@@ -542,6 +544,7 @@ export default {
   },
   methods: {
     handler({ element, index, direction }) {
+      this.index = index;
       if (index == 0) {
         if (!this.isFirstTime) {
           document.getElementById("img-2").style.transform = "none";
@@ -749,6 +752,10 @@ export default {
     position: relative;
     bottom: 40px;
     left: 75px;
+
+    @media #{$mq-small-laptop} {
+      left: 50px;
+    }
   }
 }
 
@@ -768,7 +775,7 @@ export default {
   background: #e0fd6a;
   margin-top: -100px;
   .wrapper-box {
-    width: 1280px;
+    max-width: 1280px;
     margin: auto;
 
     .content {
@@ -965,7 +972,7 @@ export default {
 }
 
 .lottiebox {
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 </style>

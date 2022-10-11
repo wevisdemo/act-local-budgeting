@@ -4,7 +4,13 @@
       <div class="text-center my-5">
         <h4 class="header-4 font-weight-bold">จัดสรรงบประมาณทั้งหมดในภาพรวม</h4>
         <h1 class="header-1">
-          {{ parseInt(total.toString().substring(0,total.toString().length - 5)).toLocaleString() }}
+          {{
+            total == 0
+              ? 0
+              : parseInt(
+                  total.toString().substring(0, total.toString().length - 3)
+                ).toLocaleString()
+          }}
           ล้านบาท
         </h1>
       </div>
@@ -93,64 +99,104 @@
                     <h4 class="header-4">
                       {{
                         parseInt(
-                          item.total.toString().substring(0,item.total.toString().length - 5)
+                          item.total
+                            .toString()
+                            .substring(0, item.total.toString().length - 3)
                         ).toLocaleString()
                       }}
                       ล้านบาท ({{ ((item.total / total) * 100).toFixed(1) }}%)
                     </h4>
                   </b-col>
-                  <b-col cols="4"
-                    ><img
-                      width="100%"
-                      :src="require(`@/assets/images/work_type_${i + 1}.svg`)"
-                      alt=""
-                  /></b-col>
+                  <b-col cols="4"><ImageSector :title="item.plan" /></b-col>
                 </b-row>
               </div>
               <div class="bg-white p-4">
-                <p class="text-2 blue-a font-weight-bold m-0">
-                  มี
-                  {{
-                    tasks.filter(
-                      (x) => x.area == item.name && x.plan == item.plan
-                    ).length
-                  }}
-                  รายการงบภายใต้แผนงาน
-                </p>
-                <p class="text-2 blue-a m-0">
-                  (สัดส่วน % เทียบเฉพาะรายการในแผนงานเดียวกัน)
-                </p>
-                <hr />
+                <div class="work-list-box" :id="'work-list-box' + i">
+                  <p class="text-2 blue-a font-weight-bold m-0">
+                    มี
+                    {{
+                      tasks.filter(
+                        (x) => x.area == item.name && x.plan == item.plan
+                      ).length
+                    }}
+                    รายการงบภายใต้แผนงาน
+                  </p>
+                  <p class="text-2 blue-a m-0">
+                    (สัดส่วน % เทียบเฉพาะรายการในแผนงานเดียวกัน)
+                  </p>
+                  <hr />
 
-                <div class="test">
-                  <div
-                    v-for="(item2, j) in tasks
-                      .filter((x) => x.area == item.name && x.plan == item.plan)
-                      .sort(function (a, b) {
-                        return b.total - a.total;
-                      })"
-                    :key="'province-task-' + j"
-                  >
-                    <p class="text-2 black font-weight-bold m-0">
-                      {{ item2.task }}
-                    </p>
-                    <p class="text-3 black m-0">
-                      {{
-                        parseInt(
-                          item2.total.toString().substring(0,item.total.toString().length - 5)
-                        ).toLocaleString()
-                      }}
-                      ล้านบาท ({{ ((item2.total / total) * 100).toFixed(1) }}%)
-                    </p>
+                  <div class="work-list-box-content">
                     <div
-                      class="bg-black task-chart mb-4"
-                      :style="{
-                        maxWidth:
-                          ((item2.total / total) * 100).toFixed(1) + '%',
-                      }"
-                    ></div>
+                      v-for="(item2, j) in tasks
+                        .filter(
+                          (x) => x.area == item.name && x.plan == item.plan
+                        )
+                        .sort(function (a, b) {
+                          return b.total - a.total;
+                        })"
+                      :key="'province-task-' + j"
+                    >
+                      <p class="text-2 black font-weight-bold m-0">
+                        {{ item2.task }}
+                      </p>
+                      <p class="text-3 black m-0">
+                        {{
+                          parseInt(
+                            item2.total
+                              .toString()
+                              .substring(0, item2.total.toString().length - 3)
+                          ).toLocaleString()
+                        }}
+                        ล้านบาท ({{
+                          ((item2.total / total) * 100).toFixed(1)
+                        }}%)
+                      </p>
+                      <div
+                        class="bg-black task-chart mb-4"
+                        :style="{
+                          maxWidth:
+                            ((item2.total / total) * 100).toFixed(2) + '%',
+                        }"
+                      ></div>
+                    </div>
                   </div>
                 </div>
+                <template
+                  v-if="
+                    tasks.filter(
+                      (x) => x.area == item.name && x.plan == item.plan
+                    ).length > 5
+                  "
+                >
+                  <!-- <div
+                    class="
+                      blue-a
+                      text-2
+                      font-weight-bold
+                      see-more
+                      d-flex
+                      justify-content-between
+                      mt-3
+                      pointer
+                    "
+                    @click="seeMore(item.isExpand, i)"
+                  >
+                    <template v-if="!isShoww">
+                      <div>
+                        เพิ่มเติม
+                        {{
+                          tasks.filter(
+                            (x) => x.area == item.name && x.plan == item.plan
+                          ).length - 3
+                        }}
+                        รายการ
+                      </div>
+                    </template>
+                    <template v-else>ย่อลง</template>
+                    <div>+</div>
+                  </div> -->
+                </template>
               </div>
             </div>
           </VueSlickCarousel>
@@ -164,13 +210,13 @@
               :style="{ backgroundColor: item.color }"
             ></div>
             <p class="text-3 mr-1">
-              {{ ((item.total / total) * 100).toFixed(1) }}%
+              {{ ((item.total / total) * 100).toFixed(2) }}%
             </p>
             <p class="text-3 font-weight-bold">{{ item.type }}</p>
           </div>
         </div>
 
-        <div class="d-flex w-100">
+        <div class="d-flex w-100 drag-wrapper overflow-auto" v-dragscroll>
           <div
             v-for="(item3, j) in groupedByType"
             :style="{
@@ -180,21 +226,21 @@
             :key="'type-' + j"
           >
             <div
-            @click="selectWorkType(item3.type)"
-              class="work-type-square big w-100 mr-2"
+              @click="selectWorkType(item3.type)"
+              class="work-type-square black big w-100 mr-2"
               :style="{
                 backgroundColor: item3.color,
               }"
               :key="j"
             >
               <h5 class="header-5 mr-1">
-                {{ ((item3.total / total) * 100).toFixed(1) }}%
+                {{ ((item3.total / total) * 100).toFixed(2) }}%
               </h5>
             </div>
           </div>
         </div>
 
-        <p class="my-5 text-2 text-center">รายละเอียดแผนงาน</p>
+        <p class="my-5 text-2 text-center">รายละเอียดงบประมาณ</p>
 
         <div>
           <VueSlickCarousel
@@ -212,8 +258,9 @@
                 :style="{
                   backgroundColor: item.color,
                 }"
+              
               >
-                <b-row class="align-items-center">
+                <b-row class="align-items-center"      :class="{ 'white-b': item.color == '#253472' || item.color == '#A80C7C' }">
                   <b-col cols="8">
                     <p class="text-1 font-weight-bold m-0">
                       {{ item.type }}
@@ -221,7 +268,9 @@
                     <h4 class="header-4">
                       {{
                         parseInt(
-                          item.total.toString().substring(0,item.total.toString().length - 5)
+                          item.total
+                            .toString()
+                            .substring(0, item.total.toString().length - 3)
                         ).toLocaleString()
                       }}
                       ล้านบาท ({{ ((item.total / total) * 100).toFixed(1) }}%)
@@ -230,12 +279,13 @@
                   <b-col cols="4"
                     ><img
                       width="100%"
-                      :src="require(`@/assets/images/klang_${item.id}.svg`)"
+                      :src="require(`@/assets/images/sector/sector_klang.svg`)"
                       alt=""
                   /></b-col>
                 </b-row>
               </div>
               <div class="bg-white p-4">
+                <div class="work-list-box">
                 <p class="text-2 blue-a font-weight-bold m-0">
                   มี
                   {{ tasks.filter((x) => x.type == item.type).length }}
@@ -246,7 +296,7 @@
                 </p>
                 <hr />
 
-                <div class="test">
+                <div class="work-list-box-content">
                   <div
                     v-for="(item2, j) in tasks
                       .filter((x) => x.type == item.type)
@@ -261,7 +311,9 @@
                     <p class="text-3 black m-0">
                       {{
                         parseInt(
-                          item2.total.toString().substring(0,item2.total.toString().length - 5)
+                          item2.total
+                            .toString()
+                            .substring(0, item2.total.toString().length - 3)
                         ).toLocaleString()
                       }}
                       ล้านบาท ({{ ((item2.total / total) * 100).toFixed(1) }}%)
@@ -276,26 +328,27 @@
                   </div>
                 </div>
               </div>
+              </div>
             </div>
           </VueSlickCarousel></div
       ></template>
 
-      <div class="mt-5 text-center"  v-if="total != 0">
+      <div class="mt-5 text-center" v-if="total != 0">
         <a
           :href="pao.budgetingDocUrl"
           target="_blank"
           class="link-btn text-3"
           rel="noopener noreferrer"
-          >สำรวจเอกสารงบประมาณฉบับจริง</a
+          ><img :src="link_w" class="mr-1" alt="" /> สำรวจเอกสารงบประมาณฉบับจริง</a
         >
       </div>
-      <div class="mt-5 text-center">
+      <div class="mt-4 text-center">
         <a
           href="https://docs.google.com/spreadsheets/d/1hyNpUsSRriL0XhP89HtEO9S0uU2IOQz33cvxT5GwIeU/edit#gid=0"
           target="_blank"
           class="link-btn text-3"
           rel="noopener noreferrer"
-          >Download ข้อบัญญัติรายจ่าย อบจ.</a
+          ><img :src="download_w" class="mr-1" alt="" />Download ข้อบัญญัติรายจ่าย อบจ.</a
         >
       </div>
     </div>
@@ -311,6 +364,7 @@ export default {
   data() {
     return {
       total: 0,
+      isShoww: false,
       selected_type: "แผนงาน",
       groupedByArea: [],
       groupedByType: [],
@@ -327,12 +381,15 @@ export default {
         { text: "แผนงาน", value: "แผนงาน" },
         { text: "ประเภทงบ", value: "ประเภทงบ" },
       ],
+      link_w: require("~/assets/images/link_w.svg"),
+      download_w: require("~/assets/images/download_w.svg"),
       slickOptions: {
         focusOnSelect: true,
         infinite: true,
         slidesToShow: 1,
         speed: 500,
         dots: true,
+        arrow: true,
         responsive: [
           {
             breakpoint: 600,
@@ -411,6 +468,10 @@ export default {
           this.groupedByType.sort(function (a, b) {
             return b.total - a.total;
           });
+
+          this.groupedByAreaSlide.map((x, i, ref) => {
+            x.isExpand = false;
+          });
         });
     },
     selectWorkPlan(index) {
@@ -420,6 +481,16 @@ export default {
     selectWorkType(index) {
       const i = this.groupedByType.map((e) => e.type).indexOf(index);
       this.$refs.worktypeprovince.goTo(i);
+    },
+    seeMore(isShow, i) {
+      // console.log(isShow, i);
+      // if (!isShow) { console.log(1);
+      //   this.groupedByAreaSlide[i].isExpand = true;
+      // } else { console.log(2);
+      //   this.groupedByAreaSlide[i].isExpand = false;
+      // }
+      // console.log(this.groupedByAreaSlide[i]);
+      //this.isShoww = true;
     },
   },
 };
@@ -448,7 +519,7 @@ export default {
 }
 
 .work-card {
-  box-shadow: 1px 1px 12px 2px rgba(24, 31, 28, 0.15);
+  // box-shadow: 1px 1px 12px 2px rgba(24, 31, 28, 0.15);
   padding: 25px;
 }
 
@@ -456,9 +527,19 @@ export default {
   height: 20px;
 }
 
-.test {
+.work-list-box-content {
   max-height: 420px;
-  overflow: hidden;
+  overflow-y: auto;
+}
+
+.work-list-box-content::-webkit-scrollbar {
+  background: #cccccc;
+}
+
+.work-list-box-content::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #535349;
+  border: 2px solid #535349;
 }
 
 .link-btn {
@@ -466,6 +547,15 @@ export default {
   color: #fffef5;
   border: 1px solid #fffef5;
   border-radius: 5px;
-  padding: 10px 25px;
+  padding: 5px 25px;
+}
+
+.work-list-box {
+  height: 500px;
+  overflow: hidden;
+}
+
+.see-more {
+  border-bottom: 1px solid #0056a6;
 }
 </style>

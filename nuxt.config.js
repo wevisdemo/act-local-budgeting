@@ -1,4 +1,4 @@
-const BASE_URL = 'https://projects.punchup.world/booksonshelf/'
+const BASE_URL = 'https://wevisdemo.github.io/act-local-budgeting/'
 const array = [];
 for (var i = 0; i < 51; i++) {
   for (var j = 0; j < 51; j++) {

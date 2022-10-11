@@ -53,9 +53,33 @@
         </p>
 
         <div class="d-flex justify-content-center py-sm-5">
-          <div class="share-btn text-1 mx-2">FB</div>
-          <div class="share-btn text-1 mx-2">TW</div>
-          <div class="share-btn text-1 mx-2">LINE</div>
+          <div
+            class="share-btn text-1 mx-2"
+            v-sharer
+            data-sharer="facebook"
+            data-title=""
+            data-url="https://wevisdemo.github.io/act-local-budgeting/"
+          >
+            FB
+          </div>
+          <div
+            class="share-btn text-1 mx-2"
+            v-sharer
+            data-sharer="twitter"
+            data-title=""
+            data-url="https://wevisdemo.github.io/act-local-budgeting/"
+          >
+            TW
+          </div>
+          <div
+            class="share-btn text-1 mx-2"
+            v-sharer
+            data-sharer="line"
+            data-title=""
+            data-url="https://wevisdemo.github.io/act-local-budgeting/"
+          >
+            LINE
+          </div>
         </div>
       </div>
 
@@ -103,12 +127,25 @@
           </li>
         </ul>
       </div>
+
+      <NuxtLink class="box text-3" to="/">
+        <div class="header-box mb-5">
+          <div class="content bg-white">
+            <p class="text-1 font-weight-bold m-0 blue-a">กลับหน้าหลัก</p>
+          </div>
+        </div>
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script>
+import VueSharer from "vue-sharer";
+
 export default {
+  directives: {
+    sharer: VueSharer,
+  },
   data() {
     return {
       box_light: require("~/assets/images/box_light.svg"),
@@ -160,5 +197,16 @@ export default {
   padding: 20px 10px;
   max-width: 80px;
   border: 2px solid #e5fbff;
+}
+
+.header-box {
+  border: 1px solid #fffef5;
+  padding: 10px;
+  width: fit-content;
+  margin: auto;
+
+  .content {
+    padding: 10px;
+  }
 }
 </style>

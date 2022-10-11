@@ -2,44 +2,13 @@
   <div>
     <div class="min-h-screen bg-blue-a overflow-hidden main-wrapper">
       <div>
-        <b-row class="d-none d-lg-flex">
-          <b-col></b-col>
-          <b-col><img :src="box_lime" alt="" width="330" /></b-col>
-        </b-row>
-
-        <b-row class="text-center mt-2 intro-1">
-          <b-col class="position-relative">
-            <img :src="box_blue" alt="" width="340" class="d-none d-lg-block" />
-            <div class="intro-text">
-              <h1 class="m-0">ผ่างบเมือง</h1>
-              <h5 class="header-5">
-                ให้งบประมาณเมือง…<br />เป็นเรื่องตรวจสอบได้
-              </h5>
-            </div>
-          </b-col>
-        </b-row>
-
-        <div class="d-flex justify-content-center mt-2">
-          <div cols="4" class="text-right d-block d-lg-none">
-            <img :src="box_lime" alt="" width="340" class="" />
-          </div>
-          <div class="text-right">
-            <img :src="box_town_2" alt="" width="340" />
-          </div>
-          <div class="text-left">
-            <img
-              :src="box_town_1"
-              alt=""
-              width="340"
-              class="d-none d-lg-block"
-            />
-            <img :src="box_lime" alt="" width="340" class="d-block d-lg-none" />
-          </div>
+        <div class="text-center">
+          <img :src="act_logo" width="75%" class="mt-5" alt="" />
         </div>
 
-        <div class="d-flex flex-column flex-lg-row justify-content-center mt-2">
+        <div class="d-flex flex-column flex-lg-row justify-content-center mt-3">
           <div cols="4" class="text-right d-none d-lg-block">
-            <img :src="box_town_3" alt="" width="340" />
+            <img :src="box_town_2" alt="" width="340" />
           </div>
           <div cols="4" class="position-relative">
             <img :src="box_dark" alt="" width="340" class="d-none d-lg-block" />
@@ -82,12 +51,18 @@
           </div>
         </div>
 
-        <div class="d-none d-lg-flex justify-content-center mt-2">
+        <div
+          class="d-flex justify-content-center mt-3 position-relative"
+          style="left: 150px"
+        >
           <div class="text-right">
-            <img :src="box_lime" alt="" width="340" />
+            <img :src="box_dark" alt="" width="340" class="" />
           </div>
-          <div class="text-left">
-            <img :src="box_lime" alt="" width="340" />
+          <div class="text-right">
+            <img :src="box_town_1" alt="" width="340" />
+          </div>
+          <div class="text-right">
+            <img :src="box_dark" alt="" width="340" class="" />
           </div>
         </div>
 
@@ -109,7 +84,7 @@
           </div>
         </div>
 
-        <b-row class="text-center mt-2 intro-1">
+        <!-- <b-row class="text-center mt-2 intro-1">
           <b-col class="position-relative">
             <img :src="box_blue" alt="" width="340" />
             <div class="intro-text-3">
@@ -118,10 +93,17 @@
               </p>
             </div>
           </b-col>
-        </b-row>
+        </b-row> -->
       </div>
 
-      <div class="intro-box text-2 white-b my-5 text-center text-md-left">
+      <div style="max-width: 992px" class="mx-auto mt-5">
+        <h4 class="header-4 font-weight-bold white-a px-3">
+          ถนน เสาไฟ โรงเรียน<br />
+          พื้นที่สาธารณะ ศูนย์พยาบาล...ฯลฯ
+        </h4>
+      </div>
+
+      <div class="intro-box text-2 white-b my-3 text-center text-md-left">
         <p class="text-2 m-0">
           สิ่งเหล่านี้ล้วนเป็นสิ่งอำนวยความสะดวกและสวัสดิการพื้นฐานของเราทุกคน
           ไม่ว่าเราจะอาศัยอยู่เมืองไหน จังหวัดไหน
@@ -129,10 +111,8 @@
           <br /><br />
           การจัดสรรงบประมาณของหน่วยงานอย่าง
           <span class="bg-lime blue-a">องค์การบริหารส่วนจังหวัด (อบจ.)</span>
-          จึงมีส่วนชี้ชะตาว่าประชาชนในแต่ละเมือง
-          จะได้รับประโยชน์จากโครงสร้างพื้นฐานเหล่านี้มากน้อยแค่ไหน ดังนั้น
-          <span class="lime font-weight-bold"
-            >งบประมาณของจังหวัดจึงไม่ใช่เรื่องไกลตัว</span
+          <span class="lime font-weight-bold">
+            จึงมีส่วนชี้ชะตาว่าประชาชนในแต่ละเมืองจะได้รับประโยชน์จากโครงสร้างพื้นฐานเหล่านี้มากน้อยแค่ไหน ดังนั้นงบประมาณของจังหวัดจึงไม่ใช่เรื่องไกลตัว</span
           >
           แต่เป็นสิ่งที่พวกเราทุกคนควรมีโอกาสช่วยกันออกแบบและตรวจสอบได้
           ว่างบประมาณของเมืองเรา ควรใช้และถูกใช้จ่ายไปกับเรื่องอะไรบ้าง
@@ -193,6 +173,7 @@ export default {
       punchup: require("~/assets/images/punchup.svg"),
       folder_dark: require("~/assets/images/folder_dark.svg"),
       box_light: require("~/assets/images/box_light.svg"),
+      act_logo: require("~/assets/images/act_logo.svg"),
     };
   },
 };
@@ -206,7 +187,7 @@ export default {
 .intro-box {
   border: 0.5px solid #d7ffb7;
   padding: 25px;
-  max-width: 681px;
+  max-width: 992px;
   margin: auto;
 
   p {

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="menu d-flex justify-content-between align-items-center">
+    <div
+      class="menu d-flex justify-content-between align-items-center"
+      id="menu-wrapper"
+    >
       <div>
         <img :src="logo" alt="" width="70" />
       </div>
@@ -19,7 +22,27 @@ export default {
   data() {
     return {
       logo: require("~/assets/images/logo.svg"),
+      lastScrollTop: 0
     };
+  },
+  created() {
+    if (process.client) {
+      window.addEventListener("scroll", this.handleScroll);
+    }
+  },
+  destroyed() {
+    if (process.client) window.removeEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+      if (st > this.lastScrollTop) {
+        document.getElementById("menu-wrapper").style.top = "-100px";
+      } else {
+        document.getElementById("menu-wrapper").style.top = "0";
+      }
+      this.lastScrollTop = st <= 0 ? 0 : st;
+    },
   },
 };
 </script>
@@ -33,6 +56,7 @@ export default {
   width: 100%;
   top: 0;
   z-index: 10;
+  transition: 0.5s;
   .box {
     border: 1px solid #3a3a42;
     padding: 5px;
