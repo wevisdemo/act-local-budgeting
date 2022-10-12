@@ -321,7 +321,7 @@
           >ใช้งบประมาณไปกับอะไรบ้าง?
         </p>
       </div>
-      <div class="position-relative">
+      <div class="position-relative" id="province-wrapper">
         <b-tabs
           align="right"
           lazy
@@ -376,8 +376,6 @@
                     alt=""
                   />
                   <b>งานรายจ่าย</b><br />
-                  สามารถแบ่งออกเป็นประเภท
-                  ตามลำดับขั้นตั้งแต่ใหญ่ไปจนถึงเล็กได้ดังนี้
                 </p>
               </b-popover>
             </template>
@@ -417,7 +415,7 @@
                         class="bg-blue-a test2 px-3 pt-3 lime-b"
                         :style="{
                           backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
-                            (i + 1) +
+                            item.id +
                             '.svg')})`,
                         }"
                       >
@@ -469,7 +467,7 @@
                         class="bg-blue-a test2 px-3 pt-3 lime-b"
                         :style="{
                           backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
-                            (i + 1) +
+                            item.id +
                             '.svg')})`,
                         }"
                       >
@@ -521,7 +519,7 @@
                         class="bg-blue-a test2 px-3 pt-3 lime-b"
                         :style="{
                           backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
-                            (i + 1) +
+                            item.id +
                             '.svg')})`,
                         }"
                       >
@@ -729,8 +727,11 @@
               <div class="selected_keyword ml-3">{{ selected_keyword }}</div>
             </div>
             <p class="text-2 white-b">
-              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัดเชียงใหม่ ในปี
-              2565
+              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัด{{
+                selected_province
+              }}
+              ในปี
+              {{ selected_year_province }}
             </p>
           </div>
         </template>
@@ -768,6 +769,7 @@ export default {
       ],
       keyword: [
         {
+          id: 1,
           text: "โครงสร้างพื้นฐาน/สิ่งอำนวยความสะดวก",
           bg: "~/assets/images/keywordgroup_1.svg",
           list: [
@@ -783,6 +785,7 @@ export default {
           ],
         },
         {
+          id: 2,
           text: "บุคลากร/กลุ่มคน",
           bg: "./assets/images/keywordgroup_4.svg",
           list: [
@@ -801,6 +804,7 @@ export default {
           ],
         },
         {
+          id: 3,
           text: "ค่าใช้จ่ายอื่น ๆ",
           bg: "./assets/images/keywordgroup_7.svg",
           list: [
@@ -819,6 +823,7 @@ export default {
           ],
         },
         {
+          id: 4,
           text: "วัสดุ/อุปกรณ์",
           bg: "./assets/images/keywordgroup_2.svg",
           list: [
@@ -833,6 +838,7 @@ export default {
           ],
         },
         {
+          id: 5,
           text: "สถานที่",
           bg: "./assets/images/keywordgroup_5.svg",
           list: [
@@ -850,6 +856,7 @@ export default {
           ],
         },
         {
+          id: 6,
           text: "กิจกรรม",
           bg: "./assets/images/keywordgroup_3.svg",
           list: [
@@ -871,6 +878,7 @@ export default {
           ],
         },
         {
+          id: 7,
           text: "สวัสดิการ/คุณภาพชีวิต",
           bg: "./assets/images/keywordgroup_6.svg",
           list: [
@@ -1054,6 +1062,10 @@ export default {
           this.total_province = data.total;
           this.budgetingDocUrl = data.pao.budgetingDocUrl;
         });
+
+      setTimeout(() => {
+        document.getElementById("province-wrapper").scrollIntoView();
+      }, 1000);
     },
     showKeywordResult(text) {
       this.keywordSlide = [];
@@ -1330,6 +1342,6 @@ select::-ms-expand {
   color: $black !important;
   border: 1px solid $black !important;
   border-radius: 5px;
-    padding: 5px 25px;
+  padding: 5px 25px;
 }
 </style>

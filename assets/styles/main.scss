@@ -443,3 +443,8 @@ body {
 .drag-wrapper::-webkit-scrollbar {
   display: none;
 }
+
+.collapsed > .when-opened,
+:not(.collapsed) > .when-closed {
+  display: none !important;
+}

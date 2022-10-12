@@ -54,7 +54,7 @@
 
         <div class="d-flex justify-content-center py-sm-5">
           <div
-            class="share-btn text-1 mx-2"
+            class="share-btn pointer text-1 mx-2"
             v-sharer
             data-sharer="facebook"
             data-title=""
@@ -63,7 +63,7 @@
             FB
           </div>
           <div
-            class="share-btn text-1 mx-2"
+            class="share-btn pointer text-1 mx-2"
             v-sharer
             data-sharer="twitter"
             data-title=""
@@ -72,7 +72,7 @@
             TW
           </div>
           <div
-            class="share-btn text-1 mx-2"
+            class="share-btn pointer text-1 mx-2"
             v-sharer
             data-sharer="line"
             data-title=""

@@ -109,41 +109,40 @@
             <p class="text-4 mb-1 grey">{{ item.area }}</p>
           </b-col>
           <b-col cols="6" class="pl-0">
-            <p class="text-4 font-weight-bold mb-1">ประเภทรายจ่าย :</p>
-            <img
-              :src="klang_mini_1"
-              width="25"
-              alt=""
-              v-if="item.type == 'งบรายจ่ายอื่น'"
-            />
-            <img
-              :src="klang_mini_2"
-              width="25"
-              alt=""
-              v-else-if="item.type == 'งบเงินอุดหนุน'"
-            />
-            <img
-              :src="klang_mini_3"
-              width="25"
-              alt=""
-              v-else-if="item.type == 'งบลงทุน'"
-            />
-            <img
-              :src="klang_mini_4"
-              width="25"
-              alt=""
-              v-else-if="item.type == 'งบดำเนินงาน'"
-            />
-            <img
-              :src="klang_mini_5"
-              width="25"
-              alt=""
-              v-else-if="item.type == 'งบบุคลากร'"
-            />
-            <img :src="klang_mini_6" width="25" alt="" v-else />
-            <p class="text-4 mb-1">{{ item.plan }}</p>
-            <p class="text-4 mb-1 grey">{{ item.area }}</p>
-          </b-col>
+                <p class="text-4 font-weight-bold mb-1">ประเภทรายจ่าย :</p>
+                <img
+                  :src="klang_mini_1"
+                  width="25"
+                  alt=""
+                  v-if="item.type == 'งบรายจ่ายอื่น'"
+                />
+                <img
+                  :src="klang_mini_2"
+                  width="25"
+                  alt=""
+                  v-else-if="item.type == 'งบเงินอุดหนุน'"
+                />
+                <img
+                  :src="klang_mini_3"
+                  width="25"
+                  alt=""
+                  v-else-if="item.type == 'งบลงทุน'"
+                />
+                <img
+                  :src="klang_mini_4"
+                  width="25"
+                  alt=""
+                  v-else-if="item.type == 'งบดำเนินงาน'"
+                />
+                <img
+                  :src="klang_mini_5"
+                  width="25"
+                  alt=""
+                  v-else-if="item.type == 'งบบุคลากร'"
+                />
+                <img :src="klang_mini_6" width="25" alt="" v-else />
+                <p class="text-4 mb-1">{{ item.type }}</p>
+              </b-col>
         </b-row>
       </div>
       </div>

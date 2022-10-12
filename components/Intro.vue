@@ -3,7 +3,7 @@
     <div class="min-h-screen bg-blue-a overflow-hidden main-wrapper">
       <div>
         <div class="text-center">
-          <img :src="act_logo" width="75%" class="mt-5" alt="" />
+          <img :src="act_logo"  class="mt-5 act_logo" alt="" />
         </div>
 
         <div class="d-flex flex-column flex-lg-row justify-content-center mt-3">
@@ -306,5 +306,10 @@ export default {
     width: 280px;
     height: 201.86px;
   }
+}
+
+.act_logo {
+  max-width: 800px;
+  margin: auto;
 }
 </style>

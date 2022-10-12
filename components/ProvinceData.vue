@@ -71,7 +71,7 @@
         </div>
 
         <p class="my-5 text-2 text-center" v-if="total != 0">
-          รายละเอียดแผนงาน
+          รายละเอียดแผนงาน 
         </p>
 
         <div v-if="total != 0">
@@ -116,7 +116,7 @@
                     มี
                     {{
                       tasks.filter(
-                        (x) => x.area == item.name && x.plan == item.plan
+                        (x) => x.plan == item.plan
                       ).length
                     }}
                     รายการงบภายใต้แผนงาน
@@ -130,7 +130,7 @@
                     <div
                       v-for="(item2, j) in tasks
                         .filter(
-                          (x) => x.area == item.name && x.plan == item.plan
+                          (x) => x.plan == item.plan
                         )
                         .sort(function (a, b) {
                           return b.total - a.total;

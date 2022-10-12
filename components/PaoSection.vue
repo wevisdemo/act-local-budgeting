@@ -8,9 +8,18 @@
       </div>
     </div>
     <template>
-      <div class="text-1 white-b font-weight-bold d-flex justify-content-between mb-3">
+      <div
+        class="
+          text-1
+          white-b
+          font-weight-bold
+          d-flex
+          justify-content-between
+          mb-3
+        "
+      >
         <span> 5 อันดับรายการที่ใช้จ่ายเงิน<u>เยอะ</u>ที่สุด</span>
-        <img :src="drag" alt="" />
+        <img :src="drag" alt="" class="d-block d-lg-none"/>
       </div>
       <div
         class="overflow-auto drag-wrapper"
@@ -169,17 +178,26 @@
                   v-else-if="item.type == 'งบบุคลากร'"
                 />
                 <img :src="klang_mini_6" width="25" alt="" v-else />
-                <p class="text-4 mb-1">{{ item.plan }}</p>
-                <p class="text-4 mb-1 grey">{{ item.area }}</p>
+                <p class="text-4 mb-1">{{ item.type }}</p>
               </b-col>
             </b-row>
           </div>
         </div>
       </div>
       <div class="text-center py-5 text-2 white-b" v-else>ไม่พบข้อมูล</div>
-      <div class="text-1 white-b font-weight-bold d-flex justify-content-between mb-3 mt-5">
+      <div
+        class="
+          text-1
+          white-b
+          font-weight-bold
+          d-flex
+          justify-content-between
+          mb-3
+          mt-5
+        "
+      >
         <span> 5 อันดับรายการที่ใช้จ่ายเงิน<u>น้อย</u>ที่สุด</span>
-        <img :src="drag" alt="" />
+        <img :src="drag" alt="" class="d-block d-lg-none"/>
       </div>
       <div
         class="overflow-auto drag-wrapper"
@@ -350,7 +368,7 @@
       <p class="text-1 white-b my-5 font-weight-bold">
         ข้อมูลอื่นๆของจังของอบจ. {{ province }}
       </p>
-      <b-row v-if="pao.chiefExecutives != null">
+      <b-row v-if="pao != null">
         <b-col sm="7">
           <div class="bg-lime-b p-3 w-fit">
             <p class="text-1 font-weight-bold m-0">รายได้ของอบจ.</p>
@@ -358,28 +376,20 @@
           <div class="bg-black white-b p-3">
             <h3
               class="header-3 text-center font-weight-bold"
-              v-if="pao.population != null"
+              v-if="total_income != 0"
             >
               {{
                 parseInt(
-                  pao.population
+                  total
                     .toString()
-                    .substring(0, pao.population.toString().length - 3)
+                    .substring(0, total_income.toString().length - 3)
                 ).toLocaleString()
               }}
               ล้านบาท
             </h3>
             <div class="d-flex w-100" v-if="pao != null">
               <div
-                v-for="(item, i) in pao.incomes"
-                :key="'income+' + i"
-                class="bg-white-a"
-                :style="{
-                  width: ((item.total / total) * 100).toFixed(1) + '%',
-                  height: '50px',
-                }"
-              ></div>
-              <div
+                v-if="pao.incomes.length > 0"
                 v-for="(item, i) in pao.incomes"
                 :key="'income-' + i"
                 class="bg-white-a"
@@ -388,11 +398,15 @@
                   height: '50px',
                 }"
                 :class="{
-                  'bg-white-a': i == 0,
-                  'bg-blue-a': i == 1,
-                  'bg-pink': i == 2,
+                  'bg-white-a black': i == 0,
+                  'bg-blue-a white-b': i == 1,
+                  'bg-pink black': i == 2,
                 }"
-              ></div>
+              >
+                <span class="text-4 p-2"
+                  >{{ ((item.total / total) * 100).toFixed() }}%</span
+                >
+              </div>
             </div>
             <div>
               <div class="d-flex justify-content-around my-3">
@@ -404,7 +418,7 @@
                   <div
                     :class="{
                       'bg-white-a': i == 0,
-                      'bg-blue-a': i == 1,
+                      'bg-blue-a white-b': i == 1,
                       'bg-pink': i == 2,
                     }"
                     class="font-weight-bold text-center"
@@ -424,10 +438,29 @@
                 </div>
               </div>
             </div>
+            <div class="text-right">
+              <template v-for="(item, i) in pao.incomes" v-if="isShow">
+                <p
+                  v-for="(item2, j) in item.categories"
+                  :key="'extra-' + i + j"
+                  class="white-b m-0"
+                >
+                  {{ item2.category }}
+                  <span class="pink"
+                    >{{ ((item2.total / total) * 100).toFixed(3) }}%</span
+                  >
+                </p></template
+              >
+              <p class="mb-0 mt-4 pink pointer" @click="showExtraIncomeDetails">
+                {{ isShow ? "ย่อลง -" : "หมวดรายได้เพิ่มเติม +" }}
+              </p>
+            </div>
             <hr style="border-top: 1px solid #fff" />
             <b-row v-if="pao.population != null">
               <b-col sm="5">
-                <p class="text-3 font-weight-bold mb-1">จำนวนประชากร</p>
+                <p class="text-3 font-weight-bold mb-1">
+                  <img :src="population_logo" alt="" /> จำนวนประชากร
+                </p>
                 <p class="text-3 mb-1">
                   {{ pao.population.toLocaleString() }} คน
                 </p>
@@ -436,18 +469,20 @@
                 </p>
               </b-col>
               <b-col sm="7">
-                <p class="text-3 font-weight-bold mb-1">
-                  งบประมาณเฉลี่ยต่อหัวเทียบกับ 76 จังหวัด
+                <!-- <p class="text-3 font-weight-bold mb-1">
+                  <img :src="person_logo" alt="" /> งบประมาณเฉลี่ยต่อหัวเทียบกับ
+                  76 จังหวัด
                 </p>
                 <div id="chart">
                   <apexchart
+                  v-if="budgetPerCapita.length > 0"
                     type="scatter"
                     height="60"
                     :options="chartOptions"
                     :series="series"
                     :key="testKey"
                   ></apexchart>
-                </div>
+                </div> -->
               </b-col>
             </b-row>
           </div>
@@ -456,22 +491,383 @@
           <div class="bg-lime-b p-3 w-fit">
             <p class="text-1 font-weight-bold m-0">ผู้บริหาร</p>
           </div>
-          <div class="bg-black white-b p-3">
-            <b-row>
-              <b-col sm="8">
-                <p class="text-2 font-weight-bold lime">
-                  {{ pao.chiefExecutives[0].name }}
-                </p>
-                <p class="text-3 font-weight-bold">ตำแหน่ง</p>
-                <p class="text-3">นายกองค์การบริหารส่วนจังหวัดเชียงใหม่</p>
-                <p class="text-3 font-weight-bold">วันที่ดำรงตำแหน่ง</p>
-                <p class="text-3">{{ pao.chiefExecutives[0].inOffice }}</p>
-              </b-col>
-              <b-col sm="4"
-                ><img :src="pao.chiefExecutives[0].photoUrl" alt=""
-              /></b-col>
-            </b-row>
-          </div>
+          <template v-for="(item, i) in pao.chiefExecutives">
+            <div class="bg-black white-b" :key="'pao-info-' + i">
+              <b-row no-gutters>
+                <b-col sm="8" class="p-3">
+                  <p class="text-2 font-weight-bold lime">
+                    {{ item.name }}
+                  </p>
+                  <p class="text-3 font-weight-bold m-0">ตำแหน่ง</p>
+                  <p class="text-3">
+                    นายกองค์การบริหารส่วนจังหวัดเ{{ province }}
+                  </p>
+                  <p class="text-3 font-weight-bold m-0">วันที่ดำรงตำแหน่ง</p>
+                  <p class="text-3">{{ item.inOffice }}</p>
+                </b-col>
+                <b-col
+                  sm="4"
+                  class="
+                    bg-lime
+                    d-flex
+                    justify-content-center
+                    align-items-center
+                  "
+                  ><div
+                    class="pao-img"
+                    :style="{
+                      backgroundImage: `url(${pao.chiefExecutives[0].photoUrl})`,
+                    }"
+                  ></div
+                ></b-col>
+              </b-row>
+
+              <b-collapse :id="'collapse-pao-' + i" class="mt-2">
+                <div class="bg-black p-3">
+                  <p class="text-3 white-b">ข้อมูลบัญชีทรัพย์สิน</p>
+                  <template
+                    v-if="item.ownAccount != null && item.spouseAccount != null"
+                  >
+                  <div class="d-flex">
+                    <p class="text-3 font-weight-bold">ยอดรวม</p>
+                    <div class="d-flex mx-1">
+                      <div class="work-type-square mx-2 bg-lime"></div>
+                      <p class="text-3 font-weight-bold m-0">ผู้ยื่น</p>
+                      <div class="work-type-square mx-2 bg-blue-a"></div>
+                      <p class="text-3 font-weight-bold m-0">คู่สมรส</p>
+                    </div>
+                  </div>
+
+                 
+                    <div class="pao-acc-box">
+                      <div
+                        class="d-flex white-b text-3 justify-content-between"
+                      >
+                        <p class="m-0">รวมรายได้ต่อปี</p>
+                        <p class="m-0">
+                          {{
+                            item.ownAccount.income +
+                              item.spouseAccount.income ==
+                            0
+                              ? 0
+                              : parseInt(
+                                  (
+                                    item.ownAccount.income +
+                                    item.spouseAccount.income
+                                  )
+                                    .toString()
+                                    .substring(
+                                      0,
+                                      (
+                                        item.ownAccount.income +
+                                        item.spouseAccount.income
+                                      ).toString().length - 3
+                                    )
+                                ).toLocaleString()
+                          }}
+                          ล้านบาท
+                        </p>
+                      </div>
+                      <div class="d-flex mt-3">
+                        <div
+                          class="bg-lime"
+                          :style="{
+                            width:
+                              (
+                                (item.ownAccount.income /
+                                  (item.ownAccount.income +
+                                    item.spouseAccount.income)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          class="bg-blue-a"
+                          :style="{
+                            width:
+                              (
+                                (item.spouseAccount.income /
+                                  (item.ownAccount.income +
+                                    item.spouseAccount.income)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="pao-acc-box bg-transparent">
+                      <div
+                        class="d-flex white-b text-3 justify-content-between"
+                      >
+                        <p class="m-0">รวมรายจ่ายต่อปี</p>
+                        <p class="m-0">
+                          {{
+                            item.ownAccount.expense +
+                              item.spouseAccount.expense ==
+                            0
+                              ? 0
+                              : parseInt(
+                                  (
+                                    item.ownAccount.expense +
+                                    item.spouseAccount.expense
+                                  )
+                                    .toString()
+                                    .substring(
+                                      0,
+                                      (
+                                        item.ownAccount.expense +
+                                        item.spouseAccount.expense
+                                      ).toString().length - 3
+                                    )
+                                ).toLocaleString()
+                          }}
+                          ล้านบาท
+                        </p>
+                      </div>
+                      <div class="d-flex mt-3">
+                        <div
+                          class="bg-lime"
+                          :style="{
+                            width:
+                              (
+                                (item.ownAccount.expense /
+                                  (item.ownAccount.expense +
+                                    item.spouseAccount.expense)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          class="bg-blue-a"
+                          :style="{
+                            width:
+                              (
+                                (item.spouseAccount.expense /
+                                  (item.ownAccount.expense +
+                                    item.spouseAccount.expense)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="pao-acc-box">
+                      <div
+                        class="d-flex white-b text-3 justify-content-between"
+                      >
+                        <p class="m-0">
+                          การเสียภาษีเงินได้บุคคลธรรมดาในรอบปีภาษีที่ผ่านมา
+                        </p>
+                        <p class="m-0">
+                          {{
+                            item.ownAccount.taxed + item.spouseAccount.taxed ==
+                            0
+                              ? 0
+                              : parseInt(
+                                  (
+                                    item.ownAccount.taxed +
+                                    item.spouseAccount.taxed
+                                  )
+                                    .toString()
+                                    .substring(
+                                      0,
+                                      (
+                                        item.ownAccount.taxed +
+                                        item.spouseAccount.taxed
+                                      ).toString().length - 3
+                                    )
+                                ).toLocaleString()
+                          }}
+                          ล้านบาท
+                        </p>
+                      </div>
+                      <div class="d-flex mt-3">
+                        <div
+                          class="bg-lime"
+                          :style="{
+                            width:
+                              (
+                                (item.ownAccount.taxed /
+                                  (item.ownAccount.taxed +
+                                    item.spouseAccount.taxed)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          class="bg-blue-a"
+                          :style="{
+                            width:
+                              (
+                                (item.spouseAccount.taxed /
+                                  (item.ownAccount.taxed +
+                                    item.spouseAccount.taxed)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="pao-acc-box bg-transparent">
+                      <div
+                        class="d-flex white-b text-3 justify-content-between"
+                      >
+                        <p class="m-0">รวมทรัพย์สินทั้งสิ้น</p>
+                        <p class="m-0">
+                          {{
+                            item.ownAccount.asset + item.spouseAccount.asset ==
+                            0
+                              ? 0
+                              : parseInt(
+                                  (
+                                    item.ownAccount.asset +
+                                    item.spouseAccount.asset
+                                  )
+                                    .toString()
+                                    .substring(
+                                      0,
+                                      (
+                                        item.ownAccount.asset +
+                                        item.spouseAccount.asset
+                                      ).toString().length - 3
+                                    )
+                                ).toLocaleString()
+                          }}
+                          ล้านบาท
+                        </p>
+                      </div>
+                      <div class="d-flex mt-3">
+                        <div
+                          class="bg-lime"
+                          :style="{
+                            width:
+                              (
+                                (item.ownAccount.asset /
+                                  (item.ownAccount.asset +
+                                    item.spouseAccount.asset)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          class="bg-blue-a"
+                          :style="{
+                            width:
+                              (
+                                (item.spouseAccount.asset /
+                                  (item.ownAccount.asset +
+                                    item.spouseAccount.asset)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="pao-acc-box">
+                      <div
+                        class="d-flex white-b text-3 justify-content-between"
+                      >
+                        <p class="m-0">รวมหนี้สินทั้งสิ้น</p>
+                        <p class="m-0">
+                          {{
+                            item.ownAccount.debt + item.spouseAccount.debt == 0
+                              ? 0
+                              : parseInt(
+                                  (
+                                    item.ownAccount.debt +
+                                    item.spouseAccount.debt
+                                  )
+                                    .toString()
+                                    .substring(
+                                      0,
+                                      (
+                                        item.ownAccount.debt +
+                                        item.spouseAccount.debt
+                                      ).toString().length - 3
+                                    )
+                                ).toLocaleString()
+                          }}
+                          ล้านบาท
+                        </p>
+                      </div>
+                      <div class="d-flex mt-3">
+                        <div
+                          class="bg-lime"
+                          :style="{
+                            width:
+                              (
+                                (item.ownAccount.debt /
+                                  (item.ownAccount.debt +
+                                    item.spouseAccount.debt)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          class="bg-blue-a"
+                          :style="{
+                            width:
+                              (
+                                (item.spouseAccount.debt /
+                                  (item.ownAccount.debt +
+                                    item.spouseAccount.debt)) *
+                                100
+                              ).toFixed() + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                      </div>
+                    </div>
+                  </template>
+                  <template v-else>   <p class="text-3 white-b text-center py-5">ไม่พบข้อมูลบัญชีทรัพย์สิน</p></template>
+                  <div class="d-flex justify-content-between mt-5">
+                    <a
+                      :href="item.fillingUrl"
+                      target="_blank"
+                      class="pao-link"
+                      rel="noopener noreferrer"
+                      >ดูข้อมูลประวัติการยื่นบัญชีทรัพย์สิน
+                      <img :src="arrow_link" class="ml-3" alt=""
+                    /></a>
+                    <a
+                      href="https://ele.dla.go.th/public/appointment.do"
+                      target="_blank"
+                      class="pao-link"
+                      rel="noopener noreferrer"
+                      >สืบค้นเพิ่มเติมเกี่ยวกับ นายก อบจ.
+                      <img :src="arrow_link" class="ml-3" alt=""
+                    /></a>
+                  </div>
+                </div>
+              </b-collapse>
+              <b-button
+                v-b-toggle="'collapse-pao-' + i"
+                class="collapse-pao-btn"
+              >
+                <div
+                  class="d-flex justify-content-between w-100 px-1 when-closed"
+                >
+                  <p class="m-0">ข้อมูลรายได้เพิ่มเติม</p>
+                  <p class="m-0">+</p>
+                </div>
+                <div
+                  class="d-flex justify-content-between w-100 px-1 when-opened"
+                >
+                  <p class="m-0">ย่อลง</p>
+                  <p class="m-0">-</p>
+                </div></b-button
+              >
+            </div>
+          </template>
         </b-col>
       </b-row>
     </div>
@@ -517,9 +913,12 @@ export default {
     return {
       total: 0,
       testKey: 0,
+      total_income: 0,
+      isShow: false,
       tasks: [],
       pao: [],
       budgetPerCapita: [],
+      extraIncome: [],
       sector_mini_1: require("~/assets/images/mini_icon/sector_mini_1.svg"),
       sector_mini_2: require("~/assets/images/mini_icon/sector_mini_2.svg"),
       sector_mini_3: require("~/assets/images/mini_icon/sector_mini_3.svg"),
@@ -538,8 +937,11 @@ export default {
       klang_mini_4: require("~/assets/images/mini_icon/klang_mini_4.svg"),
       klang_mini_5: require("~/assets/images/mini_icon/klang_mini_5.svg"),
       klang_mini_6: require("~/assets/images/mini_icon/klang_mini_6.svg"),
+      population_logo: require("~/assets/images/population_logo.svg"),
+      person_logo: require("~/assets/images/person_logo.svg"),
       drag: require("~/assets/images/drag.svg"),
       logo: require("~/assets/images/logo.svg"),
+      arrow_link: require("~/assets/images/arrow_link.svg"),
       series: [
         {
           name: "SAMPLE A",
@@ -547,6 +949,7 @@ export default {
         },
       ],
       chartOptions: {
+        colors: ["#FFFFFF"],
         chart: {
           height: 100,
           type: "scatter",
@@ -584,17 +987,22 @@ export default {
             },
           },
         },
+        tooltip: {
+          enabled: false,
+        },
       },
     };
   },
   watch: {
     year: {
       handler(newValue, oldValue) {
+        this.getDataForChart();
         this.getData(this.year, this.province);
       },
     },
     province: {
       handler(newValue, oldValue) {
+        this.getDataForChart();
         this.getData(this.year, this.province);
       },
     },
@@ -604,6 +1012,8 @@ export default {
   },
   methods: {
     getData(y, p) {
+      this.total_income = 0;
+
       fetch("data/" + y + "/pao-" + p + ".json")
         .then((response) => response.json())
         .then((data) => {
@@ -613,23 +1023,32 @@ export default {
           this.pao.incomes.sort(function (a, b) {
             return b.total - a.total;
           });
-          //console.log(this.pao);
-          //console.log(this.pao.incomes.length);
+          let total_income = this.pao.incomes.map((a) => a.total);
+          total_income.forEach((element) => {
+            this.total_income += element;
+          });
         });
-
-      this.testKey++;
-
+    },
+    getDataForChart() {
       fetch("data/2565/nation-wide.json")
         .then((response) => response.json())
         .then((data) => {
           let result = data.budgetPerCapita;
 
           result.forEach((element) => {
-            this.budgetPerCapita.push([parseInt(element.amount.toFixed()), 0]);
+            this.budgetPerCapita.push({
+              x: parseInt(element.amount.toFixed()),
+              y: 0,
+              fillColor: "#FFFFFF",
+            });
           });
 
           this.series[0].data = this.budgetPerCapita;
         });
+    },
+    showExtraIncomeDetails() {
+      if (!this.isShow) this.isShow = true;
+      else this.isShow = false;
     },
   },
 };
@@ -669,5 +1088,41 @@ export default {
 
 .bg-pink {
   background: #ff2581;
+}
+
+.pink {
+  color: #ff2581;
+}
+
+.pao-img {
+  width: 146px;
+  height: 146px;
+  border: 2px solid #181f1c;
+  border-radius: 50%;
+  background-position: center;
+}
+
+.work-type-square {
+  width: 15px;
+  height: 15px;
+}
+
+.pao-acc-box {
+  background: #262e2c;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.collapse-pao-btn {
+  width: 100%;
+  background: #181f1c;
+  color: #a6bfff;
+  border: none;
+  padding: 10px;
+}
+
+.pao-link {
+  color: #e5fbff;
+  text-decoration: none;
 }
 </style>
