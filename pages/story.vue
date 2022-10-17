@@ -27,11 +27,12 @@
           :offset="0.5"
           @step-enter="handler"
         >
-          <div class="step" data-step-no="1">
+          <div class="step flex-column" data-step-no="1">
             <h2 class="header-2 font-weight-bold text-center">
               งบ อบจ. <br />
               สำคัญกับชีวิตเราอย่างไร?
             </h2>
+            <img :src="arrowdown" id="arrowdown" alt="">
           </div>
           <div class="step" data-step-no="2">
             <div class="text-1 text-step-2 text-center">
@@ -64,7 +65,7 @@
           </div>
           <div class="step" data-step-no="5">
             <div class="text-step-3">
-              <h5 class="header-5 font-weight-bold text-center">
+              <h5 class="header-5 font-weight-bold text-center mb-5">
                 จึงเป็น<span class="blue-a">สิทธิและหน้าที่</span
                 >ของประชาชนอย่างเราที่จะต้องเข้าไปมีส่วนร่วมแสดงความคิดเห็นในขั้นตอนการจัดสรรงบในแต่ละปี
               </h5>
@@ -261,8 +262,8 @@
                 <li>เผยแพร่ผ่านเว็บไซต์ทางการของรัฐ</li>
                 <li>ทั้งในรูปแบบ PDF HTML รวมถึง Excel Spreadsheet</li>
                 <li>
-                  สามารถส่งคำร้องขอเอกสารงบ ใน format ต่างๆ ด้วยโปรแกรม
-                  หรือเทคโนโลยีรูปแบบอื่นๆ
+                  สามารถส่งคำร้องขอเอกสารงบ ใน format ต่างๆ
+                  ด้วยโปรแกรมหรือเทคโนโลยีรูป<span class="nowrap">แบบ</span>อื่นๆ
                 </li>
               </ul>
               <div class="link-box-black">
@@ -423,9 +424,7 @@
               <NuxtLink to="/dashboard">
                 <div class="box-1 pointer mx-3">
                   <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
-                    งบ อบจ.<br />
-                    สำคัญกับชีวิตเรา<br />
-                    อย่างไร?
+                    ตรวจสอบ<br />งบประมาณ<br />ในจังหวัดของคุณ
                   </h4>
                 </div>
               </NuxtLink>
@@ -448,7 +447,7 @@
 <script>
 import "intersection-observer";
 import Scrollama from "vue-scrollama";
-import * as arrow from "~/assets/lottie/story_postit.json";
+import * as story_postit_lottie from "~/assets/lottie/story_postit.json";
 import Lottie from "vue-lottie/src/lottie.vue";
 import LottieAnimation from "lottie-web-vue";
 
@@ -460,10 +459,11 @@ export default {
   },
   data() {
     return {
-      arrow: arrow,
+      story_postit: story_postit_lottie,
       index: 0,
       logo: require("~/assets/images/logo.svg"),
       arrow: require("~/assets/images/arrow.svg"),
+      arrowdown: require("~/assets/images/arrowdown.svg"),
       papertear: require("~/assets/images/papertear.svg"),
       obstacle1: require("~/assets/images/obstacle1.svg"),
       obstacle2: require("~/assets/images/obstacle2.svg"),
@@ -528,6 +528,7 @@ export default {
     }, 1000);
     setTimeout(() => {
       document.getElementById("img-3").style.bottom = "6%";
+      document.getElementById("arrowdown").style.opacity = 1;
       document.getElementsByTagName("body")[0].style.overflow = "unset";
       this.isFirstTime = false;
     }, 3000);
@@ -671,6 +672,11 @@ export default {
   z-index: 5;
   transition: 0.5s;
   opacity: 0;
+
+  @media #{$mq-small-laptop} {
+    transform: scale(2.5);
+    bottom: 17%;
+  }
 }
 
 #img-6 {
@@ -681,6 +687,11 @@ export default {
   z-index: 5;
   transition: 0.5s;
   opacity: 0;
+
+  @media #{$mq-small-laptop} {
+    transform: scale(1);
+    bottom: 14%;
+  }
 }
 .step {
   padding: 15vh 0;
@@ -972,7 +983,12 @@ export default {
 }
 
 .lottiebox {
-  position: fixed;
+  position: absolute;
   bottom: 0;
+}
+
+#arrowdown {
+  opacity: 0;
+  transition: 0.5s;
 }
 </style>

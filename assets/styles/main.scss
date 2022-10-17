@@ -448,3 +448,11 @@ body {
 :not(.collapsed) > .when-closed {
   display: none !important;
 }
+
+ul {
+  word-break: break-all;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

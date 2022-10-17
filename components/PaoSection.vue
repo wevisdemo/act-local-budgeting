@@ -19,7 +19,7 @@
         "
       >
         <span> 5 อันดับรายการที่ใช้จ่ายเงิน<u>เยอะ</u>ที่สุด</span>
-        <img :src="drag" alt="" class="d-block d-lg-none"/>
+        <img :src="drag" alt="" class="d-block d-lg-none" />
       </div>
       <div
         class="overflow-auto drag-wrapper"
@@ -29,9 +29,7 @@
         <div class="d-flex flex-nowrap task-wrapper">
           <div
             class="task-box mr-3"
-            v-for="(item, i) in tasks.slice(0, 5).sort(function (a, b) {
-              return b.total - a.total;
-            })"
+            v-for="(item, i) in tasksDesc"
             :key="'task-list-' + i"
           >
             <b-row>
@@ -197,7 +195,7 @@
         "
       >
         <span> 5 อันดับรายการที่ใช้จ่ายเงิน<u>น้อย</u>ที่สุด</span>
-        <img :src="drag" alt="" class="d-block d-lg-none"/>
+        <img :src="drag" alt="" class="d-block d-lg-none" />
       </div>
       <div
         class="overflow-auto drag-wrapper"
@@ -207,9 +205,7 @@
         <div class="d-flex flex-nowrap task-wrapper">
           <div
             class="task-box mr-3"
-            v-for="(item, i) in tasks.slice(0, 5).sort(function (a, b) {
-              return a.total - b.total;
-            })"
+            v-for="(item, i) in tasksAsc"
             :key="'task-list-' + i"
           >
             <b-row>
@@ -446,7 +442,11 @@
                   class="white-b m-0"
                 >
                   {{ item2.category }}
-                  <span class="pink"
+                  <span  :class="{
+                      'white-a': i == 0,
+                      'blue-a': i == 1,
+                      'pink': i == 2,
+                    }"
                     >{{ ((item2.total / total) * 100).toFixed(3) }}%</span
                   >
                 </p></template
@@ -469,20 +469,20 @@
                 </p>
               </b-col>
               <b-col sm="7">
-                <!-- <p class="text-3 font-weight-bold mb-1">
+                <p class="text-3 font-weight-bold mb-1">
                   <img :src="person_logo" alt="" /> งบประมาณเฉลี่ยต่อหัวเทียบกับ
                   76 จังหวัด
                 </p>
                 <div id="chart">
                   <apexchart
-                  v-if="budgetPerCapita.length > 0"
+                    v-if="budgetPerCapita.length > 0"
                     type="scatter"
                     height="60"
                     :options="chartOptions"
                     :series="series"
                     :key="testKey"
                   ></apexchart>
-                </div> -->
+                </div>
               </b-col>
             </b-row>
           </div>
@@ -528,17 +528,16 @@
                   <template
                     v-if="item.ownAccount != null && item.spouseAccount != null"
                   >
-                  <div class="d-flex">
-                    <p class="text-3 font-weight-bold">ยอดรวม</p>
-                    <div class="d-flex mx-1">
-                      <div class="work-type-square mx-2 bg-lime"></div>
-                      <p class="text-3 font-weight-bold m-0">ผู้ยื่น</p>
-                      <div class="work-type-square mx-2 bg-blue-a"></div>
-                      <p class="text-3 font-weight-bold m-0">คู่สมรส</p>
+                    <div class="d-flex">
+                      <p class="text-3 font-weight-bold">ยอดรวม</p>
+                      <div class="d-flex mx-1">
+                        <div class="work-type-square mx-2 bg-lime"></div>
+                        <p class="text-3 font-weight-bold m-0">ผู้ยื่น</p>
+                        <div class="work-type-square mx-2 bg-blue-a"></div>
+                        <p class="text-3 font-weight-bold m-0">คู่สมรส</p>
+                      </div>
                     </div>
-                  </div>
 
-                 
                     <div class="pao-acc-box">
                       <div
                         class="d-flex white-b text-3 justify-content-between"
@@ -828,7 +827,11 @@
                       </div>
                     </div>
                   </template>
-                  <template v-else>   <p class="text-3 white-b text-center py-5">ไม่พบข้อมูลบัญชีทรัพย์สิน</p></template>
+                  <template v-else>
+                    <p class="text-3 white-b text-center py-5">
+                      ไม่พบข้อมูลบัญชีทรัพย์สิน
+                    </p></template
+                  >
                   <div class="d-flex justify-content-between mt-5">
                     <a
                       :href="item.fillingUrl"
@@ -878,7 +881,7 @@
       >
         <div>
           <p>
-            แผนงบประมาณของ<span class="lime-b">อบจ. เชียงใหม่</span>
+            แผนงบประมาณของ<span class="lime-b">อบจ. {{ province }}</span>
             ประกอบด้วยโครงการอีกมากมายที่เกี่ยวข้องกับความเป็นอยู่ของพวกเรา
           </p>
           <p class="m-0">
@@ -916,6 +919,8 @@ export default {
       total_income: 0,
       isShow: false,
       tasks: [],
+      tasksAsc: [],
+      tasksDesc: [],
       pao: [],
       budgetPerCapita: [],
       extraIncome: [],
@@ -945,11 +950,17 @@ export default {
       series: [
         {
           name: "SAMPLE A",
-          data: [],
+          data: [
+            [1, 0],
+            [2, 0],
+            [3, 0],
+            [4, 0],
+            [5, 0],
+          ],
         },
       ],
       chartOptions: {
-        colors: ["#FFFFFF"],
+        colors: [],
         chart: {
           height: 100,
           type: "scatter",
@@ -1007,7 +1018,7 @@ export default {
       },
     },
   },
-  mounted() {
+  created() {
     this.getData(this.year, this.province);
   },
   methods: {
@@ -1027,6 +1038,16 @@ export default {
           total_income.forEach((element) => {
             this.total_income += element;
           });
+          this.tasksAsc = this.tasks
+            .sort(function (a, b) {
+              return a.total - b.total;
+            })
+            .slice(0, 5);
+            this.tasksDesc = this.tasks
+            .sort(function (a, b) {
+              return b.total - a.total;
+            })
+            .slice(0, 5);
         });
     },
     getDataForChart() {
@@ -1036,14 +1057,16 @@ export default {
           let result = data.budgetPerCapita;
 
           result.forEach((element) => {
-            this.budgetPerCapita.push({
-              x: parseInt(element.amount.toFixed()),
-              y: 0,
-              fillColor: "#FFFFFF",
-            });
+            this.budgetPerCapita.push([element.amount, 0]);
+
+            const randomColor = Math.floor(Math.random() * 16777215).toString(
+              16
+            );
+            //console.log(randomColor);
+            this.chartOptions.colors.push("#" + randomColor);
           });
 
-          this.series[0].data = this.budgetPerCapita;
+          //this.series[0].data = this.budgetPerCapita;
         });
     },
     showExtraIncomeDetails() {
