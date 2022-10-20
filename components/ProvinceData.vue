@@ -3,7 +3,7 @@
     <div class="text-1 bg-black py-4 white-a">
       <div class="text-center my-5">
         <h4 class="header-4 font-weight-bold">จัดสรรงบประมาณทั้งหมดในภาพรวม</h4>
-        <h1 class="header-1">
+        <h1 class="header-1 px-3">
           <formatNumber :data="total" />
         </h1>
       </div>
@@ -24,7 +24,15 @@
       </div>
 
       <template v-if="selected_type == 'แผนงาน'">
-        <div class="d-flex flex-column flex-sm-row px-2 px-sm-0 justify-content-center" v-if="total != 0">
+        <div
+          class="
+            d-flex
+            flex-column flex-sm-row
+            px-2 px-sm-0
+            justify-content-center
+          "
+          v-if="total != 0"
+        >
           <div class="d-flex mx-1" v-for="(item, i) in work_type" :key="i">
             <div
               class="work-type-square mr-2"
@@ -67,7 +75,7 @@
           รายละเอียดแผนงาน
         </p>
 
-        <div v-if="total != 0">
+        <div v-if="total != 0" class="px-3">
           <VueSlickCarousel
             v-bind="slickOptions"
             class="work-card-wrapper-2"
@@ -90,7 +98,9 @@
                       {{ item.plan }}
                     </p>
                     <h4 class="header-4">
-                      <formatNumber :data="item.total" /> ({{ ((item.total / total) * 100).toFixed(1) }}%)
+                      <formatNumber :data="item.total" /> ({{
+                        ((item.total / total) * 100).toFixed(1)
+                      }}%)
                     </h4>
                   </b-col>
                   <b-col cols="4"><ImageSector :title="item.plan" /></b-col>
@@ -182,7 +192,7 @@
         </div>
       </template>
       <template v-else>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center flex-column flex-sm-row">
           <div class="d-flex mx-1" v-for="(item, i) in groupedByType" :key="i">
             <div
               class="work-type-square mr-2"
@@ -221,7 +231,7 @@
 
         <p class="my-5 text-2 text-center">รายละเอียดงบประมาณ</p>
 
-        <div>
+        <div class="px-3">
           <VueSlickCarousel
             v-bind="slickOptions"
             class="work-card-wrapper-2"
@@ -250,7 +260,9 @@
                       {{ item.type }}
                     </p>
                     <h4 class="header-4">
-                      <formatNumber :data="item.total" /> ({{ ((item.total / total) * 100).toFixed(1) }}%)
+                      <formatNumber :data="item.total" /> ({{
+                        ((item.total / total) * 100).toFixed(1)
+                      }}%)
                     </h4>
                   </b-col>
                   <b-col cols="4"
@@ -366,10 +378,10 @@ export default {
         arrow: true,
         responsive: [
           {
-            breakpoint: 600,
+            breakpoint: 769,
             settings: {
               slidesToShow: 1,
-              arrow: false,
+              arrows: false,
             },
           },
         ],

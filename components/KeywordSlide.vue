@@ -5,145 +5,141 @@
       class="work-card-wrapper-2"
       v-if="data.length > 0"
     >
-      <div
-        class="px-1"
-        v-for="(item, i) in data"
-        :key="'task-list-' + i"
-      >
-      <div class="task-box">
-        <b-row no-gutters>
-          <b-col cols="12" class="">
-            <p class="text-3 mb-0 font-weight-bold">
-              {{ item.task }}
-            </p></b-col
-          >
-        </b-row>
-        <p class="text-1 my-1">
-          <formatNumber :data="item.total" />
-        </p>
-        <p class="text-4 mb-1">
-          {{ ((item.total / total) * 100).toFixed(1) }}% ของค่าใช้จ่ายทั้งหมด
-        </p>
+      <div class="px-1" v-for="(item, i) in data" :key="'task-list-' + i">
+        <div class="task-box">
+          <b-row no-gutters>
+            <b-col cols="12" class="">
+              <p class="text-3 mb-0 font-weight-bold">
+                {{ item.task }}
+              </p></b-col
+            >
+          </b-row>
+          <p class="text-1 my-1">
+            <formatNumber :data="item.total" />
+          </p>
+          <p class="text-4 mb-1">
+            {{ ((item.total / total) * 100).toFixed(1) }}% ของค่าใช้จ่ายทั้งหมด
+          </p>
 
-        <div style="background: #ccc">
-          <div
-            class="bg-black"
-            :style="{
-              width: ((item.total / total) * 100).toFixed(1) + '%',
-              height: '10px',
-            }"
-          ></div>
+          <div style="background: #ccc">
+            <div
+              class="bg-black"
+              :style="{
+                width: ((item.total / total) * 100).toFixed(1) + '%',
+                height: '10px',
+              }"
+            ></div>
+          </div>
+          <b-row>
+            <b-col cols="6">
+              <p class="text-4 font-weight-bold mb-1">แผนงาน :</p>
+              <img
+                :src="sector_mini_1"
+                width="25"
+                alt=""
+                v-if="item.plan == 'บริหารงานทั่วไป'"
+              />
+              <img
+                :src="sector_mini_2"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'การรักษาความสงบภายใน'"
+              />
+              <img
+                :src="sector_mini_3"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'การศึกษา'"
+              />
+              <img
+                :src="sector_mini_4"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'สาธารณสุข'"
+              />
+              <img
+                :src="sector_mini_5"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'สังคมสงเคราะห์'"
+              />
+              <img
+                :src="sector_mini_6"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'เคหะและชุมชน'"
+              />
+              <img
+                :src="sector_mini_7"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'สร้างความเข้มแข็งของชุมชน'"
+              />
+              <img
+                :src="sector_mini_8"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'การศาสนา วัฒนธรรม และนันทนาการ'"
+              />
+              <img
+                :src="sector_mini_9"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'อุตสาหกรรมและการโยธา'"
+              />
+              <img
+                :src="sector_mini_10"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'การเกษตร'"
+              />
+              <img
+                :src="sector_mini_11"
+                width="25"
+                alt=""
+                v-else-if="item.plan == 'การพาณิชย์'"
+              />
+              <img :src="sector_mini_12" width="25" alt="" v-else />
+              <p class="text-4 mb-1">{{ item.plan }}</p>
+              <p class="text-4 mb-1 grey">{{ item.area }}</p>
+            </b-col>
+            <b-col cols="6" class="pl-0">
+              <p class="text-4 font-weight-bold mb-1">ประเภทรายจ่าย :</p>
+              <img
+                :src="klang_mini_1"
+                width="25"
+                alt=""
+                v-if="item.type == 'งบรายจ่ายอื่น'"
+              />
+              <img
+                :src="klang_mini_2"
+                width="25"
+                alt=""
+                v-else-if="item.type == 'งบเงินอุดหนุน'"
+              />
+              <img
+                :src="klang_mini_3"
+                width="25"
+                alt=""
+                v-else-if="item.type == 'งบลงทุน'"
+              />
+              <img
+                :src="klang_mini_4"
+                width="25"
+                alt=""
+                v-else-if="item.type == 'งบดำเนินงาน'"
+              />
+              <img
+                :src="klang_mini_5"
+                width="25"
+                alt=""
+                v-else-if="item.type == 'งบบุคลากร'"
+              />
+              <img :src="klang_mini_6" width="25" alt="" v-else />
+              <p class="text-4 mb-1">{{ item.type }}</p>
+            </b-col>
+          </b-row>
         </div>
-        <b-row>
-          <b-col cols="6">
-            <p class="text-4 font-weight-bold mb-1">แผนงาน :</p>
-            <img
-              :src="sector_mini_1"
-              width="25"
-              alt=""
-              v-if="item.plan == 'บริหารงานทั่วไป'"
-            />
-            <img
-              :src="sector_mini_2"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'การรักษาความสงบภายใน'"
-            />
-            <img
-              :src="sector_mini_3"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'การศึกษา'"
-            />
-            <img
-              :src="sector_mini_4"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'สาธารณสุข'"
-            />
-            <img
-              :src="sector_mini_5"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'สังคมสงเคราะห์'"
-            />
-            <img
-              :src="sector_mini_6"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'เคหะและชุมชน'"
-            />
-            <img
-              :src="sector_mini_7"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'สร้างความเข้มแข็งของชุมชน'"
-            />
-            <img
-              :src="sector_mini_8"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'การศาสนา วัฒนธรรม และนันทนาการ'"
-            />
-            <img
-              :src="sector_mini_9"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'อุตสาหกรรมและการโยธา'"
-            />
-            <img
-              :src="sector_mini_10"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'การเกษตร'"
-            />
-            <img
-              :src="sector_mini_11"
-              width="25"
-              alt=""
-              v-else-if="item.plan == 'การพาณิชย์'"
-            />
-            <img :src="sector_mini_12" width="25" alt="" v-else />
-            <p class="text-4 mb-1">{{ item.plan }}</p>
-            <p class="text-4 mb-1 grey">{{ item.area }}</p>
-          </b-col>
-          <b-col cols="6" class="pl-0">
-                <p class="text-4 font-weight-bold mb-1">ประเภทรายจ่าย :</p>
-                <img
-                  :src="klang_mini_1"
-                  width="25"
-                  alt=""
-                  v-if="item.type == 'งบรายจ่ายอื่น'"
-                />
-                <img
-                  :src="klang_mini_2"
-                  width="25"
-                  alt=""
-                  v-else-if="item.type == 'งบเงินอุดหนุน'"
-                />
-                <img
-                  :src="klang_mini_3"
-                  width="25"
-                  alt=""
-                  v-else-if="item.type == 'งบลงทุน'"
-                />
-                <img
-                  :src="klang_mini_4"
-                  width="25"
-                  alt=""
-                  v-else-if="item.type == 'งบดำเนินงาน'"
-                />
-                <img
-                  :src="klang_mini_5"
-                  width="25"
-                  alt=""
-                  v-else-if="item.type == 'งบบุคลากร'"
-                />
-                <img :src="klang_mini_6" width="25" alt="" v-else />
-                <p class="text-4 mb-1">{{ item.type }}</p>
-              </b-col>
-        </b-row>
-      </div>
       </div>
     </VueSlickCarousel>
   </div>
@@ -188,6 +184,8 @@ export default {
             breakpoint: 600,
             settings: {
               slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false,
             },
           },
         ],

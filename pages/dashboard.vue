@@ -73,7 +73,7 @@
               <div
                 class="
                   d-flex
-                  flex-column flex-md-row
+                  flex-wrap flex-column flex-md-row
                   justify-content-center
                   px-2 px-sm-0
                 "
@@ -197,7 +197,7 @@
               <div
                 class="
                   d-flex
-                  flex-column flex-md-row
+                  flex-wrap flex-column flex-sm0row
                   justify-content-center
                   px-2 px-sm-0
                 "
@@ -407,7 +407,7 @@
                 </p>
               </div>
               <b-row class="m-0">
-                <b-col sm="4" class="mb-3">
+                <b-col cols="12" lg="4" class="mb-3">
                   <template v-for="(item, i) in keyword.slice(0, 3)">
                     <div class="mb-3" :key="i">
                       <div
@@ -459,7 +459,7 @@
                     </div>
                   </template>
                 </b-col>
-                <b-col sm="4" class="mb-3">
+                <b-col cols="12" lg="4" class="mb-3">
                   <template v-for="(item, i) in keyword.slice(3, 5)">
                     <div class="mb-3" :key="i">
                       <div
@@ -511,7 +511,7 @@
                     </div>
                   </template>
                 </b-col>
-                <b-col sm="4" class="mb-3">
+                <b-col cols="12" lg="4" class="mb-3">
                   <template v-for="(item, i) in keyword.slice(5, 7)">
                     <div class="mb-3" :key="i">
                       <div

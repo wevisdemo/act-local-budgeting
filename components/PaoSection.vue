@@ -47,7 +47,6 @@
               >
             </b-row>
             <p class="text-1 my-1">
-
               <formatNumber :data="item.total" />
             </p>
             <p class="text-4 mb-1">
@@ -392,7 +391,14 @@
               </div>
             </div>
             <div>
-              <div class="d-flex justify-content-between my-3">
+              <div
+                class="
+                  d-flex
+                  justify-content-between
+                  flex-column flex-sm-row
+                  my-3
+                "
+              >
                 <div
                   v-for="(item, i) in pao.incomes"
                   :key="'income+' + i"
@@ -404,7 +410,7 @@
                       'bg-blue-a white-b': i == 1,
                       'bg-pink': i == 2,
                     }"
-                    class="font-weight-bold text-center"
+                    class="font-weight-bold text-sm-center text-left"
                   >
                     {{ item.type }}
                   </div>
@@ -450,7 +456,7 @@
                 </p>
               </b-col>
               <b-col sm="7">
-                <p class="text-3 font-weight-bold mb-1">
+                <p class="text-3 font-weight-bold mb-1 mt-3 mt-sm-0">
                   <img :src="person_logo" alt="" /> งบประมาณเฉลี่ยต่อหัวเทียบกับ
                   76 จังหวัด
                 </p>
@@ -472,7 +478,7 @@
           <template v-for="(item, i) in pao.chiefExecutives">
             <div class="bg-black white-b" :key="'pao-info-' + i">
               <b-row no-gutters>
-                <b-col sm="8" class="p-3">
+                <b-col sm="7" class="p-3">
                   <p class="text-2 font-weight-bold lime">
                     {{ item.name }}
                   </p>
@@ -484,12 +490,13 @@
                   <p class="text-3">{{ item.inOffice }}</p>
                 </b-col>
                 <b-col
-                  sm="4"
+                  sm="5"
                   class="
                     bg-lime
                     d-flex
                     justify-content-center
                     align-items-center
+                    p-3 p-sm-0
                   "
                   ><div
                     class="pao-img"
@@ -610,7 +617,7 @@
                             width:
                               (
                                 (item.spouseAccount.expense /
-                                Math.max(...acc_data)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -629,7 +636,7 @@
                         <p class="text-3 text-center m-0">
                           <formatNumber :data="acc_data[3]" />
                         </p>
-                        <hr class="my-2" style="border-color:#EC6440" />
+                        <hr class="my-2" style="border-color: #ec6440" />
                         <b-row>
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
@@ -638,7 +645,7 @@
                             <formatNumber :data="item.ownAccount.expense"
                           /></b-col>
                         </b-row>
-                        <b-row style="width:200px">
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -666,7 +673,7 @@
                             width:
                               (
                                 (item.ownAccount.taxed /
-                                Math.max(...acc_data)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -678,7 +685,7 @@
                             width:
                               (
                                 (item.spouseAccount.taxed /
-                                Math.max(...acc_data)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -697,7 +704,7 @@
                         <p class="text-3 text-center m-0">
                           <formatNumber :data="acc_data[4]" />
                         </p>
-                        <hr class="my-2" style="border-color:#EC6440" />
+                        <hr class="my-2" style="border-color: #ec6440" />
                         <b-row>
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
@@ -706,7 +713,7 @@
                             <formatNumber :data="item.ownAccount.taxed"
                           /></b-col>
                         </b-row>
-                        <b-row style="width:200px">
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -732,7 +739,7 @@
                             width:
                               (
                                 (item.ownAccount.asset /
-                                Math.max(...acc_data)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -744,7 +751,7 @@
                             width:
                               (
                                 (item.spouseAccount.asset /
-                                Math.max(...acc_data)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -752,7 +759,7 @@
                         ></div>
                       </div>
                       <b-popover
-                        target="popover-asset" 
+                        target="popover-asset"
                         triggers="hover"
                         placement="bottom"
                         class="test"
@@ -763,7 +770,7 @@
                         <p class="text-3 text-center m-0">
                           <formatNumber :data="acc_data[0]" />
                         </p>
-                        <hr class="my-2" style="border-color:#EC6440" />
+                        <hr class="my-2" style="border-color: #ec6440" />
                         <b-row>
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
@@ -772,7 +779,7 @@
                             <formatNumber :data="item.ownAccount.asset"
                           /></b-col>
                         </b-row>
-                        <b-row style="width:200px">
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -797,8 +804,7 @@
                           :style="{
                             width:
                               (
-                                (item.ownAccount.debt /
-                                Math.max(...acc_data)) *
+                                (item.ownAccount.debt / Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -810,7 +816,7 @@
                             width:
                               (
                                 (item.spouseAccount.debt /
-                                Math.max(...acc_data)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -829,7 +835,7 @@
                         <p class="text-3 text-center m-0">
                           <formatNumber :data="acc_data[1]" />
                         </p>
-                        <hr class="my-2" style="border-color:#EC6440" />
+                        <hr class="my-2" style="border-color: #ec6440" />
                         <b-row>
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
@@ -838,7 +844,7 @@
                             <formatNumber :data="item.ownAccount.debt"
                           /></b-col>
                         </b-row>
-                        <b-row style="width:200px">
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -854,11 +860,18 @@
                       ไม่พบข้อมูลบัญชีทรัพย์สิน
                     </p></template
                   >
-                  <div class="d-flex justify-content-between mt-5">
+                  <div
+                    class="
+                      d-flex
+                      flex-column flex-sm-row
+                      justify-content-between
+                      mt-5
+                    "
+                  >
                     <a
                       :href="item.fillingUrl"
                       target="_blank"
-                      class="pao-link"
+                      class="pao-link text-3"
                       rel="noopener noreferrer"
                       >ดูข้อมูลประวัติการยื่นบัญชีทรัพย์สิน
                       <img :src="arrow_link" class="ml-3" alt=""
@@ -866,7 +879,7 @@
                     <a
                       href="https://ele.dla.go.th/public/appointment.do"
                       target="_blank"
-                      class="pao-link"
+                      class="pao-link text-3 mt-3 mt-sm-0"
                       rel="noopener noreferrer"
                       >สืบค้นเพิ่มเติมเกี่ยวกับ นายก อบจ.
                       <img :src="arrow_link" class="ml-3" alt=""
@@ -1256,6 +1269,11 @@ export default {
   border: 2px solid #181f1c;
   border-radius: 50%;
   background-position: center;
+
+  // @media #{$mq-mini-mobile} {
+  //   width: 96px;
+  //   height: 96px;
+  // }
 }
 
 .work-type-square {

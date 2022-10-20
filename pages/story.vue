@@ -32,7 +32,7 @@
               งบ อบจ. <br />
               สำคัญกับชีวิตเราอย่างไร?
             </h2>
-            <img :src="arrowdown" id="arrowdown" alt="">
+            <img :src="arrowdown" id="arrowdown" alt="" />
           </div>
           <div class="step" data-step-no="2">
             <div class="text-1 text-step-2 text-center">
@@ -75,8 +75,8 @@
         </Scrollama>
       </div>
       <div class="">
-        <div class="bg-black">
-          <div class="d-flex justify-content-between px-5 pt-3">
+        <div class="story-header-box">
+          <div class="d-none d-lg-flex justify-content-between px-5 pt-3">
             <div class="circle"></div>
             <div class="circle"></div>
           </div>
@@ -88,9 +88,15 @@
           </div>
         </div>
         <div
-          class="story-intro-2 d-flex justify-content-center align-items-center"
+          class="
+            story-intro-2
+            d-flex
+            flex-column flex-lg-row
+            justify-content-center
+            align-items-center
+          "
         >
-          <div class="position-relative pr-5">
+          <div class="position-relative pr-lg-5">
             <div
               class="
                 circle
@@ -105,7 +111,7 @@
             >
               ก่อน<br />จัดสรรงบ
             </div>
-            <div class="desc">
+            <div class="desc mt-3 mt-lg-0">
               <p class="text-2 text-center">
                 เราเรียกขั้นตอนนี้ว่า
                 <span class="orange-a">Participatory Budgeting</span>
@@ -115,7 +121,9 @@
               </p>
             </div>
           </div>
-          <div class="mx-3"><img width="100%" :src="arrow" alt="" /></div>
+          <div class="mx-3">
+            <img width="100%" :src="arrow" class="arrow" alt="" />
+          </div>
           <div class="position-relative">
             <div
               class="
@@ -131,7 +139,7 @@
             >
               หลัง<br />จัดสรรงบ
             </div>
-            <div class="desc">
+            <div class="desc mt-3 mt-lg-0">
               <p class="text-2 text-center">
                 อย่างไรก็ตาม หลังจากที่การจัดสรรงบประมาณเสร็จสิ้นไปแล้ว
                 ประชาชนอย่างเรา ๆ ก็ยังคงมีบทบาทสำคัญ นั่นก็คือการ
@@ -143,7 +151,7 @@
         </div>
       </div>
       <div class="bg-blue-a overflow-hidden">
-        <div class="d-flex justify-content-between px-5 pt-3">
+        <div class="d-none d-lg-flex justify-content-between px-5 pt-3">
           <div class="circle"></div>
           <div class="circle"></div>
         </div>
@@ -152,7 +160,13 @@
           การสำรวจตรวจดูงบของ อบจ. ก็ไม่ได้ง่ายอย่างที่มันควรจะเป็น
         </p>
         <div class="position-relative papertear">
-          <img :src="papertear" alt="" width="100%" />
+          <img
+            :src="papertear_m"
+            alt=""
+            width="100%"
+            class="d-none d-lg-block"
+          />
+          <img :src="papertear" alt="" width="100%" class="d-block d-lg-none" />
           <h2 class="header-2 text-center m-0">
             อุปสรรคที่ทำให้การสำรวจงบ อบจ. <br />
             ยังคงเป็นเรื่องสุดหินสำหรับบ้านเรา
@@ -161,7 +175,18 @@
         <div class="bg-papertear">
           <div class="wrapper-box">
             <div class="position-relative text-center paper-1">
-              <img width="100%" :src="obstacle1" alt="" />
+              <img
+                width="100%"
+                :src="obstacle1"
+                alt=""
+                class="d-none d-sm-block"
+              />
+              <img
+                width="100%"
+                :src="obstacle1_m"
+                alt=""
+                class="d-block d-sm-none"
+              />
               <div class="content">
                 <div>
                   <h5 class="header-5 font-weight-bold">
@@ -179,7 +204,18 @@
               </div>
             </div>
             <div class="position-relative text-center">
-              <img width="100%" :src="obstacle2" alt="" />
+              <img
+                width="100%"
+                :src="obstacle2"
+                alt=""
+                class="d-none d-sm-block"
+              />
+              <img
+                width="100%"
+                :src="obstacle2_m"
+                alt=""
+                class="d-block d-sm-none"
+              />
               <div class="content">
                 <div>
                   <h5 class="header-5 font-weight-bold">
@@ -204,17 +240,19 @@
         </div>
       </div>
       <div class="bg-black world-bg">
-        <div class="d-flex justify-content-between p-5">
+        <div class="d-none d-lg-flex justify-content-between p-5">
           <div class="circle"></div>
           <div class="circle"></div>
         </div>
 
-        <h4 class="header-4 font-weight-bold white-a text-center">
+        <h4 class="header-4 font-weight-bold white-a text-center pt-5">
           การตรวจสอบงบของภาครัฐไทย<span class="lime-b">ยังคงทำได้ยาก</span>
           <br />
           งั้นเรามาดูกันดีกว่า ว่าต่างประเทศเขาจัดการเรื่องนี้อย่างไรบ้าง
         </h4>
-        <p class="text-2 text-center white-a py-5 content-box">
+        <p
+          class="text-2 text-center white-a py-5 content-box d-none d-lg-block"
+        >
           เพื่อความโปร่งใส
           หลายประเทศได้มีการนำข้อมูลเกี่ยวกับการจัดสรรงบประมาณของภาครัฐ
           มาเผยแพร่ให้ประชาชนทั่วไปได้รับรู้
@@ -223,7 +261,9 @@
           ที่ประชาชนสามารถกดสำรวจเองได้
         </p>
 
-        <div class="square-box-wrapper pb-5">
+        <div
+          class="square-box-wrapper d-flex d-lg-block pb-0 pb-lg-5 pt-5 pt-lg-0"
+        >
           <div class="d-flex justify-content-around pb-5">
             <div class="bg-blue-a square-box white-a square-box-1">
               <h2 class="header-2 font-weight-light">สหรัฐอเมริกา</h2>
@@ -263,7 +303,8 @@
                 <li>ทั้งในรูปแบบ PDF HTML รวมถึง Excel Spreadsheet</li>
                 <li>
                   สามารถส่งคำร้องขอเอกสารงบ ใน format ต่างๆ
-                  ด้วยโปรแกรมหรือเทคโนโลยีรูป<span class="nowrap">แบบ</span>อื่นๆ
+                  ด้วยโปรแกรมหรือเทคโนโลยีรูป<span class="nowrap">แบบ</span
+                  >อื่นๆ
                 </li>
               </ul>
               <div class="link-box-black">
@@ -284,7 +325,7 @@
             </div>
           </div>
 
-          <div class="d-flex justify-content-around">
+          <div class="d-block d-lg-flex justify-content-around">
             <div class="bg-purple-b square-box white-a square-box-3">
               <h2 class="header-2 font-weight-light">ประเทศบราซิล</h2>
               <ul class="text-2">
@@ -314,17 +355,50 @@
               </div>
             </div>
 
-            <div class="box-4">
+            <div class="box-4 d-none d-lg-block">
               <img :src="graph" width="100" alt="" />
               <img :src="money" class="money" width="100" alt="" />
               <img :src="coin" class="coin" width="100" alt="" />
             </div>
           </div>
+        </div>
+        <div class="text-right d-block d-lg-none">
+          <img :src="drag_papertear" alt="" />
+        </div>
+
+        <p
+          class="text-2 text-center white-a py-5 content-box d-block d-lg-none"
+        >
+          เพื่อความโปร่งใส
+          หลายประเทศได้มีการนำข้อมูลเกี่ยวกับการจัดสรรงบประมาณของภาครัฐ
+          มาเผยแพร่ให้ประชาชนทั่วไปได้รับรู้
+          และสามารถนำข้อมูลเหล่านั้นมาวิเคราะห์ต่อยอด
+          หรือแม้กระทั่งเปลี่ยนให้เป็นชาร์ตรูปแบบต่าง ๆ
+          ที่ประชาชนสามารถกดสำรวจเองได้
+        </p>
+      </div>
+      <div class="story-header-box">
+        <div>
           <div class="text-center">
-            <img :src="thailand_arrow" alt="" />
+            <img
+              :src="thailand_arrow"
+              alt=""
+              class="d-none d-lg-block mx-auto"
+            />
+            <img
+              :src="thailand_arrow_m"
+              alt=""
+              class="d-block d-lg-none mx-auto"
+            />
           </div>
           <b-col class="position-relative text-center th-box mt-3">
-            <img :src="thailand" alt="" width="500" />
+            <img :src="thailand" width="500" alt="" class="d-none d-lg-block" />
+            <img
+              :src="thailand_m"
+              alt=""
+              width="500"
+              class="d-block d-lg-none mx-auto"
+            />
             <div class="intro-text white-a text-left">
               <h2 class="header-2 font-weight-light">กลับมาที่บ้านเรา...</h2>
               <p class="text-2">
@@ -369,7 +443,7 @@
           </p>
         </div>
       </div>
-      <div class="bg-grid-blue text-center">
+      <div class="bg-grid-blue text-center px-3">
         <div class="bg-black text-1 white-a grid-header">
           หากยังไม่มีธงในใจว่าต้องการเจาะจงตรวจสอบตรงจุดไหน
           อาจเริ่มจากการไล่ดูงบประมาณที่เกี่ยวข้อง กับความเป็นอยู่ของเราก่อน
@@ -467,11 +541,16 @@ export default {
       papertear: require("~/assets/images/papertear.svg"),
       obstacle1: require("~/assets/images/obstacle1.svg"),
       obstacle2: require("~/assets/images/obstacle2.svg"),
+      papertear_m: require("~/assets/images/papertear_m.svg"),
+      obstacle1_m: require("~/assets/images/obstacle1_m.svg"),
+      obstacle2_m: require("~/assets/images/obstacle2_m.svg"),
       coin: require("~/assets/images/coin.svg"),
       money: require("~/assets/images/money.svg"),
       graph: require("~/assets/images/graph.svg"),
       thailand_arrow: require("~/assets/images/thailand_arrow.svg"),
       thailand: require("~/assets/images/thailand.svg"),
+      thailand_arrow_m: require("~/assets/images/thailand_arrow_m.svg"),
+      thailand_m: require("~/assets/images/thailand_m.svg"),
       link_white: require("~/assets/images/link_white.svg"),
       link_black: require("~/assets/images/link_black.svg"),
       land_1: require("~/assets/images/land_1.png"),
@@ -480,6 +559,7 @@ export default {
       back_dark: require("~/assets/images/back_dark.png"),
       front: require("~/assets/images/front.png"),
       front_dark: require("~/assets/images/front_dark.png"),
+      drag_papertear: require("~/assets/images/drag_papertear.svg"),
       currStep: null,
       word_random: [
         { title: "ป้องกันและระงับโรคติดต่อ ", bg: "#253472", color: "#FFFEF5" },
@@ -518,20 +598,31 @@ export default {
         { title: "ส่งเสริมการกีฬา ", bg: "#E0FD6A", color: "#181F1C" },
       ],
       isFirstTime: true,
+      img2: "",
+      img3: "",
     };
   },
   mounted() {
+    var width = window.screen.width;
+    console.log(width);
+    if (width > 768) {
+      this.img2 = 0;
+      this.img3 = 0;
+    } else if (width > 600) {
+      this.img2 = 4;
+      this.img3 = 3;
+    }
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     document.getElementById("img-1").style.bottom = 0;
     setTimeout(() => {
-      document.getElementById("img-2").style.bottom = "7%";
+      document.getElementById("img-2").style.bottom = 7 - this.img2 + "%";
     }, 1000);
     setTimeout(() => {
-      document.getElementById("img-3").style.bottom = "6%";
+      document.getElementById("img-3").style.bottom = 6 - this.img3 + "%";
       document.getElementById("arrowdown").style.opacity = 1;
       document.getElementsByTagName("body")[0].style.overflow = "unset";
       this.isFirstTime = false;
-    }, 3000);
+    }, 2000);
 
     var i = 1;
 
@@ -550,14 +641,14 @@ export default {
         if (!this.isFirstTime) {
           document.getElementById("img-2").style.transform = "none";
           document.getElementById("img-3").style.transform = "none";
-          document.getElementById("img-2").style.bottom = "7%";
-          document.getElementById("img-3").style.bottom = "6%";
+          document.getElementById("img-2").style.bottom = 7 - this.img2 + "%";
+          document.getElementById("img-3").style.bottom = 7 - this.img3 + "%";
         }
       } else if (index == 1) {
         document.getElementById("img-2").style.transform = "scale(2.5)";
         document.getElementById("img-3").style.transform = "scale(3)";
-        document.getElementById("img-2").style.bottom = "22%";
-        document.getElementById("img-3").style.bottom = "12%";
+        document.getElementById("img-2").style.bottom = 22 - this.img2 + "%";
+        document.getElementById("img-3").style.bottom = 12 - this.img2 + "%";
       }
 
       if (index == 4) {
@@ -618,9 +709,14 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
 
+  @media #{$mq-mini-mobile} {
+    background-size: 100px;
+    padding: 0 10px;
+  }
+
   p {
     margin: auto;
-    width: 500px;
+    max-width: 500px;
   }
 }
 
@@ -677,6 +773,10 @@ export default {
     transform: scale(2.5);
     bottom: 17%;
   }
+  @media #{$mq-mobile} {
+    transform: scale(3);
+    bottom: 11%;
+  }
 }
 
 #img-6 {
@@ -689,8 +789,13 @@ export default {
   opacity: 0;
 
   @media #{$mq-small-laptop} {
-    transform: scale(1);
+    transform: scale(3);
     bottom: 14%;
+  }
+
+  @media #{$mq-mobile} {
+    transform: scale(1);
+    bottom: 6%;
   }
 }
 .step {
@@ -732,6 +837,10 @@ export default {
   padding: 30px 10px 66px;
   text-align: center;
 
+  @media #{$mq-mobile} {
+    padding: 30px 10px;
+  }
+
   .header {
     max-width: 838px;
     margin: auto;
@@ -752,20 +861,46 @@ export default {
   padding: 60px 0;
   background-image: url("~/assets/images/bg_grid_blue.svg");
 
+  @media #{$mq-mobile} {
+    background: #0056a6;
+  }
+
   .circle {
     width: 154px;
     height: 154px;
     border-radius: 50%;
+    border: none !important;
+
+    @media #{$mq-mobile} {
+      margin: auto;
+      width: 98px;
+      height: 98px;
+      color: #fffef5;
+    }
+  }
+
+  .arrow {
+    @media #{$mq-mobile} {
+      transform: rotate(90deg);
+    }
   }
 
   .desc {
-    width: 400px;
+    max-width: 400px;
     position: relative;
     bottom: 40px;
     left: 75px;
 
     @media #{$mq-small-laptop} {
       left: 50px;
+    }
+    @media #{$mq-mobile} {
+      position: unset;
+      color: #fffef5 !important;
+      span {
+        color: #fffef5 !important;
+        font-weight: bold;
+      }
     }
   }
 }
@@ -779,12 +914,23 @@ export default {
     position: absolute;
     bottom: 10px;
     width: 100%;
+
+    @media #{$mq-mobile} {
+      font-size: 40px;
+    }
+
+    @media #{$mq-mini-mobile} {
+      font-size: 20px;
+    }
   }
 }
 
 .bg-papertear {
   background: #e0fd6a;
   margin-top: -100px;
+  @media #{$mq-mini-mobile} {
+    margin-top: 0;
+  }
   .wrapper-box {
     max-width: 1280px;
     margin: auto;
@@ -797,9 +943,13 @@ export default {
       justify-content: center;
       align-items: center;
       height: 100%;
-
+      padding: 0 10px;
       p {
         max-width: 700px;
+
+        @media #{$mq-mini-mobile} {
+          font-size: 12px !important;
+        }
       }
     }
   }
@@ -807,17 +957,30 @@ export default {
 
 .paper-1 {
   top: 100px;
+  @media #{$mq-mini-mobile} {
+    top: unset;
+  }
 }
 
 .square-box-wrapper {
   max-width: 900px;
   margin: auto;
+
+  @media #{$mq-mobile} {
+    max-width: 1200px;
+    overflow-x: auto;
+  }
+}
+
+.square-box-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .square-box {
-  max-width: 435px;
+  width: 435px;
   padding: 25px;
-  width: 100%;
+  margin: 0 10px;
+  //width: 100%;
 }
 
 .link-box-white {
@@ -842,17 +1005,29 @@ export default {
   position: relative;
   right: 25px;
   top: 25px;
+
+  @media #{$mq-mobile} {
+    position: unset;
+  }
 }
 
 .square-box-2 {
   position: relative;
   left: 25px;
+
+  @media #{$mq-mobile} {
+    position: unset;
+  }
 }
 
 .square-box-3 {
   position: relative;
   top: 25px;
   left: 50px;
+
+  @media #{$mq-mobile} {
+    position: unset;
+  }
 }
 
 .money {
@@ -874,16 +1049,36 @@ export default {
   width: 450px;
   padding: 10px 5px;
 
-  // @media #{$mq-mobile} {
-  //   position: unset;
-  //   margin: auto;
-  //   width: 320px;
-  // }
+  @media #{$mq-mobile} {
+    width: 400px;
+    color: #181f1c !important;
+  }
+
+  @media #{$mq-mini-mobile} {
+    // position: unset;
+    margin: auto;
+    width: 250px;
+  }
 }
 
 .th-box {
-  width: 450px;
+  max-width: 450px;
   margin: 0 auto;
+
+  @media #{$mq-mobile} {
+  }
+
+  @media #{$mq-mini-mobile} {
+    img {
+      width: 300px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 14px;
+    }
+  }
 }
 
 .symbol-header {
@@ -901,6 +1096,10 @@ export default {
     padding: 20px;
     width: fit-content;
     margin: auto;
+
+    @media #{$mq-mobile} {
+      position: unset;
+    }
   }
 
   hr {
@@ -990,5 +1189,13 @@ export default {
 #arrowdown {
   opacity: 0;
   transition: 0.5s;
+}
+
+.story-header-box {
+  background: #181f1c;
+
+  @media #{$mq-mobile} {
+    background: #0056a6;
+  }
 }
 </style>
