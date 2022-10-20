@@ -47,14 +47,8 @@
               >
             </b-row>
             <p class="text-1 my-1">
-              {{
-                parseInt(
-                  item.total
-                    .toString()
-                    .substring(0, item.total.toString().length - 3)
-                ).toLocaleString()
-              }}
-              ล้านบาท
+
+              <formatNumber :data="item.total" />
             </p>
             <p class="text-4 mb-1">
               {{ ((item.total / total) * 100).toFixed(1) }}%
@@ -223,14 +217,7 @@
               >
             </b-row>
             <p class="text-1 my-1">
-              {{
-                parseInt(
-                  item.total
-                    .toString()
-                    .substring(0, item.total.toString().length - 3)
-                ).toLocaleString()
-              }}
-              ล้านบาท
+              <formatNumber :data="item.total" />
             </p>
             <p class="text-4 mb-1">
               {{ ((item.total / total) * 100).toFixed(1) }}%
@@ -365,7 +352,7 @@
         ข้อมูลอื่นๆของจังของอบจ. {{ province }}
       </p>
       <b-row v-if="pao != null">
-        <b-col sm="7">
+        <b-col lg="7">
           <div class="bg-lime-b p-3 w-fit">
             <p class="text-1 font-weight-bold m-0">รายได้ของอบจ.</p>
           </div>
@@ -378,7 +365,7 @@
                 parseInt(
                   total
                     .toString()
-                    .substring(0, total_income.toString().length - 3)
+                    .substring(0, total_income.toString().length - 7)
                 ).toLocaleString()
               }}
               ล้านบาท
@@ -405,7 +392,7 @@
               </div>
             </div>
             <div>
-              <div class="d-flex justify-content-around my-3">
+              <div class="d-flex justify-content-between my-3">
                 <div
                   v-for="(item, i) in pao.incomes"
                   :key="'income+' + i"
@@ -422,14 +409,7 @@
                     {{ item.type }}
                   </div>
                   <p class="my-1 white-b">
-                    {{
-                      parseInt(
-                        item.total
-                          .toString()
-                          .substring(0, item.total.toString().length - 3)
-                      ).toLocaleString()
-                    }}
-                    ล้านบาท
+                    <formatNumber :data="item.total" />
                   </p>
                 </div>
               </div>
@@ -442,10 +422,11 @@
                   class="white-b m-0"
                 >
                   {{ item2.category }}
-                  <span  :class="{
+                  <span
+                    :class="{
                       'white-a': i == 0,
                       'blue-a': i == 1,
-                      'pink': i == 2,
+                      pink: i == 2,
                     }"
                     >{{ ((item2.total / total) * 100).toFixed(3) }}%</span
                   >
@@ -473,21 +454,18 @@
                   <img :src="person_logo" alt="" /> งบประมาณเฉลี่ยต่อหัวเทียบกับ
                   76 จังหวัด
                 </p>
-                <div id="chart">
-                  <apexchart
-                    v-if="budgetPerCapita.length > 0"
-                    type="scatter"
-                    height="60"
-                    :options="chartOptions"
-                    :series="series"
-                    :key="testKey"
-                  ></apexchart>
+                <p class="m-0 lime" v-if="budget_province != 0">
+                  {{ parseInt(budget_province).toLocaleString() }}
+                  บาท/คน/ปี
+                </p>
+                <div style="height: 50px">
+                  <canvas id="line-chart"></canvas>
                 </div>
               </b-col>
             </b-row>
           </div>
         </b-col>
-        <b-col sm="5">
+        <b-col lg="5" class="mt-3 mt-lg-0">
           <div class="bg-lime-b p-3 w-fit">
             <p class="text-1 font-weight-bold m-0">ผู้บริหาร</p>
           </div>
@@ -500,7 +478,7 @@
                   </p>
                   <p class="text-3 font-weight-bold m-0">ตำแหน่ง</p>
                   <p class="text-3">
-                    นายกองค์การบริหารส่วนจังหวัดเ{{ province }}
+                    นายกองค์การบริหารส่วนจังหวัด{{ province }}
                   </p>
                   <p class="text-3 font-weight-bold m-0">วันที่ดำรงตำแหน่ง</p>
                   <p class="text-3">{{ item.inOffice }}</p>
@@ -544,38 +522,17 @@
                       >
                         <p class="m-0">รวมรายได้ต่อปี</p>
                         <p class="m-0">
-                          {{
-                            item.ownAccount.income +
-                              item.spouseAccount.income ==
-                            0
-                              ? 0
-                              : parseInt(
-                                  (
-                                    item.ownAccount.income +
-                                    item.spouseAccount.income
-                                  )
-                                    .toString()
-                                    .substring(
-                                      0,
-                                      (
-                                        item.ownAccount.income +
-                                        item.spouseAccount.income
-                                      ).toString().length - 3
-                                    )
-                                ).toLocaleString()
-                          }}
-                          ล้านบาท
+                          <formatNumber :data="acc_data[2]" />
                         </p>
                       </div>
-                      <div class="d-flex mt-3">
+                      <div class="d-flex mt-3" id="popover-income">
                         <div
                           class="bg-lime"
                           :style="{
                             width:
                               (
                                 (item.ownAccount.income /
-                                  (item.ownAccount.income +
-                                    item.spouseAccount.income)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -587,14 +544,43 @@
                             width:
                               (
                                 (item.spouseAccount.income /
-                                  (item.ownAccount.income +
-                                    item.spouseAccount.income)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
                           }"
                         ></div>
                       </div>
+                      <b-popover
+                        target="popover-income"
+                        triggers="hover"
+                        placement="bottom"
+                        class="test"
+                      >
+                        <p class="text-4 text-center font-weight-bold m-0">
+                          รวมทรัพย์สินทั้งสิ้น
+                        </p>
+                        <p class="text-3 text-center m-0">
+                          <formatNumber :data="acc_data[2]" />
+                        </p>
+                        <hr class="my-2" style="border-color: #ec6440" />
+                        <b-row>
+                          <b-col cols="5">
+                            <p class="text-4 m-0">ผู้ยื่น</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.ownAccount.income"
+                          /></b-col>
+                        </b-row>
+                        <b-row style="width: 200px">
+                          <b-col cols="5">
+                            <p class="text-4 m-0">คู่สมรส</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.spouseAccount.income"
+                          /></b-col>
+                        </b-row>
+                      </b-popover>
                     </div>
                     <div class="pao-acc-box bg-transparent">
                       <div
@@ -602,38 +588,17 @@
                       >
                         <p class="m-0">รวมรายจ่ายต่อปี</p>
                         <p class="m-0">
-                          {{
-                            item.ownAccount.expense +
-                              item.spouseAccount.expense ==
-                            0
-                              ? 0
-                              : parseInt(
-                                  (
-                                    item.ownAccount.expense +
-                                    item.spouseAccount.expense
-                                  )
-                                    .toString()
-                                    .substring(
-                                      0,
-                                      (
-                                        item.ownAccount.expense +
-                                        item.spouseAccount.expense
-                                      ).toString().length - 3
-                                    )
-                                ).toLocaleString()
-                          }}
-                          ล้านบาท
+                          <formatNumber :data="acc_data[3]" />
                         </p>
                       </div>
-                      <div class="d-flex mt-3">
+                      <div class="d-flex mt-3" id="popover-exp">
                         <div
                           class="bg-lime"
                           :style="{
                             width:
                               (
                                 (item.ownAccount.expense /
-                                  (item.ownAccount.expense +
-                                    item.spouseAccount.expense)) *
+                                  Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -645,14 +610,43 @@
                             width:
                               (
                                 (item.spouseAccount.expense /
-                                  (item.ownAccount.expense +
-                                    item.spouseAccount.expense)) *
+                                Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
                           }"
                         ></div>
                       </div>
+                      <b-popover
+                        target="popover-exp"
+                        triggers="hover"
+                        placement="bottom"
+                        class="test"
+                      >
+                        <p class="text-4 text-center font-weight-bold m-0">
+                          รวมทรัพย์สินทั้งสิ้น
+                        </p>
+                        <p class="text-3 text-center m-0">
+                          <formatNumber :data="acc_data[3]" />
+                        </p>
+                        <hr class="my-2" style="border-color:#EC6440" />
+                        <b-row>
+                          <b-col cols="5">
+                            <p class="text-4 m-0">ผู้ยื่น</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.ownAccount.expense"
+                          /></b-col>
+                        </b-row>
+                        <b-row style="width:200px">
+                          <b-col cols="5">
+                            <p class="text-4 m-0">คู่สมรส</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.spouseAccount.expense"
+                          /></b-col>
+                        </b-row>
+                      </b-popover>
                     </div>
                     <div class="pao-acc-box">
                       <div
@@ -662,37 +656,17 @@
                           การเสียภาษีเงินได้บุคคลธรรมดาในรอบปีภาษีที่ผ่านมา
                         </p>
                         <p class="m-0">
-                          {{
-                            item.ownAccount.taxed + item.spouseAccount.taxed ==
-                            0
-                              ? 0
-                              : parseInt(
-                                  (
-                                    item.ownAccount.taxed +
-                                    item.spouseAccount.taxed
-                                  )
-                                    .toString()
-                                    .substring(
-                                      0,
-                                      (
-                                        item.ownAccount.taxed +
-                                        item.spouseAccount.taxed
-                                      ).toString().length - 3
-                                    )
-                                ).toLocaleString()
-                          }}
-                          ล้านบาท
+                          <formatNumber :data="acc_data[4]" />
                         </p>
                       </div>
-                      <div class="d-flex mt-3">
+                      <div class="d-flex mt-3" id="popover-tax">
                         <div
                           class="bg-lime"
                           :style="{
                             width:
                               (
                                 (item.ownAccount.taxed /
-                                  (item.ownAccount.taxed +
-                                    item.spouseAccount.taxed)) *
+                                Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -704,14 +678,43 @@
                             width:
                               (
                                 (item.spouseAccount.taxed /
-                                  (item.ownAccount.taxed +
-                                    item.spouseAccount.taxed)) *
+                                Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
                           }"
                         ></div>
                       </div>
+                      <b-popover
+                        target="popover-tax"
+                        triggers="hover"
+                        placement="bottom"
+                        class="test"
+                      >
+                        <p class="text-4 text-center font-weight-bold m-0">
+                          รวมทรัพย์สินทั้งสิ้น
+                        </p>
+                        <p class="text-3 text-center m-0">
+                          <formatNumber :data="acc_data[4]" />
+                        </p>
+                        <hr class="my-2" style="border-color:#EC6440" />
+                        <b-row>
+                          <b-col cols="5">
+                            <p class="text-4 m-0">ผู้ยื่น</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.ownAccount.taxed"
+                          /></b-col>
+                        </b-row>
+                        <b-row style="width:200px">
+                          <b-col cols="5">
+                            <p class="text-4 m-0">คู่สมรส</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.spouseAccount.taxed"
+                          /></b-col>
+                        </b-row>
+                      </b-popover>
                     </div>
                     <div class="pao-acc-box bg-transparent">
                       <div
@@ -719,37 +722,17 @@
                       >
                         <p class="m-0">รวมทรัพย์สินทั้งสิ้น</p>
                         <p class="m-0">
-                          {{
-                            item.ownAccount.asset + item.spouseAccount.asset ==
-                            0
-                              ? 0
-                              : parseInt(
-                                  (
-                                    item.ownAccount.asset +
-                                    item.spouseAccount.asset
-                                  )
-                                    .toString()
-                                    .substring(
-                                      0,
-                                      (
-                                        item.ownAccount.asset +
-                                        item.spouseAccount.asset
-                                      ).toString().length - 3
-                                    )
-                                ).toLocaleString()
-                          }}
-                          ล้านบาท
+                          <formatNumber :data="acc_data[0]" />
                         </p>
                       </div>
-                      <div class="d-flex mt-3">
+                      <div class="d-flex mt-3" id="popover-asset">
                         <div
                           class="bg-lime"
                           :style="{
                             width:
                               (
                                 (item.ownAccount.asset /
-                                  (item.ownAccount.asset +
-                                    item.spouseAccount.asset)) *
+                                Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -761,14 +744,43 @@
                             width:
                               (
                                 (item.spouseAccount.asset /
-                                  (item.ownAccount.asset +
-                                    item.spouseAccount.asset)) *
+                                Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
                           }"
                         ></div>
                       </div>
+                      <b-popover
+                        target="popover-asset" 
+                        triggers="hover"
+                        placement="bottom"
+                        class="test"
+                      >
+                        <p class="text-4 text-center font-weight-bold m-0">
+                          รวมทรัพย์สินทั้งสิ้น
+                        </p>
+                        <p class="text-3 text-center m-0">
+                          <formatNumber :data="acc_data[0]" />
+                        </p>
+                        <hr class="my-2" style="border-color:#EC6440" />
+                        <b-row>
+                          <b-col cols="5">
+                            <p class="text-4 m-0">ผู้ยื่น</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.ownAccount.asset"
+                          /></b-col>
+                        </b-row>
+                        <b-row style="width:200px">
+                          <b-col cols="5">
+                            <p class="text-4 m-0">คู่สมรส</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.spouseAccount.asset"
+                          /></b-col>
+                        </b-row>
+                      </b-popover>
                     </div>
                     <div class="pao-acc-box">
                       <div
@@ -776,36 +788,17 @@
                       >
                         <p class="m-0">รวมหนี้สินทั้งสิ้น</p>
                         <p class="m-0">
-                          {{
-                            item.ownAccount.debt + item.spouseAccount.debt == 0
-                              ? 0
-                              : parseInt(
-                                  (
-                                    item.ownAccount.debt +
-                                    item.spouseAccount.debt
-                                  )
-                                    .toString()
-                                    .substring(
-                                      0,
-                                      (
-                                        item.ownAccount.debt +
-                                        item.spouseAccount.debt
-                                      ).toString().length - 3
-                                    )
-                                ).toLocaleString()
-                          }}
-                          ล้านบาท
+                          <formatNumber :data="acc_data[1]" />
                         </p>
                       </div>
-                      <div class="d-flex mt-3">
+                      <div class="d-flex mt-3" id="popover-debt">
                         <div
                           class="bg-lime"
                           :style="{
                             width:
                               (
                                 (item.ownAccount.debt /
-                                  (item.ownAccount.debt +
-                                    item.spouseAccount.debt)) *
+                                Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
@@ -817,14 +810,43 @@
                             width:
                               (
                                 (item.spouseAccount.debt /
-                                  (item.ownAccount.debt +
-                                    item.spouseAccount.debt)) *
+                                Math.max(...acc_data)) *
                                 100
                               ).toFixed() + '%',
                             height: '19px',
                           }"
                         ></div>
                       </div>
+                      <b-popover
+                        target="popover-debt"
+                        triggers="hover"
+                        placement="bottom"
+                        class="test"
+                      >
+                        <p class="text-4 text-center font-weight-bold m-0">
+                          รวมทรัพย์สินทั้งสิ้น
+                        </p>
+                        <p class="text-3 text-center m-0">
+                          <formatNumber :data="acc_data[1]" />
+                        </p>
+                        <hr class="my-2" style="border-color:#EC6440" />
+                        <b-row>
+                          <b-col cols="5">
+                            <p class="text-4 m-0">ผู้ยื่น</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.ownAccount.debt"
+                          /></b-col>
+                        </b-row>
+                        <b-row style="width:200px">
+                          <b-col cols="5">
+                            <p class="text-4 m-0">คู่สมรส</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            <formatNumber :data="item.spouseAccount.debt"
+                          /></b-col>
+                        </b-row>
+                      </b-popover>
                     </div>
                   </template>
                   <template v-else>
@@ -907,6 +929,7 @@
 </template>
 
 <script>
+import Chart from "chart.js";
 export default {
   props: {
     year: Number,
@@ -914,9 +937,11 @@ export default {
   },
   data() {
     return {
+      line_chart: {},
       total: 0,
       testKey: 0,
       total_income: 0,
+      budget_province: 0,
       isShow: false,
       tasks: [],
       tasksAsc: [],
@@ -947,18 +972,9 @@ export default {
       drag: require("~/assets/images/drag.svg"),
       logo: require("~/assets/images/logo.svg"),
       arrow_link: require("~/assets/images/arrow_link.svg"),
-      series: [
-        {
-          name: "SAMPLE A",
-          data: [
-            [1, 0],
-            [2, 0],
-            [3, 0],
-            [4, 0],
-            [5, 0],
-          ],
-        },
-      ],
+      series: [],
+      bgcolor: [],
+      data_result: [],
       chartOptions: {
         colors: [],
         chart: {
@@ -1002,28 +1018,114 @@ export default {
           enabled: false,
         },
       },
+      acc_data: [],
     };
   },
   watch: {
     year: {
       handler(newValue, oldValue) {
-        this.getDataForChart();
         this.getData(this.year, this.province);
+        //this.update();
       },
     },
     province: {
       handler(newValue, oldValue) {
-        this.getDataForChart();
         this.getData(this.year, this.province);
+        this.update(newValue, oldValue);
       },
     },
   },
   created() {
     this.getData(this.year, this.province);
+    this.getDataForChart();
   },
+  mounted() {
+    setTimeout(() => {
+      this.chartConstructor();
+    }, 1000);
+  },
+
   methods: {
+    update(newp, oldp) {
+      let newindex = this.data_result.findIndex((object) => {
+        return object.name === newp;
+      });
+
+      let oldindex = this.data_result.findIndex((object) => {
+        return object.name === oldp;
+      });
+
+      this.line_chart.data.datasets.map((dataset) => {
+        dataset.backgroundColor[oldindex] = "rgba(255, 255, 255, 0.1)";
+        dataset.backgroundColor[newindex] = "#E0FD6A";
+      });
+
+      this.line_chart.update();
+
+      let budget_province = this.data_result.filter(
+        (x) => x.name == this.province
+      );
+
+      if (budget_province.length > 0)
+        this.budget_province = budget_province[0].amount.toFixed();
+      else this.budget_province = 0;
+    },
+    chartConstructor(type, data, options) {
+      const chart_element = document.getElementById("line-chart");
+
+      if (chart_element != null) {
+        this.line_chart = new Chart(chart_element, {
+          type: "scatter",
+          data: {
+            datasets: [
+              {
+                label: "Scatter Dataset",
+                data: this.series,
+                backgroundColor: this.bgcolor,
+                pointRadius: 5,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+              display: false,
+            },
+            scales: {
+              yAxes: [
+                {
+                  display: false,
+                  gridLines: {
+                    display: false,
+                  },
+                },
+              ],
+              xAxes: [
+                {
+                  gridLines: {
+                    display: false,
+                  },
+                  ticks: {
+                    // Include a dollar sign in the ticks
+                    fontColor: "white",
+                    callback: function (value, index, ticks) {
+                      return "฿" + parseInt(value).toLocaleString();
+                    },
+                  },
+                },
+              ],
+            },
+            tooltips: {
+              enabled: false,
+            },
+          },
+        });
+      }
+    },
     getData(y, p) {
       this.total_income = 0;
+      this.acc_data = [];
 
       fetch("data/" + y + "/pao-" + p + ".json")
         .then((response) => response.json())
@@ -1043,30 +1145,61 @@ export default {
               return a.total - b.total;
             })
             .slice(0, 5);
-            this.tasksDesc = this.tasks
+          this.tasksDesc = this.tasks
             .sort(function (a, b) {
               return b.total - a.total;
             })
             .slice(0, 5);
+
+          if (this.pao.chiefExecutives.length > 0) {
+            //console.log(this.pao.chiefExecutives[0].ownAccount);
+            if (this.pao.chiefExecutives[0].ownAccount != null) {
+              for (const property in this.pao.chiefExecutives[0].ownAccount) {
+                this.acc_data.push(
+                  this.pao.chiefExecutives[0].ownAccount[property]
+                );
+              }
+            }
+          }
+
+          if (this.pao.chiefExecutives[0].spouseAccount != null) {
+            Object.entries(this.pao.chiefExecutives[0].spouseAccount).forEach(
+              ([key, value], index) => {
+                this.acc_data[index] += value;
+              }
+            );
+          }
         });
     },
     getDataForChart() {
       fetch("data/2565/nation-wide.json")
         .then((response) => response.json())
         .then((data) => {
-          let result = data.budgetPerCapita;
+          this.data_result = data.budgetPerCapita;
 
-          result.forEach((element) => {
-            this.budgetPerCapita.push([element.amount, 0]);
+          this.data_result.forEach((element) => {
+            this.budgetPerCapita.push({
+              x: element.amount,
+              y: 0,
+            });
 
-            const randomColor = Math.floor(Math.random() * 16777215).toString(
-              16
-            );
-            //console.log(randomColor);
-            this.chartOptions.colors.push("#" + randomColor);
+            this.bgcolor.push("rgba(255, 255, 255, 0.1)");
           });
 
-          //this.series[0].data = this.budgetPerCapita;
+          let budget_province = this.data_result.filter(
+            (x) => x.name == this.province
+          );
+
+          if (budget_province.length > 0)
+            this.budget_province = budget_province[0].amount.toFixed();
+          else this.budget_province = 0;
+
+          let a = this.data_result.findIndex((object) => {
+            return object.name === this.province;
+          });
+
+          this.bgcolor[a] = "#E0FD6A";
+          this.series = this.budgetPerCapita;
         });
     },
     showExtraIncomeDetails() {

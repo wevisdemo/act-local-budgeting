@@ -5,9 +5,9 @@
       id="menu-wrapper"
     >
       <div>
-        <img :src="logo" alt="" width="70" />
+        <img :src="logo" alt="" width="70" class="logo" />
       </div>
-      <div>
+      <div class="text-right text-sm-left">
         <NuxtLink class="box text-3" to="/">หน้าหลัก</NuxtLink>
         <NuxtLink class="box text-3" to="/dashboard">สำรวจข้อมูล</NuxtLink>
         <NuxtLink class="box text-3" to="/story">งบ อบจ. สำคัญอย่างไร</NuxtLink>
@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       logo: require("~/assets/images/logo.svg"),
-      lastScrollTop: 0
+      lastScrollTop: 0,
     };
   },
   created() {
@@ -62,6 +62,12 @@ export default {
     padding: 5px;
     color: #bfc5cb;
     margin: 0 5px;
+    display: inline-block;
+
+    @media #{$mq-mini-mobile} {
+      margin-bottom: 2px;
+      font-size: 11px;
+    }
   }
 }
 </style>

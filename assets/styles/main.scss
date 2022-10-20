@@ -44,7 +44,7 @@ body {
   font-size: 40px;
   line-height: 125%;
   @media #{$mq-mini-mobile} {
-    font-size: 32px;
+    font-size: 29px;
   }
 }
 .header-4 {
@@ -73,21 +73,21 @@ body {
   line-height: 120%;
   font-size: 20px;
   @media #{$mq-mini-mobile} {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 .text-3 {
   line-height: 120%;
   font-size: 16px;
   @media #{$mq-mini-mobile} {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 .text-4 {
   line-height: 120%;
   font-size: 13px;
   @media #{$mq-mini-mobile} {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
@@ -346,7 +346,7 @@ body {
 }
 
 .slick-dots {
-  //bottom: -40px !important;
+  bottom: -20px !important;
   li button:before,
   li.slick-active button:before {
     color: transparent;
@@ -438,6 +438,10 @@ body {
   .popover-body {
     padding: 0;
   }
+}
+
+.bs-popover-bottom {
+  background: #FFFEF5 !important; 
 }
 
 .drag-wrapper::-webkit-scrollbar {

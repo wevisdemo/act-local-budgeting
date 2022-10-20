@@ -13,36 +13,32 @@
           ></b-form-select>
         </p>
         <h4 class="header-4 mt-2">
-          องค์การบริหารส่วนจังหวัด (อบจ.) <br />
+          องค์การบริหารส่วนจังหวัด (อบจ.) <br class="d-none d-sm-inline" />
           จำนวน 76 แห่ง ของประเทศไทย
         </h4>
-        <div class="d-flex justify-content-center mt-3">
-          <div class="ml-5">
+        <div class="d-flex justify-content-lg-center mt-3">
+          <div class="ml-lg-5">
             <h5 class="header-5 font-weight-bold">
               จัดสรรงบประมาณผ่านข้อบัญญัติงบประมาณฯ ทั้งหมด
             </h5>
             <h1 class="header-1">
-              {{
-                parseInt(
-                  total_nationwide
-                    .toString()
-                    .substring(0, total_nationwide.toString().length - 3)
-                ).toLocaleString()
-              }}
-              ล้านบาท
+              <formatNumber :data="total_nationwide" />
             </h1>
           </div>
         </div>
       </div>
       <div class="position-relative">
+        <p class="text-2 white-a px-4 d-block d-lg-none">
+          โดยสามารถจำแนกค่าใช้จ่ายออกตาม:
+        </p>
         <b-tabs
           align="right"
           lazy
-          nav-class="main-tab pr-5 align-items-center"
+          nav-class="main-tab pr-md-5 align-items-center"
           no-fade
         >
           <template #tabs-start>
-            <p class="text-2 white-a m-0 px-3">
+            <p class="text-2 white-a m-0 px-3 d-none d-lg-block">
               โดยสามารถจำแนกค่าใช้จ่ายออกตาม:
             </p>
           </template>
@@ -73,8 +69,15 @@
                 </p>
               </b-popover>
             </template>
-            <div class="text-1 bg-white py-5 black">
-              <div class="d-flex justify-content-center">
+            <div class="text-1 bg-white py-4 py-sm-5 black">
+              <div
+                class="
+                  d-flex
+                  flex-column flex-md-row
+                  justify-content-center
+                  px-2 px-sm-0
+                "
+              >
                 <div
                   class="d-flex mx-1"
                   v-for="(item, i) in work_type"
@@ -148,14 +151,7 @@
                           {{ item.plan }}
                         </p>
                         <h4 class="header-4">
-                          {{
-                            parseInt(
-                              item.total
-                                .toString()
-                                .substring(0, item.total.toString().length - 3)
-                            ).toLocaleString()
-                          }}
-                          ล้านบาท ({{
+                          <formatNumber :data="item.total" /> ({{
                             ((item.total / total_nationwide) * 100).toFixed(1)
                           }}%)
                         </h4>
@@ -197,8 +193,15 @@
                 </p>
               </b-popover>
             </template>
-            <div class="text-1 bg-white py-5 black">
-              <div class="d-flex justify-content-center">
+            <div class="text-1 bg-white py-4 py-sm-5 black">
+              <div
+                class="
+                  d-flex
+                  flex-column flex-md-row
+                  justify-content-center
+                  px-2 px-sm-0
+                "
+              >
                 <div
                   class="d-flex mx-1"
                   v-for="(item, i) in groupedByType"
@@ -271,14 +274,7 @@
                           {{ item.type }}
                         </p>
                         <h4 class="header-4">
-                          {{
-                            parseInt(
-                              item.total
-                                .toString()
-                                .substring(0, item.total.toString().length - 3)
-                            ).toLocaleString()
-                          }}
-                          ล้านบาท ({{
+                          <formatNumber :data="item.total" /> ({{
                             ((item.total / total_nationwide) * 100).toFixed(1)
                           }}%)
                         </h4>
@@ -322,17 +318,20 @@
         </p>
       </div>
       <div class="position-relative" id="province-wrapper">
+        <p class="text-2 white-a px-4 d-block d-lg-none">เลือกวิธีสำรวจ:</p>
         <b-tabs
           align="right"
           lazy
-          nav-class="main-tab-province pr-5 align-items-center"
+          nav-class="main-tab-province pr-sm-5 align-items-center"
           no-fade
         >
           <template #tabs-start>
-            <p class="text-2 white-a m-0 px-3">เลือกวิธีสำรวจ:</p>
+            <p class="text-2 white-a m-0 px-3 d-none d-lg-block">
+              เลือกวิธีสำรวจ:
+            </p>
           </template>
           <b-tab
-            title="สำรวจผ่านโครงสร้าง"
+            title="โครงสร้าง"
             title-item-class="tab-header"
             active
             @click="activetab_province = 'สำรวจผ่านโครงสร้าง'"
@@ -348,7 +347,7 @@
                 alt=""
                 id="popover-province-1"
               />
-              <strong>สำรวจผ่านโครงสร้าง</strong>
+              <strong>โครงสร้าง</strong>
               <b-popover
                 v-if="activetab_province == 'สำรวจผ่านโครงสร้าง'"
                 target="popover-province-1"
@@ -387,12 +386,12 @@
             </template>
           </b-tab>
           <b-tab
-            title="สำรวจผ่านคำสำคัญ"
+            title="คำสำคัญ"
             title-item-class="tab-header"
             @click="activetab_province = 'สำรวจผ่านคำสำคัญ'"
           >
             <div class="text-2 bg-white py-5 black">
-              <div style="width: 600px" class="mx-auto text-center">
+              <div style="max-width: 600px" class="mx-auto text-center px-3">
                 <p>
                   เห็นโครงสร้างงบ อบจ. กันไปแล้ว หลายคนอาจจะยังจินตนาการไม่ออก
                   ว่างบแต่ละแผนงานเกี่ยวข้องกับชีวิตเราเรื่องไหนบ้าง
@@ -600,8 +599,9 @@
       </div>
       <div
         class="
+          p-3
           grid-wrapper
-          h-100vh
+          min-h-screen
           d-flex
           justify-content-center
           align-items-center
@@ -695,14 +695,7 @@
           <div class="text-center white-b text-2">
             จากงบประมาณ <span class="lime">อบจ.{{ selected_province }}</span>
             ทั้งหมด
-            {{
-              parseInt(
-                total_province
-                  .toString()
-                  .substring(0, total_province.toString().length - 3)
-              ).toLocaleString()
-            }}
-            ล้านบาท พบคำว่า
+            <formatNumber :data="total_province" /> พบคำว่า
             <div class="selected_keyword">{{ selected_keyword }}</div>
             ปรากฏใน {{ keywordSlide.length }} รายการงบ
           </div>
@@ -914,6 +907,7 @@ export default {
             breakpoint: 600,
             settings: {
               slidesToShow: 1,
+              arrows: false,
             },
           },
         ],
@@ -1092,7 +1086,6 @@ export default {
           });
         });
 
-      console.log(this.keywordSlide);
       this.$refs["kw-modal"].show();
     },
     selectWorkPlan(index) {
@@ -1107,7 +1100,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .collapse .card-body {
   background-color: #0056a6;
   padding: 0 1.25rem 1.25rem;
@@ -1123,6 +1116,10 @@ export default {
   position: relative;
   font-size: 24px;
   font-weight: bold;
+
+  @media #{$mq-mini-mobile} {
+    width: 160px;
+  }
 }
 
 .tab-header a {
@@ -1143,6 +1140,10 @@ export default {
   font-weight: bold;
   border: none;
   padding: 10px;
+
+  @media #{$mq-mini-mobile} {
+    width: 100px !important;
+  }
 }
 
 .expense-type .active {
@@ -1215,12 +1216,20 @@ select::-ms-expand {
 .work-card-wrapper {
   max-width: 600px;
   margin: auto;
+
+  @media #{$mq-mini-mobile} {
+    max-width: 300px;
+  }
 }
 
 .work-card {
   //box-shadow: 1px 1px 12px 2px rgba(24, 31, 28, 0.15);
   border: 4px solid #000;
   padding: 25px;
+
+  @media #{$mq-mini-mobile} {
+    padding: 10px;
+  }
 }
 
 .link-btn {
@@ -1335,6 +1344,10 @@ select::-ms-expand {
   right: -24px;
   top: 0;
   z-index: 1;
+
+  @media #{$mq-mini-mobile} {
+    right: 0px;
+  }
 }
 
 .link-btn-w {

@@ -4,14 +4,7 @@
       <div class="text-center my-5">
         <h4 class="header-4 font-weight-bold">จัดสรรงบประมาณทั้งหมดในภาพรวม</h4>
         <h1 class="header-1">
-          {{
-            total == 0
-              ? 0
-              : parseInt(
-                  total.toString().substring(0, total.toString().length - 3)
-                ).toLocaleString()
-          }}
-          ล้านบาท
+          <formatNumber :data="total" />
         </h1>
       </div>
 
@@ -31,7 +24,7 @@
       </div>
 
       <template v-if="selected_type == 'แผนงาน'">
-        <div class="d-flex justify-content-center" v-if="total != 0">
+        <div class="d-flex flex-column flex-sm-row px-2 px-sm-0 justify-content-center" v-if="total != 0">
           <div class="d-flex mx-1" v-for="(item, i) in work_type" :key="i">
             <div
               class="work-type-square mr-2"
@@ -97,14 +90,7 @@
                       {{ item.plan }}
                     </p>
                     <h4 class="header-4">
-                      {{
-                        parseInt(
-                          item.total
-                            .toString()
-                            .substring(0, item.total.toString().length - 3)
-                        ).toLocaleString()
-                      }}
-                      ล้านบาท ({{ ((item.total / total) * 100).toFixed(1) }}%)
+                      <formatNumber :data="item.total" /> ({{ ((item.total / total) * 100).toFixed(1) }}%)
                     </h4>
                   </b-col>
                   <b-col cols="4"><ImageSector :title="item.plan" /></b-col>
@@ -135,14 +121,7 @@
                         {{ item2.task }}
                       </p>
                       <p class="text-3 black m-0">
-                        {{
-                          parseInt(
-                            item2.total
-                              .toString()
-                              .substring(0, item2.total.toString().length - 3)
-                          ).toLocaleString()
-                        }}
-                        ล้านบาท ({{
+                        <formatNumber :data="item2.total" /> ({{
                           (
                             (item2.total /
                               groupedByAreaSlide.filter(
@@ -271,14 +250,7 @@
                       {{ item.type }}
                     </p>
                     <h4 class="header-4">
-                      {{
-                        parseInt(
-                          item.total
-                            .toString()
-                            .substring(0, item.total.toString().length - 3)
-                        ).toLocaleString()
-                      }}
-                      ล้านบาท ({{ ((item.total / total) * 100).toFixed(1) }}%)
+                      <formatNumber :data="item.total" /> ({{ ((item.total / total) * 100).toFixed(1) }}%)
                     </h4>
                   </b-col>
                   <b-col cols="4"
@@ -314,14 +286,7 @@
                         {{ item2.task }}
                       </p>
                       <p class="text-3 black m-0">
-                        {{
-                          parseInt(
-                            item2.total
-                              .toString()
-                              .substring(0, item2.total.toString().length - 3)
-                          ).toLocaleString()
-                        }}
-                        ล้านบาท ({{
+                        <formatNumber :data="item2.total" /> ({{
                           ((item2.total / total) * 100).toFixed(1)
                         }}%)
                       </p>
@@ -404,6 +369,7 @@ export default {
             breakpoint: 600,
             settings: {
               slidesToShow: 1,
+              arrow: false,
             },
           },
         ],

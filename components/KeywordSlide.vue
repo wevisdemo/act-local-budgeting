@@ -19,8 +19,7 @@
           >
         </b-row>
         <p class="text-1 my-1">
-          {{ parseInt(item.total.toString().substring(0,item.total.toString().length - 3)).toLocaleString() }}
-          ล้านบาท
+          <formatNumber :data="item.total" />
         </p>
         <p class="text-4 mb-1">
           {{ ((item.total / total) * 100).toFixed(1) }}% ของค่าใช้จ่ายทั้งหมด

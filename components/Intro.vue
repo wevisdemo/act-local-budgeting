@@ -2,16 +2,28 @@
   <div>
     <div class="min-h-screen bg-blue-a overflow-hidden main-wrapper">
       <div>
-        <div class="text-center">
-          <img :src="act_logo"  class="mt-5 act_logo" alt="" />
+        <div class="text-center px-3">
+          <img :src="act_logo" class="mt-3 mt-sm-5 act_logo" alt="" />
+        </div>
+
+        <div class="d-flex d-lg-none justify-content-center mt-2">
+          <div class="text-right">
+            <img :src="box_lime" alt="" width="" class="img-intro-box" />
+          </div>
+          <div class="text-left">
+            <img :src="box_town_1" alt="" width="" class="img-intro-box" />
+          </div>
+          <div class="text-right">
+            <img :src="box_lime" alt="" width="" class="img-intro-box" />
+          </div>
         </div>
 
         <div class="d-flex flex-column flex-lg-row justify-content-center mt-3">
           <div cols="4" class="text-right d-none d-lg-block">
-            <img :src="box_town_2" alt="" width="340" />
+            <img :src="box_town_2" alt="" width="" />
           </div>
           <div cols="4" class="position-relative">
-            <img :src="box_dark" alt="" width="340" class="d-none d-lg-block" />
+            <img :src="box_dark" alt="" width="" class="d-none d-lg-block img-intro-box" />
             <div class="intro-text-2 white-a">
               <p class="text-4 m-0 text-center text-lg-left">
                 โปรเจกต์ชวนตรวจสอบงบประมาณจังหวัดชิ้นนี้<br />ต่อยอดมาจากไอเดียทีม
@@ -31,19 +43,19 @@
             </div>
           </div>
           <div cols="4" class="text-left position-relative">
-            <img :src="box_dark" alt="" width="340" class="d-none d-lg-block" />
+            <img :src="box_dark" alt="" width="" class="d-none d-lg-block img-intro-box" />
             <div class="intro-text-2 white-a">
               <div class="d-flex justify-content-around">
                 <div>
                   <p class="mb-1 text-4 font-weight-bold">Powered by</p>
-                  <img :src="act" alt="" />
+                  <img :src="act" alt="" class="logo-brand" />
                 </div>
                 <div class="ml-3">
                   <p class="mb-1 text-4 font-weight-bold">Co-Developed by</p>
                   <div class="d-flex flex-lg-column">
-                    <div><img :src="punchup" alt="" /></div>
-                    <div><p class="my-2 text-4 mx-3 mx-lg-0">&</p></div>
-                    <div><img :src="hand" alt="" /></div>
+                    <div><img :src="punchup" alt="" class="logo-brand"/></div>
+                    <div><p class="my-2 text-4 mx-1 mx-lg-0">&</p></div>
+                    <div><img :src="hand" alt="" class="logo-brand"/></div>
                   </div>
                 </div>
               </div>
@@ -52,71 +64,64 @@
         </div>
 
         <div
-          class="d-flex justify-content-center mt-3 position-relative"
+          class="d-lg-flex justify-content-center mt-3 position-relative d-none"
           style="left: 150px"
         >
           <div class="text-right">
-            <img :src="box_dark" alt="" width="340" class="" />
+            <img :src="box_dark" alt="" width="" class="img-intro-box" />
           </div>
           <div class="text-right">
-            <img :src="box_town_1" alt="" width="340" />
+            <img :src="box_town_1" alt="" width="" class="img-intro-box"/>
           </div>
           <div class="text-right">
-            <img :src="box_dark" alt="" width="340" class="" />
+            <img :src="box_dark" alt="" width="" class="img-intro-box" />
           </div>
         </div>
 
         <div class="d-flex d-lg-none justify-content-center mt-2">
           <div class="text-right">
-            <img :src="box_lime" alt="" width="340" />
+            <img :src="box_lime" alt="" width="" class="img-intro-box" />
           </div>
           <div class="text-left">
-            <img :src="box_town_2" alt="" width="340" />
+            <img :src="box_town_2" alt="" width="" class="img-intro-box" />
           </div>
         </div>
 
         <div class="d-flex d-lg-none justify-content-center mt-2">
           <div class="text-right">
-            <img :src="box_town_3" alt="" width="340" />
+            <img :src="box_town_3" alt="" width="" class="img-intro-box" />
           </div>
           <div class="text-left">
-            <img :src="box_lime" alt="" width="340" />
+            <img :src="box_lime" alt="" width=""  class="img-intro-box"/>
           </div>
         </div>
-
-        <!-- <b-row class="text-center mt-2 intro-1">
-          <b-col class="position-relative">
-            <img :src="box_blue" alt="" width="340" />
-            <div class="intro-text-3">
-              <p class="text-1 font-weight-bold">
-                ถนน เสาไฟ โรงเรียน<br />พื้นที่สาธารณะ<br />ศูนย์พยาบาล...ฯลฯ
-              </p>
-            </div>
-          </b-col>
-        </b-row> -->
       </div>
 
-      <div style="max-width: 992px" class="mx-auto mt-5">
-        <h4 class="header-4 font-weight-bold white-a px-3">
-          ถนน เสาไฟ โรงเรียน<br />
-          พื้นที่สาธารณะ ศูนย์พยาบาล...ฯลฯ
-        </h4>
-      </div>
+      <div class="px-3">
+        <div style="max-width: 992px" class="mx-auto mt-5 text-center">
+          <h4 class="header-4 font-weight-bold white-a px-3 d-none d-md-none">
+            ถนน เสาไฟ โรงเรียน<br />
+            พื้นที่สาธารณะ ศูนย์พยาบาล...ฯลฯ
+          </h4>
+          <img :src="intro_desc_header" width="300" alt="" class="mx-auto" />
+        </div>
 
-      <div class="intro-box text-2 white-b my-3 text-center text-md-left">
-        <p class="text-2 m-0">
-          สิ่งเหล่านี้ล้วนเป็นสิ่งอำนวยความสะดวกและสวัสดิการพื้นฐานของเราทุกคน
-          ไม่ว่าเราจะอาศัยอยู่เมืองไหน จังหวัดไหน
-          เพราะเป็นปัจจัยที่จะทำให้เราใช้ชีวิตอยู่ในเมืองได้อย่างมีคุณภาพและมีความสุข
-          <br /><br />
-          การจัดสรรงบประมาณของหน่วยงานอย่าง
-          <span class="bg-lime blue-a">องค์การบริหารส่วนจังหวัด (อบจ.)</span>
-          <span class="lime font-weight-bold">
-            จึงมีส่วนชี้ชะตาว่าประชาชนในแต่ละเมืองจะได้รับประโยชน์จากโครงสร้างพื้นฐานเหล่านี้มากน้อยแค่ไหน ดังนั้นงบประมาณของจังหวัดจึงไม่ใช่เรื่องไกลตัว</span
-          >
-          แต่เป็นสิ่งที่พวกเราทุกคนควรมีโอกาสช่วยกันออกแบบและตรวจสอบได้
-          ว่างบประมาณของเมืองเรา ควรใช้และถูกใช้จ่ายไปกับเรื่องอะไรบ้าง
-        </p>
+        <div class="intro-box text-2 white-b my-3 text-center text-md-left">
+          <p class="text-2 m-0">
+            สิ่งเหล่านี้ล้วนเป็นสิ่งอำนวยความสะดวกและสวัสดิการพื้นฐานของเราทุกคน
+            ไม่ว่าเราจะอาศัยอยู่เมืองไหน จังหวัดไหน
+            เพราะเป็นปัจจัยที่จะทำให้เราใช้ชีวิตอยู่ในเมืองได้อย่างมีคุณภาพและมีความสุข
+            <br /><br />
+            การจัดสรรงบประมาณของหน่วยงานอย่าง
+            <span class="bg-lime blue-a">องค์การบริหารส่วนจังหวัด (อบจ.)</span>
+            <span class="lime font-weight-bold">
+              จึงมีส่วนชี้ชะตาว่าประชาชนในแต่ละเมืองจะได้รับประโยชน์จากโครงสร้างพื้นฐานเหล่านี้มากน้อยแค่ไหน
+              ดังนั้นงบประมาณของจังหวัดจึงไม่ใช่เรื่องไกลตัว</span
+            >
+            แต่เป็นสิ่งที่พวกเราทุกคนควรมีโอกาสช่วยกันออกแบบและตรวจสอบได้
+            ว่างบประมาณของเมืองเรา ควรใช้และถูกใช้จ่ายไปกับเรื่องอะไรบ้าง
+          </p>
+        </div>
       </div>
     </div>
 
@@ -174,6 +179,7 @@ export default {
       folder_dark: require("~/assets/images/folder_dark.svg"),
       box_light: require("~/assets/images/box_light.svg"),
       act_logo: require("~/assets/images/act_logo.svg"),
+      intro_desc_header: require("~/assets/images/intro_desc_header.svg"),
     };
   },
 };
@@ -192,6 +198,10 @@ export default {
 
   p {
     line-height: 150%;
+  }
+
+  @media #{$mq-mini-mobile} {
+    padding: 10px;
   }
 }
 
@@ -311,5 +321,18 @@ export default {
 .act_logo {
   max-width: 800px;
   margin: auto;
+}
+
+.img-intro-box {
+  max-width: 300px;
+  @media #{$mq-mini-mobile} {
+    max-width: 200px;
+  }
+}
+
+.logo-brand {
+  @media #{$mq-mini-mobile} {
+    width: 100%;
+  }
 }
 </style>
