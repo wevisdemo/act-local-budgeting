@@ -1,3 +1,15 @@
+/**
+ * @preserve
+ * Sharer.js
+ *
+ * @description Create your own social share buttons
+ * @version 0.2.12
+ * @author Ellison Leao <ellisonleao@gmail.com>
+ * @license GPLv3
+ *
+ */
+
+
 /*!
  * ApexCharts v3.35.5
  * (c) 2018-2022 ApexCharts
@@ -96,15 +108,16 @@ and limitations under the License.
  */
 
 
-/**
- * @preserve
- * Sharer.js
- *
- * @description Create your own social share buttons
- * @version 0.2.12
- * @author Ellison Leao <ellisonleao@gmail.com>
- * @license GPLv3
- *
+/*!
+  * vue-router v3.5.2
+  * (c) 2021 Evan You
+  * @license MIT
+  */
+
+/*!
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
+ * Released under the MIT License.
  */
 
 
@@ -118,16 +131,3 @@ and limitations under the License.
 //! moment.js
 
 //! moment.js locale configuration
-
-
-/*!
-  * vue-router v3.5.2
-  * (c) 2021 Evan You
-  * @license MIT
-  */
-
-/*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
- * Released under the MIT License.
- */
