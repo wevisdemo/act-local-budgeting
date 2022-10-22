@@ -26,7 +26,7 @@
             <img :src="box_dark" alt="" width="" class="d-none d-lg-block img-intro-box" />
             <div class="intro-text-2 white-a">
               <p class="text-4 m-0 text-center text-lg-left">
-                โปรเจกต์ชวนตรวจสอบงบประมาณจังหวัดชิ้นนี้<br />ต่อยอดมาจากไอเดียทีม
+                โปรเจกต์ชวนตรวจสอบงบประมาณ อบจ. ชิ้นนี้<br />ต่อยอดมาจากไอเดียทีม
                 <span class="lime"> ขิงบ้านเรา</span> ผู้ได้รับการคัดเลือก
               </p>
               <hr class="my-1 d-none d-lg-block" />
@@ -128,7 +128,7 @@
     <div
       class="h-100vh choose-wrapper d-flex flex-column justify-content-between"
     >
-      <div class="p-3 d-flex justify-content-center align-items-center h-100">
+      <div class="px-3 py-5 d-flex justify-content-center align-items-center h-100">
         <div>
           <div class="header-box mb-5">
             <div class="content bg-blue-a">
@@ -172,9 +172,9 @@ export default {
       box_town_1: require("~/assets/images/box_town_1.svg"),
       box_town_2: require("~/assets/images/box_town_2.svg"),
       box_town_3: require("~/assets/images/box_town_3.svg"),
-      actkathon: require("~/assets/images/actkathon.png"),
+      actkathon: require("~/assets/images/actkathon.svg"),
       act: require("~/assets/images/act.svg"),
-      hand: require("~/assets/images/hand.png"),
+      hand: require("~/assets/images/hand.svg"),
       punchup: require("~/assets/images/punchup.svg"),
       folder_dark: require("~/assets/images/folder_dark.svg"),
       box_light: require("~/assets/images/box_light.svg"),
@@ -324,7 +324,7 @@ export default {
 }
 
 .img-intro-box {
-  max-width: 300px;
+  max-width: 340px;
   @media #{$mq-mini-mobile} {
     max-width: 200px;
   }

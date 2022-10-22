@@ -118,7 +118,7 @@
                   </p>
                   <hr />
 
-                  <div class="work-list-box-content">
+                  <div class="work-list-box-content py-1">
                     <div
                       v-for="(item2, j) in tasks
                         .filter((x) => x.plan == item.plan)

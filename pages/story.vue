@@ -36,10 +36,10 @@
           </div>
           <div class="step" data-step-no="2">
             <div class="text-1 text-step-2 text-center">
-              <b> องค์กรปกครองส่วนท้องถิ่น หรือ อบจ.</b> <br />
+              <b>องค์กรปกครองส่วนท้องถิ่น หรือ อบจ.</b> <br />
               เป็นองค์กรปกครองส่วนท้องถิ่นที่มีขนาดใหญ่ที่สุด
               และมีเขตพื้นที่รับผิดชอบครอบคลุมทั่วทั้งจังหวัด
-              ก่อตั้งขึ้นเพื่อจัดหาบริการสาธารณ์ประโยชน์ต่างๆ
+              ก่อตั้งขึ้นเพื่อจัดหาบริการสาธารณประโยชน์ต่าง ๆ 
               ให้แก่ประชาชนในแต่ละจังหวัด
             </div>
           </div>
@@ -90,6 +90,7 @@
         <div
           class="
             story-intro-2
+            px-2
             d-flex
             flex-column flex-lg-row
             justify-content-center
@@ -150,7 +151,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-blue-a overflow-hidden">
+      <div class="bg-blue-a overflow-hidden ">
         <div class="d-none d-lg-flex justify-content-between px-5 pt-3">
           <div class="circle"></div>
           <div class="circle"></div>
@@ -239,7 +240,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-black world-bg">
+      <div class="bg-black world-bg px-2">
         <div class="d-none d-lg-flex justify-content-between p-5">
           <div class="circle"></div>
           <div class="circle"></div>
@@ -247,7 +248,7 @@
 
         <h4 class="header-4 font-weight-bold white-a text-center pt-5">
           การตรวจสอบงบของภาครัฐไทย<span class="lime-b">ยังคงทำได้ยาก</span>
-          <br />
+          <br class="d-none d-sm-inline"/>
           งั้นเรามาดูกันดีกว่า ว่าต่างประเทศเขาจัดการเรื่องนี้อย่างไรบ้าง
         </h4>
         <p
@@ -485,7 +486,16 @@
           justify-content-between
         "
       >
-        <div class="p-3 d-flex justify-content-center align-items-center h-100">
+        <div
+          class="
+            px-3
+            py-5
+            d-flex
+            justify-content-center
+            align-items-center
+            h-100
+          "
+        >
           <div>
             <div class="header-box mb-5">
               <div class="content bg-blue-a">
@@ -799,7 +809,7 @@ export default {
   }
 }
 .step {
-  padding: 15vh 0;
+  padding: 15vh 10px;
   width: 100%;
   height: 100vh;
   margin: auto;
@@ -926,7 +936,7 @@ export default {
 }
 
 .bg-papertear {
-  background: #e0fd6a;
+  background: #ecfea6;
   margin-top: -100px;
   @media #{$mq-mini-mobile} {
     margin-top: 0;
@@ -949,6 +959,7 @@ export default {
 
         @media #{$mq-mini-mobile} {
           font-size: 12px !important;
+          max-width: 300px;
         }
       }
     }
@@ -1056,6 +1067,10 @@ export default {
 
   @media #{$mq-mini-mobile} {
     // position: unset;
+
+    top: 0px;
+    left: 60px;
+
     margin: auto;
     width: 250px;
   }
@@ -1069,6 +1084,7 @@ export default {
   }
 
   @media #{$mq-mini-mobile} {
+    max-width: 300px;
     img {
       width: 300px;
     }

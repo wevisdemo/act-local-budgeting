@@ -5,7 +5,8 @@
       id="menu-wrapper"
     >
       <div>
-        <img :src="logo" alt="" width="70" class="logo" />
+        <a href="http://actai.co" target="_blank" rel="noopener noreferrer">
+        <img :src="logo" alt="" width="70" class="logo" /></a>
       </div>
       <div class="text-right text-sm-left">
         <NuxtLink class="box text-3" to="/">หน้าหลัก</NuxtLink>

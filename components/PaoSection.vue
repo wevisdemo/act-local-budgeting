@@ -19,7 +19,7 @@
         "
       >
         <span> 5 อันดับรายการที่ใช้จ่ายเงิน<u>เยอะ</u>ที่สุด</span>
-        <img :src="drag" alt="" class="d-block d-lg-none" />
+        <img :src="drag" alt="" class="drag-icon" />
       </div>
       <div
         class="overflow-auto drag-wrapper"
@@ -188,7 +188,7 @@
         "
       >
         <span> 5 อันดับรายการที่ใช้จ่ายเงิน<u>น้อย</u>ที่สุด</span>
-        <img :src="drag" alt="" class="d-block d-lg-none" />
+        <img :src="drag" alt="" class="drag-icon" />
       </div>
       <div
         class="overflow-auto drag-wrapper"
@@ -348,7 +348,7 @@
     </template>
     <div>
       <p class="text-1 white-b my-5 font-weight-bold">
-        ข้อมูลอื่นๆของจังของอบจ. {{ province }}
+        ข้อมูลอื่น ๆ ของอบจ. {{ province }}
       </p>
       <b-row v-if="pao != null">
         <b-col lg="7">
@@ -360,14 +360,22 @@
               class="header-3 text-center font-weight-bold"
               v-if="total_income != 0"
             >
-              {{
-                parseInt(
-                  total
-                    .toString()
-                    .substring(0, total_income.toString().length - 7)
-                ).toLocaleString()
-              }}
-              ล้านบาท
+              <template v-if="total != 0 && total != null">
+                {{
+                  total >= 1000000
+                    ? parseInt(
+                        total
+                          .toFixed()
+                          .toString()
+                          .substring(
+                            0,
+                            total_income.toFixed().toString().length - 6
+                          )
+                      ).toLocaleString() + " ล้านบาท"
+                    : parseInt(total.toString()).toLocaleString() + " บาท"
+                }}
+              </template>
+              <template v-else> 0 บาท </template>
             </h3>
             <div class="d-flex w-100" v-if="pao != null">
               <div
@@ -565,7 +573,7 @@
                         class="test"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
-                          รวมทรัพย์สินทั้งสิ้น
+                          รวมรายได้ต่อปี
                         </p>
                         <p class="text-3 text-center m-0">
                           <formatNumber :data="acc_data[2]" />
@@ -631,7 +639,7 @@
                         class="test"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
-                          รวมทรัพย์สินทั้งสิ้น
+                          รวมรายจ่ายต่อปี
                         </p>
                         <p class="text-3 text-center m-0">
                           <formatNumber :data="acc_data[3]" />
@@ -699,7 +707,7 @@
                         class="test"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
-                          รวมทรัพย์สินทั้งสิ้น
+                          การเสียภาษาเงินได้บุคคลธรรมดาในรอบปีภาษีที่ผ่านมา
                         </p>
                         <p class="text-3 text-center m-0">
                           <formatNumber :data="acc_data[4]" />
@@ -713,7 +721,7 @@
                             <formatNumber :data="item.ownAccount.taxed"
                           /></b-col>
                         </b-row>
-                        <b-row style="width: 200px">
+                        <b-row>
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -830,7 +838,7 @@
                         class="test"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
-                          รวมทรัพย์สินทั้งสิ้น
+                          รวมหนี้สินทั้งสิ้น
                         </p>
                         <p class="text-3 text-center m-0">
                           <formatNumber :data="acc_data[1]" />
@@ -927,15 +935,16 @@
         </div>
       </b-col>
       <b-col sm="2" class="bg-white-a p-3 red text-center">
-        <img :src="logo" alt="" class="mb-1" />
-        <div>
-          <a
-            target="_blank"
-            :href="pao.actAiUrl"
-            class="text-2 mb-0 font-weight-bold mt-2 red"
-            >เข้าสู่เครื่องมือ</a
-          >
-        </div>
+        <a
+          target="_blank"
+          :href="pao.actAiUrl"
+          class="text-2 mb-0 font-weight-bold mt-2 red pao-link-act"
+        >
+          <div>
+            <img :src="logo" alt="" class="mb-1" />
+            <div>เข้าสู่เครื่องมือ <img :src="linkicon_red" alt="" /></div>
+          </div>
+        </a>
       </b-col>
     </b-row>
   </div>
@@ -985,6 +994,7 @@ export default {
       drag: require("~/assets/images/drag.svg"),
       logo: require("~/assets/images/logo.svg"),
       arrow_link: require("~/assets/images/arrow_link.svg"),
+      linkicon_red: require("~/assets/images/linkicon_red.svg"),
       series: [],
       bgcolor: [],
       data_result: [],
@@ -1269,7 +1279,8 @@ export default {
   border: 2px solid #181f1c;
   border-radius: 50%;
   background-position: center;
-
+  background-repeat: no-repeat;
+  background-size: 100%;
   // @media #{$mq-mini-mobile} {
   //   width: 96px;
   //   height: 96px;
@@ -1298,5 +1309,16 @@ export default {
 .pao-link {
   color: #e5fbff;
   text-decoration: none;
+}
+
+.pao-link-act {
+  color: #ed1c24;
+  text-decoration: none;
+}
+.drag-icon {
+  display: none;
+  @media only screen and (max-width: 1440px) {
+    display: block;
+  }
 }
 </style>

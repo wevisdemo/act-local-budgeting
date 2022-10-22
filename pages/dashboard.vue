@@ -21,7 +21,7 @@
             <h5 class="header-5 font-weight-bold">
               จัดสรรงบประมาณผ่านข้อบัญญัติงบประมาณฯ ทั้งหมด
             </h5>
-            <h1 class="header-1">
+            <h1 class="header-1 total-nationwide">
               <formatNumber :data="total_nationwide" />
             </h1>
           </div>
@@ -197,7 +197,7 @@
               <div
                 class="
                   d-flex
-                  flex-wrap flex-column flex-sm0row
+                  flex-wrap flex-column flex-sm-row
                   justify-content-center
                   px-2 px-sm-0
                 "
@@ -246,7 +246,7 @@
               <p class="text-3 text-center mt-5">
                 รายละเอียด
                 {{ groupedByType.length }}
-                แผน
+                ประเภท
               </p>
 
               <div>
@@ -641,7 +641,7 @@
           justify-content-between
         "
       >
-        <div class="p-3 d-flex justify-content-center align-items-center h-100">
+        <div class="px-3 py-5 d-flex justify-content-center align-items-center h-100">
           <div>
             <div class="header-box mb-5">
               <div class="content bg-blue-a">
@@ -1356,5 +1356,11 @@ select::-ms-expand {
   border: 1px solid $black !important;
   border-radius: 5px;
   padding: 5px 25px;
+}
+
+.total-nationwide {
+  @media #{$mq-mini-mobile} {
+    color: #E0FD6A !important;
+  }
 }
 </style>
