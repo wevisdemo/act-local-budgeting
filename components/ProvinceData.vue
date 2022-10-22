@@ -110,7 +110,7 @@
                 <div class="work-list-box" :id="'work-list-box' + i">
                   <p class="text-2 blue-a font-weight-bold m-0">
                     มี
-                    {{ tasks.filter((x) => x.plan == item.plan).length }}
+                    {{ combinedTasksByPlan.find(e => e.plan === item.plan).tasks.length }}
                     รายการงบภายใต้แผนงาน
                   </p>
                   <p class="text-2 blue-a m-0">
@@ -120,11 +120,7 @@
 
                   <div class="work-list-box-content">
                     <div
-                      v-for="(item2, j) in tasks
-                        .filter((x) => x.plan == item.plan)
-                        .sort(function (a, b) {
-                          return b.total - a.total;
-                        })"
+                      v-for="(item2, j) in combinedTasksByPlan.find(e => e.plan === item.plan).tasks"
                       :key="'province-task-' + j"
                     >
                       <p class="text-2 black font-weight-bold m-0">
@@ -135,7 +131,7 @@
                           (
                             (item2.total /
                               groupedByAreaSlide.filter(
-                                (x) => x.plan == item2.plan
+                                (x) => x.plan == item.plan
                               )[0].total) *
                             100
                           ).toFixed(1)
@@ -355,6 +351,7 @@ export default {
       groupedByArea: [],
       groupedByType: [],
       groupedByAreaSlide: [],
+      combinedTasksByPlan: [],
       pao: [],
       tasks: [],
       work_type: [
@@ -456,6 +453,15 @@ export default {
             return b.total - a.total;
           });
 
+          const plans = this.groupedByAreaSlide.map(s => s.plan)
+          this.combinedTasksByPlan = plans.map(plan => {
+            const tasksByPlan = this.tasks.filter(task => task.plan === plan);
+            return {
+              plan,
+              tasks: combineTasks(tasksByPlan)
+            }
+          })
+
           // console.log(this.groupedByArea);
 
           // this.groupedByArea.map((x, i, ref) => {console.log(x.total)
@@ -487,6 +493,31 @@ export default {
     },
   },
 };
+
+/**
+ * Combine duplicated task name to single task representation
+ * @param targetedTasks Tasks to be combined
+ * @return Sort-by-total-desc combined tasks, { task: string, total: number }
+ */
+function combineTasks(targetedTasks) {
+  const tasksByName = {};
+  targetedTasks.forEach((task) => {
+    const existing = tasksByName[task.task];
+    if (existing) {
+      existing.total += task.total;
+    } else {
+      tasksByName[task.task] = {
+        total: task.total,
+      }
+    }
+  })
+
+  return Object.keys(tasksByName)
+    .map((key) => ({ task: key, total: tasksByName[key].total }))
+    .sort(function (a, b) {
+      return b.total - a.total;
+    })
+}
 </script>
 
 <style lang="scss" scoped>
