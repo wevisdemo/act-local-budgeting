@@ -178,7 +178,7 @@ export default {
       punchup: require("~/assets/images/punchup.svg"),
       folder_dark: require("~/assets/images/folder_dark.svg"),
       box_light: require("~/assets/images/box_light.svg"),
-      act_logo: require("~/assets/images/act_logo.svg"),
+      act_logo: require("~/assets/images/act_logo.png"),
       intro_desc_header: require("~/assets/images/intro_desc_header.svg"),
     };
   },

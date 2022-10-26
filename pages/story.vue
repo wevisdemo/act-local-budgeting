@@ -826,8 +826,8 @@ export default {
 #img-6 {
   max-width: 946px;
   margin: auto;
-  transform: scale(2.5);
-  bottom: 240px;
+  transform: scale(2);
+    bottom: 190px;
   z-index: 5;
   transition: 0.5s;
   opacity: 0;

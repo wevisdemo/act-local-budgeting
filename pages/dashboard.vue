@@ -275,12 +275,15 @@
                 <div
                   v-for="(item3, j) in groupedByType"
                   :style="{
-                    maxWidth:
-                      (item3.total / total_nationwide) * 100 > 1
-                        ? ((item3.total / total_nationwide) * 100).toFixed(2) +
-                          '%'
-                        : '1%',
-                  }"
+                      maxWidth:
+                        (item3.total / total_nationwide) * 100 != 0 &&
+                        (item3.total / total_nationwide) * 100 > 2
+                          ? ((item3.total / total_nationwide) * 100).toFixed(
+                              2
+                            ) + '%'
+                          : '1%',
+                      minWidth: '10px',
+                    }"
                   class="w-100"
                   :class="{
                     'white-b':
@@ -434,7 +437,7 @@
                     width="10"
                     alt=""
                   />
-                  <b>รายการงบ</b><br />
+                  <b>รายการงาน</b><br />
                 </p>
 
                 <span class="text-4"
@@ -933,7 +936,7 @@ export default {
 
       setTimeout(() => {
         document.getElementById("province-wrapper").scrollIntoView();
-      }, 1000);
+      }, 500);
     },
     showKeywordResult(text) {
       this.keywordSlide = [];
@@ -1045,7 +1048,7 @@ select::-ms-expand {
   background-color: transparent;
   background-image: url("~/assets/images/arrow_dd.svg");
   background-repeat: no-repeat;
-  width: 80px;
+  width: 90px;
   border: 1px solid #e5fbff;
   border-radius: 0;
   margin: 0 10px;

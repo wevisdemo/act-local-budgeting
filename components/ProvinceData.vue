@@ -116,7 +116,7 @@
                   <p class="text-2 blue-a font-weight-bold m-0">
                     มี
                     {{ combinedTasksByPlan.find(e => e.plan === item.plan).tasks.length }}
-                    รายการงบภายใต้แผนงาน
+                    รายการงานภายใต้แผนงานนี้
                   </p>
                   <p class="text-2 blue-a m-0">
                     (สัดส่วน % เทียบเฉพาะรายการในแผนงานเดียวกัน)
@@ -283,7 +283,7 @@
                   <p class="text-2 blue-a font-weight-bold m-0">
                     มี
                     {{ tasks.filter((x) => x.type == item.type).length }}
-                    รายการงบภายใต้แผนงาน
+                    รายการภายใต้ประเภทงบนี้
                   </p>
                   <p class="text-2 blue-a m-0">
                     (สัดส่วน % เทียบเฉพาะรายการในแผนงานเดียวกัน)
@@ -579,7 +579,7 @@ function combineTasks(targetedTasks) {
 
 .work-list-box {
   height: 500px;
-  overflow: hidden;
+  //overflow-x: hidden;
 }
 
 .see-more {
