@@ -100,12 +100,13 @@
                     v-for="(item3, j) in item2.plans"
                     :style="{
                       maxWidth:
-                        (item3.total / total_nationwide) * 100 != 0 && (item3.total / total_nationwide) * 100 > 2
+                        (item3.total / total_nationwide) * 100 != 0 &&
+                        (item3.total / total_nationwide) * 100 > 2
                           ? ((item3.total / total_nationwide) * 100).toFixed(
                               2
-                            ) +
-                            '%'
-                          : '1%',    minWidth: '10px'
+                            ) + '%'
+                          : '1%',
+                      minWidth: '10px',
                     }"
                     class="w-100"
                     :key="'type-' + i + j"
@@ -228,7 +229,7 @@
                   :style="{
                     maxWidth:
                       (item3.total / total_nationwide) * 100 > 1
-                        ? ((item3.total / total_nationwide) * 100).toFixed(2)  +
+                        ? ((item3.total / total_nationwide) * 100).toFixed(2) +
                           '%'
                         : '1%',
                   }"
@@ -940,7 +941,6 @@ export default {
           },
         ],
       },
-
       work_type_desc: [
         {
           title: "แผนงานบริหารงานทั่วไป",
@@ -1093,7 +1093,7 @@ export default {
       this.keywordSlide = [];
       this.selected_keyword = text;
 
-      fetch("/data/keywords.json")
+      fetch("data/keywords.json")
         .then((response) => response.json())
         .then((data) => {
           let a = Object.entries(data);
