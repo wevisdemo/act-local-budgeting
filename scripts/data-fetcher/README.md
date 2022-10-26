@@ -101,6 +101,7 @@ A root file indicates years and provinces provided in the data set.
 type Metadata = {
   years: number[]
   provinces: string[]
+  updatedAt: string   // ISO 8601 Date - YYYY-MM-DD
 }
 ```
 
@@ -108,7 +109,8 @@ Example
 ```json
 {
   "years": [2563, 2564],
-  "provinces": ["เชียงใหม่", "เชียงราย"]
+  "provinces": ["เชียงใหม่", "เชียงราย"],
+  "updatedAt": "2022-10-27"
 }
 ```
 
