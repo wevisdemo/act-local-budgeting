@@ -88,20 +88,24 @@
                     :style="{ backgroundColor: item.color }"
                   ></div>
                   <p class="text-3 mr-1">
-                    {{ ((item.total / total_nationwide) * 100).toFixed(1) }}%
+                    {{ ((item.total / total_nationwide) * 100).toFixed(2) }}%
                   </p>
                   <p class="text-3 font-weight-bold">{{ item.name }}</p>
                 </div>
               </div>
 
-              <div class="d-flex w-100">
+              <div class="d-flex w-100 overflow-hidden">
                 <template class="d-flex mx-1" v-for="(item2, i) in work_type">
                   <div
                     v-for="(item3, j) in item2.plans"
                     :style="{
                       maxWidth:
-                        ((item3.total / total_nationwide) * 100).toFixed(1) +
-                        '%',
+                        (item3.total / total_nationwide) * 100 != 0 && (item3.total / total_nationwide) * 100 > 2
+                          ? ((item3.total / total_nationwide) * 100).toFixed(
+                              2
+                            ) +
+                            '%'
+                          : '1%',    minWidth: '10px'
                     }"
                     class="w-100"
                     :key="'type-' + i + j"
@@ -116,7 +120,7 @@
                     >
                       <h5 class="header-5 mr-1" v-if="j == 0">
                         {{
-                          ((item3.total / total_nationwide) * 100).toFixed(1)
+                          ((item3.total / total_nationwide) * 100).toFixed(2)
                         }}%
                       </h5>
                     </div>
@@ -152,7 +156,7 @@
                         </p>
                         <h4 class="header-4">
                           <formatNumber :data="item.total" /> ({{
-                            ((item.total / total_nationwide) * 100).toFixed(1)
+                            ((item.total / total_nationwide) * 100).toFixed(2)
                           }}%)
                         </h4>
                         <p class="text-3 m-0">
@@ -218,14 +222,21 @@
                 </div>
               </div>
 
-              <div class="d-flex w-100 drag-wrapper overflow-auto" v-dragscroll>
+              <div class="d-flex w-100 overflow-hidden">
                 <div
                   v-for="(item3, j) in groupedByType"
                   :style="{
                     maxWidth:
-                      ((item3.total / total_nationwide) * 100).toFixed(1) + '%',
+                      (item3.total / total_nationwide) * 100 > 1
+                        ? ((item3.total / total_nationwide) * 100).toFixed(2)  +
+                          '%'
+                        : '1%',
                   }"
                   class="w-100"
+                  :class="{
+                    'white-b':
+                      item3.color == '#253472' || item3.color == '#A80C7C',
+                  }"
                   :key="'type-' + j"
                 >
                   <div
@@ -237,7 +248,7 @@
                     :key="j"
                   >
                     <h5 class="header-5 mr-1">
-                      {{ ((item3.total / total_nationwide) * 100).toFixed(1) }}%
+                      {{ ((item3.total / total_nationwide) * 100).toFixed(2) }}%
                     </h5>
                   </div>
                 </div>
@@ -275,7 +286,7 @@
                         </p>
                         <h4 class="header-4">
                           <formatNumber :data="item.total" /> ({{
-                            ((item.total / total_nationwide) * 100).toFixed(1)
+                            ((item.total / total_nationwide) * 100).toFixed(2)
                           }}%)
                         </h4>
                       </b-col>
@@ -628,7 +639,14 @@
 
           <p class="m-0 font-weight-bold">@corruptionwatch</p>
           <p>
-            และติดตามสรุปการรายงานเหตุสงสัยการทุจริต ได้ที่ Corruption Watch
+            และติดตามสรุปการรายงานเหตุสงสัยการทุจริต ได้ที่
+            <a
+              class="white-b text-underline"
+              href="https://cs.actai.co/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Corruption Watch</a
+            >
           </p>
         </div>
       </div>
@@ -641,7 +659,16 @@
           justify-content-between
         "
       >
-        <div class="px-3 py-5 d-flex justify-content-center align-items-center h-100">
+        <div
+          class="
+            px-3
+            py-5
+            d-flex
+            justify-content-center
+            align-items-center
+            h-100
+          "
+        >
           <div>
             <div class="header-box mb-5">
               <div class="content bg-blue-a">
@@ -896,6 +923,7 @@ export default {
       corruption_watch: require("~/assets/images/corruption_watch.png"),
       project_card_sample: require("~/assets/images/project_card_sample.svg"),
       trophy_desktop: require("~/assets/images/trophy_desktop.svg"),
+      linkicon_white: require("~/assets/images/linkicon_white.svg"),
       slickOptions: {
         focusOnSelect: true,
         infinite: true,
@@ -1214,7 +1242,7 @@ select::-ms-expand {
 }
 
 .work-card-wrapper {
-  max-width: 600px;
+  max-width: 625px;
   margin: auto;
 
   @media #{$mq-mini-mobile} {
@@ -1324,7 +1352,10 @@ select::-ms-expand {
   height: 200px;
   border: 4px solid #ffffff;
   cursor: pointer;
-  padding: 12px;
+
+  h5 {
+    padding: 12px;
+  }
 }
 
 .big:hover {
@@ -1360,7 +1391,7 @@ select::-ms-expand {
 
 .total-nationwide {
   @media #{$mq-mini-mobile} {
-    color: #E0FD6A !important;
+    color: #e0fd6a !important;
   }
 }
 </style>

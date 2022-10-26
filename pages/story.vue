@@ -39,7 +39,7 @@
               <b>องค์กรปกครองส่วนท้องถิ่น หรือ อบจ.</b> <br />
               เป็นองค์กรปกครองส่วนท้องถิ่นที่มีขนาดใหญ่ที่สุด
               และมีเขตพื้นที่รับผิดชอบครอบคลุมทั่วทั้งจังหวัด
-              ก่อตั้งขึ้นเพื่อจัดหาบริการสาธารณประโยชน์ต่าง ๆ 
+              ก่อตั้งขึ้นเพื่อจัดหาบริการสาธารณประโยชน์ต่าง ๆ
               ให้แก่ประชาชนในแต่ละจังหวัด
             </div>
           </div>
@@ -49,7 +49,14 @@
                 อบจ. มีอำนาจหน้าที่ครอบคลุม หลากหลายด้าน ไม่ว่าจะเป็น...
               </p>
 
-              <div class="random header-3" id="random">วิศวกรรมจราจร</div>
+              <div
+                class="random header-3"
+                id="random"
+                @mouseover="clearTimer"
+                @mouseleave="setTimer"
+              >
+                วิศวกรรมจราจร
+              </div>
             </div>
           </div>
           <div class="step" data-step-no="4">
@@ -71,7 +78,6 @@
               </h5>
             </div>
           </div>
-          <div data-step-no="6"></div>
         </Scrollama>
       </div>
       <div class="">
@@ -97,61 +103,72 @@
             align-items-center
           "
         >
-          <div class="position-relative pr-lg-5">
-            <div
-              class="
-                circle
-                bg-orange-a
-                text-2
-                d-flex
-                justify-content-center
-                align-items-center
-                text-center
-                font-weight-bold
-              "
-            >
-              ก่อน<br />จัดสรรงบ
-            </div>
-            <div class="desc mt-3 mt-lg-0">
-              <p class="text-2 text-center">
-                เราเรียกขั้นตอนนี้ว่า
-                <span class="orange-a">Participatory Budgeting</span>
-                แต่ในความเป็นจริง สำหรับประเทศไทย แนวคิดการจัดสรรงบประมาณแบบ
-                มีส่วนร่วมลักษณะนี้อาจยังไม่ประสบความสำเร็จ
-                หรือเห็นภาพได้ชัดเนื่องจากข้อจำกัดหลายอย่าง
-              </p>
+          <div
+            class="
+              position-relative
+              story-intro-content-1
+              d-flex
+              justify-content-end
+            "
+          >
+            <div>
+              <div
+                class="
+                  circle
+                  bg-orange-a
+                  text-2
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  text-center
+                  font-weight-bold
+                "
+              >
+                ก่อน<br />จัดสรรงบ
+              </div>
+              <div class="desc mt-3 mt-lg-0">
+                <p class="text-2 text-center">
+                  เราเรียกขั้นตอนนี้ว่า
+                  <span class="orange-a">Participatory Budgeting</span>
+                  แต่ในความเป็นจริง สำหรับประเทศไทย แนวคิดการจัดสรรงบประมาณแบบ
+                  มีส่วนร่วมลักษณะนี้อาจยังไม่ประสบความสำเร็จ
+                  หรือเห็นภาพได้ชัดเนื่องจากข้อจำกัดหลายอย่าง
+                </p>
+              </div>
             </div>
           </div>
-          <div class="mx-3">
+          <div class="mx-3 arrow-box">
             <img width="100%" :src="arrow" class="arrow" alt="" />
           </div>
-          <div class="position-relative">
-            <div
-              class="
-                circle
-                bg-light-blue
-                text-2
-                d-flex
-                justify-content-center
-                align-items-center
-                text-center
-                font-weight-bold
-              "
-            >
-              หลัง<br />จัดสรรงบ
-            </div>
-            <div class="desc mt-3 mt-lg-0">
-              <p class="text-2 text-center">
-                อย่างไรก็ตาม หลังจากที่การจัดสรรงบประมาณเสร็จสิ้นไปแล้ว
-                ประชาชนอย่างเรา ๆ ก็ยังคงมีบทบาทสำคัญ นั่นก็คือการ
-                <span class="light-blue">ติดตาม ตรวจสอบ</span>
-                เพื่อให้มั่นใจว่างบเหล่านั้น ถูกใช้แบบที่ควรจะเป็น
-              </p>
+          <div class="position-relative story-intro-content-2">
+            <div>
+              <div
+                class="
+                  circle
+                  bg-light-blue
+                  text-2
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  text-center
+                  font-weight-bold
+                "
+              >
+                หลัง<br />จัดสรรงบ
+              </div>
+              <div class="desc mt-3 mt-lg-0">
+                <p class="text-2 text-center">
+                  อย่างไรก็ตาม หลังจากที่การจัดสรรงบประมาณเสร็จสิ้นไปแล้ว
+                  ประชาชนอย่างเรา ๆ ก็ยังคงมีบทบาทสำคัญ นั่นก็คือการ
+                  <span class="light-blue">ติดตาม ตรวจสอบ</span>
+                  เพื่อให้มั่นใจว่างบเหล่านั้น ถูกใช้แบบที่ควรจะเป็น
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="bg-blue-a overflow-hidden ">
+      <div class="bg-blue-a overflow-hidden">
         <div class="d-none d-lg-flex justify-content-between px-5 pt-3">
           <div class="circle"></div>
           <div class="circle"></div>
@@ -248,7 +265,7 @@
 
         <h4 class="header-4 font-weight-bold white-a text-center pt-5">
           การตรวจสอบงบของภาครัฐไทย<span class="lime-b">ยังคงทำได้ยาก</span>
-          <br class="d-none d-sm-inline"/>
+          <br class="d-none d-sm-inline" />
           งั้นเรามาดูกันดีกว่า ว่าต่างประเทศเขาจัดการเรื่องนี้อย่างไรบ้าง
         </h4>
         <p
@@ -529,6 +546,8 @@
 </template>
 
 <script>
+const INTERVAL = 5000;
+
 import "intersection-observer";
 import Scrollama from "vue-scrollama";
 import * as story_postit_lottie from "~/assets/lottie/story_postit.json";
@@ -610,55 +629,67 @@ export default {
       isFirstTime: true,
       img2: "",
       img3: "",
+      timer: null,
     };
   },
   mounted() {
     var width = window.screen.width;
-    console.log(width);
+    //console.log(width);
     if (width > 768) {
       this.img2 = 0;
       this.img3 = 0;
     } else if (width > 600) {
-      this.img2 = 4;
-      this.img3 = 3;
+      this.img2 = 30;
+      this.img3 = 15;
     }
+
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     document.getElementById("img-1").style.bottom = 0;
     setTimeout(() => {
-      document.getElementById("img-2").style.bottom = 7 - this.img2 + "%";
+      document.getElementById("img-2").style.bottom = width > 600 ? 50 - this.img2 + "px" : "15px";
     }, 1000);
     setTimeout(() => {
-      document.getElementById("img-3").style.bottom = 6 - this.img3 + "%";
+      document.getElementById("img-3").style.bottom = width > 600 ? 40 - this.img3 + "px" : "10px";
       document.getElementById("arrowdown").style.opacity = 1;
       document.getElementsByTagName("body")[0].style.overflow = "unset";
       this.isFirstTime = false;
     }, 2000);
 
-    var i = 1;
-
-    setInterval(() => {
-      document.getElementById("random").textContent = this.word_random[i].title;
-      document.getElementById("random").style.background =
-        this.word_random[i].bg;
-      document.getElementById("random").style.color = this.word_random[i].color;
-      i = ++i % this.word_random.length;
-    }, 2000);
+    this.setTimer();
   },
   methods: {
+    clearTimer() {
+      clearInterval(this.timer);
+    },
+    setTimer() {
+      clearInterval(this.timer);
+      var i = 1;
+
+      this.timer = setInterval(() => {
+        document.getElementById("random").textContent =
+          this.word_random[i].title;
+        document.getElementById("random").style.background =
+          this.word_random[i].bg;
+        document.getElementById("random").style.color =
+          this.word_random[i].color;
+        i = ++i % this.word_random.length;
+      }, 2000);
+    },
     handler({ element, index, direction }) {
+      var width = window.screen.width;
       this.index = index;
       if (index == 0) {
         if (!this.isFirstTime) {
           document.getElementById("img-2").style.transform = "none";
           document.getElementById("img-3").style.transform = "none";
-          document.getElementById("img-2").style.bottom = 7 - this.img2 + "%";
-          document.getElementById("img-3").style.bottom = 7 - this.img3 + "%";
+          document.getElementById("img-2").style.bottom = width > 600 ? 50 - this.img2 + "px" : "15px";
+          document.getElementById("img-3").style.bottom = width > 600 ? 40 - this.img3 + "px" : "10px";
         }
       } else if (index == 1) {
-        document.getElementById("img-2").style.transform = "scale(2.5)";
-        document.getElementById("img-3").style.transform = "scale(3)";
-        document.getElementById("img-2").style.bottom = 22 - this.img2 + "%";
-        document.getElementById("img-3").style.bottom = 12 - this.img2 + "%";
+        document.getElementById("img-2").style.transform = "scale(2)";
+        document.getElementById("img-3").style.transform = "scale(2.5)";
+        document.getElementById("img-2").style.bottom = width > 600 ? 155 - this.img2 + "px" : "50px";
+        document.getElementById("img-3").style.bottom = width > 600 ? 85 - this.img3 + "px" : "30px";
       }
 
       if (index == 4) {
@@ -774,18 +805,21 @@ export default {
   max-width: 647px;
   margin: auto;
   transform: scale(3);
-  bottom: 12%;
+  bottom: 130px;
   z-index: 5;
   transition: 0.5s;
   opacity: 0;
 
   @media #{$mq-small-laptop} {
     transform: scale(2.5);
-    bottom: 17%;
+    bottom: 115px;
   }
   @media #{$mq-mobile} {
     transform: scale(3);
-    bottom: 11%;
+    //bottom: 11%;
+  }
+  @media #{$mq-mini-mobile} {
+    bottom: 50px;
   }
 }
 
@@ -793,19 +827,22 @@ export default {
   max-width: 946px;
   margin: auto;
   transform: scale(2.5);
-  bottom: 22%;
+  bottom: 240px;
   z-index: 5;
   transition: 0.5s;
   opacity: 0;
 
   @media #{$mq-small-laptop} {
-    transform: scale(3);
-    bottom: 14%;
+    transform: scale(2);
+    bottom: 185px;
   }
 
   @media #{$mq-mobile} {
-    transform: scale(1);
-    bottom: 6%;
+    transform: scale(2);
+    bottom: 150px;
+  }
+  @media #{$mq-mini-mobile} {
+    bottom: 60px;
   }
 }
 .step {
@@ -875,6 +912,33 @@ export default {
     background: #0056a6;
   }
 
+  .story-intro-content-1,
+  .story-intro-content-2 {
+    flex: 0 0 48%;
+  }
+
+  .story-intro-content-1 .circle {
+    right: 75px;
+    position: relative;
+
+    @media #{$mq-mobile} {
+      position: unset !important;
+    }
+  }
+
+  .story-intro-content-2 .desc {
+    left: 75px;
+    position: relative;
+
+    @media #{$mq-mobile} {
+      position: unset;
+    }
+  }
+
+  .arrow-box {
+    flex: 0 0 2%;
+  }
+
   .circle {
     width: 154px;
     height: 154px;
@@ -899,7 +963,6 @@ export default {
     max-width: 400px;
     position: relative;
     bottom: 40px;
-    left: 75px;
 
     @media #{$mq-small-laptop} {
       left: 50px;
@@ -1069,10 +1132,10 @@ export default {
     // position: unset;
 
     top: 0px;
-    left: 60px;
+    //left: 60px;
 
     margin: auto;
-    width: 250px;
+    width: 230px;
   }
 }
 
@@ -1084,9 +1147,9 @@ export default {
   }
 
   @media #{$mq-mini-mobile} {
-    max-width: 300px;
+    max-width: 280px;
     img {
-      width: 300px;
+      width: 280px;
     }
     h2 {
       font-size: 20px;
@@ -1200,6 +1263,7 @@ export default {
 .lottiebox {
   position: absolute;
   bottom: 0;
+  z-index: 6;
 }
 
 #arrowdown {

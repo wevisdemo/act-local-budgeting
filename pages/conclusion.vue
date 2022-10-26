@@ -53,33 +53,32 @@
         </p>
 
         <div class="d-flex justify-content-center py-sm-5">
-          <div
+
+          <ShareNetwork
+            network="facebook"
+            title=""
+            url="https://wevisdemo.github.io/act-local-budgeting/"
             class="share-btn pointer text-1 mx-2"
-            v-sharer
-            data-sharer="facebook"
-            data-title=""
-            data-url="https://wevisdemo.github.io/act-local-budgeting/"
           >
-            FB
-          </div>
-          <div
+            <img :src="facebook" alt="facebook" />
+          </ShareNetwork>
+
+          <ShareNetwork
+            network="twitter"
+            title=""
+            url="https://wevisdemo.github.io/act-local-budgeting/"
             class="share-btn pointer text-1 mx-2"
-            v-sharer
-            data-sharer="twitter"
-            data-title=""
-            data-url="https://wevisdemo.github.io/act-local-budgeting/"
           >
-            TW
-          </div>
-          <div
+            <img :src="twitter" alt="twitter" />
+          </ShareNetwork>
+          <ShareNetwork
+            network="line"
+            title=""
+            url="https://wevisdemo.github.io/act-local-budgeting/"
             class="share-btn pointer text-1 mx-2"
-            v-sharer
-            data-sharer="line"
-            data-title=""
-            data-url="https://wevisdemo.github.io/act-local-budgeting/"
           >
-            LINE
-          </div>
+            <img :src="line" alt="line" />
+          </ShareNetwork>
         </div>
       </div>
 
@@ -140,16 +139,18 @@
 </template>
 
 <script>
-import VueSharer from "vue-sharer";
+import Vue from "vue";
+import VueSocialSharing from "vue-social-sharing";
+Vue.use(VueSocialSharing);
 
 export default {
-  directives: {
-    sharer: VueSharer,
-  },
   data() {
     return {
       box_light: require("~/assets/images/box_light.svg"),
       logo: require("~/assets/images/logo.svg"),
+      facebook: require("~/assets/images/facebook.svg"),
+      line: require("~/assets/images/line.svg"),
+      twitter: require("~/assets/images/twitter.svg"),
     };
   },
 };
@@ -191,12 +192,6 @@ export default {
   a {
     color: #e5fbff;
   }
-}
-
-.share-btn {
-  padding: 20px 10px;
-  max-width: 80px;
-  border: 2px solid #e5fbff;
 }
 
 .header-box {

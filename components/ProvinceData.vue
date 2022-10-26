@@ -50,8 +50,14 @@
             <div
               v-for="(item3, j) in item2.plans"
               :style="{
-                maxWidth: ((item3.total / total) * 100).toFixed(1) + '%',
-              }"
+                      maxWidth:
+                        (item3.total / total) * 100 != 0 && (item3.total / total) * 100 > 2
+                          ? ((item3.total / total) * 100).toFixed(
+                              2
+                            ) +
+                            '%'
+                          : '1%',    minWidth: '10px'
+                    }"
               class="w-100"
               :key="'type-' + i + j"
             >
@@ -205,12 +211,16 @@
           </div>
         </div>
 
-        <div class="d-flex w-100 drag-wrapper overflow-auto" v-dragscroll>
+        <div class="d-flex w-100 overflow-hidden">
           <div
             v-for="(item3, j) in groupedByType"
             :style="{
-              maxWidth: ((item3.total / total) * 100).toFixed(1) + '%',
-            }"
+                    maxWidth:
+                      ((item3.total / total) * 100) > 1
+                        ? (((item3.total / total) * 100).toFixed(2)) +
+                          '%'
+                        : '1%',minWidth: '10px'
+                  }"
             class="w-100"
             :key="'type-' + j"
           >
@@ -499,7 +509,9 @@ export default {
   height: 200px;
   border: 4px solid #000000;
   cursor: pointer;
-  padding: 12px;
+  h5 {
+    padding: 12px;
+  }
 }
 
 .big:hover {

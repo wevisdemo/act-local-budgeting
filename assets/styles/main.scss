@@ -453,10 +453,14 @@ body {
   display: none !important;
 }
 
-ul {
-  word-break: break-all;
-}
-
 .nowrap {
   white-space: nowrap;
+}
+
+a:hover {
+  color: unset;
+}
+
+.text-underline {
+  text-decoration: underline;
 }

@@ -98,12 +98,12 @@
       </div>
 
       <div class="px-3">
-        <div style="max-width: 992px" class="mx-auto mt-5 text-center">
-          <h4 class="header-4 font-weight-bold white-a px-3 d-none d-md-none">
+        <div style="max-width: 992px" class="mx-auto mt-5 text-center text-md-left">
+          <h4 class="header-4 font-weight-bold white-a px-3 d-none d-md-block">
             ถนน เสาไฟ โรงเรียน<br />
             พื้นที่สาธารณะ ศูนย์พยาบาล...ฯลฯ
           </h4>
-          <img :src="intro_desc_header" width="300" alt="" class="mx-auto" />
+          <img :src="intro_desc_header" width="300" alt="" class="mx-auto d-block d-md-none" />
         </div>
 
         <div class="intro-box text-2 white-b my-3 text-center text-md-left">
@@ -229,7 +229,7 @@ export default {
   position: absolute;
   top: 5px;
   left: 5px;
-  width: 300px;
+  width: 310px;
   padding: 10px 5px;
 
   hr {

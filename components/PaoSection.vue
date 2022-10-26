@@ -460,7 +460,7 @@
                   {{ pao.population.toLocaleString() }} คน
                 </p>
                 <p class="text-4 m-0">
-                  ข้อมูลจากกรมการปกครอง โดยไม่นับรวมประชากรแฝง
+                  ข้อมูลจากกรมการปกครอง โดยไม่นับรวมประชากรแฝง รวบรวมและคำนวณข้อมูล ณ ปี 2565
                 </p>
               </b-col>
               <b-col sm="7">
@@ -885,7 +885,7 @@
                       <img :src="arrow_link" class="ml-3" alt=""
                     /></a>
                     <a
-                      href="https://ele.dla.go.th/public/appointment.do"
+                      :href="'https://www.google.com/search?q='+item.name"
                       target="_blank"
                       class="pao-link text-3 mt-3 mt-sm-0"
                       rel="noopener noreferrer"
@@ -934,13 +934,13 @@
           </p>
         </div>
       </b-col>
-      <b-col sm="2" class="bg-white-a p-3 red text-center">
+      <b-col sm="2" class="bg-white-a  red text-center">
         <a
           target="_blank"
           :href="pao.actAiUrl"
           class="text-2 mb-0 font-weight-bold mt-2 red pao-link-act"
         >
-          <div>
+          <div class="p-3">
             <img :src="logo" alt="" class="mb-1" />
             <div>เข้าสู่เครื่องมือ <img :src="linkicon_red" alt="" /></div>
           </div>
