@@ -419,7 +419,7 @@ body {
 }
 
 .slick-track {
-  display: flex !important;
+  display: flex;
 }
 
 .slick-slide {
@@ -441,7 +441,7 @@ body {
 }
 
 .bs-popover-bottom {
-  background: #FFFEF5 !important; 
+  background: #fffef5 !important;
 }
 
 .drag-wrapper::-webkit-scrollbar {

@@ -63,10 +63,17 @@
                 triggers="hover"
                 placement="topleft"
               >
-                <p class="text-3 m-0">
+                <p class="text-3">
                   <b>แผนงาน</b> หมายถึงภารกิจแต่ละด้าน
                   ที่องค์กรปกครองส่วนท้องถิ่น มีหน้าที่ตามกฎหมาย
                 </p>
+
+                <span class="text-4"
+                  >(หมายเหตุ : ตัวเลข %
+                  ในแต่ละกล่องสะท้อนสัดส่วนงบเฉพาะในแต่ละแผนงานเท่านั้น
+                  สำหรับกล่องที่มีขนาดเล็กสามารถคลิกเพื่อดู %
+                  สัดส่วนงบได้ที่กล่องรายละเอียดด้านล่าง)
+                </span>
               </b-popover>
             </template>
             <div class="text-1 bg-white py-4 py-sm-5 black">
@@ -135,14 +142,13 @@
                 แผน
               </p>
 
-              <div v-if="groupedByAreaSlide.length > 0">
+              <div v-if="groupedByAreaSlide.length > 0" id="work-plan-slide">
                 <VueSlickCarousel
                   v-bind="slickOptions"
                   class="work-card-wrapper"
                   ref="workplan"
                 >
                   <div
-                    class="work-card"
                     v-for="(item, i) in groupedByAreaSlide"
                     :key="'slide-' + i"
                     :style="{
@@ -150,22 +156,57 @@
                     }"
                     :class="{ 'white-b': item.color == '#4A4E5E' }"
                   >
-                    <b-row>
-                      <b-col cols="8">
-                        <p class="text-1 font-weight-bold">
+                    <div class="work-card">
+                      <b-row class="d-none d-md-flex">
+                        <b-col cols="8">
+                          <p class="text-1 font-weight-bold m-0">
+                            {{ item.plan }}
+                          </p>
+                          <h4 class="header-4">
+                            <formatNumber :data="item.total" /> ({{
+                              ((item.total / total_nationwide) * 100).toFixed(
+                                2
+                              )
+                            }}%)
+                          </h4>
+                          <p class="text-3 m-0">
+                            {{ work_type_desc[i].desc }}
+                          </p>
+                        </b-col>
+                        <b-col cols="4"
+                          ><ImageSector :title="item.plan"
+                        /></b-col>
+                      </b-row>
+
+                      <div class="d-block d-md-none">
+                        <p class="text-1 font-weight-bold mb-1">
                           {{ item.plan }}
                         </p>
-                        <h4 class="header-4">
-                          <formatNumber :data="item.total" /> ({{
-                            ((item.total / total_nationwide) * 100).toFixed(2)
-                          }}%)
-                        </h4>
-                        <p class="text-3 m-0">
+                        <b-row>
+                          <b-col cols="8">
+                            <h3 class="header-3 font-weight-bold m-0">
+                              ({{
+                                ((item.total / total_nationwide) * 100).toFixed(
+                                  2
+                                )
+                              }}%)
+                            </h3>
+                            <p class="font-weight-bold mb-1">
+                              ของค่าใช้จ่ายทั้งหมด
+                            </p>
+                            <p class="text-1 m-0">
+                              (<formatNumber :data="item.total" />)
+                            </p>
+                          </b-col>
+                          <b-col cols="4"
+                            ><ImageSector :title="item.plan"
+                          /></b-col>
+                        </b-row>
+                        <p class="text-3 mb-0 mt-2">
                           {{ work_type_desc[i].desc }}
                         </p>
-                      </b-col>
-                      <b-col cols="4"><ImageSector :title="item.plan" /></b-col>
-                    </b-row>
+                      </div>
+                    </div>
                   </div>
                 </VueSlickCarousel>
               </div>
@@ -191,11 +232,18 @@
                 triggers="hover"
                 placement="topleft"
               >
-                <p class="text-3 m-0">
+                <p class="text-3">
                   <b>ประเภทงบ</b>
                   หมายถึงประเภทรายจ่าย ของ อบจ. ที่กำหนดไว้ใน
                   พรบ.องค์การบริหารส่วนจังหวัด
                 </p>
+
+                <span class="text-4"
+                  >(หมายเหตุ : ตัวเลข %
+                  ในแต่ละกล่องสะท้อนสัดส่วนงบเฉพาะในแต่ละแผนงานเท่านั้น
+                  สำหรับกล่องที่มีขนาดเล็กสามารถคลิกเพื่อดู %
+                  สัดส่วนงบได้ที่กล่องรายละเอียดด้านล่าง)
+                </span>
               </b-popover>
             </template>
             <div class="text-1 bg-white py-4 py-sm-5 black">
@@ -261,7 +309,7 @@
                 ประเภท
               </p>
 
-              <div>
+              <div id="work-type-slide">
                 <VueSlickCarousel
                   v-bind="slickOptions"
                   class="work-card-wrapper"
@@ -309,7 +357,7 @@
       </div>
     </div>
     <div class="bg-blue-a white-a">
-      <div class="px-4 py-5">
+      <div class="px-3 px-sm-4 py-3 py-sm-5">
         <h4 class="header-4 font-weight-bold">
           ลองมาส่องงบจังหวัดที่คุณสนใจกันดีกว่า
         </h4>
@@ -324,7 +372,7 @@
           <b-form-select
             v-model="selected_province"
             :options="provinces"
-            class="year-select text-2 white-a font-weight-bold"
+            class="year-select province-select text-2 white-a font-weight-bold"
           ></b-form-select
           >ใช้งบประมาณไปกับอะไรบ้าง?
         </p>
@@ -366,7 +414,7 @@
                 triggers="hover"
                 placement="topleft"
               >
-                <p class="text-3 m-0">
+                <p class="text-3">
                   <b>โครงสร้างงบ อบจ.</b><br />
                   สามารถแบ่งออกเป็นประเภท
                   ตามลำดับขั้นตั้งแต่ใหญ่ไปจนถึงเล็กได้ดังนี้
@@ -388,6 +436,13 @@
                   />
                   <b>รายการงบ</b><br />
                 </p>
+
+                <span class="text-4"
+                  >(หมายเหตุ : ตัวเลข %
+                  ในแต่ละกล่องสะท้อนสัดส่วนงบเฉพาะในแต่ละแผนงานเท่านั้น
+                  สำหรับกล่องที่มีขนาดเล็กสามารถคลิกเพื่อดู %
+                  สัดส่วนงบได้ที่กล่องรายละเอียดด้านล่าง)
+                </span>
               </b-popover>
             </template>
             <template v-if="selected_province != ''">
@@ -418,164 +473,8 @@
                   กด + เพื่อสำรวจคำสำคัญภายใต้หัวข้อที่คุณสนใจ
                 </p>
               </div>
-              <b-row class="m-0">
-                <b-col cols="12" lg="4" class="mb-3">
-                  <template v-for="(item, i) in keyword.slice(0, 3)">
-                    <div class="mb-3" :key="i">
-                      <div
-                        class="bg-blue-a test2 px-3 pt-3 lime-b"
-                        :style="{
-                          backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
-                            item.id +
-                            '.svg')})`,
-                        }"
-                      >
-                        <p class="m-0 font-weight-bold">{{ item.text }}</p>
-                      </div>
-                      <b-button
-                        v-b-toggle="'collapse-set-1-' + (i + 1)"
-                        variant="primary"
-                        class="
-                          keyword-collapse
-                          w-100
-                          bg-blue-a
-                          text-right text-1
-                          lime-b
-                        "
-                        >+</b-button
-                      >
-                      <b-collapse :id="'collapse-set-1-' + (i + 1)">
-                        <b-card>
-                          <b-row>
-                            <b-col
-                              cols="4"
-                              v-for="(item2, j) in item.list"
-                              :key="'kw-' + j"
-                              class="mb-3"
-                              ><div
-                                class="
-                                  keyword-btn
-                                  text-3
-                                  white-b
-                                  p-2
-                                  text-center
-                                "
-                                @click="showKeywordResult(item2)"
-                              >
-                                {{ item2 }}
-                              </div></b-col
-                            >
-                          </b-row>
-                        </b-card>
-                      </b-collapse>
-                    </div>
-                  </template>
-                </b-col>
-                <b-col cols="12" lg="4" class="mb-3">
-                  <template v-for="(item, i) in keyword.slice(3, 5)">
-                    <div class="mb-3" :key="i">
-                      <div
-                        class="bg-blue-a test2 px-3 pt-3 lime-b"
-                        :style="{
-                          backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
-                            item.id +
-                            '.svg')})`,
-                        }"
-                      >
-                        <p class="m-0 font-weight-bold">{{ item.text }}</p>
-                      </div>
-                      <b-button
-                        v-b-toggle="'collapse-set-2-' + (i + 1)"
-                        variant="primary"
-                        class="
-                          keyword-collapse
-                          w-100
-                          bg-blue-a
-                          text-right text-1
-                          lime-b
-                        "
-                        >+</b-button
-                      >
-                      <b-collapse :id="'collapse-set-2-' + (i + 1)">
-                        <b-card>
-                          <b-row>
-                            <b-col
-                              cols="4"
-                              v-for="(item2, j) in item.list"
-                              :key="'kw-' + j"
-                              ><div
-                                class="
-                                  keyword-btn
-                                  text-3
-                                  white-b
-                                  p-2
-                                  text-center
-                                  mb-3
-                                "
-                                @click="showKeywordResult(item2)"
-                              >
-                                {{ item2 }}
-                              </div></b-col
-                            >
-                          </b-row>
-                        </b-card>
-                      </b-collapse>
-                    </div>
-                  </template>
-                </b-col>
-                <b-col cols="12" lg="4" class="mb-3">
-                  <template v-for="(item, i) in keyword.slice(5, 7)">
-                    <div class="mb-3" :key="i">
-                      <div
-                        class="bg-blue-a test2 px-3 pt-3 lime-b"
-                        :style="{
-                          backgroundImage: `url(${require('@/assets/images/keywordgroup_' +
-                            item.id +
-                            '.svg')})`,
-                        }"
-                      >
-                        <p class="m-0 font-weight-bold">{{ item.text }}</p>
-                      </div>
-                      <b-button
-                        v-b-toggle="'collapse-set-3-' + (i + 1)"
-                        variant="primary"
-                        class="
-                          keyword-collapse
-                          w-100
-                          bg-blue-a
-                          text-right text-1
-                          lime-b
-                        "
-                        >+</b-button
-                      >
-                      <b-collapse :id="'collapse-set-3-' + (i + 1)">
-                        <b-card>
-                          <b-row>
-                            <b-col
-                              cols="4"
-                              v-for="(item2, j) in item.list"
-                              :key="'kw-' + j"
-                              ><div
-                                class="
-                                  keyword-btn
-                                  text-3
-                                  white-b
-                                  p-2
-                                  text-center
-                                  mb-3
-                                "
-                                @click="showKeywordResult(item2)"
-                              >
-                                {{ item2 }}
-                              </div></b-col
-                            >
-                          </b-row>
-                        </b-card>
-                      </b-collapse>
-                    </div>
-                  </template>
-                </b-col>
-              </b-row>
+
+              <KeywordCollapse :data="keyword" />
 
               <div class="mt-5 text-center" v-if="total_province > 0">
                 <a
@@ -636,7 +535,8 @@
             มาได้ที่ LINE Official Account จับตาไม่ให้ใครโกง
           </p>
 
-          <img :src="corruption_watch" class="my-4" width="186" alt="" />
+          <a href="https://line.me/ti/p/corruptionwatch" rel="noopener noreferrer">
+          <img :src="corruption_watch" class="my-4" width="186" alt="" /></a>
 
           <p class="m-0 font-weight-bold">@corruptionwatch</p>
           <p>
@@ -701,63 +601,6 @@
         <div class="gradient"></div>
       </div>
     </template>
-    <b-modal
-      id="kw-modal"
-      ref="kw-modal"
-      title="BootstrapVue"
-      hide-header
-      hide-footer
-      size="xl"
-      centered
-    >
-      <div class="text-right">
-        <img
-          :src="close"
-          alt=""
-          class="pointer"
-          @click="$bvModal.hide('kw-modal')"
-        />
-      </div>
-      <div class="bg-black p-4">
-        <template v-if="keywordSlide.length > 0">
-          <div class="text-center white-b text-2">
-            จากงบประมาณ <span class="lime">อบจ.{{ selected_province }}</span>
-            ทั้งหมด
-            <formatNumber :data="total_province" /> พบคำว่า
-            <div class="selected_keyword">{{ selected_keyword }}</div>
-            ปรากฏใน {{ keywordSlide.length }} รายการงบ
-          </div>
-          <div class="text-right">
-            <img
-              :src="drag"
-              alt=""
-              class="m-3"
-              v-if="keywordSlide.length > 4"
-            />
-          </div>
-          <KeywordSlide
-            :data="keywordSlide"
-            :total="total_province"
-            class="mt-3"
-          />
-        </template>
-        <template v-else>
-          <div class="text-center">
-            <div class="d-flex justify-content-center align-items-center mb-3">
-              <p class="text-2 white-b m-0">ไม่ปรากฏคำว่า</p>
-              <div class="selected_keyword ml-3">{{ selected_keyword }}</div>
-            </div>
-            <p class="text-2 white-b">
-              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัด{{
-                selected_province
-              }}
-              ในปี
-              {{ selected_year_province }}
-            </p>
-          </div>
-        </template>
-      </div>
-    </b-modal>
   </div>
 </template>
 
@@ -807,44 +650,6 @@ export default {
         },
         {
           id: 2,
-          text: "บุคลากร/กลุ่มคน",
-          bg: "./assets/images/keywordgroup_4.svg",
-          list: [
-            "เทศกิจ",
-            "นักเรียน",
-            "ครู",
-            "อาสาสมัครสาธารณสุขประจําหมู่บ้าน",
-            "ปศุสัตว์",
-            "พยาบาลชุมชน",
-            "คนพิการ",
-            "ผู้สูงอายุ",
-            "ประมง",
-            "เกษตรกร",
-            "นักกีฬา",
-            "ผู้ด้อยโอกาส",
-          ],
-        },
-        {
-          id: 3,
-          text: "ค่าใช้จ่ายอื่น ๆ",
-          bg: "./assets/images/keywordgroup_7.svg",
-          list: [
-            "เงินเดือน",
-            "เงินเพิ่มพิเศษ",
-            "ค่าตอบแทนพนักงานจ้าง",
-            "OT",
-            "ชำระหนี้",
-            "ทุนสำรอง",
-            "สมทบประกันสังคม",
-            "บำรุุงสมาคม",
-            "กองทุนบำเหน็จบำนาญ",
-            "กองทุนสำรองเลี้ยงชีพ",
-            "สงเคราะห์ผู้ป่วยยากไร้",
-            "เงินช่วยพิเศษ",
-          ],
-        },
-        {
-          id: 4,
           text: "วัสดุ/อุปกรณ์",
           bg: "./assets/images/keywordgroup_2.svg",
           list: [
@@ -859,25 +664,7 @@ export default {
           ],
         },
         {
-          id: 5,
-          text: "สถานที่",
-          bg: "./assets/images/keywordgroup_5.svg",
-          list: [
-            "โรงเรียน",
-            "โรงพยาบาล",
-            "ศูนย์บริการสาธารณสุข",
-            "สวนสาธารณะ",
-            "สนามเด็กเล่น",
-            "ป่า",
-            "โรงรับจำนำ",
-            "ตลาด",
-            "โรงฆ่าสัตว์",
-            "สถานีขนส่ง",
-            "ท่าเรือ",
-          ],
-        },
-        {
-          id: 6,
+          id: 3,
           text: "กิจกรรม",
           bg: "./assets/images/keywordgroup_3.svg",
           list: [
@@ -899,7 +686,46 @@ export default {
           ],
         },
         {
-          id: 7,
+          id: 4,
+          text: "บุคลากร/กลุ่มคน",
+          bg: "./assets/images/keywordgroup_4.svg",
+          list: [
+            "เทศกิจ",
+            "นักเรียน",
+            "ครู",
+            "อาสาสมัครสาธารณสุขประจําหมู่บ้าน",
+            "ปศุสัตว์",
+            "พยาบาลชุมชน",
+            "คนพิการ",
+            "ผู้สูงอายุ",
+            "ประมง",
+            "เกษตรกร",
+            "นักกีฬา",
+            "ผู้ด้อยโอกาส",
+          ],
+        },
+
+        {
+          id: 5,
+          text: "สถานที่",
+          bg: "./assets/images/keywordgroup_5.svg",
+          list: [
+            "โรงเรียน",
+            "โรงพยาบาล",
+            "ศูนย์บริการสาธารณสุข",
+            "สวนสาธารณะ",
+            "สนามเด็กเล่น",
+            "ป่า",
+            "โรงรับจำนำ",
+            "ตลาด",
+            "โรงฆ่าสัตว์",
+            "สถานีขนส่ง",
+            "ท่าเรือ",
+          ],
+        },
+
+        {
+          id: 6,
           text: "สวัสดิการ/คุณภาพชีวิต",
           bg: "./assets/images/keywordgroup_6.svg",
           list: [
@@ -912,6 +738,25 @@ export default {
             "ป้องกันยาเสพติด",
             "ปรับปรุงภูมิทัศน์",
             "ป้องกันมลพิษ",
+          ],
+        },
+        {
+          id: 7,
+          text: "ค่าใช้จ่ายอื่น ๆ",
+          bg: "./assets/images/keywordgroup_7.svg",
+          list: [
+            "เงินเดือน",
+            "เงินเพิ่มพิเศษ",
+            "ค่าตอบแทนพนักงานจ้าง",
+            "OT",
+            "ชำระหนี้",
+            "ทุนสำรอง",
+            "สมทบประกันสังคม",
+            "บำรุุงสมาคม",
+            "กองทุนบำเหน็จบำนาญ",
+            "กองทุนสำรองเลี้ยงชีพ",
+            "สงเคราะห์ผู้ป่วยยากไร้",
+            "เงินช่วยพิเศษ",
           ],
         },
       ],
@@ -931,6 +776,7 @@ export default {
         slidesToShow: 1,
         speed: 500,
         dots: true,
+        adaptiveHeight: false,
         responsive: [
           {
             breakpoint: 600,
@@ -1119,10 +965,12 @@ export default {
     selectWorkPlan(index) {
       const i = this.groupedByAreaSlide.map((e) => e.plan).indexOf(index);
       this.$refs.workplan.goTo(i);
+      document.getElementById("work-plan-slide").scrollIntoView();
     },
     selectWorkType(index) {
       const i = this.groupedByType.map((e) => e.type).indexOf(index);
       this.$refs.worktype.goTo(i);
+      document.getElementById("work-type-slide").scrollIntoView();
     },
   },
 };
@@ -1197,10 +1045,22 @@ select::-ms-expand {
   background-color: transparent;
   background-image: url("~/assets/images/arrow_dd.svg");
   background-repeat: no-repeat;
-  width: 150px;
+  width: 80px;
   border: 1px solid #e5fbff;
   border-radius: 0;
   margin: 0 10px;
+
+  @media #{$mq-mini-mobile} {
+    margin: 5px;
+  }
+}
+
+.province-select {
+  width: 150px !important;
+  @media #{$mq-mini-mobile} {
+    width: 125px !important;
+    margin: 5px;
+  }
 }
 
 .year-select option {
@@ -1254,6 +1114,7 @@ select::-ms-expand {
   //box-shadow: 1px 1px 12px 2px rgba(24, 31, 28, 0.15);
   border: 4px solid #000;
   padding: 25px;
+  min-height: 250px;
 
   @media #{$mq-mini-mobile} {
     padding: 10px;
@@ -1330,22 +1191,6 @@ select::-ms-expand {
     width: 280px;
     height: 201.86px;
   }
-}
-
-.test2 {
-  height: 175px;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.keyword-collapse {
-  border: 0;
-  border-radius: 0;
-}
-
-.keyword-btn {
-  border: 1px solid #fffef5;
-  cursor: pointer;
 }
 
 .big {

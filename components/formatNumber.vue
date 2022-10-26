@@ -4,10 +4,16 @@
       {{
         data >= 1000000
           ? parseInt(
-              data.toFixed().toString().substring(0, data.toFixed().toString().length - 6)
-            ).toLocaleString() + ' ล้านบาท'
-          : parseInt(data.toString()).toLocaleString() + ' บาท'
+              data
+                .toFixed()
+                .toString()
+                .substring(0, data.toFixed().toString().length - 6)
+            ).toLocaleString()
+          : parseInt(data.toString()).toLocaleString()
       }}
+      <p class="m-0 d-inline-block">
+        {{ data >= 1000000 ? " ล้านบาท" : " บาท" }}
+      </p>
     </template>
     <template v-else> 0 บาท </template>
   </span>

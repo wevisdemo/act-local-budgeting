@@ -50,14 +50,13 @@
             <div
               v-for="(item3, j) in item2.plans"
               :style="{
-                      maxWidth:
-                        (item3.total / total) * 100 != 0 && (item3.total / total) * 100 > 2
-                          ? ((item3.total / total) * 100).toFixed(
-                              2
-                            ) +
-                            '%'
-                          : '1%',    minWidth: '10px'
-                    }"
+                maxWidth:
+                  (item3.total / total) * 100 != 0 &&
+                  (item3.total / total) * 100 > 2
+                    ? ((item3.total / total) * 100).toFixed(2) + '%'
+                    : '1%',
+                minWidth: '10px',
+              }"
               class="w-100"
               :key="'type-' + i + j"
             >
@@ -81,7 +80,7 @@
           รายละเอียดแผนงาน
         </p>
 
-        <div v-if="total != 0" class="px-3">
+        <div v-if="total != 0" class="px-3" id="work-plan-province-slide">
           <VueSlickCarousel
             v-bind="slickOptions"
             class="work-card-wrapper-2"
@@ -215,12 +214,12 @@
           <div
             v-for="(item3, j) in groupedByType"
             :style="{
-                    maxWidth:
-                      ((item3.total / total) * 100) > 1
-                        ? (((item3.total / total) * 100).toFixed(2)) +
-                          '%'
-                        : '1%',minWidth: '10px'
-                  }"
+              maxWidth:
+                (item3.total / total) * 100 > 1
+                  ? ((item3.total / total) * 100).toFixed(2) + '%'
+                  : '1%',
+              minWidth: '10px',
+            }"
             class="w-100"
             :key="'type-' + j"
           >
@@ -241,7 +240,7 @@
 
         <p class="my-5 text-2 text-center">รายละเอียดงบประมาณ</p>
 
-        <div class="px-3">
+        <div class="px-3" id="work-type-province-slide">
           <VueSlickCarousel
             v-bind="slickOptions"
             class="work-card-wrapper-2"
@@ -480,21 +479,13 @@ export default {
     selectWorkPlan(index) {
       const i = this.groupedByAreaSlide.map((e) => e.plan).indexOf(index);
       this.$refs.workplanprovince.goTo(i);
+      document.getElementById("work-plan-province-slide").scrollIntoView();
     },
     selectWorkType(index) {
       const i = this.groupedByType.map((e) => e.type).indexOf(index);
       this.$refs.worktypeprovince.goTo(i);
-    },
-    seeMore(isShow, i) {
-      // console.log(isShow, i);
-      // if (!isShow) { console.log(1);
-      //   this.groupedByAreaSlide[i].isExpand = true;
-      // } else { console.log(2);
-      //   this.groupedByAreaSlide[i].isExpand = false;
-      // }
-      // console.log(this.groupedByAreaSlide[i]);
-      //this.isShoww = true;
-    },
+      document.getElementById("work-type-province-slide").scrollIntoView();
+    }
   },
 };
 </script>
