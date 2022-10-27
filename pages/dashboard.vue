@@ -14,8 +14,12 @@
         </p>
         <h4 class="header-4 mt-2">
           องค์การบริหารส่วนจังหวัด (อบจ.) <br class="d-none d-sm-inline" />
-          จำนวน 76 แห่ง ของประเทศไทย
+          จำนวน {{ provinces.length - 1 }} แห่ง ของประเทศไทย
         </h4>
+        <p class="text-4 lime">
+          อัพเดตข้อมูลเมื่อ
+          {{ updatedAt | moment("add", "543 years", "DD/MM/YYYY") }}
+        </p>
         <div class="d-flex justify-content-lg-center mt-3">
           <div class="ml-lg-5">
             <h5 class="header-5 font-weight-bold">
@@ -76,7 +80,7 @@
                 </span>
               </b-popover>
             </template>
-            <div class="text-1 bg-white py-4 py-sm-5 black">
+            <div class="text-1 bg-white tab-wrapper black">
               <div
                 class="
                   d-flex
@@ -102,33 +106,37 @@
               </div>
 
               <div class="d-flex w-100 overflow-hidden">
-                <template class="d-flex mx-1" v-for="(item2, i) in work_type">
+                <template
+                  class="d-flex mx-1"
+                  v-for="(item2, i) in groupedByAreaSlide"
+                >
                   <div
-                    v-for="(item3, j) in item2.plans"
                     :style="{
                       maxWidth:
-                        (item3.total / total_nationwide) * 100 != 0 &&
-                        (item3.total / total_nationwide) * 100 > 2
-                          ? ((item3.total / total_nationwide) * 100).toFixed(
+                        (item2.total / total_nationwide) * 100 != 0 &&
+                        (item2.total / total_nationwide) * 100 > 2
+                          ? ((item2.total / total_nationwide) * 100).toFixed(
                               2
                             ) + '%'
                           : '1%',
                       minWidth: '10px',
                     }"
                     class="w-100"
-                    :key="'type-' + i + j"
+                    :key="'work-type-' + i"
                   >
                     <div
-                      @click="selectWorkPlan(item3.plan)"
+                      @click="selectWorkPlan(item2.plan, i)"
                       class="work-type-square big w-100 mr-2"
                       :style="{
                         backgroundColor: item2.color,
                       }"
-                      :key="j"
+                      :class="{
+                        hovered: selected_work_plan == i,
+                      }"
                     >
-                      <h5 class="header-5 mr-1" v-if="j == 0">
+                      <h5 class="header-5 mr-1">
                         {{
-                          ((item3.total / total_nationwide) * 100).toFixed(2)
+                          ((item2.total / total_nationwide) * 100).toFixed(2)
                         }}%
                       </h5>
                     </div>
@@ -147,6 +155,7 @@
                   v-bind="slickOptions"
                   class="work-card-wrapper"
                   ref="workplan"
+                  @beforeChange="getIndexWorkPlan"
                 >
                   <div
                     v-for="(item, i) in groupedByAreaSlide"
@@ -246,7 +255,7 @@
                 </span>
               </b-popover>
             </template>
-            <div class="text-1 bg-white py-4 py-sm-5 black">
+            <div class="text-1 bg-white tab-wrapper black">
               <div
                 class="
                   d-flex
@@ -296,6 +305,9 @@
                     :style="{
                       backgroundColor: item3.color,
                     }"
+                    :class="{
+                      hovered: selected_work_type == j,
+                    }"
                     :key="j"
                   >
                     <h5 class="header-5 mr-1">
@@ -314,12 +326,13 @@
               <div id="work-type-slide">
                 <VueSlickCarousel
                   v-bind="slickOptions"
-                  class="work-card-wrapper"
+                  class="work-card-wrapper work-card-type-wrapper"
                   ref="worktype"
                   v-if="groupedByType.length > 0"
+                  @beforeChange="getIndexWorkType"
                 >
                   <div
-                    class="work-card"
+                    class="work-card work-card-type"
                     v-for="(item, i) in groupedByType"
                     :key="'slide-' + i"
                     :style="{
@@ -330,9 +343,16 @@
                         item.color == '#253472' || item.color == '#A80C7C',
                     }"
                   >
-                    <b-row>
+
+                    <!-- <p class="text-1 font-weight-bold m-0 d-block d-lg-none">
+                      {{ item.type }}
+                    </p> -->
+
+                    <b-row class="d-none d-md-flex">
                       <b-col cols="8">
-                        <p class="text-1 font-weight-bold m-0">
+                        <p
+                          class="text-1 font-weight-bold m-0"
+                        >
                           {{ item.type }}
                         </p>
                         <h4 class="header-4">
@@ -350,6 +370,37 @@
                           alt=""
                       /></b-col>
                     </b-row>
+
+                    <div class="d-block d-md-none">
+                      <p class="text-1 font-weight-bold mb-1">
+                        {{ item.plan }}
+                      </p>
+                      <b-row>
+                        <b-col cols="8">
+                          <h3 class="header-3 font-weight-bold m-0">
+                            ({{
+                              ((item.total / total_nationwide) * 100).toFixed(
+                                2
+                              )
+                            }}%)
+                          </h3>
+                          <p class="font-weight-bold mb-1">
+                            ของค่าใช้จ่ายทั้งหมด
+                          </p>
+                          <p class="text-1 m-0">
+                            (<formatNumber :data="item.total" />)
+                          </p>
+                        </b-col>
+                        <b-col cols="4"
+                          ><img
+                            width="100%"
+                            :src="
+                              require(`@/assets/images/sector/sector_klang.svg`)
+                            "
+                            alt=""
+                        /></b-col>
+                      </b-row>
+                    </div>
                   </div>
                 </VueSlickCarousel>
               </div>
@@ -618,9 +669,14 @@
       hide-footer
       size="xl"
       centered
-    ><div class="text-right">
-      <img :src="close" class="pointer" alt="" @click="$bvModal.hide('kw-modal')">
-    </div>
+      ><div class="text-right">
+        <img
+          :src="close"
+          class="pointer"
+          alt=""
+          @click="$bvModal.hide('kw-modal')"
+        />
+      </div>
       <div class="bg-black p-4">
         <template v-if="keywordSlide.length > 0">
           <div class="text-center white-b text-2 mb-5">
@@ -651,6 +707,24 @@
         </template>
       </div>
     </b-modal>
+    <div class="white-b position-fixed p-2 disclaimer" v-if="isShowDisclaimer">
+      <div class="text-right">
+        <img
+          width="30"
+          :src="close"
+          class="pointer"
+          alt=""
+          @click="isShowDisclaimer = false"
+        />
+      </div>
+      <div class="bg-black p-2">
+        <p class="text-2 m-0">
+          รวบรวมข้อมูลจาก 76 องค์การบริหารส่วนจังหวัด
+          โดยอาจไม่ปรากฎข้อมูลของบางองค์การบริหารส่วนจังหวัด ในบางปีงบประมาณ
+          เนื่องจากหน่วยงานไม่เปิดเผยข้อมูลบนหน้าเว็บไซต์
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -658,10 +732,14 @@
 export default {
   data() {
     return {
+      isShowDisclaimer: true,
       selected: 2565,
       selected_year_province: 2565,
       selected_province: "",
       selected_keyword: "",
+      updatedAt: "",
+      selected_work_plan: 0,
+      selected_work_type: 0,
       budgetingDocUrl: "",
       activetab: "แผนงาน",
       activetab_province: "สำรวจผ่านโครงสร้าง",
@@ -832,7 +910,6 @@ export default {
             breakpoint: 600,
             settings: {
               slidesToShow: 1,
-              arrows: false,
             },
           },
         ],
@@ -904,13 +981,14 @@ export default {
   },
   mounted() {
     this.setYearAndProvince();
-    this.getNationWideData(2565);
+    this.getNationWideData(new Date().getFullYear() + 543);
   },
   methods: {
     setYearAndProvince() {
       fetch("data/metadata.json")
         .then((response) => response.json())
         .then((data) => {
+          this.updatedAt = data.updatedAt;
           data.years.forEach((element) => {
             this.options.push({ value: element, text: element });
           });
@@ -1021,6 +1099,12 @@ export default {
       const i = this.groupedByType.map((e) => e.type).indexOf(index);
       this.$refs.worktype.goTo(i);
       document.getElementById("work-type-slide").scrollIntoView();
+    },
+    getIndexWorkPlan(currentSlide, nextSlide) {
+      this.selected_work_plan = nextSlide;
+    },
+    getIndexWorkType(currentSlide, nextSlide) {
+      this.selected_work_type = nextSlide;
     },
   },
 };
@@ -1257,6 +1341,10 @@ select::-ms-expand {
   border: 4px solid #000000;
 }
 
+.hovered {
+  border: 4px solid #000000;
+}
+
 .selected_keyword {
   background: #fffef5;
   padding: 10px 15px;
@@ -1288,5 +1376,21 @@ select::-ms-expand {
   @media #{$mq-mini-mobile} {
     color: #e0fd6a !important;
   }
+}
+
+.disclaimer {
+  max-width: 600px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+}
+
+.tab-wrapper {
+  padding: 20px 0 60px;
+}
+
+.work-card-type {
+  min-height: 150px !important;
 }
 </style>

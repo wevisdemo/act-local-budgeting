@@ -46,9 +46,9 @@
         </div>
 
         <div class="d-flex w-100" v-if="total != 0">
-          <template class="d-flex mx-1" v-for="(item2, i) in work_type">
+          <template class="d-flex mx-1" v-for="(item3, i) in groupedByAreaSlide">
             <div
-              v-for="(item3, j) in item2.plans"
+            
               :style="{
                 maxWidth:
                   (item3.total / total) * 100 != 0 &&
@@ -58,17 +58,19 @@
                 minWidth: '10px',
               }"
               class="w-100"
-              :key="'type-' + i + j"
+              :key="'type-p-' + i"
             >
               <div
                 @click="selectWorkPlan(item3.plan)"
                 class="work-type-square big black w-100 mr-2"
                 :style="{
-                  backgroundColor: item2.color,
+                  backgroundColor: item3.color,
                 }"
-                :key="j"
+                 :class="{
+                        'hovered-w': selected_work_plan == i,
+                      }"
               >
-                <h5 class="header-5 mr-1" v-if="j == 0">
+                <h5 class="header-5 mr-1">
                   {{ ((item3.total / total) * 100).toFixed(1) }}%
                 </h5>
               </div>
@@ -86,6 +88,7 @@
             class="work-card-wrapper-2"
             ref="workplanprovince"
             v-if="groupedByAreaSlide.length > 0"
+            @beforeChange="getIndexWorkPlan"
           >
             <div
               v-for="(item, i) in groupedByAreaSlide"
@@ -159,33 +162,6 @@
                     ).length > 5
                   "
                 >
-                  <!-- <div
-                    class="
-                      blue-a
-                      text-2
-                      font-weight-bold
-                      see-more
-                      d-flex
-                      justify-content-between
-                      mt-3
-                      pointer
-                    "
-                    @click="seeMore(item.isExpand, i)"
-                  >
-                    <template v-if="!isShoww">
-                      <div>
-                        เพิ่มเติม
-                        {{
-                          tasks.filter(
-                            (x) => x.area == item.name && x.plan == item.plan
-                          ).length - 3
-                        }}
-                        รายการ
-                      </div>
-                    </template>
-                    <template v-else>ย่อลง</template>
-                    <div>+</div>
-                  </div> -->
                 </template>
               </div>
             </div>
@@ -225,6 +201,9 @@
               :style="{
                 backgroundColor: item3.color,
               }"
+                     :class="{
+                        'hovered-w': selected_work_type == j,
+                      }"
               :key="j"
             >
               <h5 class="header-5 mr-1">
@@ -242,6 +221,7 @@
             class="work-card-wrapper-2"
             ref="worktypeprovince"
             v-if="groupedByType.length > 0"
+            @beforeChange="getIndexWorkType"
           >
             <div
               v-for="(item, i) in groupedByType"
@@ -361,6 +341,8 @@ export default {
       groupedByType: [],
       groupedByAreaSlide: [],
       combinedTasksByPlan: [],
+      selected_work_plan: 0,
+      selected_work_type: 0,
       pao: [],
       tasks: [],
       work_type: [
@@ -387,7 +369,6 @@ export default {
             breakpoint: 769,
             settings: {
               slidesToShow: 1,
-              arrows: false,
             },
           },
         ],
@@ -491,7 +472,13 @@ export default {
       const i = this.groupedByType.map((e) => e.type).indexOf(index);
       this.$refs.worktypeprovince.goTo(i);
       document.getElementById("work-type-province-slide").scrollIntoView();
-    }
+    },
+    getIndexWorkPlan(currentSlide, nextSlide) {
+      this.selected_work_plan = nextSlide;
+    },
+    getIndexWorkType(currentSlide, nextSlide) {
+      this.selected_work_type = nextSlide;
+    },
   },
 };
 
@@ -584,5 +571,9 @@ function combineTasks(targetedTasks) {
 
 .see-more {
   border-bottom: 1px solid #0056a6;
+}
+
+.hovered-w {
+  border: 4px solid #fffef5;
 }
 </style>

@@ -345,8 +345,13 @@ body {
   border: 2px solid #323232;
 }
 
+.slick-arrow {
+  z-index: 5;
+}
+
 .slick-dots {
-  bottom: -20px !important;
+  bottom: -30px !important;
+
   li button:before,
   li.slick-active button:before {
     color: transparent;
@@ -368,6 +373,10 @@ body {
 .slick-dots li {
   height: 10px !important;
   width: 10px !important;
+  @media #{$mq-mini-mobile} {
+    height: 5px !important;
+    width: 5px !important;
+  }
 }
 
 .slick-dots li button {
@@ -382,8 +391,8 @@ body {
   background-size: contain;
   width: 40px;
   @media #{$mq-mini-mobile} {
-    height: 25px;
-    width: 25px;
+    // height: 25px;
+    // width: 25px;
   }
 }
 
@@ -396,26 +405,68 @@ body {
   right: 15px;
   position: relative;
   @media #{$mq-mini-mobile} {
-    position: unset;
-    height: 25px;
-    width: 25px;
+    // position: unset;
+    // height: 25px;
+    // width: 25px;
   }
 }
 
 .work-card-wrapper .slick-prev::before {
   background: url("../images/arrow_left_black.svg") no-repeat;
+  top: 145px;
+  left: 25px;
 }
 
 .work-card-wrapper .slick-next::before {
   background: url("../images/arrow_right_black.svg") no-repeat;
+  top: 145px;
+  right: 40px;
+  position: relative;
+  @media #{$mq-mini-mobile} {
+    right: 15px;
+  }
 }
 
 .work-card-wrapper-2 .slick-prev::before {
   background: url("../images/arrow_left_white.svg") no-repeat;
+  bottom: 440px;
+  left: 25px;
+
+  @media #{$mq-mini-mobile} {
+    bottom: 385px;
+  }
 }
 
 .work-card-wrapper-2 .slick-next::before {
   background: url("../images/arrow_right_white.svg") no-repeat;
+  bottom: 440px;
+  right: 40px;
+  position: relative;
+
+  @media #{$mq-mini-mobile} {
+    bottom: 385px;
+    right: 15px;
+  }
+}
+
+.work-card-type-wrapper .slick-next::before,
+.work-card-type-wrapper .slick-prev::before {
+  @media #{$mq-mini-mobile} {
+    top: 95px;
+  }
+}
+
+.work-card-wrapper-2 .slick-dots {
+  bottom: -30px !important;
+  @media #{$mq-mini-mobile} {
+    bottom: -20px !important;
+  }
+}
+
+.slick-next {
+  @media #{$mq-mini-mobile} {
+    right: 0 !important;
+  }
 }
 
 .slick-track {

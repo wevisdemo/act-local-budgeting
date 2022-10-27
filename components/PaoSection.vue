@@ -412,18 +412,18 @@
                   :key="'income+' + i"
                   class="black"
                 >
+                <div class="d-flex">
                   <div
                     :class="{
                       'bg-white-a': i == 0,
                       'bg-blue-a white-b': i == 1,
                       'bg-pink': i == 2,
                     }"
-                    class="font-weight-bold text-sm-center text-left"
-                  >
-                    {{ item.type }}
-                  </div>
-                  <p class="my-1 white-b">
-                    <formatNumber :data="item.total" />
+                    class="work-type-square"
+                  ></div>
+                  <p class="text-4 m-0 white-b font-weight-bold d-inline-block ml-2">{{ item.type }}</p></div>
+                  <p class="my-1 white-b ml-4">
+                    (<formatNumber :data="item.total" />)
                   </p>
                 </div>
               </div>
@@ -460,13 +460,15 @@
                   {{ pao.population.toLocaleString() }} คน
                 </p>
                 <p class="text-4 m-0">
-                  ข้อมูลจากกรมการปกครอง โดยไม่นับรวมประชากรแฝง รวบรวมและคำนวณข้อมูล ณ ปี 2565
+                  ข้อมูลจากกรมการปกครอง โดยไม่นับรวมประชากรแฝง
+                  รวบรวมและคำนวณข้อมูล ณ ปี 2565
                 </p>
               </b-col>
               <b-col sm="7">
                 <p class="text-3 font-weight-bold mb-1 mt-3 mt-sm-0">
-                  <img :src="person_logo" alt="" /> งบประมาณเฉลี่ยต่อหัวเทียบกับ
-                  76 จังหวัด
+                  <img :src="person_logo" alt="" />
+                  งบประมาณเฉลี่ยต่อหัวเทียบกับจังหวัดทั้งหมดที่มีการสำรวจในปีนั้น
+                  ๆ 76 จังหวัด
                 </p>
                 <p class="m-0 lime" v-if="budget_province != 0">
                   {{ parseInt(budget_province).toLocaleString() }}
@@ -885,7 +887,7 @@
                       <img :src="arrow_link" class="ml-3" alt=""
                     /></a>
                     <a
-                      :href="'https://www.google.com/search?q='+item.name"
+                      :href="'https://www.google.com/search?q=' + item.name"
                       target="_blank"
                       class="pao-link text-3 mt-3 mt-sm-0"
                       rel="noopener noreferrer"
@@ -934,7 +936,7 @@
           </p>
         </div>
       </b-col>
-      <b-col sm="2" class="bg-white-a  red text-center">
+      <b-col sm="2" class="bg-white-a red text-center">
         <a
           target="_blank"
           :href="pao.actAiUrl"
