@@ -352,8 +352,31 @@
       </p>
       <b-row v-if="pao != null">
         <b-col lg="7">
-          <div class="bg-lime-b p-3 w-fit">
-            <p class="text-1 font-weight-bold m-0">รายได้ของอบจ.</p>
+          <div class="d-flex justify-content-between align-items-end">
+            <div class="bg-lime-b p-3 w-fit">
+              <p class="text-1 font-weight-bold m-0">รายได้ของอบจ.</p>
+            </div>
+            <div>
+              <img :src="info" alt="" id="info" />
+              <b-popover target="info" triggers="hover"  placement="topleft">
+                <p class="text-3 m-0">
+                   <b>รายได้ของ อบจ.</b> <br/>
+แบ่งโดยแหล่งที่มาอย่างคร่าว ๆ ได้ดังนี้ <br/>
+ <b>รายได้ที่จัดเก็บเอง</b> <br/>
+ <ul class="m-0">
+  <li>รายได้จากภาษีอากร เช่น ภาษียาสูบ น้ำมัน ก๊าซ ปิโตรเลียม</li>
+  <li>รายได้ที่ไม่ใช่ภาษี เช่น ค่าธรรมเนียม ค่าปรับ ใบอนุญาต ฯลฯ </li>
+ </ul>
+ <b>รายได้จากภาษีที่รัฐบาลจัดเก็บแล้วจัดสรรให้</b>
+รายได้จากภาษีที่รัฐบาลจัดเก็บแล้วจัดสรรให้ เช่น ภาษีรถยนต์ ค่าภาคหลวงแร่ ภาษีมูลค่าเพิ่ม ตาม พ.ร.บ. ฯลฯ <br/>
+ <b>รายได้ที่รัฐบาลอุดหนุนให้</b><br/>
+ <ul class="m-0">
+  <li>เงินอุดหนุนทั่วไป</li>
+  <li>เงินอุดหนุนเฉพาะกิจ</li>
+ </ul>
+                </p>
+              </b-popover>
+            </div>
           </div>
           <div class="bg-black white-b p-3">
             <h3
@@ -412,16 +435,28 @@
                   :key="'income+' + i"
                   class="black"
                 >
-                <div class="d-flex">
-                  <div
-                    :class="{
-                      'bg-white-a': i == 0,
-                      'bg-blue-a white-b': i == 1,
-                      'bg-pink': i == 2,
-                    }"
-                    class="work-type-square"
-                  ></div>
-                  <p class="text-4 m-0 white-b font-weight-bold d-inline-block ml-2">{{ item.type }}</p></div>
+                  <div class="d-flex">
+                    <div
+                      :class="{
+                        'bg-white-a': i == 0,
+                        'bg-blue-a white-b': i == 1,
+                        'bg-pink': i == 2,
+                      }"
+                      class="work-type-square"
+                    ></div>
+                    <p
+                      class="
+                        text-4
+                        m-0
+                        white-b
+                        font-weight-bold
+                        d-inline-block
+                        ml-2
+                      "
+                    >
+                      {{ item.type }}
+                    </p>
+                  </div>
                   <p class="my-1 white-b ml-4">
                     (<formatNumber :data="item.total" />)
                   </p>
@@ -497,7 +532,7 @@
                     นายกองค์การบริหารส่วนจังหวัด{{ province }}
                   </p>
                   <p class="text-3 font-weight-bold m-0">วันที่ดำรงตำแหน่ง</p>
-                  <p class="text-3">{{ item.inOffice }}</p>
+                  <p class="text-3">{{ item.inOffice }}  ({{ setDiffDate(item.inOffice) }})</p> 
                 </b-col>
                 <b-col
                   sm="5"
@@ -520,16 +555,22 @@
               <b-collapse :id="'collapse-pao-' + i" class="mt-2">
                 <div class="bg-black p-3">
                   <p class="text-3 white-b">ข้อมูลบัญชีทรัพย์สิน</p>
-                  <template
-                    v-if="item.ownAccount != null && item.spouseAccount != null"
-                  >
+                  <template v-if="item.ownAccount != null">
                     <div class="d-flex">
                       <p class="text-3 font-weight-bold">ยอดรวม</p>
                       <div class="d-flex mx-1">
                         <div class="work-type-square mx-2 bg-lime"></div>
                         <p class="text-3 font-weight-bold m-0">ผู้ยื่น</p>
-                        <div class="work-type-square mx-2 bg-blue-a"></div>
-                        <p class="text-3 font-weight-bold m-0">คู่สมรส</p>
+                        <div
+                          class="work-type-square mx-2 bg-blue-a"
+                          v-if="item.spouseAccount != null"
+                        ></div>
+                        <p
+                          class="text-3 font-weight-bold m-0"
+                          v-if="item.spouseAccount != null"
+                        >
+                          คู่สมรส
+                        </p>
                       </div>
                     </div>
 
@@ -556,6 +597,7 @@
                           }"
                         ></div>
                         <div
+                          v-if="item.spouseAccount != null"
                           class="bg-blue-a"
                           :style="{
                             width:
@@ -572,7 +614,7 @@
                         target="popover-income"
                         triggers="hover"
                         placement="bottom"
-                        class="test"
+                  custom-class="pao-popover-wrapper"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
                           รวมรายได้ต่อปี
@@ -581,7 +623,7 @@
                           <formatNumber :data="acc_data[2]" />
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row>
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
@@ -589,7 +631,10 @@
                             <formatNumber :data="item.ownAccount.income"
                           /></b-col>
                         </b-row>
-                        <b-row style="width: 200px">
+                        <b-row
+                          style="width: 200px"
+                          v-if="item.spouseAccount != null"
+                        >
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -622,6 +667,7 @@
                           }"
                         ></div>
                         <div
+                          v-if="item.spouseAccount != null"
                           class="bg-blue-a"
                           :style="{
                             width:
@@ -638,7 +684,7 @@
                         target="popover-exp"
                         triggers="hover"
                         placement="bottom"
-                        class="test"
+                  custom-class="pao-popover-wrapper"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
                           รวมรายจ่ายต่อปี
@@ -647,7 +693,7 @@
                           <formatNumber :data="acc_data[3]" />
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row>
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
@@ -655,7 +701,10 @@
                             <formatNumber :data="item.ownAccount.expense"
                           /></b-col>
                         </b-row>
-                        <b-row style="width: 200px">
+                        <b-row
+                          style="width: 200px"
+                          v-if="item.spouseAccount != null"
+                        >
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -691,6 +740,7 @@
                         ></div>
                         <div
                           class="bg-blue-a"
+                          v-if="item.spouseAccount != null"
                           :style="{
                             width:
                               (
@@ -706,7 +756,7 @@
                         target="popover-tax"
                         triggers="hover"
                         placement="bottom"
-                        class="test"
+                  custom-class="pao-popover-wrapper"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
                           การเสียภาษาเงินได้บุคคลธรรมดาในรอบปีภาษีที่ผ่านมา
@@ -715,7 +765,7 @@
                           <formatNumber :data="acc_data[4]" />
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row>
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
@@ -723,7 +773,7 @@
                             <formatNumber :data="item.ownAccount.taxed"
                           /></b-col>
                         </b-row>
-                        <b-row>
+                        <b-row v-if="item.spouseAccount != null">
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -756,6 +806,7 @@
                           }"
                         ></div>
                         <div
+                          v-if="item.spouseAccount != null"
                           class="bg-blue-a"
                           :style="{
                             width:
@@ -772,7 +823,7 @@
                         target="popover-asset"
                         triggers="hover"
                         placement="bottom"
-                        class="test"
+                  custom-class="pao-popover-wrapper"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
                           รวมทรัพย์สินทั้งสิ้น
@@ -781,7 +832,7 @@
                           <formatNumber :data="acc_data[0]" />
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row>
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
@@ -789,7 +840,10 @@
                             <formatNumber :data="item.ownAccount.asset"
                           /></b-col>
                         </b-row>
-                        <b-row style="width: 200px">
+                        <b-row
+                          style="width: 200px"
+                          v-if="item.spouseAccount != null"
+                        >
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -822,6 +876,7 @@
                         ></div>
                         <div
                           class="bg-blue-a"
+                          v-if="item.spouseAccount != null"
                           :style="{
                             width:
                               (
@@ -837,7 +892,7 @@
                         target="popover-debt"
                         triggers="hover"
                         placement="bottom"
-                        class="test"
+                  custom-class="pao-popover-wrapper"
                       >
                         <p class="text-4 text-center font-weight-bold m-0">
                           รวมหนี้สินทั้งสิ้น
@@ -846,7 +901,7 @@
                           <formatNumber :data="acc_data[1]" />
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row>
+                        <b-row style="width: 200px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
@@ -854,7 +909,10 @@
                             <formatNumber :data="item.ownAccount.debt"
                           /></b-col>
                         </b-row>
-                        <b-row style="width: 200px">
+                        <b-row
+                          style="width: 200px"
+                          v-if="item.spouseAccount != null"
+                        >
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
@@ -997,6 +1055,7 @@ export default {
       logo: require("~/assets/images/logo.svg"),
       arrow_link: require("~/assets/images/arrow_link.svg"),
       linkicon_red: require("~/assets/images/linkicon_red.svg"),
+      info: require("~/assets/images/info.svg"),
       series: [],
       bgcolor: [],
       data_result: [],
@@ -1071,6 +1130,19 @@ export default {
   },
 
   methods: {
+    setDiffDate(date) {
+      var startMomentObject = this.$moment(date.split(" - ")[0], "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
+      var startObject = startMomentObject.toDate();
+      var endtMomentObject = this.$moment(date.split(" - ")[1], "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
+      var endObject = endtMomentObject.toDate();
+
+      var dateResult = this.$moment(endObject).diff(
+        this.$moment(startObject),
+        "years"
+      );
+
+      return dateResult + " ปี";
+    },
     update(newp, oldp) {
       let newindex = this.data_result.findIndex((object) => {
         return object.name === newp;

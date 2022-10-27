@@ -1355,7 +1355,7 @@ select::-ms-expand {
 
 .info {
   position: absolute;
-  right: -24px;
+  right: -32px;
   top: 0;
   z-index: 1;
 

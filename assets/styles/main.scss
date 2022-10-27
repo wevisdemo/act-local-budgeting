@@ -484,6 +484,7 @@ body {
   .arrow::before,
   .arrow::after {
     border-top-color: #e0fd6a;
+    border-bottom-color: #e0fd6a;
   }
 
   .popover-body {
@@ -491,8 +492,13 @@ body {
   }
 }
 
-.bs-popover-bottom {
+.pao-popover-wrapper {
   background: #fffef5 !important;
+
+  .arrow::after {
+    border-top-color: #fffef5 !important;
+    border-bottom-color: #fffef5 !important;
+  }
 }
 
 .drag-wrapper::-webkit-scrollbar {
