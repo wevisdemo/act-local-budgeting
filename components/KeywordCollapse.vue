@@ -30,7 +30,8 @@
                   class="mb-3"
                   ><div
                     class="keyword-btn text-3 white-b p-2 text-center"
-                    @click="showKeywordResult(item2)"
+                    @click="() => $emit('showKeywordResult', item2)"
+                    
                   >
                     <span>{{ item2 }}</span>
                   </div></b-col
@@ -69,7 +70,7 @@
                   class="mb-3"
                   ><div
                     class="keyword-btn text-3 white-b p-2 text-center"
-                    @click="showKeywordResult(item2)"
+                    @click="() => $emit('showKeywordResult', item2)"
                   >
                     <span>{{ item2 }}</span>
                   </div></b-col
@@ -108,7 +109,7 @@
                   class="mb-3"
                   ><div
                     class="keyword-btn text-3 white-b p-2 text-center"
-                    @click="showKeywordResult(item2)"
+                    @click="() => $emit('showKeywordResult', item2)"
                   >
                     <span>{{ item2 }}</span>
                   </div></b-col
@@ -150,7 +151,7 @@
                   class="mb-3"
                   ><div
                     class="keyword-btn text-3 white-b p-2 text-center"
-                    @click="showKeywordResult(item2)"
+                    @click="() => $emit('showKeywordResult', item2)"
                   >
                     <span>{{ item2 }}</span>
                   </div></b-col

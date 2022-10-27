@@ -275,15 +275,14 @@
                 <div
                   v-for="(item3, j) in groupedByType"
                   :style="{
-                      maxWidth:
-                        (item3.total / total_nationwide) * 100 != 0 &&
-                        (item3.total / total_nationwide) * 100 > 2
-                          ? ((item3.total / total_nationwide) * 100).toFixed(
-                              2
-                            ) + '%'
-                          : '1%',
-                      minWidth: '10px',
-                    }"
+                    maxWidth:
+                      (item3.total / total_nationwide) * 100 != 0 &&
+                      (item3.total / total_nationwide) * 100 > 2
+                        ? ((item3.total / total_nationwide) * 100).toFixed(2) +
+                          '%'
+                        : '1%',
+                    minWidth: '10px',
+                  }"
                   class="w-100"
                   :class="{
                     'white-b':
@@ -477,7 +476,10 @@
                 </p>
               </div>
 
-              <KeywordCollapse :data="keyword" />
+              <KeywordCollapse
+                :data="keyword"
+                @showKeywordResult="showKeywordResult"
+              />
 
               <div class="mt-5 text-center" v-if="total_province > 0">
                 <a
@@ -538,8 +540,12 @@
             มาได้ที่ LINE Official Account จับตาไม่ให้ใครโกง
           </p>
 
-          <a href="https://line.me/ti/p/corruptionwatch" rel="noopener noreferrer">
-          <img :src="corruption_watch" class="my-4" width="186" alt="" /></a>
+          <a
+            href="https://line.me/ti/p/corruptionwatch"
+            rel="noopener noreferrer"
+          >
+            <img :src="corruption_watch" class="my-4" width="186" alt=""
+          /></a>
 
           <p class="m-0 font-weight-bold">@corruptionwatch</p>
           <p>
@@ -604,6 +610,47 @@
         <div class="gradient"></div>
       </div>
     </template>
+    <b-modal
+      id="kw-modal"
+      ref="kw-modal"
+      title="BootstrapVue"
+      hide-header
+      hide-footer
+      size="xl"
+      centered
+    ><div class="text-right">
+      <img :src="close" class="pointer" alt="" @click="$bvModal.hide('kw-modal')">
+    </div>
+      <div class="bg-black p-4">
+        <template v-if="keywordSlide.length > 0">
+          <div class="text-center white-b text-2 mb-5">
+            จากงบประมาณ <span class="lime">อบจ.{{ selected_province }}</span>
+            ทั้งหมด
+            {{
+              parseInt(
+                total_province.toString().substring(0, 4)
+              ).toLocaleString()
+            }}
+            ล้านบาท พบคำว่า
+            <div class="selected_keyword">{{ selected_keyword }}</div>
+            ปรากฏใน {{ keywordSlide.length }} รายการงบ
+          </div>
+          <KeywordSlide :data="keywordSlide" :total="total_province" />
+        </template>
+        <template v-else>
+          <div class="text-center">
+            <div class="d-flex justify-content-center align-items-center mb-3">
+              <p class="text-2 white-b m-0">ไม่ปรากฏคำว่า</p>
+              <div class="selected_keyword ml-3">{{ selected_keyword }}</div>
+            </div>
+            <p class="text-2 white-b">
+              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัดเชียงใหม่ ในปี
+              2565
+            </p>
+          </div>
+        </template>
+      </div>
+    </b-modal>
   </div>
 </template>
 
