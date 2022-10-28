@@ -343,16 +343,13 @@
                         item.color == '#253472' || item.color == '#A80C7C',
                     }"
                   >
-
                     <!-- <p class="text-1 font-weight-bold m-0 d-block d-lg-none">
                       {{ item.type }}
                     </p> -->
 
                     <b-row class="d-none d-md-flex">
                       <b-col cols="8">
-                        <p
-                          class="text-1 font-weight-bold m-0"
-                        >
+                        <p class="text-1 font-weight-bold m-0">
                           {{ item.type }}
                         </p>
                         <h4 class="header-4">
@@ -430,7 +427,7 @@
           >ใช้งบประมาณไปกับอะไรบ้าง?
         </p>
       </div>
-      <div class="position-relative" id="province-wrapper">
+      <div class="position-relative" id="province-wrapper" v-if="selected_province != ''">
         <p class="text-2 white-a px-4 d-block d-lg-none">เลือกวิธีสำรวจ:</p>
         <b-tabs
           align="right"
@@ -538,7 +535,7 @@
                   target="_blank"
                   class="link-btn-w text-3"
                   rel="noopener noreferrer"
-                  ><img :src="link_w" class="mr-1" alt="" />
+                  ><img :src="link_w" class="mr-1" alt="" width="10" />
                   สำรวจเอกสารงบประมาณฉบับจริง</a
                 >
               </div>
@@ -548,7 +545,7 @@
                   target="_blank"
                   class="link-btn-w text-3"
                   rel="noopener noreferrer"
-                  ><img :src="download_w" class="mr-1" alt="" />Download
+                  ><img :src="download_black" class="mr-1" alt="" />Download
                   ข้อบัญญัติรายจ่าย อบจ.</a
                 >
               </div>
@@ -591,10 +588,7 @@
             มาได้ที่ LINE Official Account จับตาไม่ให้ใครโกง
           </p>
 
-          <a
-            href="https://line.me/ti/p/corruptionwatch"
-            rel="noopener noreferrer"
-          >
+          <a href="https://line.me/R/ti/p/@206vpscc" rel="noopener noreferrer">
             <img :src="corruption_watch" class="my-4" width="186" alt=""
           /></a>
 
@@ -677,7 +671,7 @@
           @click="$bvModal.hide('kw-modal')"
         />
       </div>
-      <div class="bg-black p-4">
+      <div class="bg-black px-4 py-5">
         <template v-if="keywordSlide.length > 0">
           <div class="text-center white-b text-2 mb-5">
             จากงบประมาณ <span class="lime">อบจ.{{ selected_province }}</span>
@@ -742,6 +736,7 @@ export default {
       selected_work_type: 0,
       budgetingDocUrl: "",
       activetab: "แผนงาน",
+      activetab_province_index: 0,
       activetab_province: "สำรวจผ่านโครงสร้าง",
       total_nationwide: 0,
       total_work_type: 0,
@@ -891,7 +886,8 @@ export default {
       info: require("~/assets/images/info.svg"),
       drag: require("~/assets/images/drag.svg"),
       close: require("~/assets/images/close.svg"),
-      link_w: require("~/assets/images/link_w.svg"),
+      link_w: require("~/assets/images/link_black.svg"),
+      download_black: require("~/assets/images/download_black.svg"),
       download_w: require("~/assets/images/download_w.svg"),
       arrow_left_black: require("~/assets/images/arrow_right_black.svg"),
       corruption_watch: require("~/assets/images/corruption_watch.png"),
@@ -972,11 +968,16 @@ export default {
   },
   watch: {
     // whenever question changes, this function will run
-    selected_year_province(newQuestion, oldQuestion) {
+    selected_year_province(newY, oldY) {
       this.getProvinceData(this.selected_year_province, this.selected_province);
     },
-    selected_province(newQuestion, oldQuestion) {
+    selected_province(newP, oldP) {
       this.getProvinceData(this.selected_year_province, this.selected_province);
+    },
+    activetab_province(newindex, oldindex) {
+      if (this.activetab_province == "สำรวจผ่านโครงสร้าง")
+        this.activetab_province_index = 0;
+      else this.activetab_province_index = 1;
     },
   },
   mounted() {
@@ -1370,6 +1371,11 @@ select::-ms-expand {
   border: 1px solid $black !important;
   border-radius: 5px;
   padding: 5px 25px;
+}
+
+.link-btn-w:hover {
+  border: 2px solid $black !important;
+  text-decoration: none;
 }
 
 .total-nationwide {

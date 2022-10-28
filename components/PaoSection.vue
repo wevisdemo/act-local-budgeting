@@ -50,7 +50,7 @@
               <formatNumber :data="item.total" />
             </p>
             <p class="text-4 mb-1">
-              {{ ((item.total / total) * 100).toFixed(1) }}%
+              {{ ((item.total / total) * 100).toFixed(2) }}%
               ของค่าใช้จ่ายทั้งหมด
             </p>
 
@@ -63,9 +63,10 @@
                 }"
               ></div>
             </div>
-            <b-row>
+            <b-row class="mt-2">
               <b-col cols="6">
-                <p class="text-4 font-weight-bold mb-1">แผนงาน :</p>
+                <div class="border-grey">                <p class="text-4 font-weight-bold mb-1">แผนงาน :</p>
+
                 <img
                   :src="sector_mini_1"
                   width="25"
@@ -134,7 +135,7 @@
                 />
                 <img :src="sector_mini_12" width="25" alt="" v-else />
                 <p class="text-4 mb-1">{{ item.plan }}</p>
-                <p class="text-4 mb-1 grey">{{ item.area }}</p>
+                <p class="text-4 mb-1 grey">{{ item.area }}</p></div>
               </b-col>
               <b-col cols="6" class="pl-0">
                 <p class="text-4 font-weight-bold mb-1">ประเภทรายจ่าย :</p>
@@ -219,7 +220,7 @@
               <formatNumber :data="item.total" />
             </p>
             <p class="text-4 mb-1">
-              {{ ((item.total / total) * 100).toFixed(1) }}%
+              {{ ((item.total / total) * 100).toFixed(2) }}%
               ของค่าใช้จ่ายทั้งหมด
             </p>
 
@@ -232,9 +233,10 @@
                 }"
               ></div>
             </div>
-            <b-row>
+            <b-row class="mt-2">
               <b-col cols="6">
-                <p class="text-4 font-weight-bold mb-1">แผนงาน :</p>
+                <div class="border-grey">                <p class="text-4 font-weight-bold mb-1">แผนงาน :</p>
+
                 <img
                   :src="sector_mini_1"
                   width="25"
@@ -303,7 +305,7 @@
                 />
                 <img :src="sector_mini_12" width="25" alt="" v-else />
                 <p class="text-4 mb-1">{{ item.plan }}</p>
-                <p class="text-4 mb-1 grey">{{ item.area }}</p>
+                <p class="text-4 mb-1 grey">{{ item.area }}</p></div>
               </b-col>
               <b-col cols="6" class="pl-0">
                 <p class="text-4 font-weight-bold mb-1">ประเภทรายจ่าย :</p>
@@ -378,7 +380,7 @@
               </b-popover>
             </div>
           </div>
-          <div class="bg-black white-b p-3">
+          <div class="bg-black white-b p-3" v-if="hasDataPao">
             <h3
               class="header-3 text-center font-weight-bold"
               v-if="total_income != 0"
@@ -515,6 +517,7 @@
               </b-col>
             </b-row>
           </div>
+          <div class="bg-black white-b p-5 text-center" v-else><p class="m-0 text-1 font-weight-bold">ไม่พบข้อมูล</p></div>
         </b-col>
         <b-col lg="5" class="mt-3 mt-lg-0">
           <div class="bg-lime-b p-3 w-fit">
@@ -960,13 +963,13 @@
                 class="collapse-pao-btn"
               >
                 <div
-                  class="d-flex justify-content-between w-100 px-1 when-closed"
+                  class="d-flex justify-content-between w-100 px-1 when-closed font-weight-bold"
                 >
                   <p class="m-0">ข้อมูลรายได้เพิ่มเติม</p>
                   <p class="m-0">+</p>
                 </div>
                 <div
-                  class="d-flex justify-content-between w-100 px-1 when-opened"
+                  class="d-flex justify-content-between w-100 px-1 when-opened font-weight-bold"
                 >
                   <p class="m-0">ย่อลง</p>
                   <p class="m-0">-</p>
@@ -974,6 +977,7 @@
               >
             </div>
           </template>
+          <div class="bg-black white-b p-5 text-center" v-if="!hasDataChief"><p class="m-0 text-1 font-weight-bold">ไม่พบข้อมูล</p></div>
         </b-col>
       </b-row>
     </div>
@@ -1025,6 +1029,8 @@ export default {
       total_income: 0,
       budget_province: 0,
       isShow: false,
+      hasDataPao: false,
+      hasDataChief: false,
       tasks: [],
       tasksAsc: [],
       tasksDesc: [],
@@ -1116,6 +1122,15 @@ export default {
       handler(newValue, oldValue) {
         this.getData(this.year, this.province);
         this.update(newValue, oldValue);
+      },
+    },
+    hasDataPao: {
+      handler(newValue, oldValue) {
+        if (newValue) {
+          setTimeout(() => {
+            this.chartConstructor();
+          }, 1000);
+        }
       },
     },
   },
@@ -1233,6 +1248,12 @@ export default {
           this.pao.incomes.sort(function (a, b) {
             return b.total - a.total;
           });
+
+          if (this.pao.incomes.length > 0) this.hasDataPao = true;
+          else this.hasDataPao = false;
+          if (this.pao.chiefExecutives.length > 0) this.hasDataChief = true;
+          else this.hasDataChief = false;
+
           let total_income = this.pao.incomes.map((a) => a.total);
           total_income.forEach((element) => {
             this.total_income += element;
@@ -1394,5 +1415,10 @@ export default {
   @media only screen and (max-width: 1440px) {
     display: block;
   }
+}
+
+.border-grey {
+  border-right: 1px solid #bfc1c0;
+  padding-right: 5px;
 }
 </style>

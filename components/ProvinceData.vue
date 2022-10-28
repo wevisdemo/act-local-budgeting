@@ -564,6 +564,10 @@ function combineTasks(targetedTasks) {
   padding: 5px 25px;
 }
 
+.link-btn:hover {
+  border: 2px solid $white-b !important; text-decoration: none;
+}
+
 .work-list-box {
   height: 500px;
   //overflow-x: hidden;
