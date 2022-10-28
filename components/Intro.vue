@@ -321,6 +321,10 @@ export default {
 .act_logo {
   max-width: 800px;
   margin: auto;
+
+  @media #{$mq-mobile} {
+    max-width: 100%;
+  }
 }
 
 .img-intro-box {
@@ -331,8 +335,6 @@ export default {
 }
 
 .logo-brand {
-  @media #{$mq-mini-mobile} {
-    width: 100%;
-  }
+  width: 100px;
 }
 </style>

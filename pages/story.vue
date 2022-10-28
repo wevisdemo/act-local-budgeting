@@ -88,7 +88,7 @@
           </div>
           <div class="story-intro">
             <div class="header header-3 white-b">
-              พวกเรามีสิทธิเข้าไปมีส่วนร่วม<br />
+              พวกเรามีสิทธิเข้าไปมีส่วนร่วม<br class="d-none d-sm-inline" />
               ทั้งขั้นตอนก่อนและหลังการจัดสรรงบ
             </div>
           </div>
@@ -130,8 +130,7 @@
                 <p class="text-2 text-center">
                   เราเรียกขั้นตอนนี้ว่า
                   <span class="orange-a">Participatory Budgeting</span>
-                  แต่ในความเป็นจริง สำหรับประเทศไทย แนวคิดการจัดสรรงบประมาณแบบ
-                  มีส่วนร่วมลักษณะนี้อาจยังไม่ประสบความสำเร็จ
+                  แต่ในความเป็นจริง สำหรับประเทศไทยแนวคิดการจัดสรรงบประมาณแบบมีส่วนร่วมลักษณะนี้อาจยังไม่ประสบความสำเร็จ
                   หรือเห็นภาพได้ชัดเนื่องจากข้อจำกัดหลายอย่าง
                 </p>
               </div>
@@ -173,7 +172,7 @@
           <div class="circle"></div>
           <div class="circle"></div>
         </div>
-        <p class="text-center white-b text-1 py-5">
+        <p class="text-center white-b text-1 py-5 px-2">
           แต่ในความเป็นจริงแล้ว... <br />
           การสำรวจตรวจดูงบของ อบจ. ก็ไม่ได้ง่ายอย่างที่มันควรจะเป็น
         </p>
@@ -272,11 +271,9 @@
           class="text-2 text-center white-a py-5 content-box d-none d-lg-block"
         >
           เพื่อความโปร่งใส
-          หลายประเทศได้มีการนำข้อมูลเกี่ยวกับการจัดสรรงบประมาณของภาครัฐ
-          มาเผยแพร่ให้ประชาชนทั่วไปได้รับรู้
+          หลายประเทศได้มีการนำข้อมูลเกี่ยวกับการจัดสรรงบประมาณของภาครัฐมาเผยแพร่ให้ประชาชนทั่วไปได้รับรู้
           และสามารถนำข้อมูลเหล่านั้นมาวิเคราะห์ต่อยอด
-          หรือแม้กระทั่งเปลี่ยนให้เป็นชาร์ตรูปแบบต่าง ๆ
-          ที่ประชาชนสามารถกดสำรวจเองได้
+          หรือแม้กระทั่งเปลี่ยนให้เป็นชาร์ตรูปแบบต่าง ๆ ที่ประชาชนสามารถกดสำรวจเองได้
         </p>
 
         <div
@@ -879,6 +876,10 @@ export default {
   font-weight: lighter;
   width: fit-content;
   margin: auto;
+
+  @media #{$mq-mobile} {
+    padding: 10px;
+  }
 }
 .story-intro {
   padding: 30px 10px 66px;
@@ -1132,10 +1133,8 @@ export default {
     // position: unset;
 
     top: 0px;
-    //left: 60px;
-
-    margin: auto;
-    width: 230px;
+    width: 240px;
+    left: 15px;
   }
 }
 
@@ -1177,7 +1176,7 @@ export default {
     margin: auto;
 
     @media #{$mq-mobile} {
-      position: unset;
+      position: unset;     padding: 10px;
     }
   }
 

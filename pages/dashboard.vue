@@ -1384,6 +1384,7 @@ select::-ms-expand {
   left: 0;
   right: 0;
   bottom: 10px;
+  z-index: 2;
 }
 
 .tab-wrapper {
