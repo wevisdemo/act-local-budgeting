@@ -176,8 +176,12 @@ export default {
 <style lang="scss" scoped>
 .keyword-btn-content {
   height: 175px;
-  background-size: cover;
+  background-size: 100%;
   background-repeat: no-repeat;
+  
+  p {
+    width: 250px;
+  }
 }
 
 .keyword-collapse {

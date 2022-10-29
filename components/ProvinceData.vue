@@ -39,7 +39,7 @@
               :style="{ backgroundColor: item.color }"
             ></div>
             <p class="text-3 mr-1">
-              {{ ((item.total / total) * 100).toFixed(1) }}%
+              {{ ((item.total / total) * 100).toFixed(2) }}%
             </p>
             <p class="text-3 font-weight-bold">{{ item.name }}</p>
           </div>
@@ -71,7 +71,7 @@
                       }"
               >
                 <h5 class="header-5 mr-1">
-                  {{ ((item3.total / total) * 100).toFixed(1) }}%
+                  {{ ((item3.total / total) * 100).toFixed(2) }}%
                 </h5>
               </div>
             </div>
@@ -107,7 +107,7 @@
                     </p>
                     <h4 class="header-4">
                       <formatNumber :data="item.total" /> ({{
-                        ((item.total / total) * 100).toFixed(1)
+                        ((item.total / total) * 100).toFixed(2)
                       }}%)
                     </h4>
                   </b-col>
@@ -142,7 +142,7 @@
                                 (x) => x.plan == item.plan
                               )[0].total) *
                             100
-                          ).toFixed(1)
+                          ).toFixed(2)
                         }}%)
                       </p>
                       <div
@@ -246,7 +246,7 @@
                     </p>
                     <h4 class="header-4">
                       <formatNumber :data="item.total" /> ({{
-                        ((item.total / total) * 100).toFixed(1)
+                        ((item.total / total) * 100).toFixed(2)
                       }}%)
                     </h4>
                   </b-col>
@@ -266,7 +266,7 @@
                     รายการภายใต้ประเภทงบนี้
                   </p>
                   <p class="text-2 blue-a m-0">
-                    (สัดส่วน % เทียบเฉพาะรายการในแผนงานเดียวกัน)
+                    (สัดส่วน % เทียบเฉพาะรายการในประเภทงบเดียวกัน)
                   </p>
                   <hr />
 
@@ -284,7 +284,7 @@
                       </p>
                       <p class="text-3 black m-0">
                         <formatNumber :data="item2.total" /> ({{
-                          ((item2.total / total) * 100).toFixed(1)
+                          ((item2.total / total) * 100).toFixed(2)
                         }}%)
                       </p>
                       <div
@@ -535,6 +535,10 @@ function combineTasks(targetedTasks) {
 .work-card {
   // box-shadow: 1px 1px 12px 2px rgba(24, 31, 28, 0.15);
   padding: 25px;
+
+  @media #{$mq-mini-mobile} {
+    padding: 10px;
+  }
 }
 
 .task-chart {

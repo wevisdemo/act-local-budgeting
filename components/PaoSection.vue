@@ -51,7 +51,7 @@
             </p>
             <p class="text-4 mb-1">
               {{ ((item.total / total) * 100).toFixed(2) }}%
-              ของค่าใช้จ่ายทั้งหมด
+              ของรายจ่ายทั้งหมด
             </p>
 
             <div style="background: #ccc">
@@ -221,7 +221,7 @@
             </p>
             <p class="text-4 mb-1">
               {{ ((item.total / total) * 100).toFixed(2) }}%
-              ของค่าใช้จ่ายทั้งหมด
+              ของรายจ่ายทั้งหมด
             </p>
 
             <div style="background: #ccc">
@@ -384,7 +384,7 @@
             <h3
               class="header-3 text-center font-weight-bold"
               v-if="total_income != 0"
-            >
+            ><span class="font-weight-normal">ประมาณการรายได้</span><br class="d-inline d-sm-none">
               <template v-if="total != 0 && total != null">
                 {{
                   total >= 1000000
@@ -402,7 +402,7 @@
               </template>
               <template v-else> 0 บาท </template>
             </h3>
-            <div class="d-flex w-100" v-if="pao != null">
+            <div class="d-flex w-100 overflow-hidden" v-if="pao != null">
               <div
                 v-if="pao.incomes.length > 0"
                 v-for="(item, i) in pao.incomes"
@@ -415,11 +415,11 @@
                 :class="{
                   'bg-white-a black': i == 0,
                   'bg-blue-a white-b': i == 1,
-                  'bg-pink black': i == 2,
+                  'bg-pink white-b': i == 2,
                 }"
               >
-                <span class="text-4 p-2"
-                  >{{ ((item.total / total) * 100).toFixed() }}%</span
+                <span class="text-4 p-1"
+                  >{{ ((item.total / total) * 100).toFixed(2) }}%</span
                 >
               </div>
             </div>
@@ -479,12 +479,12 @@
                       'blue-a': i == 1,
                       pink: i == 2,
                     }"
-                    >{{ ((item2.total / total) * 100).toFixed(3) }}%</span
+                    >{{ ((item2.total / total) * 100).toFixed(2) }}%</span
                   >
                 </p></template
               >
               <p class="mb-0 mt-4 pink pointer" @click="showExtraIncomeDetails">
-                {{ isShow ? "ย่อลง -" : "หมวดรายได้เพิ่มเติม +" }}
+                {{ isShow ? "ย่อลง -" : "รายละเอียด +" }}
               </p>
             </div>
             <hr style="border-top: 1px solid #fff" />
@@ -535,7 +535,7 @@
                     นายกองค์การบริหารส่วนจังหวัด{{ province }}
                   </p>
                   <p class="text-3 font-weight-bold m-0">วันที่ดำรงตำแหน่ง</p>
-                  <p class="text-3">{{ item.inOffice }}  ({{ setDiffDate(item.inOffice) }})</p> 
+                  <p class="text-3">{{ item.inOffice }}</p> 
                 </b-col>
                 <b-col
                   sm="5"
@@ -965,7 +965,7 @@
                 <div
                   class="d-flex justify-content-between w-100 px-1 when-closed font-weight-bold"
                 >
-                  <p class="m-0">ข้อมูลรายได้เพิ่มเติม</p>
+                  <p class="m-0">ข้อมูลเพิ่มเติม</p>
                   <p class="m-0">+</p>
                 </div>
                 <div
@@ -1420,5 +1420,11 @@ export default {
 .border-grey {
   border-right: 1px solid #bfc1c0;
   padding-right: 5px;
+}
+
+#info {
+  @media #{$mq-mini-mobile} {
+    width: 20px;
+  }
 }
 </style>

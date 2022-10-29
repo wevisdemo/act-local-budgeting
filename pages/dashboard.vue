@@ -105,7 +105,7 @@
                 </div>
               </div>
 
-              <div class="d-flex w-100 overflow-hidden">
+              <div class="d-flex w-100 overflow-hidden" id="work-plan-slide">
                 <template
                   class="d-flex mx-1"
                   v-for="(item2, i) in groupedByAreaSlide"
@@ -150,7 +150,7 @@
                 แผน
               </p>
 
-              <div v-if="groupedByAreaSlide.length > 0" id="work-plan-slide">
+              <div v-if="groupedByAreaSlide.length > 0">
                 <VueSlickCarousel
                   v-bind="slickOptions"
                   class="work-card-wrapper"
@@ -280,7 +280,7 @@
                 </div>
               </div>
 
-              <div class="d-flex w-100 overflow-hidden">
+              <div class="d-flex w-100 overflow-hidden" id="work-type-slide">
                 <div
                   v-for="(item3, j) in groupedByType"
                   :style="{
@@ -323,7 +323,7 @@
                 ประเภท
               </p>
 
-              <div id="work-type-slide">
+              <div>
                 <VueSlickCarousel
                   v-bind="slickOptions"
                   class="work-card-wrapper work-card-type-wrapper"
@@ -343,13 +343,13 @@
                         item.color == '#253472' || item.color == '#A80C7C',
                     }"
                   >
-                    <!-- <p class="text-1 font-weight-bold m-0 d-block d-lg-none">
+                    <p class="text-1 font-weight-bold m-0 d-block d-sm-none">
                       {{ item.type }}
-                    </p> -->
+                    </p>
 
                     <b-row class="d-none d-md-flex">
                       <b-col cols="8">
-                        <p class="text-1 font-weight-bold m-0">
+                        <p class="text-1 font-weight-bold m-0 d-none d-sm-block">
                           {{ item.type }}
                         </p>
                         <h4 class="header-4">
@@ -427,7 +427,11 @@
           >ใช้งบประมาณไปกับอะไรบ้าง?
         </p>
       </div>
-      <div class="position-relative" id="province-wrapper" v-if="selected_province != ''">
+      <div
+        class="position-relative"
+        id="province-wrapper"
+        v-if="selected_province != ''"
+      >
         <p class="text-2 white-a px-4 d-block d-lg-none">เลือกวิธีสำรวจ:</p>
         <b-tabs
           align="right"
@@ -615,14 +619,7 @@
         "
       >
         <div
-          class="
-            px-3
-            py-5
-            d-flex
-            justify-content-center
-            align-items-center
-            h-100
-          "
+          class="px-3 d-flex justify-content-center align-items-center h-100"
         >
           <div>
             <div class="header-box mb-5">
@@ -676,14 +673,12 @@
           <div class="text-center white-b text-2 mb-5">
             จากงบประมาณ <span class="lime">อบจ.{{ selected_province }}</span>
             ทั้งหมด
-            {{
-              parseInt(
-                total_province.toString().substring(0, 4)
-              ).toLocaleString()
-            }}
+
+            <formatNumber :data="total_province" />
+
             ล้านบาท พบคำว่า
             <div class="selected_keyword">{{ selected_keyword }}</div>
-            ปรากฏใน {{ keywordSlide.length }} รายการงบ
+            ปรากฏใน {{ keywordSlide.length }} รายการ
           </div>
           <KeywordSlide :data="keywordSlide" :total="total_province" />
         </template>
@@ -694,8 +689,8 @@
               <div class="selected_keyword ml-3">{{ selected_keyword }}</div>
             </div>
             <p class="text-2 white-b">
-              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัดเชียงใหม่ ในปี
-              2565
+              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัด{{ selected_province }} ในปี
+              {{ selected_year_province }}
             </p>
           </div>
         </template>
@@ -715,7 +710,7 @@
         <p class="text-2 m-0">
           รวบรวมข้อมูลจาก 76 องค์การบริหารส่วนจังหวัด
           โดยอาจไม่ปรากฎข้อมูลของบางองค์การบริหารส่วนจังหวัด ในบางปีงบประมาณ
-          เนื่องจากหน่วยงานไม่เปิดเผยข้อมูลบนหน้าเว็บไซต์
+          เนื่องจากหน่วยงานไม่เปิดเผยข้อมูลบนหน้าเว็บไซต์ และไม่ครอบคลุมงบประมาณรายจ่ายเฉพาะการ
         </p>
       </div>
     </div>
@@ -994,11 +989,15 @@ export default {
             this.options.push({ value: element, text: element });
           });
 
+          data.provinces.sort((a, b) => a.localeCompare(b))
+
           this.provinces.push({ value: "", text: "เลือกจังหวัด" });
 
           data.provinces.forEach((element) => {
             this.provinces.push({ value: element, text: element });
           });
+
+      
         });
     },
     getNationWideData(year) {
@@ -1267,6 +1266,11 @@ select::-ms-expand {
 .choose-wrapper {
   background-image: url("~/assets/images/bg_grid_blue.svg");
   position: relative;
+  padding-top: 75px;
+
+  @media #{$mq-mini-mobile} {
+    padding-top: 30px;
+  }
   .header-box {
     border: 1px solid #0056a6;
     padding: 10px;
@@ -1362,6 +1366,7 @@ select::-ms-expand {
 
   @media #{$mq-mini-mobile} {
     right: 0px;
+    width: 20px;
   }
 }
 
@@ -1385,7 +1390,7 @@ select::-ms-expand {
 }
 
 .disclaimer {
-  max-width: 600px;
+  max-width: 655px;
   margin: auto;
   left: 0;
   right: 0;

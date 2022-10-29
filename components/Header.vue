@@ -6,9 +6,10 @@
     >
       <div>
         <a href="http://actai.co" target="_blank" rel="noopener noreferrer">
-        <img :src="logo" alt="" width="70" class="logo" /></a>
+          <img :src="logo" alt="" width="70" class="logo"
+        /></a>
       </div>
-      <div class="text-right text-sm-left">
+      <div class="text-right text-sm-left menu-list">
         <NuxtLink class="box text-3" to="/">หน้าหลัก</NuxtLink>
         <NuxtLink class="box text-3" to="/dashboard">สำรวจข้อมูล</NuxtLink>
         <NuxtLink class="box text-3" to="/story">งบ อบจ. สำคัญอย่างไร</NuxtLink>
@@ -69,6 +70,12 @@ export default {
       margin-bottom: 2px;
       font-size: 11px;
     }
+  }
+}
+
+.menu-list {
+  @media #{$mq-mini-mobile} {
+    width: 250px;
   }
 }
 </style>

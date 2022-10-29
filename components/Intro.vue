@@ -23,7 +23,12 @@
             <img :src="box_town_2" alt="" width="" />
           </div>
           <div cols="4" class="position-relative">
-            <img :src="box_dark" alt="" width="" class="d-none d-lg-block img-intro-box" />
+            <img
+              :src="box_dark"
+              alt=""
+              width=""
+              class="d-none d-lg-block img-intro-box"
+            />
             <div class="intro-text-2 white-a">
               <p class="text-4 m-0 text-center text-lg-left">
                 โปรเจกต์ชวนตรวจสอบงบประมาณ อบจ. ชิ้นนี้<br />ต่อยอดมาจากไอเดียทีม
@@ -43,7 +48,12 @@
             </div>
           </div>
           <div cols="4" class="text-left position-relative">
-            <img :src="box_dark" alt="" width="" class="d-none d-lg-block img-intro-box" />
+            <img
+              :src="box_dark"
+              alt=""
+              width=""
+              class="d-none d-lg-block img-intro-box"
+            />
             <div class="intro-text-2 white-a">
               <div class="d-flex justify-content-around">
                 <div>
@@ -53,9 +63,9 @@
                 <div class="ml-3">
                   <p class="mb-1 text-4 font-weight-bold">Co-Developed by</p>
                   <div class="d-flex flex-lg-column">
-                    <div><img :src="punchup" alt="" class="logo-brand"/></div>
+                    <div><img :src="punchup" alt="" class="logo-brand" /></div>
                     <div><p class="my-2 text-4 mx-1 mx-lg-0">&</p></div>
-                    <div><img :src="hand" alt="" class="logo-brand"/></div>
+                    <div><img :src="hand" alt="" class="logo-brand" /></div>
                   </div>
                 </div>
               </div>
@@ -71,7 +81,7 @@
             <img :src="box_dark" alt="" width="" class="img-intro-box" />
           </div>
           <div class="text-right">
-            <img :src="box_town_1" alt="" width="" class="img-intro-box"/>
+            <img :src="box_town_1" alt="" width="" class="img-intro-box" />
           </div>
           <div class="text-right">
             <img :src="box_dark" alt="" width="" class="img-intro-box" />
@@ -92,18 +102,26 @@
             <img :src="box_town_3" alt="" width="" class="img-intro-box" />
           </div>
           <div class="text-left">
-            <img :src="box_lime" alt="" width=""  class="img-intro-box"/>
+            <img :src="box_lime" alt="" width="" class="img-intro-box" />
           </div>
         </div>
       </div>
 
       <div class="px-3">
-        <div style="max-width: 992px" class="mx-auto mt-5 text-center text-md-left">
+        <div
+          style="max-width: 992px"
+          class="mx-auto mt-5 text-center text-md-left"
+        >
           <h4 class="header-4 font-weight-bold white-a px-3 d-none d-md-block">
             ถนน เสาไฟ โรงเรียน<br />
             พื้นที่สาธารณะ ศูนย์พยาบาล...ฯลฯ
           </h4>
-          <img :src="intro_desc_header" width="300" alt="" class="mx-auto d-block d-md-none" />
+          <img
+            :src="intro_desc_header"
+            width="300"
+            alt=""
+            class="mx-auto d-block d-md-none"
+          />
         </div>
 
         <div class="intro-box text-2 white-b my-3 text-center text-md-left">
@@ -128,7 +146,9 @@
     <div
       class="h-100vh choose-wrapper d-flex flex-column justify-content-between"
     >
-      <div class="px-3 py-5 d-flex justify-content-center align-items-center h-100">
+      <div
+        class="px-3 d-flex justify-content-center align-items-center h-100"
+      >
         <div>
           <div class="header-box mb-5">
             <div class="content bg-blue-a">
@@ -257,6 +277,11 @@ export default {
 .choose-wrapper {
   background-image: url("~/assets/images/bg_grid_blue.svg");
   position: relative;
+  padding-top: 75px;
+
+  @media #{$mq-mini-mobile} {
+    padding-top: 30px;
+  }
   .header-box {
     border: 1px solid #0056a6;
     padding: 10px;
