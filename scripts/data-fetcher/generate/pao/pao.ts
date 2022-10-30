@@ -21,6 +21,12 @@ export function generatePaoBudgets(
     for (const province of allProvinces) {
       const targetedBudgetRows = budgetRows
         .filter(row => row.year === year && row.province === province)
+
+      if (targetedBudgetRows.length === 0) {
+        // Early return on empty budget rows
+        continue
+      }
+
       const expenseRows = targetedBudgetRows
         .filter(row => row.type === 'expense')
       const incomeRows = targetedBudgetRows

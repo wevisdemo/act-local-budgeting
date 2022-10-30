@@ -10,6 +10,37 @@ jest.mock('../../log-collector/log-collector', () => {
   }
 })
 
+describe('generate > pao', () => {
+  test('Map only when there is a record of matched year and province', () => {
+    const chiangMai2564 = getExpenseRow()
+    const chiangMai2563 = { ...getExpenseRow(), year: 2563 }
+    const saraburi2564 = { ...getExpenseRow(), province: 'สระบุรี' }
+    
+    const paos = generatePaoBudgets(
+      [
+        chiangMai2564,
+        chiangMai2563,
+        saraburi2564,
+      ],
+      [],
+      [
+        getActAiLinkRow(),
+        { ...getActAiLinkRow(), province: 'สระบุรี' }],
+      [
+        getByYearLinkRow(2563),
+        getByYearLinkRow(2564),
+        { ...getByYearLinkRow(2563), province: 'สระบุรี' },
+        { ...getByYearLinkRow(2564), province: 'สระบุรี' },
+      ]
+    )
+
+    expect(paos.length).toBe(3)
+    expect(paos).not.toContainEqual(
+      { year: 2563, province: 'สระบุรี', budget: expect.anything() },
+    )
+  })
+})
+
 describe('generate > pao > budget', () => {
   test('Get all PAO budgets for years by provinces', () => {
     const chiangMai2564 = getExpenseRow()
