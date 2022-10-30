@@ -37,8 +37,7 @@ jobs:
       run: npm run fetch
 
     - name: Generate 🏗️
-      run: npm run build
-      run: npm run generate
+      run: npm run build && npm run generate
     
     - name: Deploy ☁️
       uses: peaceiris/actions-gh-pages@v3
