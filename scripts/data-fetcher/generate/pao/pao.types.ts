@@ -46,6 +46,7 @@ export type ChiefExecutive = {
   ownAccount: Account
   spouseAccount?: Account
   fillingUrl: string
+  remark?: string
 }
 
 export type Account = {

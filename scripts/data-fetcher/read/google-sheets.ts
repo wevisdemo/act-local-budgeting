@@ -73,6 +73,7 @@ export async function getAssetRows(csvUrl: string): Promise<AssetRow[]> {
       ownTaxed: parseToNumber(row[17]),
       spouseTaxed: parseEmptyStringToUndefined(row[18]) ? parseToNumber(row[18]) : undefined,
       fillingUrl: row[19],
+      remark: parseEmptyStringToUndefined(row[20]),
     }
   })
 }

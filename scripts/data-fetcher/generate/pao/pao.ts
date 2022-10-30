@@ -208,5 +208,6 @@ function mapChiefExecutive(row: AssetRow): ChiefExecutive {
       taxed: row.spouseTaxed ?? 0,
     } : undefined,
     fillingUrl: row.fillingUrl,
+    remark: row.remark,
   }
 }

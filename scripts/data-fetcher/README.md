@@ -256,6 +256,7 @@ type ChiefExecutive = {
   ownAccount: Account
   spouseAccount?: Account
   fillingUrl: string
+  remark?: string
 }
 
 type Account = {
@@ -324,6 +325,7 @@ Example
           "taxed": 0
         },
         "fillingUrl": "https://drive.google.com",
+        "remark": "แสดงผลคู่สมรสลำดับที่ 1 เท่านั้น"
       }],
   }
 }

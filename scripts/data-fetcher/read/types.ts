@@ -54,6 +54,7 @@ export type AssetRow = {
   ownTaxed: number // เงินได้พึงประเมินผู้ยื่น
   spouseTaxed?: number // เงินได้พึงประเมินคู่สมรส
   fillingUrl: string // PDF Link
+  remark?: string // หมายเหตุ
 }
 
 export type KeywordRow = {
