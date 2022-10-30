@@ -26,7 +26,17 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    - name: Install dependencies 👨🏻‍💻
     - run: npm ci
+
+    - name: Test fetch 🧪
+    - run: npm run test-fetch
+
+    - name: Fetch data 🏃🏻‍♂️
+    - run: npm run fetch
+
+    - name: Generate 🏗️
     - run: npm run build
     - run: npm run generate
     
