@@ -460,7 +460,9 @@
                     </p>
                   </div>
                   <p class="my-1 white-b ml-4">
-                    (<formatNumber :data="item.total" />)
+                    ({{
+      parseInt(item.total.toString()).toLocaleString()
+      }} บาท)
                   </p>
                 </div>
               </div>
@@ -558,7 +560,7 @@
               <b-collapse :id="'collapse-pao-' + i" class="mt-2">
                 <div class="bg-black p-3">
                   <p class="text-3 white-b">ข้อมูลบัญชีทรัพย์สิน</p>
-                  <template v-if="item.ownAccount != null">
+                  <template v-if="item.ownAccount != null && acc_data.length >0">
                     <div class="d-flex">
                       <p class="text-3 font-weight-bold">ยอดรวม</p>
                       <div class="d-flex mx-1">
@@ -583,7 +585,9 @@
                       >
                         <p class="m-0">รวมรายได้ต่อปี</p>
                         <p class="m-0">
-                          <formatNumber :data="acc_data[2]" />
+                          {{
+      parseFloat(acc_data[2].toString()).toLocaleString()
+      }} บาท
                         </p>
                       </div>
                       <div class="d-flex mt-3" id="popover-income">
@@ -623,27 +627,31 @@
                           รวมรายได้ต่อปี
                         </p>
                         <p class="text-3 text-center m-0">
-                          <formatNumber :data="acc_data[2]" />
+                         {{
+      parseFloat(acc_data[2].toString()).toLocaleString()
+      }} บาท
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row style="width: 200px">
+                        <b-row style="width: 250px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
                           <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.ownAccount.income"
-                          /></b-col>
+                            {{
+      parseFloat(item.ownAccount.income.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                         <b-row
-                          style="width: 200px"
+                          style="width: 250px"
                           v-if="item.spouseAccount != null"
                         >
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
                           <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.spouseAccount.income"
-                          /></b-col>
+                            {{
+      parseFloat(item.spouseAccount.income.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                       </b-popover>
                     </div>
@@ -653,7 +661,9 @@
                       >
                         <p class="m-0">รวมรายจ่ายต่อปี</p>
                         <p class="m-0">
-                          <formatNumber :data="acc_data[3]" />
+                          {{
+      parseFloat(acc_data[3].toString()).toLocaleString()
+      }} บาท
                         </p>
                       </div>
                       <div class="d-flex mt-3" id="popover-exp">
@@ -693,27 +703,31 @@
                           รวมรายจ่ายต่อปี
                         </p>
                         <p class="text-3 text-center m-0">
-                          <formatNumber :data="acc_data[3]" />
+                          {{
+      parseFloat(acc_data[3].toString()).toLocaleString()
+      }} บาท
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row style="width: 200px">
+                        <b-row style="width: 250px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
                           <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.ownAccount.expense"
-                          /></b-col>
+                            {{
+      parseFloat(item.ownAccount.expense.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                         <b-row
-                          style="width: 200px"
+                          style="width: 250px"
                           v-if="item.spouseAccount != null"
                         >
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
                           <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.spouseAccount.expense"
-                          /></b-col>
+                            {{
+      parseFloat(item.spouseAccount.expense.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                       </b-popover>
                     </div>
@@ -725,7 +739,9 @@
                           การเสียภาษีเงินได้บุคคลธรรมดาในรอบปีภาษีที่ผ่านมา
                         </p>
                         <p class="m-0">
-                          <formatNumber :data="acc_data[4]" />
+                          {{
+      parseFloat(acc_data[4].toString()).toLocaleString()
+      }} บาท
                         </p>
                       </div>
                       <div class="d-flex mt-3" id="popover-tax">
@@ -761,28 +777,32 @@
                         placement="bottom"
                   custom-class="pao-popover-wrapper"
                       >
-                        <p class="text-4 text-center font-weight-bold m-0">
+                        <p class="text-4 text-center font-weight-bold m-0" style="width: 250px">
                           การเสียภาษาเงินได้บุคคลธรรมดาในรอบปีภาษีที่ผ่านมา
                         </p>
                         <p class="text-3 text-center m-0">
-                          <formatNumber :data="acc_data[4]" />
+                          {{
+      parseFloat(acc_data[4].toString()).toLocaleString()
+      }} บาท
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row style="width: 200px">
+                        <b-row style="width: 250px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
-                          <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.ownAccount.taxed"
-                          /></b-col>
+                          <b-col cols="7" class="text-right p-0">
+                            {{
+      parseFloat(item.ownAccount.taxed.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
-                        <b-row v-if="item.spouseAccount != null">
+                        <b-row v-if="item.spouseAccount != null" style="width: 250px">
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
-                          <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.spouseAccount.taxed"
-                          /></b-col>
+                          <b-col cols="7" class="text-right p-0">
+                            {{
+      parseFloat(item.spouseAccount.income.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                       </b-popover>
                     </div>
@@ -792,7 +812,9 @@
                       >
                         <p class="m-0">รวมทรัพย์สินทั้งสิ้น</p>
                         <p class="m-0">
-                          <formatNumber :data="acc_data[0]" />
+                          {{
+      parseFloat(acc_data[0].toString()).toLocaleString()
+      }} บาท
                         </p>
                       </div>
                       <div class="d-flex mt-3" id="popover-asset">
@@ -832,27 +854,31 @@
                           รวมทรัพย์สินทั้งสิ้น
                         </p>
                         <p class="text-3 text-center m-0">
-                          <formatNumber :data="acc_data[0]" />
+                          {{
+      parseFloat(acc_data[0].toString()).toLocaleString()
+      }} บาท
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row style="width: 200px">
+                        <b-row style="width: 275px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
                           <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.ownAccount.asset"
-                          /></b-col>
+                            {{
+      parseFloat(item.ownAccount.asset.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                         <b-row
-                          style="width: 200px"
+                          style="width: 275px"
                           v-if="item.spouseAccount != null"
                         >
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
                           <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.spouseAccount.asset"
-                          /></b-col>
+                            {{
+      parseFloat(item.spouseAccount.asset.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                       </b-popover>
                     </div>
@@ -862,7 +888,9 @@
                       >
                         <p class="m-0">รวมหนี้สินทั้งสิ้น</p>
                         <p class="m-0">
-                          <formatNumber :data="acc_data[1]" />
+                          {{
+      parseFloat(acc_data[1].toString()).toLocaleString()
+      }} บาท
                         </p>
                       </div>
                       <div class="d-flex mt-3" id="popover-debt">
@@ -901,30 +929,36 @@
                           รวมหนี้สินทั้งสิ้น
                         </p>
                         <p class="text-3 text-center m-0">
-                          <formatNumber :data="acc_data[1]" />
+                          {{
+      parseFloat(acc_data[1].toString()).toLocaleString()
+      }} บาท
                         </p>
                         <hr class="my-2" style="border-color: #ec6440" />
-                        <b-row style="width: 200px">
+                        <b-row style="width: 250px">
                           <b-col cols="5">
                             <p class="text-4 m-0">ผู้ยื่น</p></b-col
                           >
                           <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.ownAccount.debt"
-                          /></b-col>
+                            {{
+      parseFloat(item.ownAccount.debt.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                         <b-row
-                          style="width: 200px"
+                          style="width: 250px"
                           v-if="item.spouseAccount != null"
                         >
                           <b-col cols="5">
                             <p class="text-4 m-0">คู่สมรส</p></b-col
                           >
                           <b-col cols="7" class="text-right">
-                            <formatNumber :data="item.spouseAccount.debt"
-                          /></b-col>
+                            {{
+      parseFloat(item.spouseAccount.debt.toString()).toLocaleString()
+      }} บาท</b-col>
                         </b-row>
                       </b-popover>
                     </div>
+
+                    <p class="m-0 text-3 white-b text-center mt-3" v-if="item.remark != null">หมายเหตุ : {{item.remark}}</p>
                   </template>
                   <template v-else>
                     <p class="text-3 white-b text-center py-5">
@@ -1109,6 +1143,7 @@ export default {
         },
       },
       acc_data: [],
+      remark:""
     };
   },
   watch: {
@@ -1279,7 +1314,7 @@ export default {
               }
             }
           }
-
+        
           if (this.pao.chiefExecutives[0].spouseAccount != null) {
             Object.entries(this.pao.chiefExecutives[0].spouseAccount).forEach(
               ([key, value], index) => {
@@ -1287,6 +1322,7 @@ export default {
               }
             );
           }
+
         });
     },
     getDataForChart() {

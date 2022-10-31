@@ -69,8 +69,8 @@
               จึงเป็นตัวแปรสำคัญที่มีส่วนในการกำหนดคุณภาพชีวิตของผู้คน
             </div>
           </div>
-          <div class="step" data-step-no="5">
-            <div class="text-step-3">
+          <div class="step align-items-start" data-step-no="5">
+            <div class="text-step-3 mt-5">
               <h5 class="header-5 font-weight-bold text-center mb-5">
                 จึงเป็น<span class="blue-a">สิทธิและหน้าที่</span
                 >ของประชาชนอย่างเราที่จะต้องเข้าไปมีส่วนร่วมแสดงความคิดเห็นในขั้นตอนการจัดสรรงบในแต่ละปี

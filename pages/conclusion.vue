@@ -52,7 +52,7 @@
           <ShareNetwork
             network="facebook"
             title=""
-            url="https://wevisdemo.github.io/act-local-budgeting/"
+            url="http://localbudgeting.actai.co/"
             class="share-btn pointer text-1 mx-2"
           >
             <img :src="facebook" alt="facebook" />
@@ -61,7 +61,7 @@
           <ShareNetwork
             network="twitter"
             title=""
-            url="https://wevisdemo.github.io/act-local-budgeting/"
+            url="http://localbudgeting.actai.co/"
             class="share-btn pointer text-1 mx-2"
           >
             <img :src="twitter" alt="twitter" />
@@ -69,7 +69,7 @@
           <ShareNetwork
             network="line"
             title=""
-            url="https://wevisdemo.github.io/act-local-budgeting/"
+            url="http://localbudgeting.actai.co/"
             class="share-btn pointer text-1 mx-2"
           >
             <img :src="line" alt="line" />

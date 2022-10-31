@@ -1,4 +1,4 @@
-const BASE_URL = 'https://wevisdemo.github.io/act-local-budgeting/'
+const BASE_URL = 'http://localbudgeting.actai.co/'
 const array = [];
 for (var i = 0; i < 51; i++) {
   for (var j = 0; j < 51; j++) {
@@ -73,7 +73,7 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: 'https://wevisdemo.github.io/act-local-budgeting/favicon.png' }
+      { rel: 'icon', type: 'image/x-icon', href: 'http://localbudgeting.actai.co/favicon.png' }
     ]
   },
 

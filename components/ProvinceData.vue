@@ -284,7 +284,7 @@
                       </p>
                       <p class="text-3 black m-0">
                         <formatNumber :data="item2.total" /> ({{
-                          ((item2.total / total) * 100).toFixed(2)
+                          ((item2.total / item.total) * 100).toFixed(2)
                         }}%)
                       </p>
                       <div

@@ -14,7 +14,7 @@
         </p>
         <h4 class="header-4 mt-2">
           องค์การบริหารส่วนจังหวัด (อบจ.) <br class="d-none d-sm-inline" />
-          จำนวน {{ provinces.length - 1 }} แห่ง ของประเทศไทย
+          จำนวน {{ province_length }} แห่ง ของประเทศไทย
         </h4>
         <p class="text-4 lime">
           อัพเดตข้อมูลเมื่อ
@@ -349,7 +349,9 @@
 
                     <b-row class="d-none d-md-flex">
                       <b-col cols="8">
-                        <p class="text-1 font-weight-bold m-0 d-none d-sm-block">
+                        <p
+                          class="text-1 font-weight-bold m-0 d-none d-sm-block"
+                        >
                           {{ item.type }}
                         </p>
                         <h4 class="header-4">
@@ -689,7 +691,10 @@
               <div class="selected_keyword ml-3">{{ selected_keyword }}</div>
             </div>
             <p class="text-2 white-b">
-              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัด{{ selected_province }} ในปี
+              ในรายงานข้อบัญญัติงบประมาณรายจ่ายของ อบจ. จังหวัด{{
+                selected_province
+              }}
+              ในปี
               {{ selected_year_province }}
             </p>
           </div>
@@ -710,7 +715,8 @@
         <p class="text-2 m-0">
           รวบรวมข้อมูลจาก 76 องค์การบริหารส่วนจังหวัด
           โดยอาจไม่ปรากฎข้อมูลของบางองค์การบริหารส่วนจังหวัด ในบางปีงบประมาณ
-          เนื่องจากหน่วยงานไม่เปิดเผยข้อมูลบนหน้าเว็บไซต์ และไม่ครอบคลุมงบประมาณรายจ่ายเฉพาะการ
+          เนื่องจากหน่วยงานไม่เปิดเผยข้อมูลบนหน้าเว็บไซต์
+          และไม่ครอบคลุมงบประมาณรายจ่ายเฉพาะการ
         </p>
       </div>
     </div>
@@ -724,6 +730,7 @@ export default {
       isShowDisclaimer: true,
       selected: 2565,
       selected_year_province: 2565,
+      province_length: 0,
       selected_province: "",
       selected_keyword: "",
       updatedAt: "",
@@ -962,9 +969,8 @@ export default {
     };
   },
   watch: {
-    // whenever question changes, this function will run
     selected_year_province(newY, oldY) {
-      this.getProvinceData(this.selected_year_province, this.selected_province);
+      this.setProvince(newY);
     },
     selected_province(newP, oldP) {
       this.getProvinceData(this.selected_year_province, this.selected_province);
@@ -976,29 +982,29 @@ export default {
     },
   },
   mounted() {
-    this.setYearAndProvince();
+    this.setProvince(new Date().getFullYear() + 543);
     this.getNationWideData(new Date().getFullYear() + 543);
   },
   methods: {
-    setYearAndProvince() {
+    setProvince(y) {
+      this.provinces = [];
+      this.selected_year_province = y;
+      this.selected_province = "";
       fetch("data/metadata.json")
         .then((response) => response.json())
         .then((data) => {
-          this.updatedAt = data.updatedAt;
-          data.years.forEach((element) => {
-            this.options.push({ value: element, text: element });
-          });
-
-          data.provinces.sort((a, b) => a.localeCompare(b))
+          data.provincesByYears[y].sort((a, b) => a.localeCompare(b));
 
           this.provinces.push({ value: "", text: "เลือกจังหวัด" });
 
-          data.provinces.forEach((element) => {
+          data.provincesByYears[y].forEach((element) => {
             this.provinces.push({ value: element, text: element });
           });
-
-      
         });
+
+      var province_url = decodeURI(window.location.href).split("?province=");
+
+      if (province_url[1] != null) this.selected_province = province_url[1];
     },
     getNationWideData(year) {
       this.groupedByAreaSlide = [];
@@ -1048,6 +1054,20 @@ export default {
           this.groupedByType.sort(function (a, b) {
             return b.total - a.total;
           });
+        });
+
+      fetch("data/metadata.json")
+        .then((response) => response.json())
+        .then((data) => {
+          this.updatedAt = data.updatedAt;
+
+          if (this.options.length == 0) {
+            data.years.forEach((element) => {
+              this.options.push({ value: element, text: element });
+            });
+          }
+
+          this.province_length = data.provincesByYears[this.selected].length;
         });
     },
     getProvinceData(y, p) {
