@@ -1,0 +1,36 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "อุทัยธานี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย เผด็จ นุ้ยปรี",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20201106/8FB51560-A388-4BD5-C6B0-15733C62CC22_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 1321954.67,
+          "debt": 0,
+          "income": 743342.88,
+          "expense": 360000,
+          "taxed": 743342
+        },
+        "spouseAccount": {
+          "asset": 17614213.16,
+          "debt": 2273410.32,
+          "income": 3858475.88,
+          "expense": 1080000,
+          "taxed": 138755.88
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/10VZb85_og7Rkh_UI7o96odxiILRgoqP9?usp=sharing",
+        "remark": "แสดงผลคู่สมรสลำดับที่ 1 เท่านั้น"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1S4ZS-l6FMJpmX4VJnsT1xBOlEfkzBhHh/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/y7gqvnmy"
+  }
+}

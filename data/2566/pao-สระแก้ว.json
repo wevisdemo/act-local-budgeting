@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "สระแก้ว",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาง ขวัญเรือน เทียนทอง",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210330/D92B9AB1-4624-70A7-404A-CD7B45A0D239_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 1533839915.97,
+          "debt": 100338.09,
+          "income": 10374030,
+          "expense": 1152000,
+          "taxed": 2444030
+        },
+        "spouseAccount": {
+          "asset": 0,
+          "debt": 0,
+          "income": 0,
+          "expense": 0,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1Apuv5lYb8YD91V9Ja77-40FxgIBBVTUA?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1H5tfNkFi0cImXq_SDwNKkTSMmocmZpQO/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/yatnk7gl"
+  }
+}

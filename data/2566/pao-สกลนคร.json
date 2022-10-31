@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "สกลนคร",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "ดร. ชูพงศ์ คำจวง",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210318/4CC506E1-BD14-6F01-3D58-5702ED34121E_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 310000,
+          "debt": 125000,
+          "income": 2306360,
+          "expense": 540000,
+          "taxed": 60800
+        },
+        "spouseAccount": {
+          "asset": 80433175,
+          "debt": 14016175,
+          "income": 20100000,
+          "expense": 4598682,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1tV_o3EiHKEL4UDKDT0j3AVQbGmDk1Wy8?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1Yq98muUhTKAH1GilajzuTbiZz8agVNpz/view?usp=share_link",
+    "actAiUrl": "https://tinyurl.com/y8gcc653"
+  }
+}

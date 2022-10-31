@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "สุโขทัย",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย มนู พุกประเสริฐ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210315/2982BD08-D897-F58C-A378-4D3A1971F238_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 8949348.07,
+          "debt": 0,
+          "income": 0,
+          "expense": 70000,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1PgXeLOhz_xVOWNmpfd-TIrJ0Sr5LvbX9?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1vI2-43x0qUH2yKiVA_rl2-ZY3dgicU10/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/ybjrx3hh"
+  }
+}

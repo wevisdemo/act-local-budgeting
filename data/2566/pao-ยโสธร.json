@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ยโสธร",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย วิเชียร สมวงศ์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210223/E0886BBD-CD05-01D6-D558-967AFA903279_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 5462802.29,
+          "debt": 1962731.04,
+          "income": 2520637,
+          "expense": 318396,
+          "taxed": 190637
+        },
+        "spouseAccount": {
+          "asset": 1129571.07,
+          "debt": 0,
+          "income": 476846.01,
+          "expense": 141000,
+          "taxed": 476846.01
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1FPMlHMH6vpsePTV_SRxMJ35wI7ryxgXB?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1hcDuHi2i_AKWvcz8Ye5BOlWg-zyE7EbH/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/y8ey8sq9"
+  }
+}

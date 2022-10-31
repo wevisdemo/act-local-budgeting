@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ระนอง",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ธนกร บริสุทธิญาณี",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210316/3EE24F23-5167-20F2-9083-8E0DC1A3A1F5_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 34315108,
+          "debt": 6509479.81,
+          "income": 2699880,
+          "expense": 2304767.8,
+          "taxed": 113422.63
+        },
+        "spouseAccount": {
+          "asset": 5536099.55,
+          "debt": 2650817.31,
+          "income": 600000,
+          "expense": 519600,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1O5NLxus4y_hT0aawJngL7o1bqsfUdPqZ?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/15rcRX6F4MVgReUGuJ73ml3EVz8AnvTDf/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/yb8p54x9"
+  }
+}

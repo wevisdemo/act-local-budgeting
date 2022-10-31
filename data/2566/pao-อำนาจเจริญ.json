@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "อำนาจเจริญ",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นางสาว วันเพ็ญ ตั้งสกุล",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/applicant/37/2709/3101201101518.jpg",
+        "ownAccount": {
+          "asset": 10597022.45,
+          "debt": 0,
+          "income": 906360,
+          "expense": 589240.85,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1sv3Fzc73WNg_dmqTXc1jUvy8KJo4XgAU?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1A5f6dUMQwvSraOGkvEoeOqQlWoxpyn1U/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/ybosyq3y"
+  }
+}

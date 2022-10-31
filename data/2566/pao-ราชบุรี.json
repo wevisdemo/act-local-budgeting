@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "ราชบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย วิวัฒน์ นิติกาญจนา",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20201108/D4D52648-6F51-C86D-C6AB-F5B21B3D1F45_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 721805740.75,
+          "debt": 26188.15,
+          "income": 12012112.82,
+          "expense": 1221880,
+          "taxed": 1870330.24
+        },
+        "spouseAccount": {
+          "asset": 39622616.98,
+          "debt": 20585.3,
+          "income": 2455716.27,
+          "expense": 212440,
+          "taxed": 1593503.23
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1MG3--TGZCXxzBD06FipWwKAIC6CZT7mD?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1vkUUqLwJoVRqFYsc1oVuUEGaM8qkcD1M/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/ycao7uoj"
+  }
+}

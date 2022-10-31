@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "สุพรรณบุรี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย บุญชู จันทร์สุวรรณ",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/applicant/72/6203/3190100333196.jpg",
+        "ownAccount": {
+          "asset": 107847758.72,
+          "debt": 9361.93,
+          "income": 784229.69,
+          "expense": 347700,
+          "taxed": 784229.69
+        },
+        "spouseAccount": {
+          "asset": 50765608.38,
+          "debt": 4418282.26,
+          "income": 1013100,
+          "expense": 906987,
+          "taxed": 1013100
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1H8ts1rCbfPVHk56zC26doXdchrrF7WOL?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1l5n82s7XqbjbwyecQaaoTJHxL-cnJP10/view?usp=share_link",
+    "actAiUrl": "https://tinyurl.com/y8d3eklf"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "หนองคาย",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย ยุทธนา ศรีตะบุตร",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/applicant/43/3350/3430500995029.jpg",
+        "ownAccount": {
+          "asset": 58351256.42,
+          "debt": 1440000,
+          "income": 906360,
+          "expense": 435000,
+          "taxed": 724680
+        },
+        "spouseAccount": {
+          "asset": 272665255.94,
+          "debt": 106249004.58,
+          "income": 3271467.7,
+          "expense": 1440000,
+          "taxed": 1644369.5
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1jao3D1Kra8gZsFRBMX6H1mu7BEq5Uqo1?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/drive/folders/1KBGVLF3ya30-N5_Afj14y79_1_wSE090?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/yanboyur"
+  }
+}

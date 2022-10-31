@@ -1,0 +1,28 @@
+{
+  "total": 0,
+  "groupedByArea": [],
+  "groupedByType": [],
+  "tasks": [],
+  "pao": {
+    "name": "อุบลราชธานี",
+    "incomes": [],
+    "population": 0,
+    "chiefExecutives": [
+      {
+        "name": "นาย กานต์ กัลป์ตินันท์",
+        "inOffice": "20/12/2563 - 19/12/2567",
+        "photoUrl": "https://ele.dla.go.th/download/ELE/Candidate/20210628/9DED0651-1F8E-9552-0FE1-241C49A0724A_UPLOADFILE_DlaELE63.jpg",
+        "ownAccount": {
+          "asset": 0,
+          "debt": 0,
+          "income": 0,
+          "expense": 0,
+          "taxed": 0
+        },
+        "fillingUrl": "https://drive.google.com/drive/folders/1aEIKuFVAIGVtwJrRzDB88z6C4o8LhBuZ?usp=sharing"
+      }
+    ],
+    "budgetingDocUrl": "https://drive.google.com/file/d/1vyJFfkjdgFiJZyaBVmD_4xhQkmBI2wf-/view?usp=sharing",
+    "actAiUrl": "https://tinyurl.com/yatxb4eq"
+  }
+}
