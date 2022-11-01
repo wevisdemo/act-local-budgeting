@@ -594,6 +594,8 @@
             มาได้ที่ LINE Official Account จับตาไม่ให้ใครโกง
           </p>
 
+          <p class="m-0">สแกนหรือคลิกที่ QR Code</p>
+
           <a href="https://line.me/R/ti/p/@206vpscc" rel="noopener noreferrer">
             <img :src="corruption_watch" class="my-4" width="186" alt=""
           /></a>

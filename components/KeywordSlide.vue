@@ -18,7 +18,7 @@
             <formatNumber :data="item.total" />
           </p>
           <p class="text-4 mb-1">
-            {{ ((item.total / total) * 100).toFixed(2) }}% ของค่าใช้จ่ายทั้งหมด
+            {{ ((item.total / total) * 100).toFixed(2) }}% ของรายจ่ายทั้งหมด
           </p>
 
           <div style="background: #ccc">
