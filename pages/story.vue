@@ -907,7 +907,7 @@ export default {
   padding: 60px 0;
   background-image: url("~/assets/images/bg_grid_blue.svg");
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     background: #0056a6;
   }
 
@@ -920,7 +920,7 @@ export default {
     right: 75px;
     position: relative;
 
-    @media #{$mq-mobile} {
+    @media #{$mq-lg} {
       position: unset !important;
     }
   }
@@ -929,7 +929,7 @@ export default {
     left: 75px;
     position: relative;
 
-    @media #{$mq-mobile} {
+    @media #{$mq-lg} {
       position: unset;
     }
   }
@@ -944,7 +944,7 @@ export default {
     border-radius: 50%;
     border: none !important;
 
-    @media #{$mq-mobile} {
+    @media #{$mq-lg} {
       margin: auto;
       width: 98px;
       height: 98px;
@@ -953,7 +953,7 @@ export default {
   }
 
   .arrow {
-    @media #{$mq-mobile} {
+    @media #{$mq-lg} {
       transform: rotate(90deg);
     }
   }
@@ -966,7 +966,7 @@ export default {
     @media #{$mq-small-laptop} {
       left: 50px;
     }
-    @media #{$mq-mobile} {
+    @media #{$mq-lg} {
       position: unset;
       color: #fffef5 !important;
       span {
@@ -1039,7 +1039,7 @@ export default {
   max-width: 900px;
   margin: auto;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     max-width: 1200px;
     overflow-x: auto;
   }
@@ -1122,7 +1122,7 @@ export default {
   width: 450px;
   padding: 10px 5px;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     width: 400px;
     color: #181f1c !important;
   }
@@ -1277,7 +1277,7 @@ export default {
 .story-header-box {
   background: #181f1c;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     background: #0056a6;
   }
 }

@@ -422,7 +422,7 @@ body {
   top: 145px;
   right: 40px;
   position: relative;
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     right: 15px;
   }
 
@@ -447,7 +447,7 @@ body {
   right: 40px;
   position: relative;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     right: 15px;
   }
 
@@ -471,7 +471,7 @@ body {
 }
 
 .slick-next {
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     right: 0 !important;
   }
 }

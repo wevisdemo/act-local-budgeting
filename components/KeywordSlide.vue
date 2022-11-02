@@ -31,8 +31,9 @@
             ></div>
           </div>
           <b-row class="mt-2">
-              <b-col cols="6">
-                <div class="border-grey">                <p class="text-4 font-weight-bold mb-1">แผนงาน :</p>
+            <b-col cols="6">
+              <div class="border-grey">
+                <p class="text-4 font-weight-bold mb-1">แผนงาน :</p>
 
                 <img
                   :src="sector_mini_1"
@@ -102,8 +103,9 @@
                 />
                 <img :src="sector_mini_12" width="25" alt="" v-else />
                 <p class="text-4 mb-1">{{ item.plan }}</p>
-                <p class="text-4 mb-1 grey">{{ item.area }}</p></div>
-              </b-col>
+                <p class="text-4 mb-1 grey">{{ item.area }}</p>
+              </div>
+            </b-col>
             <b-col cols="6" class="pl-0">
               <p class="text-4 font-weight-bold mb-1">ประเภทรายจ่าย :</p>
               <img
@@ -182,7 +184,7 @@ export default {
         arrows: false,
         responsive: [
           {
-            breakpoint: 600,
+            breakpoint: 992,
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
@@ -203,6 +205,7 @@ export default {
   max-width: 280px;
   width: 100%;
   height: 285px;
+  margin: auto;
 }
 
 .border-grey {

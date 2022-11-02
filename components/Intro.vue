@@ -256,7 +256,7 @@ export default {
     border: 1px solid #e5fbff;
   }
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     position: unset;
     margin: auto;
     width: 320px;

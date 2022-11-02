@@ -1447,7 +1447,7 @@ export default {
 
   .logo-act {
     width: 75px;
-    @media #{$mq-mobile} {
+    @media #{$mq-lg} {
       width: 100%;
     }
   }
