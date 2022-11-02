@@ -343,14 +343,14 @@
                         item.color == '#253472' || item.color == '#A80C7C',
                     }"
                   >
-                    <p class="text-1 font-weight-bold m-0 d-block d-sm-none">
+                    <p class="text-1 font-weight-bold m-0 d-block d-lg-none">
                       {{ item.type }}
                     </p>
 
-                    <b-row class="d-none d-md-flex">
+                    <b-row class="d-none d-lg-flex">
                       <b-col cols="8">
                         <p
-                          class="text-1 font-weight-bold m-0 d-none d-sm-block"
+                          class="text-1 font-weight-bold m-0 d-none d-lg-block"
                         >
                           {{ item.type }}
                         </p>
@@ -370,7 +370,7 @@
                       /></b-col>
                     </b-row>
 
-                    <div class="d-block d-md-none">
+                    <div class="d-block d-lg-none">
                       <p class="text-1 font-weight-bold mb-1">
                         {{ item.plan }}
                       </p>
