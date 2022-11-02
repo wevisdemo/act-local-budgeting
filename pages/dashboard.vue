@@ -633,7 +633,7 @@
                 </p>
               </div>
             </div>
-            <div class="d-flex flex-column flex-md-row justify-content-center">
+            <div class="d-flex flex-column flex-lg-row justify-content-center">
               <NuxtLink to="/story">
                 <div class="box-1 pointer mx-3">
                   <h4 class="header-4 blue-a ml-4 mb-3 font-weight-bold">
@@ -644,7 +644,7 @@
                 </div>
               </NuxtLink>
               <NuxtLink to="/conclusion">
-                <div class="box-2 pointer mx-3 mt-3 mt-md-0">
+                <div class="box-2 pointer mx-3 mt-3 mt-lg-0">
                   <h4 class="header-4 white-a ml-4 mb-3 font-weight-bold">
                     สรุปภาพรวมงบ อบจ.
                   </h4>
@@ -1324,7 +1324,7 @@ select::-ms-expand {
   display: flex;
   align-items: flex-end;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-mini-mobile} {
     width: 280px;
     height: 201.86px;
   }
@@ -1348,7 +1348,7 @@ select::-ms-expand {
   display: flex;
   align-items: flex-end;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-mini-mobile} {
     width: 280px;
     height: 201.86px;
   }

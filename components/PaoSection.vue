@@ -563,7 +563,7 @@
                   <template v-if="item.ownAccount != null && acc_data.length >0">
                     <div class="d-flex">
                       <p class="text-3 font-weight-bold">ยอดรวม</p>
-                      <div class="d-flex mx-1">
+                      <div class="d-flex mx-1 data-type">
                         <div class="work-type-square mx-2 bg-lime"></div>
                         <p class="text-3 font-weight-bold m-0">ผู้ยื่น</p>
                         <div
@@ -1038,8 +1038,8 @@
           :href="pao.actAiUrl"
           class="text-2 mb-0 font-weight-bold mt-2 red pao-link-act"
         >
-          <div class="p-3">
-            <img :src="logo" alt="" class="mb-1" />
+          <div class="p-1 p-sm-3">
+            <img :src="logo" alt="" class="mb-1 logo-act" />
             <div>เข้าสู่เครื่องมือ <img :src="linkicon_red" alt="" /></div>
           </div>
         </a>
@@ -1143,7 +1143,7 @@ export default {
         },
       },
       acc_data: [],
-      remark:""
+      remark: "",
     };
   },
   watch: {
@@ -1314,7 +1314,7 @@ export default {
               }
             }
           }
-        
+
           if (this.pao.chiefExecutives[0].spouseAccount != null) {
             Object.entries(this.pao.chiefExecutives[0].spouseAccount).forEach(
               ([key, value], index) => {
@@ -1322,7 +1322,6 @@ export default {
               }
             );
           }
-
         });
     },
     getDataForChart() {
@@ -1445,6 +1444,13 @@ export default {
 .pao-link-act {
   color: #ed1c24;
   text-decoration: none;
+
+  .logo-act {
+    width: 75px;
+    @media #{$mq-mobile} {
+      width: 100%;
+    }
+  }
 }
 .drag-icon {
   display: none;
@@ -1462,5 +1468,9 @@ export default {
   @media #{$mq-mini-mobile} {
     width: 20px;
   }
+}
+
+.text-nowrap {
+  white-space: nowrap;
 }
 </style>
