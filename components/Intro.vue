@@ -361,5 +361,9 @@ export default {
 
 .logo-brand {
   width: 100px;
+
+  @media #{$mq-mini-mobile} {
+    width: 85px;
+  }
 }
 </style>

@@ -1079,7 +1079,7 @@ export default {
   right: 25px;
   top: 25px;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     position: unset;
   }
 }
@@ -1088,7 +1088,7 @@ export default {
   position: relative;
   left: 25px;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     position: unset;
   }
 }
@@ -1098,7 +1098,7 @@ export default {
   top: 25px;
   left: 50px;
 
-  @media #{$mq-mobile} {
+  @media #{$mq-lg} {
     position: unset;
   }
 }

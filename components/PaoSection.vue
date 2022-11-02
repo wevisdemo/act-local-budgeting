@@ -1447,9 +1447,6 @@ export default {
 
   .logo-act {
     width: 75px;
-    @media #{$mq-lg} {
-      width: 100%;
-    }
   }
 }
 .drag-icon {

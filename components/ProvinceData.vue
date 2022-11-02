@@ -646,7 +646,7 @@ function combineTasks(targetedTasks) {
 }
 
 .work-list-box {
-  height: 500px;
+  height: 505px;
   //overflow-x: hidden;
 }
 
