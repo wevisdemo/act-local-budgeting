@@ -1130,7 +1130,7 @@ export default {
   @media #{$mq-mini-mobile} {
     // position: unset;
 
-    top: 0px;
+    top: -5px;
     width: 240px;
     left: 15px;
   }

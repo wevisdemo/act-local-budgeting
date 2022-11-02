@@ -538,6 +538,7 @@ function combineTasks(targetedTasks) {
 
   @media #{$mq-mini-mobile} {
     padding: 10px;
+    height: 120px;
   }
 }
 
