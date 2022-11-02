@@ -1,7 +1,6 @@
 <template>
   <span>
-    <template v-if="data != 0 && data != null">
-      {{
+    <template v-if="data != 0 && data != null">{{
         data >= 1000000
           ? parseInt(
               data

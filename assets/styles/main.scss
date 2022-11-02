@@ -422,8 +422,12 @@ body {
   top: 145px;
   right: 40px;
   position: relative;
-  @media #{$mq-mini-mobile} {
+  @media #{$mq-mobile} {
     right: 15px;
+  }
+
+  @media #{$mq-mini-mobile} {
+    bottom: 385px;
   }
 }
 
@@ -443,9 +447,12 @@ body {
   right: 40px;
   position: relative;
 
+  @media #{$mq-mobile} {
+    right: 15px;
+  }
+
   @media #{$mq-mini-mobile} {
     bottom: 385px;
-    right: 15px;
   }
 }
 
@@ -464,7 +471,7 @@ body {
 }
 
 .slick-next {
-  @media #{$mq-mini-mobile} {
+  @media #{$mq-mobile} {
     right: 0 !important;
   }
 }

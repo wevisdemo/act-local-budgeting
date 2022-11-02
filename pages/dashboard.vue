@@ -134,7 +134,7 @@
                         hovered: selected_work_plan == i,
                       }"
                     >
-                      <h5 class="header-5 mr-1">
+                      <h5 class="header-5 mr-1"   :class="{ 'white-b': item2.color == '#4A4E5E'}">
                         {{
                           ((item2.total / total_nationwide) * 100).toFixed(2)
                         }}%

@@ -30,6 +30,7 @@
             flex-column flex-sm-row
             px-2 px-sm-0
             justify-content-center
+            flex-wrap
           "
           v-if="total != 0"
         >
@@ -46,9 +47,11 @@
         </div>
 
         <div class="d-flex w-100" v-if="total != 0">
-          <template class="d-flex mx-1" v-for="(item3, i) in groupedByAreaSlide">
+          <template
+            class="d-flex mx-1"
+            v-for="(item3, i) in groupedByAreaSlide"
+          >
             <div
-            
               :style="{
                 maxWidth:
                   (item3.total / total) * 100 != 0 &&
@@ -66,11 +69,14 @@
                 :style="{
                   backgroundColor: item3.color,
                 }"
-                 :class="{
-                        'hovered-w': selected_work_plan == i,
-                      }"
+                :class="{
+                  'hovered-w': selected_work_plan == i,
+                }"
               >
-                <h5 class="header-5 mr-1">
+                <h5
+                  class="header-5 mr-1"
+                  :class="{ 'white-b': item3.color == '#4A4E5E' }"
+                >
                   {{ ((item3.total / total) * 100).toFixed(2) }}%
                 </h5>
               </div>
@@ -95,12 +101,16 @@
               :key="'province-slide-' + i"
             >
               <div
-                class="work-card black"
+                class="work-card"
                 :style="{
                   backgroundColor: item.color,
                 }"
+                :class="{
+                  'white-b': item.color == '#4A4E5E',
+                  black: item.color != '#4A4E5E',
+                }"
               >
-                <b-row class="align-items-center">
+                <b-row class="d-none d-md-flex">
                   <b-col cols="8">
                     <p class="text-1 font-weight-bold m-0">
                       {{ item.plan }}
@@ -113,12 +123,33 @@
                   </b-col>
                   <b-col cols="4"><ImageSector :title="item.plan" /></b-col>
                 </b-row>
+
+                <div class="d-block d-md-none">
+                  <p class="text-1 font-weight-bold mb-1">
+                    {{ item.plan }}
+                  </p>
+                  <b-row>
+                    <b-col cols="8">
+                      <h3 class="header-3 font-weight-bold m-0">
+                        ({{ ((item.total / total) * 100).toFixed(2) }}%)
+                      </h3>
+                      <p class="font-weight-bold mb-1">ของค่าใช้จ่ายทั้งหมด</p>
+                      <p class="text-1 m-0">
+                        (<formatNumber :data="item.total" />)
+                      </p>
+                    </b-col>
+                    <b-col cols="4"><ImageSector :title="item.plan" /></b-col>
+                  </b-row>
+                </div>
               </div>
-              <div class="bg-white p-4">
+              <div class="bg-white p-3 p-sm-4">
                 <div class="work-list-box" :id="'work-list-box' + i">
                   <p class="text-2 blue-a font-weight-bold m-0">
                     มี
-                    {{ combinedTasksByPlan.find(e => e.plan === item.plan).tasks.length }}
+                    {{
+                      combinedTasksByPlan.find((e) => e.plan === item.plan)
+                        .tasks.length
+                    }}
                     รายการงานภายใต้แผนงานนี้
                   </p>
                   <p class="text-2 blue-a m-0">
@@ -128,7 +159,9 @@
 
                   <div class="work-list-box-content py-1">
                     <div
-                      v-for="(item2, j) in combinedTasksByPlan.find(e => e.plan === item.plan).tasks"
+                      v-for="(item2, j) in combinedTasksByPlan.find(
+                        (e) => e.plan === item.plan
+                      ).tasks"
                       :key="'province-task-' + j"
                     >
                       <p class="text-2 black font-weight-bold m-0">
@@ -169,7 +202,13 @@
         </div>
       </template>
       <template v-else>
-        <div class="d-flex justify-content-center flex-column flex-sm-row">
+        <div
+          class="
+            d-flex
+            justify-content-center
+            flex-column flex-sm-row flex-wrap
+          "
+        >
           <div class="d-flex mx-1" v-for="(item, i) in groupedByType" :key="i">
             <div
               class="work-type-square mr-2"
@@ -201,12 +240,18 @@
               :style="{
                 backgroundColor: item3.color,
               }"
-                     :class="{
-                        'hovered-w': selected_work_type == j,
-                      }"
+              :class="{
+                'hovered-w': selected_work_type == j,
+              }"
               :key="j"
             >
-              <h5 class="header-5 mr-1">
+              <h5
+                class="header-5 mr-1"
+                :class="{
+                  'white-b':
+                    item3.color == '#253472' || item3.color == '#A80C7C',
+                }"
+              >
                 {{ ((item3.total / total) * 100).toFixed(2) }}%
               </h5>
             </div>
@@ -228,18 +273,16 @@
               :key="'province-slide-' + i"
             >
               <div
-                class="work-card black"
+                class="work-card"
                 :style="{
                   backgroundColor: item.color,
                 }"
+                :class="{
+                  'white-a': item.color == '#253472' || item.color == '#A80C7C',
+                  black: item.color != '#253472' && item.color != '#A80C7C',
+                }"
               >
-                <b-row
-                  class="align-items-center"
-                  :class="{
-                    'white-b':
-                      item.color == '#253472' || item.color == '#A80C7C',
-                  }"
-                >
+                <b-row class="d-none d-md-flex align-items-center">
                   <b-col cols="8">
                     <p class="text-1 font-weight-bold m-0">
                       {{ item.type }}
@@ -257,6 +300,31 @@
                       alt=""
                   /></b-col>
                 </b-row>
+
+                <div class="d-block d-md-none align-items-center">
+                  <p class="text-1 font-weight-bold mb-1">
+                    {{ item.plan }}
+                  </p>
+                  <b-row>
+                    <b-col cols="8">
+                      <h3 class="header-3 font-weight-bold m-0">
+                        ({{ ((item.total / total) * 100).toFixed(2) }}%)
+                      </h3>
+                      <p class="font-weight-bold mb-1">ของค่าใช้จ่ายทั้งหมด</p>
+                      <p class="text-1 m-0">
+                        (<formatNumber :data="item.total" />)
+                      </p>
+                    </b-col>
+                    <b-col cols="4"
+                      ><img
+                        width="100%"
+                        :src="
+                          require(`@/assets/images/sector/sector_klang.svg`)
+                        "
+                        alt=""
+                    /></b-col>
+                  </b-row>
+                </div>
               </div>
               <div class="bg-white p-4">
                 <div class="work-list-box">
@@ -443,14 +511,14 @@ export default {
             return b.total - a.total;
           });
 
-          const plans = this.groupedByAreaSlide.map(s => s.plan)
-          this.combinedTasksByPlan = plans.map(plan => {
-            const tasksByPlan = this.tasks.filter(task => task.plan === plan);
+          const plans = this.groupedByAreaSlide.map((s) => s.plan);
+          this.combinedTasksByPlan = plans.map((plan) => {
+            const tasksByPlan = this.tasks.filter((task) => task.plan === plan);
             return {
               plan,
-              tasks: combineTasks(tasksByPlan)
-            }
-          })
+              tasks: combineTasks(tasksByPlan),
+            };
+          });
 
           // console.log(this.groupedByArea);
 
@@ -496,15 +564,15 @@ function combineTasks(targetedTasks) {
     } else {
       tasksByName[task.task] = {
         total: task.total,
-      }
+      };
     }
-  })
+  });
 
   return Object.keys(tasksByName)
     .map((key) => ({ task: key, total: tasksByName[key].total }))
     .sort(function (a, b) {
       return b.total - a.total;
-    })
+    });
 }
 </script>
 
@@ -538,7 +606,10 @@ function combineTasks(targetedTasks) {
 
   @media #{$mq-mini-mobile} {
     padding: 10px;
-    height: 120px;
+
+    p {
+      font-size: 16px;
+    }
   }
 }
 
@@ -570,7 +641,8 @@ function combineTasks(targetedTasks) {
 }
 
 .link-btn:hover {
-  border: 2px solid $white-b !important; text-decoration: none;
+  border: 2px solid $white-b !important;
+  text-decoration: none;
 }
 
 .work-list-box {
