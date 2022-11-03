@@ -105,8 +105,13 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxtjs/style-resources',
-    '@nuxtjs/fontawesome'
+    '@nuxtjs/fontawesome',
+    '@nuxtjs/google-analytics'
   ],
+ 
+  googleAnalytics: {
+    id: 'G-M9CRL9RVLV'
+  },
 
   fontawesome: {
     icons: {
