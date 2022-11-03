@@ -303,7 +303,7 @@
 
                 <div class="d-block d-md-none align-items-center">
                   <p class="text-1 font-weight-bold mb-1">
-                    {{ item.plan }}
+                    {{ item.type }}
                   </p>
                   <b-row>
                     <b-col cols="8">
