@@ -1180,19 +1180,6 @@ export default {
   },
 
   methods: {
-    setDiffDate(date) {
-      var startMomentObject = this.$moment(date.split(" - ")[0], "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
-      var startObject = startMomentObject.toDate();
-      var endtMomentObject = this.$moment(date.split(" - ")[1], "DD/MM/YYYY"); // 1st argument - string, 2nd argument - format
-      var endObject = endtMomentObject.toDate();
-
-      var dateResult = this.$moment(endObject).diff(
-        this.$moment(startObject),
-        "years"
-      );
-
-      return dateResult + " ปี";
-    },
     update(newp, oldp) {
       let newindex = this.data_result.findIndex((object) => {
         return object.name === newp;

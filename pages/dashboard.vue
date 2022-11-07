@@ -18,7 +18,7 @@
         </h4>
         <p class="text-4 lime">
           อัพเดตข้อมูลเมื่อ
-          {{ updatedAt | moment("add", "543 years", "DD/MM/YYYY") }}
+          {{ new Date(updatedAt).getDate() + "/" + (new Date(updatedAt).getMonth()+1) + "/" + (new Date(updatedAt).getFullYear()+543) }}
         </p>
         <div class="d-flex justify-content-lg-center mt-3">
           <div class="ml-lg-5">
