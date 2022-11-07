@@ -95,20 +95,6 @@ and limitations under the License.
  * SOFTWARE.
  */
 
-//! Copyright (c) JS Foundation and other contributors
-
-//! github.com/moment/moment-timezone
-
-//! license : MIT
-
-//! moment-timezone.js
-
-//! moment.js
-
-//! moment.js locale configuration
-
-//! version : 0.5.38
-
 
 /*!
  * Chart.js v2.9.4
@@ -116,6 +102,10 @@ and limitations under the License.
  * (c) 2020 Chart.js Contributors
  * Released under the MIT License
  */
+
+//! moment.js
+
+//! moment.js locale configuration
 
 
 /*!
