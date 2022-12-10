@@ -260,6 +260,7 @@ type ChiefExecutive = {
   photoUrl: string
   ownAccount: Account
   spouseAccount?: Account
+  childrenAccount?: Account
   fillingUrl: string
   remark?: string
 }
@@ -269,7 +270,7 @@ type Account = {
   debt: number
   income: number
   expense: number
-  taxed: number
+  taxed?: number
 }
 
 ```
@@ -328,6 +329,12 @@ Example
           "income": 1000000,
           "expense": 100000,
           "taxed": 0
+        },
+        "childrenAccount": {
+          "asset": 500000,
+          "debt": 0,
+          "income": 0,
+          "expense": 10000
         },
         "fillingUrl": "https://drive.google.com",
         "remark": "แสดงผลคู่สมรสลำดับที่ 1 เท่านั้น"

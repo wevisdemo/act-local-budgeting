@@ -213,6 +213,12 @@ function mapChiefExecutive(row: AssetRow): ChiefExecutive {
       expense: row.spouseExpense ?? 0,
       taxed: row.spouseTaxed ?? 0,
     } : undefined,
+    childrenAccount: row.childrenAsset !== undefined ? {
+      asset: row.childrenAsset ?? 0,
+      debt: row.childrenDebt ?? 0,
+      income: row.childrenIncome ?? 0,
+      expense: row.childrenExpense ?? 0,
+    } : undefined,
     fillingUrl: row.fillingUrl,
     remark: row.remark,
   }

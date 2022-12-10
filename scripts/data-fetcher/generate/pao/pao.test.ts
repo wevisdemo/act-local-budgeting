@@ -15,7 +15,7 @@ describe('generate > pao', () => {
     const chiangMai2564 = getExpenseRow()
     const chiangMai2563 = { ...getExpenseRow(), year: 2563 }
     const saraburi2564 = { ...getExpenseRow(), province: 'สระบุรี' }
-    
+
     const paos = generatePaoBudgets(
       [
         chiangMai2564,
@@ -270,6 +270,13 @@ describe('generate > pao > chiefExecutive', () => {
         expense: 8,
         taxed: 10,
       },
+      childrenAccount: {
+        asset: 20,
+        debt: 40,
+        income: 60,
+        expense: 80,
+        taxed: undefined,
+      },
       fillingUrl: 'https://drive.google.com',
     }
     const expectedBurapa = {
@@ -362,12 +369,16 @@ function getAssetRow(): AssetRow {
     fillingDate: '',
     ownAsset: 1,
     spouseAsset: 2,
+    childrenAsset: 20,
     ownDebt: 3,
     spouseDebt: 4,
+    childrenDebt: 40,
     ownIncome: 5,
     spouseIncome: 6,
+    childrenIncome: 60,
     ownExpense: 7,
     spouseExpense: 8,
+    childrenExpense: 80,
     ownTaxed: 9,
     spouseTaxed: 10,
     fillingUrl: 'https://drive.google.com',

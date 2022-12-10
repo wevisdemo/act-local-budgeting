@@ -475,6 +475,12 @@
           "expense": 302945.48,
           "taxed": 706872.78
         },
+        "childrenAccount": {
+          "asset": 0,
+          "debt": 0,
+          "income": 0,
+          "expense": 0
+        },
         "fillingUrl": "https://drive.google.com/drive/folders/1dotfcPfSJ4OmY-R49dH8PP_FHptqozOt?usp=sharing"
       }
     ],

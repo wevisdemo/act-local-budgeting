@@ -45,6 +45,7 @@ export type ChiefExecutive = {
   photoUrl: string
   ownAccount: Account
   spouseAccount?: Account
+  childrenAccount?: Account
   fillingUrl: string
   remark?: string
 }
@@ -54,5 +55,5 @@ export type Account = {
   debt: number
   income: number
   expense: number
-  taxed: number
+  taxed?: number
 }

@@ -45,12 +45,16 @@ export type AssetRow = {
   fillingDate: string // เมื่อวันที่
   ownAsset: number // รวมทรัพย์สินผู้ยื่น
   spouseAsset?: number // รวมทรัพย์สินคู่สมรส
+  childrenAsset?: number // รวมทรัพย์สินคู่สมรส
   ownDebt: number // รวมหนี้สินผู้ยื่น
   spouseDebt?: number // รวมหนี้สินคู่สมรส
+  childrenDebt?: number // รวมทรัพย์สินคู่สมรส
   ownIncome: number // รายได้รวมผู้ยื่น
   spouseIncome?: number // รายได้รวมคู่สมรส
+  childrenIncome?: number // รวมทรัพย์สินคู่สมรส
   ownExpense: number // รายจ่ายรวมผู้ยื่น
   spouseExpense?: number // รายจ่ายรวมคู่สมรส
+  childrenExpense?: number // รวมทรัพย์สินคู่สมรส
   ownTaxed: number // เงินได้พึงประเมินผู้ยื่น
   spouseTaxed?: number // เงินได้พึงประเมินคู่สมรส
   fillingUrl: string // PDF Link
