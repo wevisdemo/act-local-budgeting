@@ -513,6 +513,12 @@
           "expense": 100000,
           "taxed": 0
         },
+        "childrenAccount": {
+          "asset": 0,
+          "debt": 0,
+          "income": 0,
+          "expense": 0
+        },
         "fillingUrl": "https://drive.google.com/drive/folders/1TVWD5JsjFCF8urPiMEyvWlOGMbbHh2Kl?usp=sharing"
       }
     ],

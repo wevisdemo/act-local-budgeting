@@ -408,6 +408,12 @@
           "expense": 0,
           "taxed": 0
         },
+        "childrenAccount": {
+          "asset": 2279.58,
+          "debt": 0,
+          "income": 0,
+          "expense": 0
+        },
         "fillingUrl": "https://drive.google.com/drive/folders/1tUwXGTD7F2LPD3UqNwABUvoxdpY7UtGO?usp=sharing"
       }
     ],
