@@ -90,6 +90,7 @@ export default {
     '~/assets/styles/main.scss',
     'vue-slick-carousel/dist/vue-slick-carousel.css',
     'vue-slick-carousel/dist/vue-slick-carousel-theme.css',
+    '@wevisdemo/ui/styles/index.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -122,6 +123,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
+    'vue-plausible',
     'bootstrap-vue/nuxt',
   ],
   styleResources: {
@@ -129,5 +131,11 @@ export default {
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: ['@wevisdemo/ui/vue2'],
+  },
+
+  plausible: {
+    domain: 'wevisdemo.github.io/act-local-budgeting',
+    apiHost: 'https://analytics.punchup.world',
   },
 }

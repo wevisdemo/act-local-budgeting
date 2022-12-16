@@ -576,6 +576,16 @@
                         >
                           คู่สมรส
                         </p>
+                        <div
+                          class="work-type-square mx-2 bg-white-a"
+                          v-if="item.childrenAccount != null"
+                        ></div>
+                        <p
+                          class="text-3 font-weight-bold m-0"
+                          v-if="item.childrenAccount != null"
+                        >
+                        บุตรที่ยังไม่บรรลุนิติภาวะ
+                        </p>
                       </div>
                     </div>
 
@@ -599,7 +609,7 @@
                                 (item.ownAccount.income /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              ) + '%',
                             height: '19px',
                           }"
                         ></div>
@@ -612,7 +622,20 @@
                                 (item.spouseAccount.income /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              )+ '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          v-if="item.childrenAccount != null"
+                          class="bg-white-a"
+                          :style="{
+                            width:
+                              (
+                                (item.childrenAccount.income /
+                                  Math.max(...acc_data)) *
+                                100
+                              ) + '%',
                             height: '19px',
                           }"
                         ></div>
@@ -653,6 +676,18 @@
       parseFloat(item.spouseAccount.income.toString()).toLocaleString()
       }} บาท</b-col>
                         </b-row>
+                        <b-row
+                          style="width: 250px"
+                          v-if="item.childrenAccount != null"
+                        >
+                          <b-col cols="5">
+                            <p class="text-4 m-0">บุตรที่ยังไม่บรรลุนิติภาวะ</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            {{
+      parseFloat(item.childrenAccount.income.toString()).toLocaleString()
+      }} บาท</b-col>
+                        </b-row>
                       </b-popover>
                     </div>
                     <div class="pao-acc-box bg-transparent">
@@ -675,7 +710,7 @@
                                 (item.ownAccount.expense /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              ) + '%',
                             height: '19px',
                           }"
                         ></div>
@@ -688,7 +723,20 @@
                                 (item.spouseAccount.expense /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              ) + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          v-if="item.childrenAccount != null"
+                          class="bg-white-a"
+                          :style="{
+                            width:
+                              (
+                                (item.childrenAccount.expense /
+                                  Math.max(...acc_data)) *
+                                100
+                              ) + '%',
                             height: '19px',
                           }"
                         ></div>
@@ -729,6 +777,18 @@
       parseFloat(item.spouseAccount.expense.toString()).toLocaleString()
       }} บาท</b-col>
                         </b-row>
+                        <b-row
+                          style="width: 250px"
+                          v-if="item.childrenAccount != null"
+                        >
+                          <b-col cols="5">
+                            <p class="text-4 m-0">บุตรที่ยังไม่บรรลุนิติภาวะ</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            {{
+      parseFloat(item.childrenAccount.expense.toString()).toLocaleString()
+      }} บาท</b-col>
+                        </b-row>
                       </b-popover>
                     </div>
                     <div class="pao-acc-box">
@@ -753,7 +813,7 @@
                                 (item.ownAccount.taxed /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              ) + '%',
                             height: '19px',
                           }"
                         ></div>
@@ -766,7 +826,20 @@
                                 (item.spouseAccount.taxed /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              ) + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          class="bg-white-a"
+                          v-if="item.childrenAccount != null"
+                          :style="{
+                            width:
+                              (
+                                (item.childrenAccount.taxed /
+                                  Math.max(...acc_data)) *
+                                100
+                              )+ '%',
                             height: '19px',
                           }"
                         ></div>
@@ -801,7 +874,16 @@
                           >
                           <b-col cols="7" class="text-right p-0">
                             {{
-      parseFloat(item.spouseAccount.income.toString()).toLocaleString()
+      parseFloat(item.spouseAccount.taxed.toString()).toLocaleString()
+      }} บาท</b-col>
+                        </b-row>
+                        <b-row v-if="item.childrenAccount != null" style="width: 250px">
+                          <b-col cols="5" v-if="item.childrenAccount.taxed != null">
+                            <p class="text-4 m-0">บุตรที่ยังไม่บรรลุนิติภาวะ</p></b-col
+                          >
+                          <b-col cols="7" class="text-right p-0" v-if="item.childrenAccount.taxed != null">
+                            {{
+      parseFloat(item.childrenAccount.taxed.toString()).toLocaleString()
       }} บาท</b-col>
                         </b-row>
                       </b-popover>
@@ -826,7 +908,7 @@
                                 (item.ownAccount.asset /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              )+ '%',
                             height: '19px',
                           }"
                         ></div>
@@ -839,7 +921,20 @@
                                 (item.spouseAccount.asset /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              ) + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          v-if="item.childrenAccount != null"
+                          class="bg-white-a"
+                          :style="{
+                            width:
+                              (
+                                (item.childrenAccount.asset /
+                                  Math.max(...acc_data)) *
+                                100
+                              ) + '%',
                             height: '19px',
                           }"
                         ></div>
@@ -880,6 +975,18 @@
       parseFloat(item.spouseAccount.asset.toString()).toLocaleString()
       }} บาท</b-col>
                         </b-row>
+                        <b-row
+                          style="width: 275px"
+                          v-if="item.childrenAccount != null"
+                        >
+                          <b-col cols="5">
+                            <p class="text-4 m-0">บุตรที่ยังไม่บรรลุนิติภาวะ</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            {{
+      parseFloat(item.childrenAccount.asset.toString()).toLocaleString()
+      }} บาท</b-col>
+                        </b-row>
                       </b-popover>
                     </div>
                     <div class="pao-acc-box">
@@ -901,7 +1008,7 @@
                               (
                                 (item.ownAccount.debt / Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              )+ '%',
                             height: '19px',
                           }"
                         ></div>
@@ -914,7 +1021,20 @@
                                 (item.spouseAccount.debt /
                                   Math.max(...acc_data)) *
                                 100
-                              ).toFixed() + '%',
+                              ) + '%',
+                            height: '19px',
+                          }"
+                        ></div>
+                        <div
+                          class="bg-white-a"
+                          v-if="item.childrenAccount != null"
+                          :style="{
+                            width:
+                              (
+                                (item.childrenAccount.debt /
+                                  Math.max(...acc_data)) *
+                                100
+                              ) + '%',
                             height: '19px',
                           }"
                         ></div>
@@ -953,6 +1073,18 @@
                           <b-col cols="7" class="text-right">
                             {{
       parseFloat(item.spouseAccount.debt.toString()).toLocaleString()
+      }} บาท</b-col>
+                        </b-row>
+                        <b-row
+                          style="width: 250px"
+                          v-if="item.childrenAccount != null"
+                        >
+                          <b-col cols="5">
+                            <p class="text-4 m-0">บุตรที่ยังไม่บรรลุนิติภาวะ</p></b-col
+                          >
+                          <b-col cols="7" class="text-right">
+                            {{
+      parseFloat(item.childrenAccount.debt.toString()).toLocaleString()
       }} บาท</b-col>
                         </b-row>
                       </b-popover>
