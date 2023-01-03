@@ -97,7 +97,8 @@ export default {
   plugins: [
     { src: './plugins/vue-slick-carousel.js' },
     { src: './plugins/vue-dragscroll.js', mode: 'client' },
-    { src: '~/plugins/vue-awesome-swiper', mode: 'client' }
+    { src: '~/plugins/vue-awesome-swiper', mode: 'client' },
+    { src: '~/plugins/vue-gtag' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -106,13 +107,8 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxtjs/style-resources',
-    '@nuxtjs/fontawesome',
-    '@nuxtjs/google-analytics'
+    '@nuxtjs/fontawesome'
   ],
- 
-  googleAnalytics: {
-    id: 'G-M9CRL9RVLV'
-  },
 
   fontawesome: {
     icons: {

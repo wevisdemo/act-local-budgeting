@@ -13,6 +13,7 @@
 <script>
 import Intro from "../components/Intro.vue";
 import WvCookieConsent from "@wevisdemo/ui/vue2/cookie-consent";
+import { bootstrap } from "vue-gtag";
 
 export default {
   data() {
@@ -28,6 +29,7 @@ export default {
   },
   methods: {
     onCookieAccept(option) {
+      bootstrap();
       if (option["Performance"]) {
         (function (c, l, a, r, i, t, y) {
           c[a] =
