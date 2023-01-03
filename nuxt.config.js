@@ -81,9 +81,9 @@ export default {
   //   dir: 'dist/act-local-budgeting',
   // },
 
-  router: {
-    base: '/act-local-budgeting/',
-  },
+  // router: {
+  //   base: '/act-local-budgeting/',
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -131,7 +131,7 @@ export default {
   },
 
   plausible: {
-    domain: 'wevisdemo.github.io/act-local-budgeting',
+    domain: 'localbudgeting.actai.co',
     apiHost: 'https://analytics.punchup.world',
   },
 }
